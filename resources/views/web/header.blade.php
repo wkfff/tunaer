@@ -2,48 +2,135 @@
 @include("web.register")
 
 <div class="top1">
-    <div class="topcontent">
-        <div>
-            你好,欢迎访问 徒那儿
+    <div class="content">
+        <div style="color: #727272;font-size: 12px;float:left;height:35px;overflow:hidden;">
+            <span>您好，欢迎访问成都徒步网</span><a href="#" style="color: #194C8E;font-weight: bold;font-size: 16px;line-height:35px;margin-left:10px;">下载客户端</a>
         </div>
-        <div>
+        <div class="top1right" style="float:right">
             <a href="#">个人中心</a>
             <a href="#">收藏本站</a>
-            <a href="#">注册</a>
-            <a href="#">登录</a>
-            <span>028-61667788</span>
+            <a href="#" style="margin-right:0px;font-size:14px;color:#194C8E">注册</a>
+            <span>|</span>
+            <a href="#" style="font-size:14px;color:#194C8E">登录</a>
+            <a href="#" >028-61667788</a>
         </div>
     </div>
 </div>
 <div class="top2">
-    <div class="topcontent">
-        <div>
-            你好,欢迎访问 徒那儿
+    <div class="content">
+        <img src="/web/images/logo.png" style="float:left" alt="">
+        <div style="margin-left:20px;float:left;margin-top:10px;">
+            <img src="/web/images/top_pic1.png" alt="">
+            <img src="/web/images/top_pic2.png" alt="">
+            <img src="/web/images/top_pic3.gif" alt="">
         </div>
-        <div>
-            <a href="#">个人中心</a>
-            <a href="#">收藏本站</a>
-            <a href="#">注册</a>
-            <a href="#">登录</a>
-            <span>028-61667788</span>
+        <div class="searchbox" >
+            <input placeholder="搜索目的地／活动" type="text" style="height:25px;width:240px;border:none;background:none;margin-top:10px;margin-left:20px;font-size:16px;border-right:1px solid rgba(25,76,142,0.6);padding-right:10px;" >
+            <!-- <img src="/web/images/zoom2.jpg" alt=""> -->
+            <input class="searchbtn" value="搜索" type="submit">
         </div>
+    </div>
+</div>
+<div class="top3">
+    <div class="content nav">
+        <a href="#" >首页</a>
+        <a href="#" class="nav_a_hover navlist" >
+            <span>徒步活动</span><i></i>
+            <div class="xiala">
+                <div>长途活动</div>  
+                <div>交友线路</div>  
+            </div>
+        </a>
+        <a href="#" >
+            <span>成都周边游</span>
+        </a>
+        <a href="#" class="navlist" >
+            <span>自驾游</span><i></i>
+            <div class="xiala">
+                <div>自驾游介绍</div>
+                <div>活动列表</div>
+            </div>
+        </a>
+        <a href="#" class="navlist" >
+            <span>团队徒步</span><i></i>
+            <div class="xiala">
+                <div>项目介绍</div>
+                <div>活动列表</div>
+            </div>
+        </a>
+        <a href="#" class="navlist" >
+            <span>社区交友</span><i></i>
+            <div class="xiala">
+                <div>会员列表</div>
+                <div>我的主页</div>
+            </div>
+        </a>
+        <a href="#" >徒步商城</a>
+        <a href="#" >徒步足迹</a>
+        <a href="#" class="nav_a_hover" >摄影大赛</a>
     </div>
 </div>
 
 <style>
+    .xiala{
+        position: absolute;left:0px;top:45px;width:120px;
+        z-index:10;font-size: 15px;color:#333;display: none;
+    }
+    .xiala div{
+        height:45px;line-height:45px;background:rgba(255,255,255,0.8);
+        
+    }
+    .xiala div:hover{
+        background: rgba(156,169,168,0.7);color:#fff;
+    }
     .top1{
         height:35px;line-height:35px;width:100%;background:#ECECEC;
     }
-    .topcontent{
-        width:1200px;margin:0 auto;
-    }
-    .topcontent div:nth-child(1) {
-        float:left;
-    }
-    .topcontent div:nth-child(2) {
-        float:right;
+    .content{
+        width:1200px;margin:0 auto;position: relative;
     }
     .top2{
         height:80px;
     }
+    .top3{
+        height:45px;background: url(/web/images/top_bg.jpg) no-repeat center top;
+    }
+    .top1right a{
+        color:#666;font-size: 12px;margin-right:5px;
+    }
+    .nav a{
+        line-height:45px;font-size:18px;text-decoration:none;color:#222;
+        display:block;width:120px;text-align:center;float:left;position: relative;
+    }
+    .nav a:hover{
+        background:rgba(51,102,204,1);color:#fff;
+    }
+    .nav_a_hover{
+        background:#FF9900;
+    }
+    .nav a i{
+        width: 12px;height: 10px;line-height: 70px;display: inline-block;
+        margin-left: 5px;background: url(/web/images/rect.png) no-repeat 0 0;
+    }
+    .searchbox{
+        height:45px;width:370px;border:1px solid #194C8E;float:right;margin-top:12.5px;
+        border-radius:25px;position: relative;
+    }
+    .searchbtn{
+        float: right; border:none; margin-top: 5px; width: 91px; font-size: 18px;
+        color: #194C8E;height: 38px;cursor: pointer; 
+        background: url(/web/images/zoom2.jpg) no-repeat left center;
+        background-size: auto auto; background-size: 25px;
+    }
 </style>
+
+<script>
+    $(".navlist").on("mouseover",function(event){
+
+        $(this).children(".xiala").toggle();
+    })
+    $(".navlist").on("mouseout",function(event){
+
+        $(this).children(".xiala").toggle();
+    })
+</script>

@@ -1,32 +1,76 @@
 <div class="footer">
-    <p style="margin-bottom:50px;">
-        <a href="#">隐私政策</a>|<a href="#">服务条款</a>|<a href="#">联系我们</a>
-    </p>
-    <p>湖南映客互娱网络信息有限公司电话：4008-178-168</p>
-    <p>Copyright 2015-2016 inke.cn All rights reserved. 湘ICP备16012585号-1</p>
-    <p>京网文[2016]0857-082号 京公网安备11010502030716号 增值业务许可证B2-20090206 网络视听许可证1909352号</p>
+    <div class="content">
+        <div class="foot1"></div>
+        <div class="foot2">
+            <div class="item">
+                <div class="title">关于我们</div>
+                <a>广告与合作</a>
+                <a>联系我们</a>
+                <a>加入我们</a>
+                <a>关于我们</a>
+            </div>
+            <div class="item">
+                <div class="title">帮助中心</div>
+                <a>会员指南</a>
+                <a>付款指南</a>
+                <a>报名流程</a>
+                <a>新手入门</a>
+            </div>
+            <div class="item">
+                <div class="title">实用工具</div>
+                <a>申请领队</a>
+                <a>网站地图</a>
+            </div>
+            <div class="item">
+                <div class="title">关注我们</div>
+                <img src="/web/images/weixin.png" style="width:100px;" alt="">
+            </div>
+            <div class="item">
+                <div class="title">友情链接</div>
+                <a>成都徒步网</a>
+                <a>世纪佳缘</a>
+            </div>
+            <div class="item">
+                <div class="title">手机APP下载</div>
+                <img src="/web/images/weixin.png" style="width:100px;" alt="">
+            </div>
+        </div>
+        <div style="clear:both;height:20px;" ></div>
+        <div class="foot3">
+                <p class="copyright">版权所有：国际市民体育联盟中国总部 &nbsp; 北京每日东方徒步运动中心&nbsp;&nbsp; www.chinawalking.net.cn &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel：010-84896319/20 &nbsp; &nbsp; &nbsp; &nbsp;友情链接申请QQ号：94419616 &nbsp; &nbsp; &nbsp; &nbsp;ICP备05067361<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502032066" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;color:#fff;"></p>
+        </div>
+        
+
+    </div>
 </div>
 
 <style>
-    .footer {
-        text-align: center;
-        color: #546064;
-        line-height: 20px;
-        font-size: 12px;
-        padding-bottom:30px;
+    .item{
+        height:150px;float:left;border-left: 1px solid #fefdfd;padding:0px 50px;
     }
-    .footer p a{
-        line-height: 20px;
-        color: #546064;
-        text-align: center;
-        margin:40px;
-        text-decoration: none;
+    .item>.title {
+        font-size: 18px;margin-bottom:10px;
     }
-    /*覆盖注册的样式*/
-    .login_bg{
-        display: none;
+    .item a{
+        display:block;line-height:25px;font-size: 13px;color:#fefdfd;
+        cursor: pointer;
     }
-    .register_bg{
-        display: none;
+    .footer{
+        width: 100%;
+        height: 241px;
+        padding-top: 30px;
+        background: url(/web/images/foot_bg.jpg) no-repeat;
+        margin-top: 100px;
+        color: #fefdfd;
+
+    }
+    .foot1{
+        width: 170px;
+        height: 33px;
+        background: url(/web/images/foot_bg1.png) no-repeat;
+        position: absolute;
+        top: -63px;
+        left: 0;
+
     }
 </style>

@@ -1,0 +1,67 @@
+一级标题　
+    首页　徒步活动　自驾游　团队徒步　交友　商城　徒步足迹　摄影大赛
+
+    首页＞
+        各个板块的摘要
+    徒步活动＞
+        短途／长途／成都周边
+    自驾游＞
+        单独的页面，这个页面主要：最上面是自驾游的介绍，图片需要大一点，可以添加几张图片，然后自动轮滑。然后图片下面是文字介绍。
+        自驾游活动：可以参考（徒步活动的活动）界面一样。
+    团队徒步＞
+        类似自驾游
+    交友＞
+        徒友动态（展示会员的图文动态，点击进入可以评论回复。）
+        徒友交流（展现会员的头像，年龄，性别。可以筛选的。点击某一个会员头像，可以看见他的动态，相册之类的。可以发起留言等等...）
+    商城＞
+        单独的页面
+    摄影大赛＞
+        单独的页面，顶部一张大图，下面紧接着是介绍，在下面是作品列表，翻页，投票作品上有参赛选手，投票数
+    徒步足迹＞
+        徒步足迹：这个界面主要是公司发的去过的旅游动态，图文也可以放视频。界面可参考（徒步活动界面）。
+        徒友足迹：会员发的一些动态。（也就是和徒步交友的徒友动态一样的，也可直接连接过来）
+        
+活动　activity
+    id title(活动主题) tuwen(图文介绍) types(短途／长途／自驾游／团队徒步／成都周边)
+    day(几天) startday(出发时间) endday(返回时间) price(价格)
+    mudidi(目的地)　jingdian(活动景点) neirong(活动内容) jihetime(集合时间)
+    jihedidian(集合地点) qiangdu(强度等级)　jiaotong(交通方式)
+    need(需要多少人) baoming(已报名多少人)　
+    phone(电话) leader(谁领队) pictures(121_121.jpg+212_121.jpg)
+活动订单 hdorder
+    id uid aid(活动id) ordertime(下单时间)
+
+用户　user
+    id  phone passwd qqopenid wxopenid regip regtime(注册时间) 
+    lastlogin（最后一次登录） lastonline（最后一次在线） status(1/0冻结)
+用户属性　userattr 
+    id uid head(头像) uname sex age addr(住址) mryst(婚况) height intro(自我介绍) 
+
+摄影大赛　game
+    id title(赛事主题)　pic(顶部图片)　intro(参赛介绍)　status(１正常／０结束) 
+参赛作品 works
+    id uid gid(那一场参赛) pic(参赛图片) into(作品介绍) jointime(参加时间) 
+投票　toupiao
+    id uid gid cnt(1) ttime(投票时间)
+
+资讯　zixun
+    id title pic(每一篇资讯需要一张图片) tuwen(文章图文)　ptime(发布时间) readcnt(浏览次数)
+
+商品　shangpin
+    id title(商品标题) tuwen(图文介绍)　sort(分类) price(价格)　sold(已售多少)　
+    colorlist(颜色列表) chicunlist(尺寸列表)
+商品订单　sporder
+    id uid sid(商品id) kuaidi(发货状态,如果为空就是没有发货) ordertime(下单时间) mark(买家备注)
+    count(数量) color(颜色) chicun(尺寸)
+
+游记 youji
+    id uid(uid为1-10是管理员)　tuwen(图文)　type(游记分类1徒友发布/2管理员) ptime(发布时间)
+游记评论 youjicmt
+    id uid yid(游记id) cmt(评论内容) ctime(评论时间)
+
+私信　sixi
+    id fid tid content(私信内容) stime(发送时间) isread(是否查看)
+相册　xiangce
+    id uid pic(图片地址) utime(上传时间)
+动态　dongtai
+    id uid tuwen(图文) dtime(发布时间)　readcnt(浏览次数) dianzan(点赞) cmtcnt(评论条数)
