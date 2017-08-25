@@ -37,7 +37,7 @@
         </div>
         <div style="clear:both;height:20px;" ></div>
         <div class="foot3">
-                <p class="copyright">版权所有：国际市民体育联盟中国总部 &nbsp; 北京每日东方徒步运动中心&nbsp;&nbsp; www.chinawalking.net.cn &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel：010-84896319/20 &nbsp; &nbsp; &nbsp; &nbsp;友情链接申请QQ号：94419616 &nbsp; &nbsp; &nbsp; &nbsp;ICP备05067361<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502032066" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;color:#fff;"></p>
+                <p class="copyright">版权所有：国际市民体育联盟中国总部 &nbsp; 北京每日东方徒步运动中心&nbsp;&nbsp; www.chinawalking.net.cn &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel：010-84896319/20 &nbsp; &nbsp; &nbsp; &nbsp;友情链接申请QQ号：94419616 &nbsp; &nbsp; &nbsp; &nbsp;ICP备05067361</p>
         </div>
         
 

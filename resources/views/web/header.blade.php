@@ -37,13 +37,12 @@
         <a href="#" class="nav_a_hover navlist" >
             <span>徒步活动</span><i></i>
             <div class="xiala">
+                <div>成都周边游</div>  
                 <div>长途活动</div>  
                 <div>交友线路</div>  
             </div>
         </a>
-        <a href="#" >
-            <span>成都周边游</span>
-        </a>
+        
         <a href="#" class="navlist" >
             <span>自驾游</span><i></i>
             <div class="xiala">
@@ -65,8 +64,12 @@
                 <div>我的主页</div>
             </div>
         </a>
-        <a href="#" >徒步商城</a>
+        <a href="#" >
+            <span>徒步资讯</span>
+        </a>
+        
         <a href="#" >徒步足迹</a>
+        <a href="#" >徒步商城</a>
         <a href="#" class="nav_a_hover" >摄影大赛</a>
     </div>
 </div>
