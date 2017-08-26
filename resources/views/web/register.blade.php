@@ -1,4 +1,12 @@
-<div class="register_bg">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>register</title>
+</head>
+<body>
     <div class="registerbox">
         <div class="title">注册新账号</div>
         <input type="text" name="phone" placeholder="请输入手机号码" value="18328402805">
@@ -9,70 +17,59 @@
         <input type="password" name="passwd" placeholder="登录密码" value="123456">
 
         <input id="submit" type="button" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="注册">
-        <p class="register_terms">登录即代表你同意<a target="_blank" href="#">《似友服务条款》</a>和<a target="_blank" href="#">《隐私条款》</a> </p>
+        <!-- <p class="register_terms">登录即代表你同意<a target="_blank" href="#">《似友服务条款》</a>和<a target="_blank" href="#">《隐私条款》</a> </p> -->
         <div class="register_line" ></div>
         <div class="qrcode">
-            <img src="/image/qrcode.png" alt="">
-            <div>扫描下载似友APP</div>
-            <button style="background:#DC7164">新浪微博登录</button>
+            <img src="/web/images/qrcode.png" alt="">
+            <div>扫描下载客户端APP</div>
+            <button style="background:#DC7164">QQ登录</button>
             <button style="background:#5DDF78">微信登录</button>
         </div>
 
-        <div class="register_close"></div>
+        <div onclick="window.parent.closereg()" class="register_close"></div>
     </div>
-</div>
-
-
+</body>
+</html>
+<script src="/web/js/jquery.min.js" ></script>
 <script>
-    $(".login_close").click(function () {
-        $(".login_bg").css("display", "none");
-        $("body").css("overflow","auto");
-    })
+
     $("#sendcodebtn").click(function(){
         var phone = $.trim( $(".registerbox input[name='phone']").val() );
-        var r = /^1[34578]{1}\d{9}$/;
-        if( !r.test(phone) )
-        {
-            ialert("手机格式错误",1); return false;
+        var r = /^1[23456789]{1}\d{9}$/;
+        if( !r.test(phone) ) {
+            window.parent.toast("手机格式错误",3000); return false;
         }
-        $.post("{{url('ajax/sendcode')}}",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
-            var res = checkajaxdata(data);
-            if( res )
-            {
-                $("#sendcodebtn").css("display","none");
-                $("#sended").css("display",'inline');
-            }
+        $.post("/sendcode",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
+            var res = window.parent.ajaxdata(data);
+            $("#sendcodebtn").css("display","none");
+            $("#sended").css("display",'inline');
         })
     })
     $(".registerbox #submit").click(function(){
         var phone = $.trim( $(".registerbox input[name='phone']").val() );
         var passwd = $.trim( $(".registerbox input[name='passwd']").val() );
         var code = $.trim( $(".registerbox input[name='code']").val() );
-        $.post("{{url('ajax/register')}}",{
+        $.post("/register",{
             "phone":phone,
             "passwd":passwd,
-            "code":code,
-            "_token":"{{csrf_token()}}"
+            "code":code
         },function(data){
-            var res = checkajaxdata(data);
-            if( res )
-            {
-                setTimeout(function(){
-                    location.href="{{url('main')}}";
-                },1000)
+
+            var res = window.parent.ajaxdata(data);
+            if( res ) {
+                window.parent.toast("注册成功");
+                window.parent.location.reload();
             }
         })
     })
 </script>
 
 <style>
-    .register_bg {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        display: none;
+    *{
+        margin:0px;padding:0px;
+    }
+    body{
+        overflow:hidden;
     }
     .register_line{
         background: #00D8C9;
@@ -89,10 +86,10 @@
         transform: rotate(180deg);
     }
     .register_close {
-        background-image: url(../image/icon.png);
+        background-image: url(/web/images/icon.png);
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 40px;
+        right: 60px;
         width: 18px;
         height: 18px;
         background-position: -2px -190px;
@@ -139,7 +136,7 @@
         height: 360px;
         /*background: #000;*/
         position: absolute;
-        left: 350px;
+        left: 330px;
         top: 20px;
         /*border-left: 1px solid #00D8C9;*/
     }

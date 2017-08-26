@@ -16,10 +16,11 @@
     <title>@yield("title","成都徒步网")</title>
     <script src="/web/js/jquery.min.js" ></script>
     <script src="/web/js/bootstrap.min.js" ></script>
+    <script src="/web/js/common.js" ></script>
 
 </head>
 <body >
-    @yield("body","body")
+    @yield("body","")
 </body>
 </html>
 

@@ -1,65 +1,65 @@
-<div class="login_bg">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login</title>
+</head>
+<body>
     <div class="loginbox">
-        <div class="title">登录似友</div>
+        <div class="title">登录成都徒步网</div>
 
             <input name="phone" type="text" placeholder="请输入手机号码" value="18328402805">
             <input name="passwd" type="password" placeholder="登录密码" value="123456">
-            <input name="_token" type="hidden"  value="{{csrf_token()}}">
             <input name="code" style="display:inline-block;width:150px;" value="" type="text" placeholder="请输入图形验证码">
-            <img class="verify" src="{{url('verifycode')}}" alt="" >
+            <img class="verify" src="/verifycode" alt="" >
             <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">
-
-        <p class="login_terms">登录即代表你同意<a target="_blank" href="#">《似友服务条款》</a>和<a target="_blank" href="#">《隐私条款》</a> </p>
         <div class="login_line" ></div>
         <div class="qrcode">
-            <img src="/image/qrcode.png" alt="">
-            <div>扫描下载似友APP</div>
-            <button style="background:#DC7164">新浪微博登录</button>
+            <img src="/web/images/qrcode.png" alt="">
+            <div>扫描下载客户端APP</div>
+            <button style="background:#DC7164">QQ登录</button>
             <button style="background:#5DDF78">微信登录</button>
         </div>
 
-        <div class="login_close"></div>
+        <div class="login_close" onclick="window.parent.closelogin()"></div>
     </div>
-</div>
+</body>
+</html>
 
 
+<script src="/web/js/jquery.min.js" ></script>
 <script>
-    $(".login_close").click(function () {
-        $(".login_bg").css("display", "none");
-        $("body").css("overflow","auto");
-    })
+    
     $(".verify").click(function(e){
         $(".verify").attr("src","/verifycode?t="+(new Date().getTime()));
     })
+
     $(".loginbox #submit").click(function(){
         var phone = $.trim( $(".loginbox input[name='phone']").val() );
         var passwd = $.trim( $(".loginbox input[name='passwd']").val() );
         var code = $.trim( $(".loginbox input[name='code']").val() );
-        $.post("{{url('ajax/login')}}",{
+        $.post("/login",{
             "phone":phone,
             "passwd":passwd,
-            "code":code,
-            "_token":"{{csrf_token()}}"
+            "verifycode":code
         },function(data){
-            var res = checkajaxdata(data);
-            if( res )
-            {
-                setTimeout(function(){
-                    location.href="{{url('main')}}";
-                },1000)
+            var res = window.parent.ajaxdata(data);
+            if( res ) {
+                window.parent.toast("登录成功");
+                window.parent.location.reload();
             }
         })
     })
 </script>
 
 <style>
-    .login_bg {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        display: none;
+    *{
+        margin:0px;padding:0px;
+    }
+    body{
+        overflow: hidden;height:100%;width:100%;
     }
     .login_line{
         background: #00D8C9;
@@ -67,7 +67,7 @@
         height:300px;
         position: absolute;
         top:45px;
-        left:340px;
+        left:330px;
     }
     .login_close:hover {
         -webkit-transform: rotate(180deg);
@@ -76,7 +76,7 @@
         transform: rotate(180deg);
     }
     .login_close {
-        background-image: url(../image/icon.png);
+        background-image: url(/web/images/icon.png);
         position: absolute;
         top: 20px;
         right: 20px;
@@ -94,7 +94,7 @@
         text-decoration: none;
     }
     .loginbox .verify {
-        height: 40px;
+        height: 40px;margin-top:0px;
     }
     .loginbox .qrcode div {
         width: 270px;
@@ -126,8 +126,8 @@
         height: 360px;
         /*background: #000;*/
         position: absolute;
-        left: 350px;
-        top: 20px;
+        left: 330px;
+        top: 0px;
         /*border-left: 1px solid #00D8C9;*/
     }
     .loginbox p {
@@ -143,7 +143,7 @@
         font-size: 1.1em;
         line-height: 40px;
         margin-bottom: -10px;
-        margin-top: 30px;
+        /* margin-top: 30px; */
     }
     .loginbox input {
         width: 250px;
@@ -161,14 +161,8 @@
     .loginbox {
         width: 600px;
         height: 360px;
-        background: #fff;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -300px;
-        margin-top: -200px;
-        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);
-        border-radius: 4px;
+
         padding: 20px;
     }
+    
 </style>

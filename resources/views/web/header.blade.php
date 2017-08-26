@@ -1,5 +1,7 @@
-@include("web.login")
-@include("web.register")
+
+
+    
+
 
 <div class="top1">
     <div class="content">
@@ -7,12 +9,17 @@
             <span>您好，欢迎访问成都徒步网</span><a href="#" style="color: #194C8E;font-weight: bold;font-size: 16px;line-height:35px;margin-left:10px;">下载客户端</a>
         </div>
         <div class="top1right" style="float:right">
-            <a href="#">个人中心</a>
+            {{--  <a href="#">个人中心{{Session::get('uid')}}</a>  --}}
             <a href="#">收藏本站</a>
-            <a href="#" style="margin-right:0px;font-size:14px;color:#194C8E">注册</a>
-            <span>|</span>
-            <a href="#" style="font-size:14px;color:#194C8E">登录</a>
-            <a href="#" >028-61667788</a>
+            @if( Session::get('uid') )
+                <a href="/my" style="color:#194C8E;font-size:14px;">{{Session::get('uname')}}</a> | <a style="color:#194C8E;font-size:14px;" href="/outlogin">退出</a>
+            @else
+                <a href="javascript:openreg()" style="margin-right:0px;font-size:14px;color:#194C8E">注册</a>
+                <span>|</span>
+                <a href="javascript:openlogion()" style="font-size:14px;color:#194C8E">登录</a>
+            @endif
+            
+            <a href="#" >联系管理员：028-61667788</a>
         </div>
     </div>
 </div>

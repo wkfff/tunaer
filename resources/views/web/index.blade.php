@@ -212,71 +212,7 @@
             <div style="clear:both;height:60px;" ></div>
         </div>
     </div>
-    <style>
-        .zixuncon span{
-            position: absolute;bottom:-70px;left:0px;color:#444;height:60px;
-            overflow: hidden;text-align: center;
-        }
-        .zixuncon{
-            height:100%;width:100%;position:absolute;color:#fff;background:rgba(0,0,0,0.2);
-        }
-        
-        .zixunpic{
-            background-size:cover;background-repeat:no-repeat;background-position:center;height:309px;width:370px;
-            cursor:pointer;position: relative;float:left;
-        }
-        .userlist{
-            margin-top:15px;margin-bottom:-20px;height:128px;width:100%;background:#4B8EE8;position:relative;padding:0 10px;
-        }
-        .userinfo{
-            margin-top:26.5px;color:#fff;float:left;font-size:14px;line-height:25px;height:75px;margin-left:10px;
-        }
-        .useritem{
-            height:128px;width:196px;float:left;cursor: pointer;
-        }
-        .userhead{
-            background-size:cover;background-repeat:no-repeat;background-position:center;height:90px;width:90px;margin-top:19px;border-radius:45px;float:left;border:2px solid rgba(255,255,255,0.7)
-        }
-        .userhead:hover{
-            opacity: 0.8;
-        }
-        .huodongnav span{
-            width:120px;height:30px;display: inline-block;line-height:30px;
-            border:1px solid #2260b4;color:#2260b4;
-        }
-        .picitem div div{
-            height:48px;position:absolute;bottom:0px;left:0px;overflow:hidden;line-height:24px;background:rgba(51,102,204,.7);color:#fff;
-        }
-        .sjitem div div{
-            height:48px;position:absolute;bottom:-48px;left:0px;overflow:hidden;line-height:24px;color:#444;font-size: 12px;
-        }
-        .picitem,.sjitem{
-            background-size:cover;background-repeat:no-repeat;background-position:center;
-            height:160px;width:237px;position: relative;float:left;margin-right:3.5px;
-            margin-top:10px;cursor:pointer;
-        }
-        .picitem:hover{
-            opacity: 0.8;
-        }
-        .pics>.picitem:nth-child(5n),.pics>.sjitem:nth-child(5n){
-            margin-right:0;
-        }
-        .sprite_l{
-            width: 170px;
-            height: 40px;
-            background: url(/web/images/item_bg_l.png) no-repeat center center;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .sprite_r{
-            width: 170px;
-            height: 40px;
-            background: url(/web/images/item_bg_r.png) no-repeat center center;
-            display: inline-block;
-            vertical-align: middle;
-            
-        }
-    </style>
+    
 
     @include("web.footer")
 
