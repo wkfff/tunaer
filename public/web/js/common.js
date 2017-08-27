@@ -1,7 +1,7 @@
 
 // 打开登陆框
 function openlogion() {
-    var iframe = `<div onclick="$(this).toggle();" id="loginbg" style="height:100%;width:100%;position:fixed;z-index:10;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none" ><iframe src="/login" frameborder="0" style="width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;"></iframe></div>`;
+    var iframe = "<div onclick='$(this).toggle();' id='loginbg' style='height:100%;width:100%;position:fixed;z-index:10;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/login' frameborder='0' style='width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
     $("body").append(iframe);
     setTimeout(function(){
         $("#loginbg").css("display","block");
@@ -13,7 +13,7 @@ function closelogin() {
 }
 // 打开登陆框
 function openreg() {
-    var iframe = `<div onclick="$(this).toggle();" id="regbg" style="height:100%;width:100%;position:fixed;z-index:10;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none" ><iframe src="/register" frameborder="0" style="width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;"></iframe></div>`;
+    var iframe = "<div onclick='$(this).toggle();' id='regbg' style='height:100%;width:100%;position:fixed;z-index:10;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/register' frameborder='0' style='width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
     $("body").append(iframe);
     setTimeout(function(){
         $("#regbg").css("display","block");
@@ -24,7 +24,10 @@ function closereg() {
     $("#regbg").remove();
 }
 // 吐丝提示
-function toast(title,time=2000) {
+function toast(title,time) {
+    if( !time ) {
+        time = 2000;
+    }
     $(".toast").remove();
     clearTimeout(window.toastst);
     var tmp = "<div style='height:0px;width:100%;position:fixed;left:0px;bottom:250px;;text-align:center;line-height:50px;z-index:20' class='toast'><span style='background:#194C8E;color:#fff;padding:14px 30px;border-radius:10px;font-size:16px;font-weight:bold'>"+title+"</span></div>";

@@ -20,6 +20,19 @@ Route::get('/register',function(){
 Route::get('/error',function(){
     return view('web.error');
 });
+//后台入口
+Route::group(['middleware' => 'v6auth','namespace'=>'Admin'], function() {
+    Route::get('/v6', 'IndexController@index');
+});
+//后台页面前缀
+Route::get('/admin/login', 'Admin\IndexController@login');
+Route::post('/admin/dologin', 'Admin\IndexController@dologin');
+
+//后台所有页面需要检查　登录情况　由 v6auth中间件　负责
+Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin'], function()
+{
+    Route::get('/index', 'IndexController@index');
+});
 
 Route::group(['namespace' => 'Web'], function()
 {
@@ -30,4 +43,5 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/verifycode', 'IndexController@verifycode');
     Route::get('/outlogin', 'IndexController@outlogin');
     Route::get('/user', 'IndexController@user');
+
 });

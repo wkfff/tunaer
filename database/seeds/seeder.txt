@@ -35,7 +35,9 @@
     id  phone passwd qqopenid wxopenid regip regtime(注册时间) 
     lastlogin（最后一次登录） lastonline（最后一次在线） status(1/0冻结)
 用户属性　userattr 
-    id uid head(头像) uname sex age addr(住址) mryst(婚况) height intro(自我介绍) 
+    id uid head(头像) uname sex age addr(住址) mryst(婚况) height intro(自我介绍)
+聊天表　chat
+    id fid tid content(发送消息) stime(发送时间) isread(已读)
 
 摄影大赛　game
     id title(赛事主题)　pic(顶部图片)　intro(参赛介绍)　status(１正常／０结束) 
