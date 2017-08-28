@@ -37,7 +37,7 @@
         var phone = $.trim( $(".registerbox input[name='phone']").val() );
         var r = /^1[23456789]{1}\d{9}$/;
         if( !r.test(phone) ) {
-            window.parent.toast("手机格式错误",3000); return false;
+            window.parent.toast("手机格式错误"); return false;
         }
         $.post("/sendcode",{'phone':phone,'_token':"{{csrf_token()}}"},function(data){
             var res = window.parent.ajaxdata(data);

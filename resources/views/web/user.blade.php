@@ -30,24 +30,31 @@
          background-image: url(/web/images/s_ban.jpg);background-size:cover;background-position:center;"></div>
     <div class="content" style="position:relative">
         <div class="wrap" style="position: absolute;top:-270px;width:100%;color:#fff;">
-            <h2 style="color: #f4a219;">张三的大飞翔
-                <img src="/web/images/female.png" style="height:30px;"></h2>
+            <h2 style="color: #f4a219;">{{ isset($userinfo->uname)?$userinfo->uname : "资料待完善" }}
+                @if( $userinfo->sex == '女' )
+                    <img src="/web/images/female.png" style="height:30px;">
+                @else
+                    <img src="/web/images/male.png" style="height:30px;">
+                @endif
+            </h2>
             <div style="width:150px;height:150px;background-image: url(/web/images/p3.jpg);
                 background-size:cover;background-position:center;position:absolute;right:0px;top:0px;">
+                <a href="javascript:$('.userheadinput').trigger('click')" style="position:absolute;display: block;left:0px;bottom:0px;height:30px;text-align: center;line-height: 30px;width:100%;background:rgba(0,0,0,0.5);color:#fff;">修改头像</a>
+                <input type="file" class="userheadinput" onchange="updatehead(this)" style="display: none;">
             </div>
             <div class="uinfo" style="float:left;font-size:16px;margin-left:20px;line-height:24px;margin-top:20px;height:24px;">
-                年龄：<span style="color:#fff" >28岁</span>
-                婚况：<span style="color:#fff" >未婚</span>
-                常住：<span style="color:#fff" >四川成都</span>
+                年龄：<span style="color:#fff" >{{ isset($userinfo->age)?$userinfo->age : "保密" }}岁</span>
+                婚况：<span style="color:#fff" >{{ isset($userinfo->mryst)?$userinfo->mryst : "保密" }}</span>
+                常住：<span style="color:#fff" >{{ isset($userinfo->addr)?$userinfo->addr : "保密" }}</span>
             </div>
-            <div style="position:absolute;right:200px;top:0px;font-size:16px;cursor:pointer;">
+            <div style="position:absolute;right:200px;top:0px;font-size:16px;cursor:pointer;" data-toggle="modal" data-target="#myModal">
                 <span>编辑资料</span>
                 <img src="/web/images/edit.png" style="height:20px;">
             </div>
 
             <div style="clear:both" ></div>
             <div class="intro" style="margin-top:10px;margin-left:20px;font-size:16px;line-height:24px;height:24px;max-width:1000px;">
-                我不知道是不是真的有这么巧，只能说有太多的话都说不清楚。
+                {{ isset($userinfo->intro)?$userinfo->intro : "Ｔａ暂时没有填写个人介绍" }}
             </div>
 
             <div class="usernav">
@@ -68,4 +75,60 @@
 
 
     @include("web.footer")
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:500px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">修改资料</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">昵称</label>
+                        <input type="text" name="uname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">年龄</label>
+                        <input type="text" class="form-control" name="age" value="25">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="男" name="sex" checked>男生
+                        </label>
+                        <label >
+                            <input type="radio" value="女" name="sex">女生
+                        </label>
+                        <span style="margin:0 20px;">|</span>
+                        <label>
+                            <input type="radio" value="未婚" name="mryst" checked>未婚
+                        </label>
+                        <label>
+                            <input type="radio" value="离异"  name="mryst" checked>离异
+                        </label>
+                        <label >
+                            <input type="radio" value="已婚" name="mryst">已婚
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">常住地</label>
+                        <input type="text" class="form-control" name="addr" value="成都" >
+                    </div>
+                    <label for="exampleInputEmail1">自我介绍</label>
+                    <textarea class="form-control" name="intro" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" onclick="save()" class="btn btn-primary">保存设置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
+<script src="/web/js/jquery.min.js" ></script>
+<script src="/web/js/common.js" ></script>
+<script src="/web/js/user.js">
+</script>

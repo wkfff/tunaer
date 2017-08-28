@@ -86,8 +86,15 @@ class IndexController extends Controller
         return redirect($_SERVER['HTTP_REFERER']);
     }
 
-    public function user(Request $request) {
-        return view('web.user');
+    public function user($userid) {
+        $sql = " select userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
+        $res = DB::select($sql,[$userid]);
+        if( count($res) == 0 ) {
+            return view("web.error",['content'=>'用户不存在']);
+        }else{
+            return view('web.user',["userinfo"=>$res[0]]);
+        }
+
     }
     
 }

@@ -12,7 +12,7 @@
             {{--  <a href="#">个人中心{{Session::get('uid')}}</a>  --}}
             <a href="#">收藏本站</a>
             @if( Session::get('uid') )
-                <a href="/my" style="color:#194C8E;font-size:14px;">{{Session::get('uname')}}</a> | <a style="color:#194C8E;font-size:14px;" href="/outlogin">退出</a>
+                <a href="/user" style="color:#194C8E;font-size:14px;">{{Session::get('uname')}}</a> | <a style="color:#194C8E;font-size:14px;" href="/outlogin">退出</a>
             @else
                 <a href="javascript:openreg()" style="margin-right:0px;font-size:14px;color:#194C8E">注册</a>
                 <span>|</span>

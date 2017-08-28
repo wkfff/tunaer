@@ -16,7 +16,7 @@ function login($phone,$passwd,$returnuid=false) {
     if( count($res) >= 1 ) {
         Session::put('uid', $res[0]->id);
         if( !$res[0]->uname ) {
-            $res[0]->uname = '％新用户％';
+            $res[0]->uname = '请完善资料';
         }
         Session::put('uname', $res[0]->uname);
         if(!$returnuid) {

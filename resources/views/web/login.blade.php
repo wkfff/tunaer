@@ -7,31 +7,30 @@
     <title>login</title>
 </head>
 <body>
-    <div class="loginbox">
-        <div class="title">登录成都徒步网</div>
+<div class="loginbox">
+    <div class="title">登录成都徒步网</div>
 
-            <input name="phone" type="text" placeholder="请输入手机号码" value="18328402805">
-            <input name="passwd" type="password" placeholder="登录密码" value="123456">
-            <input name="code" style="display:inline-block;width:150px;" value="" type="text" placeholder="请输入图形验证码">
-            <img class="verify" src="/verifycode" alt="" >
-            <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">
-        <div class="login_line" ></div>
-        <div class="qrcode">
-            <img src="/web/images/qrcode.png" alt="">
-            <div>扫描下载客户端APP</div>
-            <button style="background:#DC7164">QQ登录</button>
-            <button style="background:#5DDF78">微信登录</button>
-        </div>
-
-        <div class="login_close" onclick="window.parent.closelogin()"></div>
+    <input name="phone" type="text" placeholder="请输入手机号码" value="18328402805">
+    <input name="passwd" type="password" placeholder="登录密码" value="123456">
+    <input name="code" style="display:inline-block;width:150px;" value="" type="text" placeholder="请输入图形验证码">
+    <img class="verify" src="/verifycode" alt="" >
+    <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">
+    <div class="login_line" ></div>
+    <div class="qrcode">
+        <img src="/web/images/qrcode.png" alt="">
+        <div>扫描下载客户端APP</div>
+        <button style="background:#DC7164">QQ登录</button>
+        <button style="background:#5DDF78">微信登录</button>
     </div>
+
+    <div class="register_close" onclick="window.parent.closelogin()"></div>
+</div>
+</div>
 </body>
 </html>
-
-
 <script src="/web/js/jquery.min.js" ></script>
 <script>
-    
+
     $(".verify").click(function(e){
         $(".verify").attr("src","/verifycode?t="+(new Date().getTime()));
     })
@@ -59,27 +58,27 @@
         margin:0px;padding:0px;
     }
     body{
-        overflow: hidden;height:100%;width:100%;
+        overflow:hidden;
     }
-    .login_line{
+    .register_line{
         background: #00D8C9;
         width:1px;
         height:300px;
         position: absolute;
         top:45px;
-        left:330px;
+        left:340px;
     }
-    .login_close:hover {
+    .register_close:hover {
         -webkit-transform: rotate(180deg);
         -moz-transform: rotate(180deg);
         -o-transform: rotate(180deg);
         transform: rotate(180deg);
     }
-    .login_close {
+    .register_close {
         background-image: url(/web/images/icon.png);
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 40px;
+        right: 60px;
         width: 18px;
         height: 18px;
         background-position: -2px -190px;
@@ -94,7 +93,7 @@
         text-decoration: none;
     }
     .loginbox .verify {
-        height: 40px;margin-top:0px;
+        height: 40px;
     }
     .loginbox .qrcode div {
         width: 270px;
@@ -127,7 +126,7 @@
         /*background: #000;*/
         position: absolute;
         left: 330px;
-        top: 0px;
+        top: 20px;
         /*border-left: 1px solid #00D8C9;*/
     }
     .loginbox p {
@@ -143,7 +142,7 @@
         font-size: 1.1em;
         line-height: 40px;
         margin-bottom: -10px;
-        /* margin-top: 30px; */
+        margin-top: 30px;
     }
     .loginbox input {
         width: 250px;
@@ -161,8 +160,14 @@
     .loginbox {
         width: 600px;
         height: 360px;
-
+        background: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -300px;
+        margin-top: -200px;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
         padding: 20px;
     }
-    
 </style>

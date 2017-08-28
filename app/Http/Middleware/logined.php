@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Session;
 
-class v6auth
+class logined
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,12 @@ class v6auth
      */
     public function handle($request, Closure $next)
     {
-//         检查　adminflag
-        if( !Session::get('adminflag') ) {
+        if( !Session::get('uid') ) {
             if( strtoupper($_SERVER['REQUEST_METHOD']) == 'GET' ) {
-                return redirect("/admin/login");
+                return redirect("/login");
             }else{
                 exit("nologin");
             }
-
         }
         return $next($request);
     }
