@@ -1,7 +1,7 @@
 @extends('admin.common')
 
 @section("content")
-    <div id="content" class="span10">
+
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>
@@ -66,5 +66,5 @@
             </a>
             <div class="clearfix"></div>
         </div>
-    </div>
+
 @stop

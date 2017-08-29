@@ -35,7 +35,19 @@ function save(){
 
 function updatehead(that) {
     var file = that.files[0];
-    if( checkFileAllow(file) ) {
-        toast("修改成功");
+    if( checkFileAllow(file,"image",3) ) {
+        var fd = new FormData();
+        fd.append("file" , file );
+        var oXHR = new XMLHttpRequest();
+        oXHR.open('POST', "/updatehead");
+        oXHR.onreadystatechange = function() {
+            if (oXHR.readyState == 4 && oXHR.status == 200) {
+                var d = oXHR.responseText; // 返回值
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            }
+        }
+        oXHR.send(fd);
     }
 }

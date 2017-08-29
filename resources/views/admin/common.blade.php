@@ -63,19 +63,35 @@
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 主面板</span></a></li>
-                    <li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> 会员列表</span></a></li>
-                    <li>
-                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i>
-                            <span class="hidden-tablet"> 徒步活动</span></a>
-                        <ul>
-                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 发布活动</span></a></li>
-                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 活动列表</span></a></li>
-                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 徒步订单</span></a></li>
-                        </ul>
+                    <li><a href="/admin/index"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 主面板</span></a></li>
+                    <li><a href="/admin/userlist"><i class="icon-envelope"></i><span class="hidden-tablet"> 会员列表</span></a></li>
+                    <li class="dropdown user" style="list-style: none">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-folder-close-alt"></i>
+                            <span class="username">会员操作</span>
+                            <i class="icon-angle-down"></i>
+                        </a>
+                        <style>
+                            .mymenu p a{
+                                color:#444 !important;
+                                text-decoration: none;
+                                display: block;
+                                margin:0px;padding:0px;
+                                height:30px;line-height:30px;
+                                text-indent:20px;
+
+                            }
+                            .mymenu p a:hover{
+                                background:#578EBE !important;
+                                color: #fff !important;
+                            }
+
+                        </style>
+                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
+                            <p><a href="/edituserinfo/casc">徒步列表</a></p>
+                            <p><a href="/deleteuser/csasa">发布徒步活动</a></p>
+                            <p><a href="/deleteuser/csasa">徒步订单</a></p>
+                        </div>
                     </li>
                     <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>
                     <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
@@ -98,9 +114,9 @@
                 </ul>
             </div>
         </div>
-
-        @yield("content")
-
+        <div id="content" class="span10" style="min-height: 92vh;">
+            @yield("content")
+        </div>
 
     </div>
 </div>
@@ -112,59 +128,8 @@
     </p>
 </footer>
 <script src="/admin/js/jquery-1.9.1.min.js"></script>
-<script src="/admin/js/jquery-migrate-1.0.0.min.js"></script>
-
-<script src="/admin/js/jquery-ui-1.10.0.custom.min.js"></script>
-
-<script src="/admin/js/jquery.ui.touch-punch.js"></script>
-
-<script src="/admin/js/modernizr.js"></script>
-
 <script src="/admin/js/bootstrap.min.js"></script>
 
-<script src="/admin/js/jquery.cookie.js"></script>
-
-<script src='/admin/js/fullcalendar.min.js'></script>
-
-<script src='/admin/js/jquery.dataTables.min.js'></script>
-
-<script src="/admin/js/excanvas.js"></script>
-<script src="/admin/js/jquery.flot.js"></script>
-<script src="/admin/js/jquery.flot.pie.js"></script>
-<script src="/admin/js/jquery.flot.stack.js"></script>
-<script src="/admin/js/jquery.flot.resize.min.js"></script>
-
-<script src="/admin/js/jquery.chosen.min.js"></script>
-
-<script src="/admin/js/jquery.uniform.min.js"></script>
-
-<script src="/admin/js/jquery.cleditor.min.js"></script>
-
-<script src="/admin/js/jquery.noty.js"></script>
-
-<script src="/admin/js/jquery.elfinder.min.js"></script>
-
-<script src="/admin/js/jquery.raty.min.js"></script>
-
-<script src="/admin/js/jquery.iphone.toggle.js"></script>
-
-<script src="/admin/js/jquery.uploadify-3.1.min.js"></script>
-
-<script src="/admin/js/jquery.gritter.min.js"></script>
-
-<script src="/admin/js/jquery.imagesloaded.js"></script>
-
-<script src="/admin/js/jquery.masonry.min.js"></script>
-
-<script src="/admin/js/jquery.knob.modified.js"></script>
-
-<script src="/admin/js/jquery.sparkline.min.js"></script>
-
-<script src="/admin/js/counter.js"></script>
-
-<script src="/admin/js/retina.js"></script>
-
-<script src="/admin/js/custom.js"></script>
 
 </body>
 </html>

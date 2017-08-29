@@ -34,4 +34,14 @@ class IndexController extends Controller{
         echo "200-登录成功";
 
     }
+//    用户列表
+    public function userlist(Request $request){
+        $page = $request->input('page',1);
+        $num = $request->input('num',20);
+        $r = DB::select(" select count(*) as cnt from user ");
+        $count = $r[0]->cnt;
+        $sql = " select user.id as userid,user.phone,user.status,userattr.* from user left join userattr on user.id=userattr.uid order by id desc limit ".($page-1)*$num.", ".$num;
+        $res = DB::select($sql);
+        return view("admin.userlist",['userlist'=>$res,"count"=>$count]);
+    }
 }

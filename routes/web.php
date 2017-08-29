@@ -24,6 +24,7 @@ Route::post('/admin/dologin', 'Admin\IndexController@dologin');
 Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin'], function()
 {
     Route::get('/index', 'IndexController@index');
+    Route::get('/userlist', 'IndexController@userlist');
 });
 //前台页面
 Route::group(['namespace' => 'Web'], function()
@@ -48,8 +49,10 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/user/{userid}', 'IndexController@user');
 
 });
-
+// 获取头像
+Route::get("/head/{userid}","Api\IndexController@userhead");
 // 需要登录访问的api
 Route::group(['namespace'=>'Api',"middleware"=>'logined'],function(){
     Route::post("/updateuserinfo","IndexController@updateuserinfo");
+    Route::post("/updatehead","IndexController@updatehead");
 });

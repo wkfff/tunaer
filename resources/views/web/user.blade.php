@@ -2,10 +2,6 @@
 
 @section("title","用户主页")
 
-@section("css")
-<link rel="stylesheet" href="/web/css/user.css">
-@stop
-
 @section("body")
     @include("web.header")
     <style>
@@ -37,9 +33,9 @@
                     <img src="/web/images/male.png" style="height:30px;">
                 @endif
             </h2>
-            <div style="width:150px;height:150px;background-image: url(/web/images/p3.jpg);
+            <div style="width:150px;height:150px;background-image: url(/head/{{Session::get('uid')}});
                 background-size:cover;background-position:center;position:absolute;right:0px;top:0px;">
-                <a href="javascript:$('.userheadinput').trigger('click')" style="position:absolute;display: block;left:0px;bottom:0px;height:30px;text-align: center;line-height: 30px;width:100%;background:rgba(0,0,0,0.5);color:#fff;">修改头像</a>
+                <a href="javascript:void(0)" onclick="$('.userheadinput').trigger('click');" style="position:absolute;display: block;left:0px;bottom:0px;height:30px;text-align: center;line-height: 30px;width:100%;background:rgba(0,0,0,0.5);color:#fff;">修改头像</a>
                 <input type="file" class="userheadinput" onchange="updatehead(this)" style="display: none;">
             </div>
             <div class="uinfo" style="float:left;font-size:16px;margin-left:20px;line-height:24px;margin-top:20px;height:24px;">
