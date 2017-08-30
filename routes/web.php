@@ -12,19 +12,22 @@
 */
 
 
-//后台入口
-Route::group(['middleware' => 'v6auth','namespace'=>'Admin'], function() {
-    Route::get('/v6', 'IndexController@index');
-});
+
 //后台页面前缀
 Route::get('/admin/login', 'Admin\IndexController@login');
 Route::post('/admin/dologin', 'Admin\IndexController@dologin');
 
+//后台入口 无前缀
+Route::group(['middleware' => 'v6auth','namespace'=>'Admin'], function() {
+    Route::get('/v6', 'IndexController@index');
+});
 //后台所有页面需要检查　登录情况　由 v6auth中间件　负责
 Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin'], function()
 {
     Route::get('/index', 'IndexController@index');
     Route::get('/userlist', 'IndexController@userlist');
+//    发布徒步
+    Route::get('/fabutubu', 'IndexController@fabutubu');
 });
 //前台页面
 Route::group(['namespace' => 'Web'], function()

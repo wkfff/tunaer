@@ -44,4 +44,7 @@ class IndexController extends Controller{
         $res = DB::select($sql);
         return view("admin.userlist",['userlist'=>$res,"count"=>$count]);
     }
+    public function fabutubu() {
+        return view("admin.fabutubu");
+    }
 }

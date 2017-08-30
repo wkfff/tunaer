@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>tunaer后台管理系统</title>
+    <title>@yield("title","tunaer后台管理系统")</title>
     <meta name="description" content="Bootstrap Metro Dashboard">
     <meta name="author" content="Dennis Ji">
     <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
@@ -88,9 +88,9 @@
 
                         </style>
                         <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
-                            <p><a href="/edituserinfo/casc">徒步列表</a></p>
-                            <p><a href="/deleteuser/csasa">发布徒步活动</a></p>
-                            <p><a href="/deleteuser/csasa">徒步订单</a></p>
+                            <p><a href="/admin/tubulist">徒步列表</a></p>
+                            <p><a href="/admin/fabutubu">发布徒步活动</a></p>
+                            <p><a href="/admin/tubuorder">徒步订单</a></p>
                         </div>
                     </li>
                     <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>
@@ -127,9 +127,8 @@
             <a href="javascript:void(0)" alt="Bootstrap_Metro_Dashboard">成都徒步网</a></span>
     </p>
 </footer>
-<script src="/admin/js/jquery-1.9.1.min.js"></script>
+<script src="/admin/js/jquery-1.10.min.js"></script>
 <script src="/admin/js/bootstrap.min.js"></script>
-
-
 </body>
 </html>
+@yield("js","")
