@@ -50,8 +50,8 @@
     id title pic(每一篇资讯需要一张图片) tuwen(文章图文)　ptime(发布时间) readcnt(浏览次数)
 
 商品　shangpin
-    id title(商品标题) tuwen(图文介绍)　sort(分类) price(价格)　sold(已售多少)　
-    colorlist(颜色列表) chicunlist(尺寸列表)
+    id title(商品标题) tuwen(图文介绍)　sort(分类) price(价格)　sold(已售多少)　youfei(配送费)　commit(评论数)
+    colorlist(颜色列表) chicunlist(尺寸列表)　kucun(库存)
 商品订单　sporder
     id uid sid(商品id) kuaidi(发货状态,如果为空就是没有发货) ordertime(下单时间) mark(买家备注)
     count(数量) color(颜色) chicun(尺寸)
