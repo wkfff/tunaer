@@ -39,7 +39,7 @@ class IndexController extends Controller
         $file = $request->file('file',null);
         if ($file->isValid()) {
             $imgname = $uid."_".time() .".". $file->getClientOriginalExtension();
-            $destinationPath = base_path() . "/public/data/images/";
+            $destinationPath = base_path() . "/public/web/data/images/";
             if( $file->move($destinationPath,$imgname) ) {
                 $sql = " select * from userattr where uid=? ";
                 $res = DB::select($sql,[$uid]);
@@ -63,7 +63,7 @@ class IndexController extends Controller
         $sql = " select head from userattr where uid=? ";
         $res = DB::select($sql,[$userid]);
         if( count($res) >= 1 ) {
-            header("Location:/data/images/".$res[0]->head);
+            header("Location:/web/data/images/".$res[0]->head);
         }else{
             header("Location:/images/default.jpg");
         }

@@ -73,7 +73,7 @@ class IndexController extends Controller
         echo "200-发送成功";
     }
     // 生成图形验证码
-    public function verifycode( )
+    public function verifycode()
     {
         $x = new \App\Libs\verifycode();
         Session::put("verifycode",$x->getcode());

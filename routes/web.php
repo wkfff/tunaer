@@ -28,6 +28,21 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/userlist', 'IndexController@userlist');
 //    发布徒步
     Route::get('/fabutubu', 'IndexController@fabutubu');
+//    发布商品
+    Route::get('/fabuproduct', 'IndexController@fabuproduct');
+//    徒步列表
+    Route::get('/tubulist', 'IndexController@tubulist');
+//    编辑徒步
+    Route::get('/updatetubu/{tubuid}', 'IndexController@updatetubu');
+//    上传照片
+    Route::post('/uploadimg', 'IndexController@uploadimg');
+//    发布徒步活动
+    Route::post('/dofabutubu', 'IndexController@dofabutubu');
+//    更新徒步
+    Route::post('/doupdatetubu', 'IndexController@doupdatetubu');
+
+
+
 });
 //前台页面
 Route::group(['namespace' => 'Web'], function()

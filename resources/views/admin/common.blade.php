@@ -58,7 +58,22 @@
 
 <div class="container-fluid-full">
     <div class="row-fluid">
+        <style>
+            .mymenu p a{
+                color:#444 !important;
+                text-decoration: none;
+                display: block;
+                margin:0px;padding:0px;
+                height:30px;line-height:30px;
+                text-indent:20px;
 
+            }
+            .mymenu p a:hover{
+                background:#578EBE !important;
+                color: #fff !important;
+            }
+
+        </style>
         <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
@@ -68,25 +83,10 @@
                     <li class="dropdown user" style="list-style: none">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-folder-close-alt"></i>
-                            <span class="username">会员操作</span>
+                            <span class="username">徒步活动</span>
                             <i class="icon-angle-down"></i>
                         </a>
-                        <style>
-                            .mymenu p a{
-                                color:#444 !important;
-                                text-decoration: none;
-                                display: block;
-                                margin:0px;padding:0px;
-                                height:30px;line-height:30px;
-                                text-indent:20px;
 
-                            }
-                            .mymenu p a:hover{
-                                background:#578EBE !important;
-                                color: #fff !important;
-                            }
-
-                        </style>
                         <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
                             <p><a href="/admin/tubulist">徒步列表</a></p>
                             <p><a href="/admin/fabutubu">发布徒步活动</a></p>
@@ -95,18 +95,20 @@
                     </li>
                     <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>
                     <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
-                    <li>
-                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i>
-                            <span class="hidden-tablet"> 徒步商城</span></a>
-                        <ul>
-                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 产品列表</span></a></li>
-                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 订单列表</span></a></li>
-                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i>
-                                    <span class="hidden-tablet"> 商品评论</span></a></li>
-                        </ul>
+                    <li class="dropdown user" style="list-style: none">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-folder-close-alt"></i>
+                            <span class="username">徒步商城</span>
+                            <i class="icon-angle-down"></i>
+                        </a>
+
+                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
+                            <p><a href="/admin/productlist">产品列表</a></p>
+                            <p><a href="/admin/fabuproduct">发布商品</a></p>
+                            <p><a href="/admin/productorder">订单列表</a></p>
+                        </div>
                     </li>
+
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 管理员列表</span></a></li>
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 运营管理</span></a></li>
@@ -129,6 +131,7 @@
 </footer>
 <script src="/admin/js/jquery-1.10.min.js"></script>
 <script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/common.js"></script>
 </body>
 </html>
-@yield("js","")
+@yield("htmlend","")

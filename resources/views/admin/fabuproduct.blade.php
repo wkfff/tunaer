@@ -1,11 +1,11 @@
 @extends('admin.common')
 
-@section("title","发布徒步活动")
+@section("title","发布商品")
 
 @section("content")
 
     <div cdiss="form-group">
-        <label for="exampleInputEmail1">图文介绍 <span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" data-toggle="modal"  data-target="#myModal">活动属性</a></span><span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" onclick="$('.tubupics').slideDown()">活动图片</a></span></label>
+        <label for="exampleInputEmail1">图文介绍 <span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" data-toggle="modal"  data-target="#myModal">商品属性</a></span><span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" onclick="$('.tubupics').slideDown()">商品图片</a></span></label>
 
     </div>
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
@@ -26,37 +26,22 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">活动属性</h4>
+                <h4 class="modal-title" id="myModalLabel">商品属性</h4>
             </div>
             <style>
-               #inputcls input{
+                #inputcls input{
                     height:30px !important;width:250px !important;border: none !important;border:1px solid #999 !important;
-               }
+                }
             </style>
+
             <div class="modal-body">
-                <div style="text-align: left;">
-                    <input type="radio" value="短途" name="types" >短途
-                    <input type="radio" value="长途" name="types" >长途
-                    <input type="radio" value="自驾游" name="types" >自驾游
-                    <input type="radio" value="团队徒步" name="types" >团队徒步
-                    <input type="radio" value="成都周边" name="types"  checked>成都周边
-                </div>
                 <div id="inputcls">
-                    <input type="text" value="青城山一日游" placeholder="主题" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
-                    <input type="text" value="1" placeholder="几天" name="howlong" >
-                    <input type="text" value="青城山目的地" placeholder="目的地" name="mudidi" ><br>
-                    <input type="text" value="2017-09-01" placeholder="出发时间" name="startday" >
-                    <input type="text" value="2017-09-02" placeholder="返回时间" name="endday" ><br>
-                    <input type="text" value="火车站集合地点" placeholder="集合地点" name="jihedidian" >
-                    <input type="text" value="2017-09-01 12:12:12" placeholder="集合时间" name="jihetime" ><br>
-                    <input type="text" value="230" placeholder="价格" name="price" >
-                    <input type="text" value="火车" placeholder="交通方式" name="jiaotong" ><br>
-                    <input type="text" value="青城山景点" placeholder="景点" name="jingdian" >
-                    <input type="text" value="活动内容你说了算" placeholder="活动内容" name="neirong" ><br>
-                    <input type="text" value="2" placeholder="强度" name="qiangdu" >
-                    <input type="text" value="34" placeholder="需要多少人" name="need" ><br>
-                    <input type="text" value="张翠翠领队" placeholder="领队" name="leader" >
-                    <input type="text" value="18328402805" placeholder="联系电话" name="phone" ><br>
+                    <input type="text" value="" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
+                    <input type="text" value="" placeholder="分类" name="sort" >
+                    <input type="text" value="" placeholder="价格" name="price" ><br>
+                    <input type="text" value="" placeholder="已售多少" name="sold" >
+                    <input type="text" value="" placeholder="颜色列表" name="colorlist" ><br>
+                    <input type="text" value="" placeholder="尺寸列表" name="chicunlist" >
                 </div>
                 <br>
             </div>
@@ -77,16 +62,16 @@
 </style>
 <div class="tubupics" onclick="$(this).slideUp()" style="width:100%;height: 100%;position:fixed;z-index:9999;left:0px;top:0px;display:none" >
 
-        <div onclick="zuzhi(event)" style="width:1000px;height:570px;background:white;position:absolute;top:50%;left:50%;
+    <div onclick="zuzhi(event)" style="width:1000px;height:570px;background:white;position:absolute;top:50%;left:50%;
         margin-left:-500px;margin-top:-285px;box-shadow:1px 3px 15px rgba(0,0,0,0.8);overflow-y: auto;padding:10px;  " >
-            <button onclick="$('.uploadfengmian').trigger('click');zuzhi(event);" type="button" class="btn btn-primary" style="position:absolute;top:10px;right:10px;" >添加图片</button>
-            <input class="uploadfengmian" type="file" style="display: none;" onchange="uploadImg(this)">
-            <button onclick="$('.tubupics').slideUp();" type="button" class="btn btn-primary red" style="position:absolute;top:60px;right:10px;" >立即保存</button>
-            <span style="position:absolute;top:110px;right:10px;" >双击图片删除</span>
-            <div class="pics" style="width:900px;" >
+        <button onclick="$('.uploadfengmian').trigger('click');zuzhi(event);" type="button" class="btn btn-primary" style="position:absolute;top:10px;right:10px;" >添加图片</button>
+        <input class="uploadfengmian" type="file" style="display: none;" onchange="uploadImg(this)">
+        <button onclick="$('.tubupics').slideUp();" type="button" class="btn btn-primary red" style="position:absolute;top:60px;right:10px;" >立即保存</button>
+        <span style="position:absolute;top:110px;right:10px;" >双击图片删除</span>
+        <div class="pics" style="width:900px;" >
 
-            </div>
         </div>
+    </div>
 </div>
 
 @section("htmlend")
@@ -95,7 +80,7 @@
     <script src="/admin/umediter/umeditor.min.js" ></script>
     <script>
         window.um = UM.getEditor('myEditor');
-//        window.shuxing.pictures = '';
+        //        window.shuxing.pictures = '';
         function fabu() {
             var t1 = $("#inputcls input");
             for( var i=0;i<t1.length;i++ ) {

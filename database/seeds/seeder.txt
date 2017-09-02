@@ -23,7 +23,7 @@
         
 活动　activity
     id title(活动主题) tuwen(图文介绍) types(短途／长途／自驾游／团队徒步／成都周边)
-    day(几天) startday(出发时间) endday(返回时间) price(价格)
+    howlong(几天) startday(出发时间) endday(返回时间) price(价格)
     mudidi(目的地)　jingdian(活动景点) neirong(活动内容) jihetime(集合时间)
     jihedidian(集合地点) qiangdu(强度等级)　jiaotong(交通方式)
     need(需要多少人) baoming(已报名多少人)　
