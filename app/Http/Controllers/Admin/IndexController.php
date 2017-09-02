@@ -106,4 +106,46 @@ class IndexController extends Controller{
     public function fabuproduct() {
         return view("admin.fabuproduct");
     }
+
+    public function dofabuproduct(Request $request) {
+        $sql = " insert into product (title,tuwen,sort,price,sold,youfei,kucun,colorlist,chicunlist,pictures) values (?,?,?,?,?,?,?,?,?,?) ";
+        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures')]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-发布失败";
+        }
+    }
+    public function productlist(Request $request) {
+        $page = $request->input('page',1);
+        $num = $request->input('num',20);
+        $r = DB::select(" select count(*) as cnt from product ");
+        $count = $r[0]->cnt;
+        $sql = " select * from product order by id desc limit ".($page-1)*$num.", ".$num;
+        $res = DB::select($sql);
+        return view("admin.productlist",['list'=>$res,"count"=>$count]);
+    }
+    public function updateproduct($pid) {
+        $sql = " select * from product where id=? ";
+        $res = DB::select($sql,[$pid]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>'商品不存在']);
+        }else{
+            return view("admin.updateproduct",["data"=>$res[0]]);
+        }
+    }
+    public function doupdateproduct(Request $request) {
+        $sql = " update product set title=?,tuwen=?,sort=?,price=?,sold=?,youfei=?,kucun=?,colorlist=?,chicunlist=?,pictures=? where id=? ";
+        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures'),$request->input('pid')]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-没有做任何修改";
+        }
+    }
+    public function adminlist() {
+        $sql = " select * from admin ";
+        $res = DB::select($sql);
+        return view("admin/adminlist",["list"=>$res]);
+    }
 }

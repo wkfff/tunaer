@@ -14,7 +14,7 @@
             height:70vh !important;
         }
     </style>
-    <script type="text/plain" id="myEditor" style="width:900px;">图文介绍.</script>
+    <script type="text/plain" id="myEditor" style="width:900px;"></script>
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
 
 @stop

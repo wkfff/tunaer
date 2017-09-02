@@ -14,7 +14,7 @@
             height:70vh !important;
         }
     </style>
-    <script type="text/plain" id="myEditor" style="width:900px;">图文介绍.</script>
+    <script type="text/plain" id="myEditor" style="width:900px;"></script>
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
 
 @stop
@@ -33,15 +33,16 @@
                     height:30px !important;width:250px !important;border: none !important;border:1px solid #999 !important;
                 }
             </style>
-
             <div class="modal-body">
                 <div id="inputcls">
-                    <input type="text" value="" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
-                    <input type="text" value="" placeholder="分类" name="sort" >
-                    <input type="text" value="" placeholder="价格" name="price" ><br>
-                    <input type="text" value="" placeholder="已售多少" name="sold" >
-                    <input type="text" value="" placeholder="颜色列表" name="colorlist" ><br>
-                    <input type="text" value="" placeholder="尺寸列表" name="chicunlist" >
+                    <input type="text" value="商品名称" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
+                    <input type="text" value="分类" placeholder="分类" name="sort" >
+                    <input type="text" value="12" placeholder="价格" name="price" ><br>
+                    <input type="text" value="3419" placeholder="已售多少" name="sold" >
+                    <input type="text" value="红色#蓝色#黑色" placeholder="颜色列表" name="colorlist" ><br>
+                    <input type="text" value="12x89#78x34" placeholder="尺寸列表" name="chicunlist" >
+                    <input type="text" value="12" placeholder="邮费" name="youfei" >
+                    <input type="text" value="999" placeholder="库存" name="kucun" >
                 </div>
                 <br>
             </div>
@@ -92,15 +93,13 @@
             if( checkpictures() ) {
                 window.shuxing.tuwen = um.getContent();
 
-                $.post("/admin/dofabutubu",window.shuxing,function(data){
+                $.post("/admin/dofabuproduct",window.shuxing,function(data){
                     if( ajaxdata(data) ) {
                         toast("发布成功");
-                        location.href="/admin/tubulist";
+                        location.href="/admin/productlist";
                     }
                 })
             }
-
-
         }
         function checkpictures() {
             var pics = $(".pics div");
@@ -122,23 +121,17 @@
         }
 
         function save() {
+
             window.shuxing = {
-                "types":$("input[name=types]:checked").val(),
+
                 "title":$("input[name=title]").val(),
-                "howlong":$("input[name=howlong]").val(),
-                "mudidi":$("input[name=mudidi]").val(),
-                "startday":$("input[name=startday]").val(),
-                "endday":$("input[name=endday]").val(),
-                "jihedidian":$("input[name=jihedidian]").val(),
-                "jihetime":$("input[name=jihetime]").val(),
+                "sort":$("input[name=sort]").val(),
                 "price":$("input[name=price]").val(),
-                "jiaotong":$("input[name=jiaotong]").val(),
-                "jingdian":$("input[name=jingdian]").val(),
-                "neirong":$("input[name=neirong]").val(),
-                "qiangdu":$("input[name=qiangdu]").val(),
-                "need":$("input[name=need]").val(),
-                "leader":$("input[name=leader]").val(),
-                "phone":$("input[name=phone]").val(),
+                "sold":$("input[name=sold]").val(),
+                "colorlist":$("input[name=colorlist]").val(),
+                "chicunlist":$("input[name=chicunlist]").val(),
+                "youfei":$("input[name=youfei]").val(),
+                "kucun":$("input[name=kucun]").val(),
             };
             $("#myModal").modal('hide');
         }

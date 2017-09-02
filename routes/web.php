@@ -24,7 +24,9 @@ Route::group(['middleware' => 'v6auth','namespace'=>'Admin'], function() {
 //后台所有页面需要检查　登录情况　由 v6auth中间件　负责
 Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin'], function()
 {
+//    后台首页
     Route::get('/index', 'IndexController@index');
+//    会员列表
     Route::get('/userlist', 'IndexController@userlist');
 //    发布徒步
     Route::get('/fabutubu', 'IndexController@fabutubu');
@@ -32,14 +34,24 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/fabuproduct', 'IndexController@fabuproduct');
 //    徒步列表
     Route::get('/tubulist', 'IndexController@tubulist');
+//    商品列表
+    Route::get('/productlist', 'IndexController@productlist');
 //    编辑徒步
     Route::get('/updatetubu/{tubuid}', 'IndexController@updatetubu');
+//    编辑商品
+    Route::get('/updateproduct/{tubuid}', 'IndexController@updateproduct');
+//    管理员列表
+    Route::get('/adminlist', 'IndexController@adminlist');
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');
 //    发布徒步活动
     Route::post('/dofabutubu', 'IndexController@dofabutubu');
 //    更新徒步
     Route::post('/doupdatetubu', 'IndexController@doupdatetubu');
+//    更新商品
+    Route::post('/doupdateproduct', 'IndexController@doupdateproduct');
+//    发布商品
+    Route::post('/dofabuproduct', 'IndexController@dofabuproduct');
 
 
 

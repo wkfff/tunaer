@@ -35,7 +35,8 @@
     <h2>Sorry, the site now can not be accessed. </h2>
     <font color="#666666">你请求访问的页面，暂时找不到，我们建议你返回首页官网进行浏览，谢谢！</font><br /><br />
     <div class="button">
-        <a href="/" title="进入官网" >进入官网</a>
+        {{--<a href="/" title="进入官网" >进入官网</a>--}}
+        <a href="javascript:history.go(-1)" title="返回上一页" >返回上一页</a>
     </div>
 </div>
 

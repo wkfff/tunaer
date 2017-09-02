@@ -32,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand"  href="index.html"><span>tunaer</span></a>
+            <a class="brand"  href="/admin/index"><span>tunaer</span></a>
 
             <div class="nav-no-collapse header-nav">
                 <ul class="nav pull-right">
@@ -109,9 +109,9 @@
                         </div>
                     </li>
 
-                    <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
-                    <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 管理员列表</span></a></li>
-                    <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> 运营管理</span></a></li>
+                    <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
+                    <li><a href="/admin/adminlist"><i class="icon-edit"></i><span class="hidden-tablet"> 管理员列表</span></a></li>
+                    <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 运营管理</span></a></li>
 
                 </ul>
             </div>
