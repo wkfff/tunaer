@@ -4,4 +4,6 @@
     margin:0px;padding:0px;
  }
 
- 
+.content{
+    width:1200px;margin:0 auto;position: relative;
+}

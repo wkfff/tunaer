@@ -100,7 +100,7 @@ class IndexController extends Controller
     public function tubulist(Request $request,$type) {
         $page = $request->input('page',1);
         $num = $request->input('num',20);
-        $sql = " select * from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+        $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
         $res = DB::select($sql,[$type]);
         return view("web.tubulist",["list"=>$res]);
 

@@ -25,7 +25,7 @@
 </div>
 <div class="top2">
     <div class="content">
-        <img src="/web/images/logo.png" style="float:left" alt="">
+        <a href="/"><img src="/web/images/logo.png" style="float:left" alt=""></a>
         <div style="margin-left:20px;float:left;margin-top:10px;">
             <img src="/web/images/top_pic1.png" alt="">
             <img src="/web/images/top_pic2.png" alt="">
@@ -40,8 +40,8 @@
 </div>
 <div class="top3">
     <div class="content nav">
-        <a href="#" >首页</a>
-        <a href="#" class="nav_a_hover navlist" >
+        <a href="/" >首页</a>
+        <a href="javascript:void(0)" class="nav_a_hover navlist" >
             <span>活动</span><i></i>
             <div class="xiala">
                 <?php
@@ -55,16 +55,13 @@
                 @for( $i=0;$i<count($types);$i++ )
                     @if( $types[$i]->name != '国内旅游' )
                         <div onclick="location.href='/tubulist/{{$types[$i]->id}}'">{{$types[$i]->name}}</div>
+                    @else
+                            <span style="display:none" >{{ $guoneilvyou = $types[$i]->id }}</span>
                     @endif
                 @endfor
-                {{--<div>周边游</div>--}}
-                {{--<div>长途徒步</div>--}}
-                {{--<div>交友线路</div>--}}
-                {{--<div>自驾游</div>--}}
-                {{--<div>团队徒步</div>--}}
             </div>
         </a>
-        <a href="#" >国内旅游</a>
+        <a href="/tubulist/{{$guoneilvyou}}" >国内旅游</a>
 
         <a href="#" class="navlist" >
             <span>社区交友</span><i></i>
@@ -98,9 +95,7 @@
     .top1{
         height:35px;line-height:35px;width:100%;background:#ECECEC;
     }
-    .content{
-        width:1200px;margin:0 auto;position: relative;
-    }
+
     .top2{
         height:80px;
     }

@@ -24,4 +24,4 @@
 </body>
 </html>
 
-@yield("js","")
+@yield("htmlend","")
