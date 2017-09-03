@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
 {
     public function index() {
+
         return view("web.index");
     }
     // 注册
@@ -95,6 +96,23 @@ class IndexController extends Controller
             return view('web.user',["userinfo"=>$res[0]]);
         }
 
+    }
+    public function tubulist(Request $request,$type) {
+        $page = $request->input('page',1);
+        $num = $request->input('num',20);
+        $sql = " select * from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+        $res = DB::select($sql,[$type]);
+        return view("web.tubulist",["list"=>$res]);
+
+    }
+    public function tubudetail($tid) {
+        $sql = " select * from tubuhuodong where id=? ";
+        $res = DB::select($sql,[$tid]);
+        if( count($res) == 0 ) {
+            return view("web.error",['content'=>"没有找到相关内容"]);
+        }else{
+            return view("web.tubudetail",['detail'=>$res[0]]);
+        }
     }
     
 }

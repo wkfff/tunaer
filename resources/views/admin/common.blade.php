@@ -112,6 +112,17 @@
                     <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
                     <li><a href="/admin/adminlist"><i class="icon-edit"></i><span class="hidden-tablet"> 管理员列表</span></a></li>
                     <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 运营管理</span></a></li>
+                    <li class="dropdown user" style="list-style: none">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-folder-close-alt"></i>
+                            <span class="username">网站设置</span>
+                            <i class="icon-angle-down"></i>
+                        </a>
+
+                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
+                            <p><a href="/admin/setting/tubutypes">徒步分类</a></p>
+                        </div>
+                    </li>
 
                 </ul>
             </div>

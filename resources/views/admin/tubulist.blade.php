@@ -23,7 +23,7 @@
         @for ($i = 0; $i < count($tubulist); $i++)
             <tr>
                 <td><a target="_blank" style="color:cornflowerblue" href="/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
-                <td class="center">{{$tubulist[$i]->types}}</td>
+                <td class="center">{{$tubulist[$i]->typename}}</td>
                 <td class="center">{{$tubulist[$i]->howlong}}天</td>
                 <td class="center">{{$tubulist[$i]->startday}}</td>
                 <td class="center">{{$tubulist[$i]->endday}}</td>
@@ -39,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/updatetubu/{{$tubulist[$i]->id}}">修改</a></li>
-                            <li><a href="/admin/deletetubu/{{$tubulist[$i]->id}}">删除</a></li>
+                            <li><a href="javascript:deletebyid({{$tubulist[$i]->id}})">删除</a></li>
                         </ul>
                     </li>
                 </td>
@@ -47,4 +47,21 @@
         @endfor
         </tbody>
     </table>
+    @if( count($tubulist) == 0 )
+        <div>
+            <button onclick="location.href='/admin/fabutubu'" class="btn btn-primary red" >添加徒步活动</button>
+        </div>
+    @endif
 @stop
+@section("htmlend")
+    <script>
+        function deletebyid(tid) {
+            $.post("/admin/deletebyid",{
+                "table":"tubuhuodong",
+                "id":tid
+            },function(data){
+                location.reload();
+            })
+        }
+    </script>
+    @stop

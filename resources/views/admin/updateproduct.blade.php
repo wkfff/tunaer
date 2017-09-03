@@ -4,7 +4,7 @@
 
 @section("content")
 
-<div cdiss="form-group">
+<div class="form-group">
     <label for="exampleInputEmail1">图文介绍 <span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" data-toggle="modal"  data-target="#myModal">商品属性</a></span><span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" onclick="$('.datapics').slideDown()">商品图片</a></span></label>
 
 </div>

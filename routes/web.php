@@ -11,12 +11,9 @@
 |
 */
 
-
-
-//后台页面前缀
+//后台页面　不需要登录
 Route::get('/admin/login', 'Admin\IndexController@login');
 Route::post('/admin/dologin', 'Admin\IndexController@dologin');
-
 //后台入口 无前缀
 Route::group(['middleware' => 'v6auth','namespace'=>'Admin'], function() {
     Route::get('/v6', 'IndexController@index');
@@ -42,6 +39,8 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/updateproduct/{tubuid}', 'IndexController@updateproduct');
 //    管理员列表
     Route::get('/adminlist', 'IndexController@adminlist');
+//    设置徒步分类
+    Route::get('/setting/tubutypes', 'IndexController@settubutypes');
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');
 //    发布徒步活动
@@ -52,9 +51,9 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post('/doupdateproduct', 'IndexController@doupdateproduct');
 //    发布商品
     Route::post('/dofabuproduct', 'IndexController@dofabuproduct');
-
-
-
+//    设置徒步分类
+    Route::post('/setting/settubutypes', 'PostController@settubutypes');
+    Route::post('/deletebyid', 'PostController@deletebyid');
 });
 //前台页面
 Route::group(['namespace' => 'Web'], function()
@@ -77,6 +76,8 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/verifycode', 'IndexController@verifycode');
     Route::get('/outlogin', 'IndexController@outlogin');
     Route::get('/user/{userid}', 'IndexController@user');
+    Route::get('/tubulist/{type}', 'IndexController@tubulist');
+    Route::get('/tubu/tubudetail/{tid}', 'IndexController@tubudetail');
 
 });
 // 获取头像

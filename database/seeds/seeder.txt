@@ -67,3 +67,7 @@
     id uid pic(图片地址) utime(上传时间)
 动态　dongtai
     id uid tuwen(图文) dtime(发布时间)　readcnt(浏览次数) dianzan(点赞) cmtcnt(评论条数)
+
+网站设置
+    tubutypes
+        id name pictures intro

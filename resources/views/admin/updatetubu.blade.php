@@ -4,7 +4,7 @@
 
 @section("content")
 
-    <div cdiss="form-group">
+    <div class="form-group">
         <label for="exampleInputEmail1">图文介绍 <span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" data-toggle="modal"  data-target="#myModal">活动属性</a></span><span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" onclick="$('.tubupics').slideDown()">活动图片</a></span></label>
 
     </div>
@@ -35,11 +35,9 @@
             </style>
             <div class="modal-body">
                 <div style="text-align: left;">
-                    <input type="radio" value="短途" name="types" >短途
-                    <input type="radio" value="长途" name="types" >长途
-                    <input type="radio" value="自驾游" name="types" >自驾游
-                    <input type="radio" value="团队徒步" name="types" >团队徒步
-                    <input type="radio" value="成都周边" name="types"  checked>成都周边
+                    @for( $i=0;$i<count($types);$i++ )
+                        <input type="radio" value="{{$types[$i]->id}}" name="types" >{{$types[$i]->name}}
+                    @endfor
                 </div>
                 <div id="inputcls">
                     <input type="text" value="{{$tubu->title}}" placeholder="主题" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>

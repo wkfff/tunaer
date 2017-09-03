@@ -46,16 +46,18 @@ class IndexController extends Controller{
     }
 
     public function fabutubu() {
-        return view("admin.fabutubu");
+        $types = DB::select("select * from tubutypes");
+        return view("admin.fabutubu",["types"=>$types]);
     }
     public function updatetubu($tubuid) {
 
         $sql = " select * from tubuhuodong where id=? ";
         $res = DB::select($sql,[$tubuid]);
+        $types = DB::select("select * from tubutypes");
         if( count($res) == 0 ) {
             return view("web.error",["content"=>'活动id不存在']);
         }else{
-            return view("admin.updatetubu",["tubu"=>$res[0]]);
+            return view("admin.updatetubu",["tubu"=>$res[0],"types"=>$types]);
         }
 
     }
@@ -99,7 +101,7 @@ class IndexController extends Controller{
         $num = $request->input('num',20);
         $r = DB::select(" select count(*) as cnt from tubuhuodong ");
         $count = $r[0]->cnt;
-        $sql = " select * from tubuhuodong order by id desc limit ".($page-1)*$num.", ".$num;
+        $sql = " select tubuhuodong.*,tubutypes.name as typename from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by id desc limit ".($page-1)*$num.", ".$num;
         $res = DB::select($sql);
         return view("admin.tubulist",['tubulist'=>$res,"count"=>$count]);
     }
@@ -147,5 +149,10 @@ class IndexController extends Controller{
         $sql = " select * from admin ";
         $res = DB::select($sql);
         return view("admin/adminlist",["list"=>$res]);
+    }
+    public function settubutypes() {
+        $sql = " select * from tubutypes ";
+        $res = DB::select($sql);
+        return view("admin.setting.tubutypes",["list"=>$res]);
     }
 }

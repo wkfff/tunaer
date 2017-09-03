@@ -42,28 +42,30 @@
     <div class="content nav">
         <a href="#" >首页</a>
         <a href="#" class="nav_a_hover navlist" >
-            <span>徒步活动</span><i></i>
+            <span>活动</span><i></i>
             <div class="xiala">
-                <div>成都周边游</div>  
-                <div>长途活动</div>  
-                <div>交友线路</div>  
+                <?php
+//                    动态加载分类
+                    if( !Session::get('types') ) {
+                        $types = DB::select(" select * from tubutypes ");
+                        Session::put("types",$types);
+                    }
+                    $types = Session::get('types');
+                ?>
+                @for( $i=0;$i<count($types);$i++ )
+                    @if( $types[$i]->name != '国内旅游' )
+                        <div onclick="location.href='/tubulist/{{$types[$i]->id}}'">{{$types[$i]->name}}</div>
+                    @endif
+                @endfor
+                {{--<div>周边游</div>--}}
+                {{--<div>长途徒步</div>--}}
+                {{--<div>交友线路</div>--}}
+                {{--<div>自驾游</div>--}}
+                {{--<div>团队徒步</div>--}}
             </div>
         </a>
-        
-        <a href="#" class="navlist" >
-            <span>自驾游</span><i></i>
-            <div class="xiala">
-                <div>自驾游介绍</div>
-                <div>活动列表</div>
-            </div>
-        </a>
-        <a href="#" class="navlist" >
-            <span>团队徒步</span><i></i>
-            <div class="xiala">
-                <div>项目介绍</div>
-                <div>活动列表</div>
-            </div>
-        </a>
+        <a href="#" >国内旅游</a>
+
         <a href="#" class="navlist" >
             <span>社区交友</span><i></i>
             <div class="xiala">
@@ -91,7 +93,7 @@
         
     }
     .xiala div:hover{
-        background: rgba(156,169,168,0.7);color:#fff;
+        background: rgba(51,102,204,1);color:#fff;
     }
     .top1{
         height:35px;line-height:35px;width:100%;background:#ECECEC;
