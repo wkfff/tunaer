@@ -51,7 +51,9 @@
                     <input type="text" value="火车" placeholder="交通方式" name="jiaotong" ><br>
                     <input type="text" value="青城山景点" placeholder="景点" name="jingdian" >
                     <input type="text" value="活动内容你说了算" placeholder="活动内容" name="neirong" ><br>
-                    <input type="text" value="2" placeholder="强度" name="qiangdu" >
+                    <input type="text" value="200km" placeholder="距离" name="juli" >
+                    <input type="text" value="特色" placeholder="特色" name="tese" ><br>
+                    <input type="text" value="一般" placeholder="强度" name="qiangdu" >
                     <input type="text" value="34" placeholder="需要多少人" name="need" ><br>
                     <input type="text" value="张翠翠领队" placeholder="领队" name="leader" >
                     <input type="text" value="18328402805" placeholder="联系电话" name="phone" ><br>
@@ -148,6 +150,8 @@
                 "jiaotong":$("input[name=jiaotong]").val(),
                 "jingdian":$("input[name=jingdian]").val(),
                 "neirong":$("input[name=neirong]").val(),
+                "juli":$("input[name=juli]").val(),
+                "tese":$("input[name=tese]").val(),
                 "qiangdu":$("input[name=qiangdu]").val(),
                 "need":$("input[name=need]").val(),
                 "leader":$("input[name=leader]").val(),

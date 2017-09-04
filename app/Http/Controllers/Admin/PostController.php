@@ -33,4 +33,5 @@ class PostController extends Controller{
             echo "200";
         }
     }
+
 }

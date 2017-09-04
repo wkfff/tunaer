@@ -106,13 +106,40 @@ class IndexController extends Controller
 
     }
     public function tubudetail($tid) {
-        $sql = " select * from tubuhuodong where id=? ";
+        $sql = " select tubuhuodong.*,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where tubuhuodong.id=? ";
         $res = DB::select($sql,[$tid]);
         if( count($res) == 0 ) {
             return view("web.error",['content'=>"没有找到相关内容"]);
         }else{
             return view("web.tubudetail",['detail'=>$res[0]]);
         }
+    }
+    public function memberlist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $ajax = $request->input("ajax","no");
+        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 order by user.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $ajax == 'no' ) {
+            return view("web.memberlist",["list"=>$res]);
+        }else{
+            echo json_encode($res);
+        }
+    }
+    public function dongtai(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $ajax = $request->input("ajax","no");
+        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 order by user.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $ajax == 'no' ) {
+            return view("web.dongtai",["list"=>$res]);
+        }else{
+            echo json_encode($res);
+        }
+    }
+    public function zixun() {
+        return view("web.zixun");
     }
     
 }

@@ -15,6 +15,7 @@
             <th>价格</th>
             <th>需要多少人</th>
             <th>已报人数</th>
+            <th>徒步距离</th>
             <th>领队</th>
             <th>操作</th>
         </tr>
@@ -30,6 +31,7 @@
                 <td class="center">{{$tubulist[$i]->price}}元</td>
                 <td class="center">{{$tubulist[$i]->need}}人</td>
                 <td class="center">{{$tubulist[$i]->baoming}}人</td>
+                <td class="center">{{$tubulist[$i]->juli}}</td>
                 <td class="center">{{$tubulist[$i]->leader}}</td>
                 <td class="center">
                     <li class="dropdown user" style="list-style: none">

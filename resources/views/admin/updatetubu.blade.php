@@ -51,6 +51,8 @@
                     <input type="text" value="{{$tubu->jiaotong}}" placeholder="交通方式" name="jiaotong" ><br>
                     <input type="text" value="{{$tubu->jingdian}}" placeholder="景点" name="jingdian" >
                     <input type="text" value="{{$tubu->neirong}}" placeholder="活动内容" name="neirong" ><br>
+                    <input type="text" value="{{$tubu->juli}}" placeholder="距离" name="juli" >
+                    <input type="text" value="{{$tubu->tese}}" placeholder="特色" name="tese" ><br>
                     <input type="text" value="{{$tubu->qiangdu}}" placeholder="强度" name="qiangdu" >
                     <input type="text" value="{{$tubu->need}}" placeholder="需要多少人" name="need" ><br>
                     <input type="text" value="{{$tubu->leader}}" placeholder="领队" name="leader" >
@@ -167,6 +169,8 @@
                 "jiaotong":$("input[name=jiaotong]").val(),
                 "jingdian":$("input[name=jingdian]").val(),
                 "neirong":$("input[name=neirong]").val(),
+                "juli":$("input[name=juli]").val(),
+                "tese":$("input[name=tese]").val(),
                 "qiangdu":$("input[name=qiangdu]").val(),
                 "need":$("input[name=need]").val(),
                 "leader":$("input[name=leader]").val(),

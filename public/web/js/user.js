@@ -6,15 +6,26 @@ function ss(n) {
     return Math.ceil(Math.random()*n)
 }
 $(document).ready(function(){
-    $("input[name=uname]").val(window.randname[ss(424)]);
+    // $("input[name=uname]").val(window.randname[ss(424)]);
+    if( "女" == window.sex) {
+        $($("input[name=sex]")[1]).prop("checked","true");
+    }else{
+        $($("input[name=sex]")[0]).prop("checked","true");
+    }
+    var mrysts = $("input[name=mryst]");
+    for( var i=0;i<mrysts.length;i++ ) {
+        if( mrysts[i].value == $($(".uinfo span")[1]).text() ) {
+            $(mrysts[i]).prop("checked","true");
+        }
+    }
 })
 
 function save(){
     var uname = $("input[name=uname]").val();
-    var sex = $("input[name=sex]").val();
+    var sex = $("input[name=sex]:checked").val();
     var age = $("input[name=age]").val();
     var intro = $("textarea[name=intro]").val();
-    var mryst = $("input[name=mryst]").val();
+    var mryst = $("input[name=mryst]:checked").val();
     var addr = $("input[name=addr]").val();
 
     if( age != '' && !/^[1-9]{1}\d{1}$/.test(age) ) {
@@ -26,9 +37,7 @@ function save(){
         var d = ajaxdata(data);
         if( d ) {
             toast("更新成功");
-            setTimeout(function(){
-                location.reload();
-            },1000)
+            location.reload();
         }
     })
 }

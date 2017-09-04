@@ -35,7 +35,3 @@
     @include("web.footer")
 
 @stop
-
-@section("js")
-    <script type='text/javascript' src="/web/js/index.js" ></script>
-@stop

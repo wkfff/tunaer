@@ -25,12 +25,12 @@
 </div>
 <div class="top2">
     <div class="content">
-        <a href="/"><img src="/web/images/logo.png" style="float:left" alt=""></a>
-        <div style="margin-left:20px;float:left;margin-top:10px;">
-            <img src="/web/images/top_pic1.png" alt="">
-            <img src="/web/images/top_pic2.png" alt="">
-            <img src="/web/images/top_pic3.gif" alt="">
-        </div>
+        <a href="/"><img src="/web/images/newlogo.jpg" style="float:left;height:80px;" alt=""></a>
+        {{--<div style="margin-left:20px;float:left;margin-top:10px;">--}}
+            {{--<img src="/web/images/top_pic1.png" alt="">--}}
+            {{--<img src="/web/images/top_pic2.png" alt="">--}}
+            {{--<img src="/web/images/top_pic3.gif" alt="">--}}
+        {{--</div>--}}
         <div class="searchbox" >
             <input placeholder="搜索目的地／活动" type="text" style="height:25px;width:240px;border:none;background:none;margin-top:10px;margin-left:20px;font-size:16px;border-right:1px solid rgba(25,76,142,0.6);padding-right:10px;" >
             <!-- <img src="/web/images/zoom2.jpg" alt=""> -->
@@ -63,14 +63,14 @@
         </a>
         <a href="/tubulist/{{$guoneilvyou}}" >国内旅游</a>
 
-        <a href="#" class="navlist" >
-            <span>社区交友</span><i></i>
+        <a href="javascript:void(0)" class="navlist" >
+            <span>徒步交友</span><i></i>
             <div class="xiala">
-                <div>会员列表</div>
-                <div>我的主页</div>
+                <div onclick="location.href='/member/dongtai'">徒友动态</div>
+                <div onclick="location.href='/member/list'">徒友交流</div>
             </div>
         </a>
-        <a href="#" >
+        <a href="/zixun" >
             <span>徒步资讯</span>
         </a>
         
@@ -121,7 +121,7 @@
     }
     .searchbox{
         height:45px;width:370px;border:1px solid #194C8E;float:right;margin-top:12.5px;
-        border-radius:25px;position: relative;
+        border-radius:25px;position: relative;margin-left:200px;
     }
     .searchbtn{
         float: right; border:none; margin-top: 5px; width: 91px; font-size: 18px;

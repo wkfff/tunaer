@@ -28,8 +28,10 @@
         <div class="wrap" style="position: absolute;top:-270px;width:100%;color:#fff;">
             <h2 style="color: #f4a219;">{{ isset($userinfo->uname)?$userinfo->uname : "资料待完善" }}
                 @if( $userinfo->sex == '女' )
+                    <script> window.sex = "女"; </script>
                     <img src="/web/images/female.png" style="height:30px;">
                 @else
+                    <script> window.sex = "男"; </script>
                     <img src="/web/images/male.png" style="height:30px;">
                 @endif
             </h2>
@@ -83,37 +85,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">昵称</label>
-                        <input type="text" name="uname" class="form-control">
+                        <label >昵称</label>
+                        <input type="text" value="{{$userinfo->uname}}" name="uname" placeholder="张三" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">年龄</label>
-                        <input type="text" class="form-control" name="age" value="25">
+                        <label >年龄</label>
+                        <input type="text" class="form-control" placeholder="27" name="age" value="{{$userinfo->age}}">
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" value="男" name="sex" checked>男生
+                            <input type="radio" value="男" name="sex">男生
                         </label>
                         <label >
                             <input type="radio" value="女" name="sex">女生
                         </label>
                         <span style="margin:0 20px;">|</span>
                         <label>
-                            <input type="radio" value="未婚" name="mryst" checked>未婚
+                            <input type="radio" value="未婚" name="mryst" >未婚
                         </label>
                         <label>
-                            <input type="radio" value="离异"  name="mryst" checked>离异
+                            <input type="radio" value="离异"  name="mryst" >离异
                         </label>
                         <label >
                             <input type="radio" value="已婚" name="mryst">已婚
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">常住地</label>
-                        <input type="text" class="form-control" name="addr" value="成都" >
+                        <label >常住地</label>
+                        <input type="text" class="form-control" name="addr" value="{{$userinfo->addr}}" placeholder="沈阳" >
                     </div>
-                    <label for="exampleInputEmail1">自我介绍</label>
-                    <textarea class="form-control" name="intro" rows="3"></textarea>
+                    <label >自我介绍</label>
+                    <textarea class="form-control" name="intro" rows="3" placeholder="自我介绍">{{$userinfo->intro}}</textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

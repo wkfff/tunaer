@@ -55,7 +55,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post('/setting/settubutypes', 'PostController@settubutypes');
     Route::post('/deletebyid', 'PostController@deletebyid');
 });
-//前台页面
+//前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
 {
     Route::get('/login',function(){
@@ -67,8 +67,6 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/error',function(){
         return view('web.error');
     });
-    // 获取头像
-    Route::get("/head/{userid}","ApiController@getuserhead");
     Route::get('/', 'IndexController@index');
     Route::post('/register','IndexController@register');
     Route::post('/login','IndexController@login');
@@ -78,12 +76,19 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/user/{userid}', 'IndexController@user');
     Route::get('/tubulist/{type}', 'IndexController@tubulist');
     Route::get('/tubu/tubudetail/{tid}', 'IndexController@tubudetail');
+    Route::get('/member/list', 'IndexController@memberlist');
+    Route::get('/member/dongtai', 'IndexController@dongtai');
+    Route::get('/zixun', 'IndexController@zixun');
+    Route::post('/tubu/huodongtuijian', 'PostController@huodongtuijian');
 
 });
 // 获取头像
-Route::get("/head/{userid}","Api\IndexController@userhead");
+Route::get("/head/{userid}","Web\PostController@userhead");
 // 需要登录访问的api
-Route::group(['namespace'=>'Api',"middleware"=>'logined'],function(){
-    Route::post("/updateuserinfo","IndexController@updateuserinfo");
-    Route::post("/updatehead","IndexController@updatehead");
+Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
+    Route::post("/updateuserinfo","PostController@updateuserinfo");
+    Route::post("/updatehead","PostController@updatehead");
+    Route::post("/tubu/baoming","PostController@baoming");
+    Route::post("/fabudongtai","PostController@fabudongtai");
+
 });
