@@ -101,7 +101,7 @@
                     z-index:999;
                 }
                 .tuijian div{
-                    height:200px;width:310px;background:#eee;background-size:cover;
+                    height:180px;width:310px;background:#eee;background-size:cover;
                     background-position:center;background-repeat: no-repeat;
                     position: relative;margin-top:20px;
                 }

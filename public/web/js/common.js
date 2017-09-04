@@ -53,7 +53,7 @@ function ajaxdata(data) {
     }
     return JSON.parse(data);
 }
-function checkFileAllow(file,type='image',size=3) {
+function checkFileAllow(file,type,size) {
     if( !file ) {
         return false;
     }
@@ -69,4 +69,61 @@ function checkFileAllow(file,type='image',size=3) {
     }
 
     return true;
+}
+
+function img2big(t) {
+    var src = '';
+    // 不管是 div背景  还是 图片都能获取到图片 url
+    if( t.nodeName == 'IMG' || t.nodeName == 'img' ) {
+        src = $(t).attr('src').replace("\"",'');
+    }else{
+        var t = $(t).css("background-image").replace(/\"/g, "").split('(').pop();
+        src = ""+t.substr(0,t.length-1);
+    }
+    // 先把这个图片放到一个自然宽高的隐藏容器
+    var tmpImg = "<img src='"+src+"' style='display:none' class='tempImg' > ";
+    $("body").append(tmpImg);
+    // 获取图片原始大小
+    var imgWidth = $(".tempImg").width();
+    var imgHeight = $(".tempImg").height();
+
+    // 如果图片原始大小超过 900x600 就要缩放   6000*4000
+    var ww = $(window).width();
+    var hh = $(window).height();
+    if(imgWidth > ww || imgHeight > hh) {
+        // 以宽作为基准来缩放
+        if( (imgWidth/imgHeight - ww/hh) >= 0 ) {
+
+            imgHeight =ww*imgHeight/imgWidth;
+            imgWidth = ww;
+            // 以高为基准来缩放
+        }else{
+            imgHeight = hh*imgWidth/imgHeight;
+            imgHeight = hh;
+        }
+    }
+
+    var s = "<div class='bigimg'  onclick='$(this).remove()' style='position:fixed;width:"+ww+"px;height:"+hh+"px;background-color:rgba(0,0,0,0.8);left:0px;top:0px;background-image:url("+src+");background-size:"+imgWidth+"px "+imgHeight+"px;background-position:center;background-repeat:no-repeat;z-index:9' ></div>";
+    // 移除测试的img
+    $(".tempImg").remove();
+    $("body").append(s);
+    // 添加滑动事件
+    $(".bigimg").bind("mousewheel",function(e){
+        // 向上滚动
+        if( e.originalEvent.wheelDelta > 0 ){
+            if( imgHeight > 3000 || imgWidth > 3000 ) return false;
+            imgWidth += imgWidth*0.2;
+            imgHeight += imgHeight*0.2;
+            $(".bigimg").css("background-size",imgWidth+"px "+imgHeight+"px")
+            // 向下滚动
+        }else{
+            if( imgHeight < 100 || imgWidth < 100 ) return false;
+            imgWidth -= imgWidth*0.2;
+            imgHeight -= imgHeight*0.2;
+
+            $(".bigimg").css("background-size",imgWidth+"px "+imgHeight+"px")
+        }
+        window.event.returnValue=false;
+        return false;
+    })
 }

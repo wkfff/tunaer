@@ -11,7 +11,7 @@ function checknull(...$args)
 }
 
 function login($phone,$passwd,$returnuid=false) {
-    $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uname where phone=? and passwd=? ";
+    $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where phone=? and passwd=? ";
     $res = DB::select($sql,[$phone,md5($passwd)]);
     if( count($res) >= 1 ) {
         Session::put('uid', $res[0]->id);

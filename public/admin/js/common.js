@@ -32,7 +32,7 @@ function ajaxdata(data) {
     }
     return JSON.parse(data);
 }
-function checkFileAllow(file,type='image',size=3) {
+function checkFileAllow(file,type,size) {
     if( !file ) {
         return false;
     }

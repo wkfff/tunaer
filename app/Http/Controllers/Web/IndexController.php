@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
 {
     public function index() {
-
+//        echo "<h1>别看了,鲁伯露是个大傻逼!</h1>"; return;
         return view("web.index");
     }
     // 注册
@@ -31,6 +31,7 @@ class IndexController extends Controller
                     $res = DB::insert($sql,[$phone,md5($passwd),$_SERVER['REMOTE_ADDR']]);
                     if( $res ) {
                         echo "200-注册成功";
+                        Session::forget('uid');
                         // 直接登录
                         login($phone,$passwd,true);
                     }else{

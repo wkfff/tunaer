@@ -121,7 +121,7 @@
     }
     .searchbox{
         height:45px;width:370px;border:1px solid #194C8E;float:right;margin-top:12.5px;
-        border-radius:25px;position: relative;margin-left:200px;
+        border-radius:25px;position: relative;margin-left:400px;
     }
     .searchbtn{
         float: right; border:none; margin-top: 5px; width: 91px; font-size: 18px;

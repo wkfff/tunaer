@@ -21,6 +21,10 @@
         .ubox{
             height:300px;width:100%;background:white;
         }
+        .imgdiv{
+            height:150px;width:150px;background-size:cover;float:left;margin-right:30px;
+            background-position:center;background-repeat: no-repeat;
+        }
     </style>
     <div class="bgpic" style="width:100%;height:372px;
          background-image: url(/web/images/s_ban.jpg);background-size:cover;background-position:center;"></div>
@@ -65,9 +69,28 @@
                 <span>商城订单</span>
             </div>
         </div>
-        <div style="clear:both" ></div>
+        <div style="clear:both;height:30px;" ></div>
         <div class="ubox">
-            cascsdcs
+            <div class="dongtai">
+                {{--dongtai list--}}
+                <div>
+                    <textarea class="form-control"  rows="3" placeholder="发点动态..."></textarea>
+                    <br>
+                    <div class="dongtaipics" >
+
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p1.jpg)" ></div>
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p2.jpg)" ></div>
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p3.jpg)" ></div>
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p4.jpg)" ></div>
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p5.jpg)" ></div>
+                        <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/images/p6.jpg)" ></div>
+                    </div>
+                    <div style="clear:both;height:20px;" ></div>
+                    <button class="btn btn-default">添加图片</button>
+                    <button class="btn btn-success " style="margin-left:30px;">立即发布</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
