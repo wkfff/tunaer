@@ -91,10 +91,13 @@ class IndexController extends Controller
     public function user($userid) {
         $sql = " select userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
         $res = DB::select($sql,[$userid]);
+        //动态
+        $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
+        $dongtai = DB::select($sql,[$userid]);
         if( count($res) == 0 ) {
             return view("web.error",['content'=>'用户不存在']);
         }else{
-            return view('web.user',["userinfo"=>$res[0]]);
+            return view('web.user',["userinfo"=>$res[0],"dongtai"=>$dongtai]);
         }
 
     }

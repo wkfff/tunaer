@@ -86,10 +86,11 @@ function img2big(t) {
     // 获取图片原始大小
     var imgWidth = $(".tempImg").width();
     var imgHeight = $(".tempImg").height();
+    // console.log(imgWidth+":"+imgHeight);
 
     // 如果图片原始大小超过 900x600 就要缩放   6000*4000
-    var ww = $(window).width();
-    var hh = $(window).height();
+    var ww = window.innerWidth;
+    var hh = window.innerHeight;
     if(imgWidth > ww || imgHeight > hh) {
         // 以宽作为基准来缩放
         if( (imgWidth/imgHeight - ww/hh) >= 0 ) {

@@ -57,7 +57,7 @@
     count(数量) color(颜色) chicun(尺寸)
 
 游记 youji
-    id uid(uid为1-10是管理员)　tuwen(图文)　type(游记分类1徒友发布/2管理员) ptime(发布时间)
+    id uid　tuwen(图文)　type(游记分类1徒友发布/2管理员) ptime(发布时间)
 游记评论 youjicmt
     id uid yid(游记id) cmt(评论内容) ctime(评论时间)
 
@@ -66,8 +66,12 @@
 相册　xiangce
     id uid pic(图片地址) utime(上传时间)
 动态　dongtai
-    id uid tuwen(图文) dtime(发布时间)　readcnt(浏览次数) dianzan(点赞) cmtcnt(评论条数)
+    id uid content(内容) imgs(图片) dtime(发布时间)　readcnt(浏览次数) zancnt(点赞) cmtcnt(评论条数)
+动态评论/点赞
+    id uid did content(如果是1就是点赞，其他就是评论内容) ctime
 
 网站设置
     tubutypes
         id name pictures intro
+    banner
+        id title    pic url sort(排序) status

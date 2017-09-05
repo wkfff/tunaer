@@ -60,3 +60,139 @@ function updatehead(that) {
         oXHR.send(fd);
     }
 }
+
+function uploadImg(t) {
+    var file = t.files[0];
+    if( !checkFileAllow(file,'image',4) ) {
+        return false;
+    }
+    var fd = new FormData();
+    fd.append("file" , file );
+    var oXHR = new XMLHttpRequest();
+    oXHR.open('POST', "/uploadimg");
+    oXHR.onreadystatechange = function() {
+        if (oXHR.readyState == 4 && oXHR.status == 200) {
+            var d = oXHR.responseText; // 返回值
+            var img =`<div class="imgdiv" ondblclick="$(this).remove()"  style="background-image:url(/web/data/images/${d})" ></div>`;
+            $(".dongtaipics").append(img);
+        }
+    }
+    oXHR.send(fd);
+}
+function uploadImg2(t) {
+    var file = t.files[0];
+    if( !checkFileAllow(file,'image',4) ) {
+        return false;
+    }
+    var fd = new FormData();
+    fd.append("file" , file );
+    var oXHR = new XMLHttpRequest();
+    oXHR.open('POST', "/uploadimg");
+    oXHR.onreadystatechange = function() {
+        if (oXHR.readyState == 4 && oXHR.status == 200) {
+            $(".youjipics").children().remove();
+            var d = oXHR.responseText; // 返回值
+            var img =`<div class="imgdiv" ondblclick="$(this).remove()"  style="background-image:url(/web/data/images/${d})" ></div>`;
+            $(".youjipics").append(img);
+        }
+    }
+    oXHR.send(fd);
+}
+
+function fadongtai(t) {
+    var content = $(".dongtai div").children("textarea").val();
+    if( $.trim(content) == '' ) {
+        toast("请填写动态内容");return;
+    }
+
+    var pics = $(".dongtaipics div");
+    var tmp = new Array();
+    for( var i=0;i<pics.length;i++ ) {
+        var url = $(pics[i]).css("background-image");
+        var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+        tmp.push(pic);
+    }
+    if( tmp.length == 0 ) {
+        toast("至少添加一张图片"); return ;
+    }
+    var imgs = tmp.join("#");
+    $.post("/fadongtai",{"content":content,"imgs":imgs},function(d){
+        if( ajaxdata(d) ) {
+            toast("发布成功");
+            location.href = "/user/"+window.uid+"#dongtai";
+            location.reload();
+        }
+    })
+}
+function dongtaicmtmp(did,type){
+    window.dongtai_id =  did;
+    if( type == 'liuyan' ) {
+        $("#myModal2").modal("show");
+    }else{
+        dongtaicm(1);
+    }
+}
+function dongtaipinglun() {
+    var content = $("textarea[name=comment]").val();
+    // alert(content);return;
+    dongtaicm(content);
+    $("#myModal2").modal("hide");
+}
+function dongtaicm(content) {
+    // alert(content);return;
+    $.post("/dongtai/pinglun",{"did":window.dongtai_id,"content":content},function(d){
+        if(ajaxdata(d)) {
+            toast("操作成功");
+        }
+    })
+}
+// 展开评论
+function zhankai(did,t) {
+    if($(t).parent("div").children("div").children("div").length != 0 ) {
+        $(t).parent("div").children("div").slideUp(function(){
+            $(t).parent("div").children("div").children("div").remove();
+        });
+        return ;
+    }
+    $.post("/dongtai/cmlist",{"did":did},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("还没有评论");return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var cmitem = `<div style="height:30px;line-height:30px;margin:10px;">
+                                    <a href="/user/${res[i].uid}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid}}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
+                                    <div style="display: inline-block;margin-left:10px;color:#444">${res[i].content}</div><span style="margin-left:20px;font-size:13px;color:#999;">${res[i].ctime}</span>
+                                </div>`;
+                $(t).parent("div").children("div").append(cmitem);
+            }
+            $(t).parent("div").children("div").slideDown();
+        }
+    })
+}
+
+function changetab(tab) {
+    $(".tab").css("display","none");
+    $("."+tab).css("display","block");
+    location.href=location.href.split("#")[0]+"#"+tab;
+}
+
+function fabuyouji() {
+    if( $(".youjipics").children().length == 0 ) {
+        toast("请上传封面");return ;
+    }
+    var tuwen = um.getContent();
+    var title = $(".youji input").val();
+    if( $.trim(title) == '' || $.trim(um.getContentTxt()) == '' ) {
+        toast("请填写没一项内容");return;
+    }
+    var url = $($(".youjipics div")[0]).css("background-image");
+    var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+
+    $.post("/youji/fabu",{"title":title,"tuwen":tuwen,"pic":pic},function(d){
+        if( ajaxdata(d) ) {
+            toast("发布成功");
+            location.reload();
+        }
+    })
+}

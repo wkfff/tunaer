@@ -90,5 +90,10 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/updatehead","PostController@updatehead");
     Route::post("/tubu/baoming","PostController@baoming");
     Route::post("/fabudongtai","PostController@fabudongtai");
+    Route::post("/uploadimg","PostController@uploadimg");
+    Route::post("/fadongtai","PostController@fadongtai");
+    Route::post("/dongtai/pinglun","PostController@dongtaicm");
+    Route::post("/dongtai/cmlist","PostController@dongtaicmlist");
+    Route::post("/youji/fabu","PostController@fabuyouji");
 
 });

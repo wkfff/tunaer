@@ -84,4 +84,70 @@ class PostController extends Controller{
         $comment = $request->input("content");
         $title = $request->input("title");
     }
+    public function uploadimg(Request $request) {
+        $file = $request->file('file');
+        if ($file->isValid()) {
+            $imgname = time() .".". $file->getClientOriginalExtension();
+            $destinationPath = base_path() . "/public/web/data/images/";
+
+            if( $file->move($destinationPath,$imgname) ) {
+                // 返回图片名
+                echo $imgname;
+            }else{
+                echo "400-操作失败";
+            }
+        }
+    }
+    public function fadongtai(Request $request) {
+        $content = $request->input("content");
+        $imgs = $request->input("imgs");
+        $sql = " insert into dongtai (uid,content,imgs) values (?,?,?) ";
+        $res = DB::insert($sql,[Session::get("uid"),$content,$imgs]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-发布失败";
+        }
+    }
+    public function dongtaicm(Request $request) {
+        $did = $request->input("did");
+        $content = $request->input("content");
+        if( $content == "1" ) {
+            $sql = " select * from dongtaicm where uid=? and did=? and content=1";
+            if( DB::select($sql,[Session::get("uid"),$did]) ) {
+                echo "400-不可以重复点赞"; return;
+            }
+        }
+        $sql = " insert into dongtaicm (uid,did,content) values (?,?,?) ";
+        $res = DB::insert($sql,[Session::get("uid"),$did,$content]);
+        if( $res ) {
+            if( $content == "1" ) {
+                @DB::table('dongtai')->where('id', $did)->increment('zancnt' ,1);
+            }else{
+                @DB::table('dongtai')->where('id', $did)->increment('cmcnt', 1);
+            }
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+    public function dongtaicmlist(Request $request) {
+        $did = $request->input("did");
+        $sql = " select * from dongtaicm where content<>1 and did=? order by id desc limit 100 ";
+        $res = DB::select($sql,[$did]);
+        echo json_encode($res);
+    }
+    public function fabuyouji(Request $request) {
+        $content = $request->input("tuwen");
+        $title = $request->input("title");
+        $pic = $request->input("pic");
+        $sql = " insert into youji (uid,title,tuwen,pic) values (?,?,?,?) ";
+        $res = DB::insert($sql,[Session::get("uid"),$title,$content,$pic]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-发布失败";
+        }
+    }
+
 }
