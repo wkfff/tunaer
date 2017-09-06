@@ -42,7 +42,7 @@ class IndexController extends Controller{
         $count = $r[0]->cnt;
         $sql = " select user.id as userid,user.phone,user.status,userattr.* from user left join userattr on user.id=userattr.uid order by id desc limit ".($page-1)*$num.", ".$num;
         $res = DB::select($sql);
-        return view("admin.userlist",['userlist'=>$res,"count"=>$count]);
+        return view("admin.userlist",['list'=>$res,"count"=>$count]);
     }
 
     public function fabutubu() {
@@ -154,5 +154,42 @@ class IndexController extends Controller{
         $sql = " select * from tubutypes ";
         $res = DB::select($sql);
         return view("admin.setting.tubutypes",["list"=>$res]);
+    }
+    public function zixunlist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $json = $request->input("json","no");
+        $sql = " select * from zixun order by id desc limit ?,?";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $json == "no" ) {
+            return view("admin.zixunlist",["list"=>$res]);
+        }else{
+            echo json_encode($res);
+        }
+    }
+    public function fabuzixun() {
+        return view("admin.fabuzixun");
+    }
+    public function updatezixun($id) {
+        $sql = " select * from zixun where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>'资讯不存在']);
+        }else{
+            return view("admin.updatezixun",["data"=>$res[0]]);
+        }
+
+    }
+    public function setbanner() {
+        $sql = " select * from banner order by id desc";
+        $res = DB::select($sql);
+        return view("admin.setting.banner",["list"=>$res]);
+    }
+    public function monidenglu($userid) {
+        $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where user.id=?";
+        $res = DB::select($sql,[$userid]);
+        Session::put('uid', $res[0]->id);
+        Session::put('uname', $res[0]->uname);
+        return redirect("/user/".$userid);
     }
 }

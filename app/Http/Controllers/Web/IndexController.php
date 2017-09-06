@@ -89,7 +89,7 @@ class IndexController extends Controller
     }
 
     public function user($userid) {
-        $sql = " select userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
+        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
         $res = DB::select($sql,[$userid]);
         //动态
         $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
@@ -134,7 +134,7 @@ class IndexController extends Controller
         $page = $request->input("page",1);
         $num = $request->input("num",20);
         $ajax = $request->input("ajax","no");
-        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 order by user.id desc limit ?,? ";
+        $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid order by dongtai.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         if( $ajax == 'no' ) {
             return view("web.dongtai",["list"=>$res]);
@@ -142,8 +142,19 @@ class IndexController extends Controller
             echo json_encode($res);
         }
     }
-    public function zixun() {
-        return view("web.zixun");
+    public function zixun(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $ajax = $request->input("ajax","no");
+        $sql = " select * from zixun order by id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $ajax == 'no' ) {
+            return view("web.zixun",["list"=>$res]);
+        }else{
+            echo json_encode($res);
+        }
     }
+
+
     
 }

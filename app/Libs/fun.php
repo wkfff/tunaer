@@ -11,13 +11,16 @@ function checknull(...$args)
 }
 
 function login($phone,$passwd,$returnuid=false) {
-    $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where phone=? and passwd=? ";
+    $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where phone=? and passwd=?  ";
     $res = DB::select($sql,[$phone,md5($passwd)]);
     if( count($res) >= 1 ) {
-        Session::put('uid', $res[0]->id);
+        if( $res[0]->status == 0 ) {
+            echo "400-账户不可用"; return;
+        }
         if( !$res[0]->uname ) {
             $res[0]->uname = '请完善资料';
         }
+        Session::put('uid', $res[0]->id);
         Session::put('uname', $res[0]->uname);
         if(!$returnuid) {
             echo "200-登录成功";

@@ -49,7 +49,7 @@
             </h2>
             <div style="width:150px;height:150px;background-image: url(/head/{{$userinfo->uid}});
                 background-size:cover;background-position:center;position:absolute;right:0px;top:0px;">
-                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->uid )
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <a href="javascript:void(0)" onclick="$('.userheadinput').trigger('click');"
                        style="position:absolute;display: block;left:0px;bottom:0px;height:30px;text-align: center;line-height: 30px;width:100%;background:rgba(0,0,0,0.5);color:#fff;">修改头像</a>
                     <input type="file" class="userheadinput" onchange="updatehead(this)" style="display: none;">
@@ -61,7 +61,7 @@
                 婚况：<span style="color:#fff" >{{ isset($userinfo->mryst)?$userinfo->mryst : "保密" }}</span>
                 常住：<span style="color:#fff" >{{ isset($userinfo->addr)?$userinfo->addr : "保密" }}</span>
             </div>
-            @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->uid )
+            @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
             <div style="position:absolute;right:200px;top:0px;font-size:16px;cursor:pointer;" data-toggle="modal" data-target="#myModal">
                 <span>编辑资料</span>
                 <img src="/web/images/edit.png" style="height:20px;">
@@ -88,7 +88,7 @@
             <input type="file" class="uploadinput" onchange="uploadImg(this)" style="display: none;" >
             <input type="file" class="uploadinput2" onchange="uploadImg2(this)" style="display: none;" >
             <div class="tab youji">
-                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->uid )
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <input type="text" class="form-control" placeholder="游记标题" style="width:900px;margin-bottom:10px" >
                     <script type="text/plain" id="myEditor" style="width:900px;"></script>
                     <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">添加封面</button>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="tab dongtai" >
-                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->uid )
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                 <div>
                     <textarea class="form-control"  rows="5" placeholder="发点动态..."></textarea>
                     <div class="dongtaipics" ></div>
@@ -227,7 +227,7 @@
     <script>
         $(document).ready(function(){
             window.um = UM.getEditor('myEditor');
-            window.uid = "{{$userinfo->uid}}";
+            window.uid = "{{$userinfo->userid}}";
             var tab = location.href.split("#");
             if( tab.length == 2 ) {
                 $("."+tab[1]).css("display","block");

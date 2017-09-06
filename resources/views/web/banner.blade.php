@@ -3,11 +3,23 @@
 
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image:url(/web/images/banner0.jpg);"></div>
-        <div class="swiper-slide" style="background-image:url(/web/images/banner1.jpg);"></div>
-        <div class="swiper-slide" style="background-image:url(/web/images/banner2.jpg);"></div>
-        <div class="swiper-slide" style="background-image:url(/web/images/banner3.jpg);"></div>
-        <div class="swiper-slide" style="background-image:url(/web/images/banner4.jpg);"></div>
+        <?php
+            if( empty(Session::get("banners")) ) {
+                $sql = " select * from banner order by sort desc ";
+                $banners = DB::select($sql);
+                Session::put("banners",$banners);
+            }
+            $banners = Session::get("banners");
+
+        ?>
+        @for( $i=0;$i<count($banners);$i++ )
+                <div onclick="location.href='{{$banners[$i]->url}}'" class="swiper-slide" title="{{$banners[$i]->title}}" style="background-image:url(/admin/data/images/{{$banners[$i]->pic}});"></div>
+        @endfor
+        {{--<div class="swiper-slide" style="background-image:url(/web/images/banner0.jpg);"></div>--}}
+        {{--<div class="swiper-slide" style="background-image:url(/web/images/banner1.jpg);"></div>--}}
+        {{--<div class="swiper-slide" style="background-image:url(/web/images/banner2.jpg);"></div>--}}
+        {{--<div class="swiper-slide" style="background-image:url(/web/images/banner3.jpg);"></div>--}}
+        {{--<div class="swiper-slide" style="background-image:url(/web/images/banner4.jpg);"></div>--}}
     </div>
     <!-- 如果需要分页器 -->
     <div class="swiper-pagination"></div>

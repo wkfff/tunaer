@@ -73,8 +73,14 @@
         <a href="/zixun" >
             <span>徒步资讯</span>
         </a>
-        
-        <a href="#" >徒步足迹</a>
+        <a href="javascript:void(0)" class="navlist" >
+            <span>徒步足迹</span><i></i>
+            <div class="xiala">
+                <div onclick="location.href='/youji/admin'">官方游记</div>
+                <div onclick="location.href='/youji/member'">会员游记</div>
+            </div>
+        </a>
+
         <a href="#" >徒步商城</a>
         <a href="#" class="nav_a_hover" >摄影大赛</a>
     </div>
@@ -83,7 +89,7 @@
 <style>
     .xiala{
         position: absolute;left:0px;top:45px;width:120px;
-        z-index:10;font-size: 15px;color:#333;display: none;
+        z-index:10;font-size: 15px;color:#333;display: none;border:1px solid #eee;
     }
     .xiala div{
         height:45px;line-height:45px;background:rgba(255,255,255,0.8);

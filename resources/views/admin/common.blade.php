@@ -13,11 +13,11 @@
     <link id="base-style" href="/admin/css/style.css" rel="stylesheet">
     <link id="base-style-responsive" href="/admin/css/style-responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <link id="ie-style" href="/admin/css/ie.css" rel="stylesheet">
+    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
+    {{--<link id="ie-style" href="/admin/css/ie.css" rel="stylesheet">--}}
     <![endif]-->
     <!--[if IE 9]>
-    <link id="ie9style" href="/admin/css/ie9.css" rel="stylesheet">
+    <!--<link id="ie9style" href="/admin/css/ie9.css" rel="stylesheet">-->
     <![endif]-->
     <!-- start: Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/web/images/ico.png">
@@ -58,71 +58,49 @@
 
 <div class="container-fluid-full">
     <div class="row-fluid">
-        <style>
-            .mymenu p a{
-                color:#444 !important;
-                text-decoration: none;
-                display: block;
-                margin:0px;padding:0px;
-                height:30px;line-height:30px;
-                text-indent:20px;
-
-            }
-            .mymenu p a:hover{
-                background:#578EBE !important;
-                color: #fff !important;
-            }
-
-        </style>
         <!-- start: Main Menu -->
-        <div id="sidebar-left" class="span2">
+        <div id="sidebar-left" class="span2" style="overflow-y: auto;">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
                     <li><a href="/admin/index"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 主面板</span></a></li>
                     <li><a href="/admin/userlist"><i class="icon-envelope"></i><span class="hidden-tablet"> 会员列表</span></a></li>
-                    <li class="dropdown user" style="list-style: none">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-folder-close-alt"></i>
-                            <span class="username">徒步活动</span>
-                            <i class="icon-angle-down"></i>
-                        </a>
-
-                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
-                            <p><a href="/admin/tubulist">徒步列表</a></p>
-                            <p><a href="/admin/fabutubu">发布徒步活动</a></p>
-                            <p><a href="/admin/tubuorder">徒步订单</a></p>
-                        </div>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步活动</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/tubulist"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步列表</span></a></li>
+                            <li><a class="submenu" href="/admin/fabutubu"><i class="icon-file-alt"></i><span class="hidden-tablet">发布徒步活动</span></a></li>
+                            <li><a class="submenu" href="/admin/tubuorder"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步订单</span></a></li>
+                        </ul>
                     </li>
-                    <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>
-                    <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
-                    <li class="dropdown user" style="list-style: none">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-folder-close-alt"></i>
-                            <span class="username">徒步商城</span>
-                            <i class="icon-angle-down"></i>
-                        </a>
-
-                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
-                            <p><a href="/admin/productlist">产品列表</a></p>
-                            <p><a href="/admin/fabuproduct">发布商品</a></p>
-                            <p><a href="/admin/productorder">订单列表</a></p>
-                        </div>
-                    </li>
-
                     <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
-                    <li><a href="/admin/adminlist"><i class="icon-edit"></i><span class="hidden-tablet"> 管理员列表</span></a></li>
-                    <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 运营管理</span></a></li>
-                    <li class="dropdown user" style="list-style: none">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-folder-close-alt"></i>
-                            <span class="username">网站设置</span>
-                            <i class="icon-angle-down"></i>
-                        </a>
-
-                        <div class="dropdown-menu mymenu" style="background:#fff;border-radius:0;cursor:pointer;margin-left:20px;">
-                            <p><a href="/admin/setting/tubutypes">徒步分类</a></p>
-                        </div>
+                    {{--<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>--}}
+                    <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步商城</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/productlist"><i class="icon-file-alt"></i><span class="hidden-tablet">产品列表</span></a></li>
+                            <li><a class="submenu" href="/admin/fabuproduct"><i class="icon-file-alt"></i><span class="hidden-tablet">发布商品</span></a></li>
+                            <li><a class="submenu" href="/admin/productorder"><i class="icon-file-alt"></i><span class="hidden-tablet">订单列表</span></a></li>
+                        </ul>
                     </li>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 行业资讯</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/zixunlist"><i class="icon-file-alt"></i><span class="hidden-tablet">资讯列表</span></a></li>
+                            <li><a class="submenu" href="/admin/fabuzixun"><i class="icon-file-alt"></i><span class="hidden-tablet">发布资讯</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 网站设置</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/setting/tubutypes"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步分类</span></a></li>
+                            <li><a class="submenu" href="/admin/setting/banner"><i class="icon-file-alt"></i><span class="hidden-tablet">Banner</span></a></li>
+                            <li><a class="submenu" href="/admin/adminlist"><i class="icon-file-alt"></i><span class="hidden-tablet">管理员列表</span></a></li>
+                        </ul>
+                    </li>
+
+
 
                 </ul>
             </div>
@@ -146,3 +124,12 @@
 </body>
 </html>
 @yield("htmlend","")
+<script>
+    $('.dropmenu').click(function(e){
+
+        e.preventDefault();
+
+        $(this).parent().find('ul').slideToggle();
+
+    });
+</script>

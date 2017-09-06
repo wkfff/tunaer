@@ -41,6 +41,18 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/adminlist', 'IndexController@adminlist');
 //    设置徒步分类
     Route::get('/setting/tubutypes', 'IndexController@settubutypes');
+//    banner
+    Route::get('/setting/banner', 'IndexController@setbanner');
+    Route::post('/setting/banner', 'PostController@setbanner');
+
+//    资讯列表
+    Route::get('/zixunlist', 'IndexController@zixunlist');
+    Route::get('/monidenglu/{userid}', 'IndexController@monidenglu');
+//    发布资讯
+    Route::get('/fabuzixun', 'IndexController@fabuzixun');
+    Route::post('/dofabuzixun', 'PostController@fabuzixun');
+    Route::get('/updatezixun/{id}', 'IndexController@updatezixun');
+
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');
 //    发布徒步活动
@@ -54,6 +66,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 //    设置徒步分类
     Route::post('/setting/settubutypes', 'PostController@settubutypes');
     Route::post('/deletebyid', 'PostController@deletebyid');
+    Route::post('/dongjiebyid', 'PostController@dongjiebyid');
 });
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
@@ -80,6 +93,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/member/dongtai', 'IndexController@dongtai');
     Route::get('/zixun', 'IndexController@zixun');
     Route::post('/tubu/huodongtuijian', 'PostController@huodongtuijian');
+    Route::post("/dongtai/cmlist","PostController@dongtaicmlist");
 
 });
 // 获取头像
@@ -93,7 +107,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/uploadimg","PostController@uploadimg");
     Route::post("/fadongtai","PostController@fadongtai");
     Route::post("/dongtai/pinglun","PostController@dongtaicm");
-    Route::post("/dongtai/cmlist","PostController@dongtaicmlist");
+
     Route::post("/youji/fabu","PostController@fabuyouji");
 
 });

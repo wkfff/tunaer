@@ -73,9 +73,14 @@ class PostController extends Controller{
         $sql = " select head from userattr where uid=? ";
         $res = DB::select($sql,[$userid]);
         if( count($res) >= 1 ) {
-            header("Location:/web/data/images/".$res[0]->head);
+            if( trim($res[0]->head) == '' ) {
+                header("Location:/web/images/default.gif");
+            }else{
+                header("Location:/web/data/images/".$res[0]->head);
+            }
+
         }else{
-            header("Location:/images/default.jpg");
+            header("Location:/web/images/default.gif");
         }
     }
 
@@ -115,7 +120,7 @@ class PostController extends Controller{
         if( $content == "1" ) {
             $sql = " select * from dongtaicm where uid=? and did=? and content=1";
             if( DB::select($sql,[Session::get("uid"),$did]) ) {
-                echo "400-不可以重复点赞"; return;
+                echo "400-已赞过了"; return;
             }
         }
         $sql = " insert into dongtaicm (uid,did,content) values (?,?,?) ";
