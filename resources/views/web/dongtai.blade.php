@@ -19,7 +19,7 @@
             <a style="color: #999;" href="/member/dongtai" >会员动态</a>
         </div>
         @for( $i=0;$i<count($list);$i++ )
-            <div>
+            <div class="item{{$list[$i]->id}}">
                 <div>{{$list[$i]->content}}</div>
                 <?php $pics=explode("#",$list[$i]->imgs); ?>
                 @for( $j=0;$j<count($pics);$j++ )
@@ -35,15 +35,16 @@
                     <button onclick="dongtaicmtmp({{$list[$i]->id}},'liuyan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
                         <img src="/web/images/liuyan.png" style="height:15px;"><span style="margin-left:10px;" >评论{{$list[$i]->cmcnt}}</span>
                     </button>
-                    <button onclick="zhankai({{$list[$i]->id}},this)" style="outline:none;" type="button" class="btn btn-default btn-sm">
+                    <button onclick="zhankai({{$list[$i]->id}},1)" style="outline:none;" type="button" class="btn btn-default btn-sm">
                         <img src="/web/images/zhankai.png" style="width:10px;"><span style="margin-left:10px;" >展开评论</span>
                     </button>
-                    <div style="width:100%;border:1px solid #eee;margin-top:10px;display: none;" >
+                    <div class="cmt{{$list[$i]->id}}" style="width:100%;border:1px solid #eee;margin-top:10px;display: none;" >
 
                     </div>
                 </div>
             </div>
         @endfor
+        {!! $fenye !!}
     </div>
     @include("web.footer")
     <!-- Modal -->
@@ -69,27 +70,46 @@
 
 @section("htmlend")
     <script>
+        window.tmppage = [];
         // 展开评论
-        function zhankai(did,t) {
-            if($(t).parent("div").children("div").children("div").length != 0 ) {
-                $(t).parent("div").children("div").slideUp(function(){
-                    $(t).parent("div").children("div").children("div").remove();
-                });
-                return ;
+        function zhankai(did,flag) {
+            if( flag == 1 ) {
+                if($(".cmt"+did).children("div").length != 0 ) {
+                    $(".cmt"+did).slideUp(function(){
+                        $(".cmt"+did).children("div").remove();
+                        window.tmppage[did] = 0;
+                    });
+                    return ;
+                }
             }
-            $.post("/dongtai/cmlist",{"did":did},function(d){
+            if( flag == 2 ) {
+                $(".cmt"+did).children("a").remove();
+            }
+//            [did=>page]
+            if( window.tmppage[did] ) {
+                window.tmppage[did]++;
+            }else{
+                window.tmppage[did] = 1;
+            }
+            $.post("/dongtai/cmlist",{"did":did,"page":window.tmppage[did]},function(d){
                 if( res = ajaxdata(d) ) {
                     if( res.length == 0 ) {
-                        toast("还没有评论");return ;
+                        if( flag == 1 ) {
+                            toast("还没有评论");return ;
+                        }else{
+                            $(".cmt"+did).children("a").remove();
+                            toast("没有更多了");return ;
+                        }
                     }
                     for( var i=0;i<res.length;i++ ) {
-                        var cmitem = `<div style="height:30px;line-height:30px;margin:10px;">
+                        var cmitem = `<div style="height:30px;line-height:30px;margin:20px 10px;">
                                     <a href="/user/${res[i].uid}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid}}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
                                     <div style="display: inline-block;margin-left:10px;color:#444">${res[i].content}</div><span style="margin-left:20px;font-size:13px;color:#999;">${res[i].ctime}</span>
                                 </div>`;
-                        $(t).parent("div").children("div").append(cmitem);
+                        $(".cmt"+did).append(cmitem);
                     }
-                    $(t).parent("div").children("div").slideDown();
+                    $(".cmt"+did).append("<a style='margin-left:40px;font-size:13px;text-decoration: none;margin-bottom: 10px;display: block;' href='javascript:void(0)' onclick='zhankai("+did+",2)'>加载更多</a>");
+                    $(".cmt"+did).slideDown();
                 }
             })
         }

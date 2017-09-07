@@ -37,24 +37,6 @@
 @section("body")
     @include("web.header")
         <div class="content">
-            <style>
-                .fenye{
-                    margin:10px 0px;
-                }
-                .fenye a {
-                    display:inline-block;height:25px;padding:0px 10px;
-                    text-align: center;color:#fff;background:#2260B4;
-                    font-size:14px;line-height:25px;margin:0px 2px;
-                    text-decoration: none;border:none;
-                }
-                .fenye a:hover{
-                    background: #3783EB;
-                }
-                .fenyecurrent{
-                    background: #f6efcc !important;color:#6d643c!important;
-                }
-            </style>
-
             <div style="font-size: 18px;color: #999;margin:30px 0">
                 <a style="color: #999;" href="/">首页</a>
                 <span>></span>

@@ -120,7 +120,7 @@ class IndexController extends Controller
     }
     public function memberlist(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",20);
+        $num = $request->input("num",90);
         $ajax = $request->input("ajax","no");
         $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 order by user.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
@@ -132,12 +132,13 @@ class IndexController extends Controller
     }
     public function dongtai(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",20);
+        $num = $request->input("num",7);
         $ajax = $request->input("ajax","no");
+        $count = DB::select(" select count(*) as cnt from dongtai inner join user on user.id=dongtai.uid ");
         $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid order by dongtai.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         if( $ajax == 'no' ) {
-            return view("web.dongtai",["list"=>$res]);
+            return view("web.dongtai",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/member/dongtai",$page,$num)]);
         }else{
             echo json_encode($res);
         }

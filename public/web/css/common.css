@@ -7,3 +7,19 @@
 .content{
     width:1200px;margin:0 auto;position: relative;
 }
+
+.fenye{
+    margin:10px 0px;
+}
+.fenye a {
+    display:inline-block;height:25px;padding:0px 10px;
+    text-align: center;color:#fff;background:#2260B4;
+    font-size:14px;line-height:25px;margin:0px 2px;
+    text-decoration: none;border:none;
+}
+.fenye a:hover{
+    background: #3783EB;
+}
+.fenyecurrent{
+    background: #f6efcc !important;color:#6d643c!important;
+}

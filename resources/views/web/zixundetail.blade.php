@@ -38,13 +38,13 @@
         <div class="tuijian"   >
             <p style="color:#999;font-size:20px;">推荐活动</p>
             @for( $i=0;$i<count($zixuns);$i++ )
-                <div style="width:400px;height:100px;margin-bottom:20px;color:#444;" >
+                <a href="/zixun/detail/{{$zixuns[$i]->id}}"><div style="width:400px;height:100px;margin-bottom:20px;color:#444;" >
                     <div style="height:100px;width:160px;float:left;background-size:cover;background-position: center;background-repeat:no-repeat;background-image:url(/admin/data/images/{{$zixuns[$i]->pic}});" ></div>
                     <div style="float:right;width:240px;height:100px;position:relative;">
                         <p style="line-height:30px;padding:0 10px;position:absolute;top:0px;" >{{$zixuns[$i]->title}}</p>
                         <p style="line-height:25px;padding:0 10px;position:absolute;bottom:0px;background:#fff;" >{{$zixuns[$i]->ptime}}</p>
                     </div>
-                </div>
+                </div></a>
             @endfor
         </div>
         <div style="clear:both" ></div>

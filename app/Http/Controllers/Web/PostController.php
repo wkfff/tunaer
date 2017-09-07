@@ -137,9 +137,11 @@ class PostController extends Controller{
         }
     }
     public function dongtaicmlist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",5);
         $did = $request->input("did");
-        $sql = " select * from dongtaicm where content<>1 and did=? order by id desc limit 100 ";
-        $res = DB::select($sql,[$did]);
+        $sql = " select * from dongtaicm where content<>1 and did=? order by id desc limit ?,? ";
+        $res = DB::select($sql,[$did,($page-1)*$num,$num]);
         echo json_encode($res);
     }
     public function fabuyouji(Request $request) {
