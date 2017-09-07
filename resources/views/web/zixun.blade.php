@@ -3,19 +3,19 @@
 @section("css")
     <style>
         .zixunitem{
-            height:200px;width:800px;line-height:25px;
+            height:200px;width:900px;line-height:25px;
         }
         .left{
             float:left;width:250px;height:160px;
-            background-size:cover;margin-top:20px;margin-left:20px;
-            background-position: center;cursor: pointer;
+            background-size:cover;margin-top:20px;
+            background-position: center;
             background-repeat:no-repeat;
         }
         .left:hover{
             opacity:0.8;
         }
         .right{
-            float:left;width:500px;height:200px;padding:20px;color:#444;
+            float:left;width:600px;height:200px;padding:20px;color:#444;
         }
         .right>.title{
             font-weight:bold;margin-bottom:10px;font-size:16px;margin-top:5px;
@@ -37,24 +37,47 @@
 @section("body")
     @include("web.header")
         <div class="content">
+            <style>
+                .fenye{
+                    margin:10px 0px;
+                }
+                .fenye a {
+                    display:inline-block;height:25px;padding:0px 10px;
+                    text-align: center;color:#fff;background:#2260B4;
+                    font-size:14px;line-height:25px;margin:0px 2px;
+                    text-decoration: none;border:none;
+                }
+                .fenye a:hover{
+                    background: #3783EB;
+                }
+                .fenyecurrent{
+                    background: #f6efcc !important;color:#6d643c!important;
+                }
+            </style>
+
             <div style="font-size: 18px;color: #999;margin:30px 0">
                 <a style="color: #999;" href="/">首页</a>
                 <span>></span>
                 <a style="color: #999;" href="/zixun" >行业资讯</a>
             </div>
             @for( $i=0;$i<count($list);$i++ )
-            <div class="zixunitem">
-                <div class="left" style="background-image:url(/admin/data/images/{{$list[$i]->pic}});"></div>
-                <div class="right">
-                    <div class="title">{{$list[$i]->title}}</div>
-                    <div class="info"><span>发布者:管理员 </span><span style="margin-left:10px;">发布时间:{{$list[$i]->ptime}}</span><span style="margin-left:10px;">阅读:{{$list[$i]->readcnt}}</span></div>
-                    <div class="jianjie">
-                    {!!$list[$i]->tuwen!!}
+                <a href="/zixun/detail/{{$list[$i]->id}}">
+                    <div class="zixunitem">
+                        <div class="left" style="background-image:url(/admin/data/images/{{$list[$i]->pic}});"></div>
+                        <div class="right">
+                            <div class="title">{{$list[$i]->title}}</div>
+                            <div class="info">
+                                <span>发布者:管理员 </span>
+                                <span style="margin-left:10px;">发布时间:{{$list[$i]->ptime}}</span>
+                                <span style="margin-left:10px;">阅读:{{$list[$i]->readcnt}}</span>
+                            </div>
+                            <div class="jianjie"> {{$list[$i]->tuwen}} </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </a>
             @endfor
             <div style="clear:both" ></div>
+            {!! $fenye !!}
         </div>
     @include("web.footer")
 
@@ -72,7 +95,7 @@
         $(document).ready(function(){
             var jianjies = $(".jianjie");
             for( var i=0;i<jianjies.length;i++ ) {
-                var tmp = (String($(jianjies[i]).text())).substr(0,200);
+                var tmp = (String(removeHTMLTag($(jianjies[i]).text()))).substr(0,100);
                 $(jianjies[i]).text(tmp);
             }
             $(".jianjie").css("display","block");

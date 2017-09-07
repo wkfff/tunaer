@@ -39,12 +39,12 @@
 聊天表　chat
     id fid tid content(发送消息) stime(发送时间) isread(已读)
 
-摄影大赛　game
-    id title(赛事主题)　pic(顶部图片)　intro(参赛介绍)　status(１正常／０结束) 
+摄影大赛　dasai
+    id title(赛事主题)　pic(顶部图片)　tuwen(参赛介绍)　startday(开始日期)　endday(结束日期)　canjia(当前参加人数)
 参赛作品 works
-    id uid gid(那一场参赛) pic(参赛图片) into(作品介绍) jointime(参加时间) 
+    id uid did(那一场参赛) pic(参赛图片) intro(作品介绍) ctime(参加时间) depiao(得票)
 投票　toupiao
-    id uid gid cnt(1) ttime(投票时间)
+    id uid wid(作品id)  ttime(投票时间) flag(1)
 
 资讯　zixun
     id title pic(每一篇资讯需要一张图片) tuwen(文章图文)　ptime(发布时间) readcnt(浏览次数)

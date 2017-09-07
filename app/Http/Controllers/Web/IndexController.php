@@ -144,15 +144,24 @@ class IndexController extends Controller
     }
     public function zixun(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",20);
+        $num = $request->input("num",10);
         $ajax = $request->input("ajax","no");
+        $count = DB::select(" select count(*) as cnt from zixun ");
         $sql = " select * from zixun order by id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         if( $ajax == 'no' ) {
-            return view("web.zixun",["list"=>$res]);
+            return view("web.zixun",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/zixun",$page,$num)]);
         }else{
             echo json_encode($res);
         }
+    }
+    public function zixundetail($id) {
+        $sql = " select * from zixun where id=? ";
+        $res = DB::select($sql,[$id]);
+        @DB::table("zixun")->where("id",$id)->increment("readcnt",1);
+        $sql = " select * from zixun order by rand() limit 5 ";
+        $zixuns = DB::select($sql);
+        return view("web.zixundetail",['list'=>$res[0],"zixuns"=>$zixuns]);
     }
 
 

@@ -72,6 +72,13 @@
                             <li><a class="submenu" href="/admin/tubuorder"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步订单</span></a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 摄影大赛</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/fabudasai"><i class="icon-file-alt"></i><span class="hidden-tablet">创建比赛</span></a></li>
+                            <li><a class="submenu" href="/admin/dasailist"><i class="icon-file-alt"></i><span class="hidden-tablet">大赛列表</span></a></li>
+                        </ul>
+                    </li>
                     <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
                     {{--<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>--}}
                     <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
@@ -83,6 +90,7 @@
                             <li><a class="submenu" href="/admin/productorder"><i class="icon-file-alt"></i><span class="hidden-tablet">订单列表</span></a></li>
                         </ul>
                     </li>
+
                     <li>
                         <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 行业资讯</span><i class="icon-angle-down"></i></a>
                         <ul>

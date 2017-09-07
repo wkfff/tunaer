@@ -67,7 +67,12 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post('/setting/settubutypes', 'PostController@settubutypes');
     Route::post('/deletebyid', 'PostController@deletebyid');
     Route::post('/dongjiebyid', 'PostController@dongjiebyid');
+    Route::get('/fabudasai', 'IndexController@fabudasai');
 });
+
+
+
+
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
 {
@@ -94,6 +99,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/zixun', 'IndexController@zixun');
     Route::post('/tubu/huodongtuijian', 'PostController@huodongtuijian');
     Route::post("/dongtai/cmlist","PostController@dongtaicmlist");
+    Route::get("/zixun/detail/{id}","IndexController@zixundetail");
 
 });
 // 获取头像

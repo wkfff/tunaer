@@ -192,4 +192,7 @@ class IndexController extends Controller{
         Session::put('uname', $res[0]->uname);
         return redirect("/user/".$userid);
     }
+    public function fabudasai(){
+        return view("admin.fabudasai");
+    }
 }
