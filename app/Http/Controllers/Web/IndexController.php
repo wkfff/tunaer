@@ -120,12 +120,40 @@ class IndexController extends Controller
     }
     public function memberlist(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",90);
+        $num = $request->input("num",24);
         $ajax = $request->input("ajax","no");
-        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 order by user.id desc limit ?,? ";
+        $sex = $request->input("sex","");
+        $addr = $request->input("addr","");
+        $age = $request->input("age","");
+        $mryst = $request->input("mryst","");
+        $where = "";
+        $search='?';
+        if( $sex != '' ) {
+            $where .= " and sex='".$sex."' ";
+            $search .= "&sex=".$sex;
+        }
+        if( $addr != '' && $addr != '-' ) {
+            $where .= " and addr like '%".$addr."%' ";
+            $search .= "&addr=".$addr;
+        }
+        if( $age != '' ) {
+            $age1 = explode("-",$age);
+            $where .= " and age>".$age1[0]." and age < ".$age1[1];
+            $search .= "&age=".$age;
+        }
+        if( $mryst != '' ) {
+            $where .= " and mryst='".$mryst."' ";
+            $search .= "&mryst=".$mryst;
+        }
+        if( $search != '?' ) {
+            $search .= "&";
+        }
+        $count = DB::select("select count(*) as cnt from user left join userattr on user.id=userattr.uid where user.status=1 ".$where);
+//        exit("select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 ".$where);
+        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 ".$where." order by user.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         if( $ajax == 'no' ) {
-            return view("web.memberlist",["list"=>$res]);
+            return view("web.memberlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/member/list",$page,$num,$search)]);
         }else{
             echo json_encode($res);
         }

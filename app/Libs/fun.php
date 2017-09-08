@@ -32,16 +32,16 @@ function login($phone,$passwd,$returnuid=false) {
     }
 }
 
-function fenye($count,$url,$currentpage=1,$page=10) {
+function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
     $pagecnt = ceil($count/$page);
     $html = "";
 //    小于５页直接输出
     if( $pagecnt <=5 ) {
         for( $i=0;$i<$pagecnt;$i++ ) {
             if( $i == $currentpage-1 ) {
-                $html .= "<a class='fenyecurrent' href='".$url."?page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a class='fenyecurrent' href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }else{
-                $html .= "<a href='".$url."?page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }
 
         }
@@ -49,24 +49,24 @@ function fenye($count,$url,$currentpage=1,$page=10) {
 //        大于５页
         list($start,$end) = qujian($currentpage,$pagecnt);
 //        上一页
-        $html .= "<a href='".$url."?page=".($currentpage-1>=1?$currentpage-1:1)."'>上一页</a>";
+        $html .= "<a href='".$url.$search."page=".($currentpage-1>=1?$currentpage-1:1)."'>上一页</a>";
 //        下一页
-        $html .= "<a href='".$url."?page=".($currentpage+1>=$pagecnt?$pagecnt:$currentpage+1)."'>下一页</a>";
+        $html .= "<a href='".$url.$search."page=".($currentpage+1>=$pagecnt?$pagecnt:$currentpage+1)."'>下一页</a>";
 //        首页
-        $html .= "<a href='".$url."?page=1'>首页</a>";
+        $html .= "<a href='".$url.$search."page=1'>首页</a>";
 //        倒退５页
-        $html .= "<a href='".$url."?page=".($currentpage-5>=1?$currentpage-5:1)."'><<</a>";
+        $html .= "<a href='".$url.$search."page=".($currentpage-5>=1?$currentpage-5:1)."'><<</a>";
         for( $i=$start;$i<$end;$i++ ) {
             if( $i == $currentpage-1 ) {
-                $html .= "<a class='fenyecurrent' href='".$url."?page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a class='fenyecurrent' href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }else{
-                $html .= "<a href='".$url."?page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }
         }
         //        前进５页
-        $html .= "<a href='".$url."?page=".($currentpage+5>=$pagecnt?$pagecnt:$currentpage+5)."'>>></a>";
+        $html .= "<a href='".$url.$search."page=".($currentpage+5>=$pagecnt?$pagecnt:$currentpage+5)."'>>></a>";
         //        末页
-        $html .= "<a href='".$url."?page=".$pagecnt."'>末页</a>";
+        $html .= "<a href='".$url.$search."page=".$pagecnt."'>末页</a>";
     }
     return "<div class='fenye' >".$html."</div>";
 }

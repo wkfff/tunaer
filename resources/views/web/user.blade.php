@@ -173,19 +173,31 @@
                         </label>
                         <span style="margin:0 20px;">|</span>
                         <label>
-                            <input type="radio" value="未婚" name="mryst" >未婚
+                            <input type="radio" value="未婚" checked name="mryst" >未婚
+                        </label>
+                        <label >
+                            <input type="radio" value="已婚" name="mryst">已婚
                         </label>
                         <label>
                             <input type="radio" value="离异"  name="mryst" >离异
                         </label>
                         <label >
-                            <input type="radio" value="已婚" name="mryst">已婚
+                            <input type="radio" value="丧偶" name="mryst">丧偶
+                        </label>
+                        <label >
+                            <input type="radio" value="保密" name="mryst">保密
                         </label>
                     </div>
                     <div class="form-group">
-                        <label >常住地</label>
-                        <input type="text" class="form-control" name="addr" value="{{$userinfo->addr}}" placeholder="沈阳" >
+                        <label >常住地</label><br>
+                        <select class="form-control" id="pro"  onchange="loadC(this)" style="width:150px;display: inline-block;">
+                            <option value="">地区 - 省</option>
+                        </select>
+                        <select class="form-control" id="city" style="width:150px;display: inline-block;">
+                            <option value="">地区 - 市</option>
+                        </select>
                     </div>
+
                     <label >自我介绍</label>
                     <textarea class="form-control" name="intro" rows="3" placeholder="自我介绍">{{$userinfo->intro}}</textarea>
                 </div>
@@ -224,16 +236,61 @@
     <script src="/admin/umediter/umeditor.config.js" ></script>
     <script src="/admin/umediter/umeditor.min.js" ></script>
     <script src="/web/js/user.js"></script>
+    <script src="/web/js/addr.js" ></script>
     <script>
         $(document).ready(function(){
+            loadP();
             window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
+            window.diqu = "{{$userinfo->addr}}";
             var tab = location.href.split("#");
             if( tab.length == 2 ) {
                 $("."+tab[1]).css("display","block");
             }else{
                 changetab("dongtai");
             }
+
+            if( "女" == window.sex) {
+                $($("input[name=sex]")[1]).prop("checked","true");
+            }else{
+                $($("input[name=sex]")[0]).prop("checked","true");
+            }
+            var mrysts = $("input[name=mryst]");
+            for( var i=0;i<mrysts.length;i++ ) {
+                if( mrysts[i].value == $($(".uinfo span")[1]).text() ) {
+                    $(mrysts[i]).prop("checked","true");
+                }
+            }
+            setTimeout(function(){
+                var pr = window.diqu.split("-")[0];
+                var ci = window.diqu.split("-")[1];
+                if( pr != '' ) {
+                    $("#pro").val(pr);
+                    $("#pro").trigger("change");
+                }if( ci != '' ) {
+                    $("#city").val(ci);
+                }
+
+            })
         })
+
+        function loadP() {
+            for( var i=0;i<pro.length;i++ ) {
+                var node = "<option value='"+pro[i]+"'>"+pro[i]+"</option>";
+                $("#pro").append(node);
+            }
+        }
+        function loadC(that) {
+            $("#city").children().remove();
+            var val = $(that).val();
+            if( $.trim(val) == '' ) {
+                $("#city").append("<option value=''>地区 - 市</option>"); return;
+            }
+            var tmps = city[val];
+            for( var i=0;i<tmps.length;i++ ) {
+                var node = "<option value='"+tmps[i]+"'>"+tmps[i]+"</option>";
+                $("#city").append(node);
+            }
+        }
     </script>
 @stop
