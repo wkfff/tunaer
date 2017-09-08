@@ -76,8 +76,8 @@
         <a href="javascript:void(0)" class="navlist" >
             <span>徒步足迹</span><i></i>
             <div class="xiala">
-                <div onclick="location.href='/youji/admin'">官方游记</div>
-                <div onclick="location.href='/youji/member'">会员游记</div>
+                <div onclick="location.href='/youjilist/2'">官方游记</div>
+                <div onclick="location.href='/youjilist/1'">会员游记</div>
             </div>
         </a>
 

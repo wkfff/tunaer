@@ -79,9 +79,17 @@
                             <li><a class="submenu" href="/admin/dasailist"><i class="icon-file-alt"></i><span class="hidden-tablet">大赛列表</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet">徒步游记</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/fabuyouji"><i class="icon-file-alt"></i><span class="hidden-tablet">发布游记</span></a></li>
+                            <li><a class="submenu" href="/admin/youjilist/2"><i class="icon-file-alt"></i><span class="hidden-tablet">官方游记</span></a></li>
+                            <li><a class="submenu" href="/admin/youjilist/1"><i class="icon-file-alt"></i><span class="hidden-tablet">会员游记</span></a></li>
+                        </ul>
+                    </li>
+                    {{--<li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>--}}
                     {{--<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>--}}
-                    <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>
+                    {{--<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>--}}
                     <li>
                         <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步商城</span><i class="icon-angle-down"></i></a>
                         <ul>

@@ -81,4 +81,23 @@ class PostController extends Controller{
         }
     }
 
+    public function dofabuyouji(Request $request) {
+        $title = $request->input("title");
+        $tuwen = $request->input("tuwen");
+        $pic = $request->input("pic");
+        $id = $request->input("id","no");
+        if( $id == 'no' ) {
+            $sql = " insert into youji (uid,type,title,tuwen,pic) values(0,2,?,?,?) ";
+            $res = DB::insert($sql,[$title,$tuwen,$pic]);
+        }else{
+            $sql = " update youji set title=?,tuwen=?,pic=? where id=? ";
+            $res = DB::update($sql,[$title,$tuwen,$pic,$id]);
+        }
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+
 }

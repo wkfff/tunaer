@@ -193,6 +193,13 @@ class IndexController extends Controller
         return view("web.zixundetail",['list'=>$res[0],"zixuns"=>$zixuns]);
     }
 
-
+    public function youjilist(Request $request,$type=1) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $count = DB::select(" select count(*) as cnt from youji where type= ".$type);
+        $sql = " select * from youji where type=? order by id desc limit ?,? ";
+        $res = DB::select($sql,[$type,($page-1)*$num,$num]);
+        return view("web.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/web/youjilist",$page,$num)]);
+    }
     
 }

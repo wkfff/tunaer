@@ -78,8 +78,29 @@ class IndexController extends Controller{
     }
 //    发布徒步活动
     public function dofabutubu(Request $request) {
-        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,  jiaotong,need,phone,leader,pictures,juli,tese) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('types'),$request->input('howlong'),$request->input('startday'),$request->input('endday'),$request->input('price'),$request->input('mudidi'),$request->input('jingdian'),$request->input('neirong'),$request->input('jihetime'),$request->input('jihedidian'),$request->input('qiangdu'),$request->input('jiaotong'),$request->input('need'),$request->input('phone'),$request->input('leader'),$request->input('pictures'),$request->input('juli'),$request->input('tese')]);
+//        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,  jiaotong,need,phone,leader,pictures,juli,tese) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+        $title = $request->input('title');
+        $tuwen = $request->input('tuwen');
+        $types = $request->input('types');
+        $howlong = $request->input('howlong');
+        $startday = $request->input('startday');
+        $endday = $request->input('endday');
+        $price = $request->input('price');
+        $mudidi = $request->input('mudidi');
+        $jingdian = $request->input('jingdian');
+        $neirong = $request->input('neirong');
+        $jihetime = $request->input('jihetime');
+        $jihedidian = $request->input('jihedidian');
+        $qiangdu = $request->input('qiangdu');
+        $jiaotong = $request->input('jiaotong');
+        $need = $request->input('need');
+        $phone = $request->input('phone');
+        $leader = $request->input('leader');
+        $pictures = $request->input('pictures');
+        $juli = $request->input('juli');
+        $tese = $request->input('tese');
+        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,jiaotong,need,phone,leader,pictures,juli,tese) values ('".$title."','".$tuwen."','".$types."','".$howlong."','".$startday."','".$endday."','".$price."','".$mudidi."','".$jingdian."','".$neirong."','".$jihetime."','".$jihedidian."','".$qiangdu."','".$jiaotong."','".$need."','".$phone."','".$leader."','".$pictures."','".$juli."','".$tese."') ";
+        $res = DB::insert($sql,[]);
         if( $res ) {
             echo "200";
         }else{
@@ -194,5 +215,34 @@ class IndexController extends Controller{
     }
     public function fabudasai(){
         return view("admin.fabudasai");
+    }
+    public function fabuyouji() {
+        return view("admin.fabuyouji");
+    }
+    public function updateyouji($id) {
+        $sql = " select * from youji where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>'游记不存在']);
+        }else{
+            return view("admin.updateyouji",["data"=>$res[0]]);
+        }
+
+    }
+    public function youjilist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",7);
+        $count = DB::select(" select count(*) as cnt from youji ");
+        $sql = " select * from youji order by id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("admin.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/youjilist",$page,$num)]);
+    }
+    public function youjilist2(Request $request,$type=1) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",7);
+        $count = DB::select(" select count(*) as cnt from youji where type= ".$type);
+        $sql = " select * from youji where type=? order by id desc limit ?,? ";
+        $res = DB::select($sql,[$type,($page-1)*$num,$num]);
+        return view("admin.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/youjilist",$page,$num)]);
     }
 }
