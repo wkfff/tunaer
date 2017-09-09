@@ -1,6 +1,6 @@
 @extends('admin.common')
 
-@section("title","创建摄影大赛")
+@section("title","编辑摄影大赛")
 
 @section("content")
 
@@ -16,14 +16,16 @@
             background-position:center;background-repeat: no-repeat;margin-top:10px;
         }
     </style>
-    <input type="text" name="title" placeholder="大赛主题" style="width:900px;margin-bottom:10px;height:35px;" ><br>
-    <input class="datetimepicker"   type="text" name="start" placeholder="开始时间" style="width:300px;margin-bottom:10px;height:35px;" >
-    <input class="datetimepicker"   type="text" name="end" placeholder="结束时间" style="width:300px;margin-bottom:10px;height:35px;" >
-    <script type="text/plain" id="myEditor" style="width:900px;">摄影大赛详细介绍</script>
+    <input type="text" name="title" value="{{$data->title}}" placeholder="大赛主题" style="width:900px;margin-bottom:10px;height:35px;" ><br>
+    <input class="datetimepicker" value="{{$data->startday}}"  type="text" name="start" placeholder="开始时间" style="width:300px;margin-bottom:10px;height:35px;" >
+    <input class="datetimepicker" value="{{$data->endday}}"  type="text" name="end" placeholder="结束时间" style="width:300px;margin-bottom:10px;height:35px;" >
+    <script type="text/plain" id="myEditor" style="width:900px;">{!! $data->tuwen !!}</script>
     <input type="file" class="uploadinput2" onchange="uploadImg(this)" style="display: none;" >
     <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">顶部图片</button>
-    <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
-    <div class="youjipics"></div>
+    <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">保存更新</button>
+    <div class="youjipics">
+        <div class='imgdiv' ondblclick='$(this).remove()'  style='background-image:url(/admin/data/images/{{$data->pic}})' ></div>
+    </div>
 
 @stop
 
@@ -44,6 +46,7 @@
             })
         })
         window.um = UM.getEditor('myEditor');
+
         function fabu() {
             var title = $("input[name=title]").val();
             var starttime = $("input[name=start]").val();
@@ -57,7 +60,7 @@
             }
             var url = $($(".youjipics div")[0]).css("background-image");
             var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
-            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime},function(d){
+            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime,"id":"{{$data->id}}"},function(d){
                 if( ajaxdata(d) ) {
                     toast("创建成功");
                     location.href="/admin/dasailist";

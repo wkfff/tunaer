@@ -12,6 +12,23 @@
     <link href="/admin/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link id="base-style" href="/admin/css/style.css" rel="stylesheet">
     <link id="base-style-responsive" href="/admin/css/style-responsive.css" rel="stylesheet">
+    <style>
+        .fenye{
+            margin:10px 0px;
+        }
+        .fenye a {
+            display:inline-block;height:25px;padding:0px 10px;
+            text-align: center;color:#fff;background:#2260B4;
+            font-size:14px;line-height:25px;margin:0px 2px;
+            text-decoration: none;border:none;
+        }
+        .fenye a:hover{
+            background: #3783EB;
+        }
+        .fenyecurrent{
+            background: #f6efcc !important;color:#6d643c!important;
+        }
+    </style>
     <!--[if lt IE 9]>
     <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
     {{--<link id="ie-style" href="/admin/css/ie.css" rel="stylesheet">--}}

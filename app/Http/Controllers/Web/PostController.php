@@ -156,5 +156,54 @@ class PostController extends Controller{
             echo "400-发布失败";
         }
     }
+    public function canjiadasai(Request $request) {
+        $did = $request->input("did","");
+        $intro = $request->input("intro",'');
+        $pic = $request->input("pic",'');
+        if( $intro == '' || $pic == '' || $did == '' ) {
+            echo "400-信息不完整"; return;
+        }
+//        检查重复参加
+        $sql = " select * from works where did=? and uid=? ";
+        $res = DB::select($sql,[$did,Session::get('uid')]);
+        if(count($res) > 0 ) {
+            echo "400-你已经参加过了"; return;
+        }
+//        检查当前时间是否允许参加大赛
+        $current = time();
+        $sql = " select * from dasai where id=? ";
+        $res = DB::select($sql,[$did]);
+        if( $current < strtotime($res[0]->startday) || $current > strtotime($res[0]->endday)) {
+            echo "400-大赛不存"; return;
+        }
+
+        $sql = " insert into works (uid,did,pics,intro) values (?,?,?,?) ";
+        $res = DB::insert($sql,[Session::get('uid'),$did,$pic,$intro]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+    public function toupiao(Request $request) {
+        $wid = $request->input('wid',"no");
+        if( $wid == 'no' ) {
+            echo "400-操作无效"; return;
+        }
+        $uid = Session::get("uid");
+        $sql = " select * from toupiao where uid=? and tday=? ";
+        $res = DB::select($sql,[$uid,date("Y-m-d")]);
+        if( count($res) >=3 ) {
+            echo "400-你今日的投票已用完，请明天再试"; return;
+        }
+        $sql = " insert into toupiao (uid,wid,tday) values(?,?,?) ";
+        $res = DB::insert($sql,[$uid,$wid,date("Y-m-d")]);
+        if( $res ) {
+            @DB::table("works")->where("id",$wid)->increment("depiao",1);
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
 
 }

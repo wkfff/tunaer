@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
 class PostController extends Controller{
     public function settubutypes(Request $request) {
         if( $request->input('tid',0) == 0 ) {
@@ -80,7 +77,6 @@ class PostController extends Controller{
             echo "200";
         }
     }
-
     public function dofabuyouji(Request $request) {
         $title = $request->input("title");
         $tuwen = $request->input("tuwen");
@@ -99,5 +95,25 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
-
+    public function fabudasai(Request $request) {
+        $title = $request->input("title");
+        $tuwen = $request->input("tuwen");
+        $startday = $request->input("startday");
+        $endday = $request->input("endday");
+        $pic = $request->input("pic");
+        $id = $request->input("id","no");
+        if( $id == 'no' ) {
+            $sql = " insert into dasai (endday,startday,title,tuwen,pic) values(?,?,?,?,?) ";
+            $res = DB::insert($sql,[$endday,$startday,$title,$tuwen,$pic]);
+        }else{
+            $sql = " update dasai set title=?,tuwen=?,pic=?,endday=?,startday=? where id=? ";
+            $res = DB::update($sql,[$title,$tuwen,$pic,$endday,$startday,$id]);
+        }
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+    
 }

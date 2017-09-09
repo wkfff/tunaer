@@ -1,6 +1,6 @@
 @extends('admin.common')
 
-@section("title","发布游记")
+@section("title","编辑游记")
 
 @section("content")
 
@@ -34,7 +34,12 @@
         window.um = UM.getEditor('myEditor');
         setTimeout(function () {
             um.setContent('{!!$data->tuwen!!}');
+            @if( $data->type == 2 )
             var img ="<div class='imgdiv' ondblclick='$(this).remove()'  style='background-image:url(/admin/data/images/{{$data->pic}})' ></div>";
+                @else
+            var img ="<div class='imgdiv' ondblclick='$(this).remove()'  style='background-image:url(/web/data/images/{{$data->pic}})' ></div>";
+                @endif
+
             $(".youjipics").append(img);
         },1000)
         function fabu() {

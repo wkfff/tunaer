@@ -245,4 +245,21 @@ class IndexController extends Controller{
         $res = DB::select($sql,[$type,($page-1)*$num,$num]);
         return view("admin.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/youjilist",$page,$num)]);
     }
+    public function dasailist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",7);
+        $count = DB::select(" select count(*) as cnt from dasai ");
+        $sql = " select * from dasai order by id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("admin.dasailist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/dasailist",$page,$num)]);
+    }
+    public function updatedasai($id) {
+        $sql = " select * from dasai where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>'大赛不存在']);
+        }else{
+            return view("admin.updatedasai",["data"=>$res[0]]);
+        }
+    }
 }

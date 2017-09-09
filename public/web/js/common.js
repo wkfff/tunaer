@@ -32,7 +32,7 @@ function toast(title) {
     $("body").append(tmp);
     window.toastst = setTimeout(function(){
         $(".toast").fadeOut(1000);
-    },2500)
+    },1500)
 }
 // 过滤ajax数据
 function ajaxdata(data) {
@@ -50,6 +50,9 @@ function ajaxdata(data) {
             openlogion();return false;
         case "noaccess":
             toast("access deny"); return false;
+    }
+    if( /^[\d]{10}\.[a-zA-Z]{3,5}$/.test(data) ) {
+        return data;
     }
     return JSON.parse(data);
 }
@@ -104,7 +107,7 @@ function img2big(t) {
         }
     }
 
-    var s = "<div class='bigimg'  onclick='$(this).remove()' style='position:fixed;width:"+ww+"px;height:"+hh+"px;background-color:rgba(0,0,0,0.8);left:0px;top:0px;background-image:url("+src+");background-size:"+imgWidth+"px "+imgHeight+"px;background-position:center;background-repeat:no-repeat;z-index:9' ></div>";
+    var s = "<div class='bigimg'  onclick='$(this).remove()' style='position:fixed;width:"+ww+"px;height:"+hh+"px;background-color:rgba(0,0,0,0.8);left:0px;top:0px;background-image:url("+src+");background-size:"+imgWidth+"px "+imgHeight+"px;background-position:center;background-repeat:no-repeat;z-index:9999' ></div>";
     // 移除测试的img
     $(".tempImg").remove();
     $("body").append(s);
@@ -127,4 +130,10 @@ function img2big(t) {
         window.event.returnValue=false;
         return false;
     })
+}
+
+// ｕ阻止事件冒泡
+function zuzhi(event) {
+
+    event.stopPropagation();
 }

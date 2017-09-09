@@ -68,11 +68,14 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post('/deletebyid', 'PostController@deletebyid');
     Route::post('/dongjiebyid', 'PostController@dongjiebyid');
     Route::get('/fabudasai', 'IndexController@fabudasai');
+    Route::post('/fabudasai', 'PostController@fabudasai');
     Route::get('/fabuyouji', 'IndexController@fabuyouji');
     Route::get('/updateyouji/{id}', 'IndexController@updateyouji');
     Route::post('/dofabuyouji', 'PostController@dofabuyouji');
     Route::get('/youjilist', 'IndexController@youjilist');
     Route::get('/youjilist/{type}', 'IndexController@youjilist2');
+    Route::get('/dasailist', 'IndexController@dasailist');
+    Route::get('/updatedasai/{id}', 'IndexController@updatedasai');
 });
 
 
@@ -106,6 +109,8 @@ Route::group(['namespace' => 'Web'], function()
     Route::post("/dongtai/cmlist","PostController@dongtaicmlist");
     Route::get("/zixun/detail/{id}","IndexController@zixundetail");
     Route::get("/youjilist/{type}","IndexController@youjilist");
+    Route::get("/youji/detail/{id}","IndexController@youjidetail");
+    Route::get("/dasai/{id?}","IndexController@dasai");
 
 });
 // 获取头像
@@ -119,7 +124,9 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/uploadimg","PostController@uploadimg");
     Route::post("/fadongtai","PostController@fadongtai");
     Route::post("/dongtai/pinglun","PostController@dongtaicm");
+    Route::post("/toupiao","PostController@toupiao");
 
     Route::post("/youji/fabu","PostController@fabuyouji");
+    Route::post("/canjiadasai","PostController@canjiadasai");
 
 });

@@ -37,23 +37,25 @@
             <a style="color: #999;" href="/member/dongtai" >会员动态</a>
         </div>
         @for( $i=0;$i<count($list);$i++ )
-        <div class="youjiitem">
-            @if( $list[$i]->type == 2 )
-                <div class="youjipic" style="background-image:url(/admin/data/images/{{$list[$i]->pic}})" ></div>
-                <div class="youjiuserhead" style="background-image:url(/web/images/admin.png)" ></div>
-            @else
-                <div class="youjipic" style="background-image:url(/web/data/images/{{$list[$i]->pic}})" ></div>
-                <div class="youjiuserhead" style="background-image:url(/head/{{$list[$i]->uid}})" ></div>
-            @endif
+            <a href="/youji/detail/{{$list[$i]->id}}">
+            <div class="youjiitem">
+                @if( $list[$i]->type == 2 )
+                    <div class="youjipic" style="background-image:url(/admin/data/images/{{$list[$i]->pic}})" ></div>
+                    <div class="youjiuserhead" style="background-image:url(/web/images/admin.png)" ></div>
+                @else
+                    <div class="youjipic" style="background-image:url(/web/data/images/{{$list[$i]->pic}})" ></div>
+                    <div class="youjiuserhead" style="background-image:url(/head/{{$list[$i]->uid}})" ></div>
+                @endif
 
 
-            <div class="youjititle">
-                {{$list[$i]->title}}
+                <div class="youjititle">
+                    {{$list[$i]->title}}
+                </div>
+                <div class="youjitime">
+                    {{$list[$i]->ytime}}
+                </div>
             </div>
-            <div class="youjitime">
-                {{$list[$i]->ytime}}
-            </div>
-        </div>
+            </a>
         @endfor
 
         <div style="clear:both" ></div>

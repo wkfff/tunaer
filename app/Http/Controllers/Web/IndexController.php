@@ -104,7 +104,7 @@ class IndexController extends Controller
     public function tubulist(Request $request,$type) {
         $page = $request->input('page',1);
         $num = $request->input('num',20);
-        $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+        $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
         $res = DB::select($sql,[$type]);
         return view("web.tubulist",["list"=>$res]);
 
@@ -200,6 +200,37 @@ class IndexController extends Controller
         $sql = " select * from youji where type=? order by id desc limit ?,? ";
         $res = DB::select($sql,[$type,($page-1)*$num,$num]);
         return view("web.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/web/youjilist",$page,$num)]);
+    }
+    public function youjidetail($id) {
+        $sql = " select * from youji left join userattr on userattr.uid=youji.uid where youji.id=? ";
+        $res = DB::select($sql,[$id]);
+        @DB::table("youji")->where("id",$id)->increment("readcnt",1);
+        $sql = " select * from youji order by rand() limit 5 ";
+        $youjis = DB::select($sql);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>"游记不存在"]);
+        }
+        return view("web.youjidetail",["list"=>$res[0],"youjis"=>$youjis]);
+    }
+
+    public function dasai(Request $request,$id=null) {
+        $sql = " select * from dasai order by id desc limit 1 ";
+        if( $id ) {
+            $sql = " select * from dasai where id= ".$id;
+        }
+        $res = DB::select($sql);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>"内容不存在"]);
+        }else{
+            @DB::table("dasai")->where("id",$res[0]->id)->increment("readcnt",1);
+            $page = $request->input("page",1);
+            $num = $request->input("num",9);
+            $count = DB::select(" select count(*) as cnt from works where did= ".$res[0]->id);
+            $zongpiao = DB::select(" select sum(depiao) as zong from works where did= ".$res[0]->id);
+            $sql = " select * from works where did=? order by depiao desc limit ?,? ";
+            $works = DB::select($sql,[$res[0]->id,($page-1)*$num,$num]);
+            return view("web.dasai",["data"=>$res[0],"zongcanjia"=>$count[0]->cnt,"zongpiao"=>$zongpiao[0]->zong,"works"=>$works,"fenye"=>fenye($count[0]->cnt,"/dasai",$page,$num)]);
+        }
     }
     
 }

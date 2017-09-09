@@ -30,6 +30,9 @@ function ajaxdata(data) {
         case "noaccess":
             toast("access deny"); return false;
     }
+    if( /^[\d]{10}\.[a-zA-Z]{3,5}/.test(data) ) {
+        return data;
+    }
     return JSON.parse(data);
 }
 function checkFileAllow(file,type,size) {
@@ -56,6 +59,7 @@ function zuzhi(event) {
 }
 
 function img2big(t) {
+
     var src = '';
     // 不管是 div背景  还是 图片都能获取到图片 url
     if( t.nodeName == 'IMG' || t.nodeName == 'img' ) {
@@ -70,20 +74,22 @@ function img2big(t) {
     // 获取图片原始大小
     var imgWidth = $(".tempImg").width();
     var imgHeight = $(".tempImg").height();
+    // console.log(imgWidth+":"+imgHeight);
 
     // 如果图片原始大小超过 900x600 就要缩放   6000*4000
-    var ww = $(window).width();
-    var hh = $(window).height();
+    var ww = window.innerWidth;
+    var hh = window.innerHeight;
+
     if(imgWidth > ww || imgHeight > hh) {
         // 以宽作为基准来缩放
         if( (imgWidth/imgHeight - ww/hh) >= 0 ) {
 
-            imgHeight =ww*imgHeight/imgWidth;
-            imgWidth = ww;
+            imgHeight =0.7*ww*imgHeight/imgWidth;
+            imgWidth = 0.7*ww;
             // 以高为基准来缩放
         }else{
-            imgHeight = hh*imgWidth/imgHeight;
-            imgHeight = hh;
+            imgWidth = 0.7*hh*imgWidth/imgHeight;
+            imgHeight = 0.7*hh;
         }
     }
 

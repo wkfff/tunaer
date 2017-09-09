@@ -82,7 +82,7 @@
         </a>
 
         <a href="javascript:void(0)" onclick="alert('暂未开启')" >徒步商城</a>
-        <a href="#" class="nav_a_hover" >摄影大赛</a>
+        <a href="/dasai" class="nav_a_hover" >摄影大赛</a>
     </div>
 </div>
 

@@ -19,7 +19,14 @@
             <tr>
                 <td>{{$list[$i]->id}}</td>
                 <td class="center" style="max-width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{$list[$i]->title}}</td>
-                <td class="center"><div onclick="img2big(this)" style="background-image:url(/admin/data/images/{{$list[$i]->pic}});background-position:center;background-repeat:no-repeat;background-size:cover;width:30px;height:20px;" ></div></td>
+                <td class="center"><div onclick="img2big(this)" style="background-image:
+                            @if( $list[$i]->type == 2 )
+                            url(/admin/data/images/{{$list[$i]->pic}});
+                            @else
+                            url(/web/data/images/{{$list[$i]->pic}});
+                            @endif
+
+                background-position:center;background-repeat:no-repeat;background-size:cover;width:30px;height:20px;" ></div></td>
                 <td class="center">
                     @if($list[$i]->type == 2)管理员
                         @else <a href="/user/{{$list[$i]->uid}}">用户</a>
