@@ -76,6 +76,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/youjilist/{type}', 'IndexController@youjilist2');
     Route::get('/dasailist', 'IndexController@dasailist');
     Route::get('/updatedasai/{id}', 'IndexController@updatedasai');
+    Route::get('/leader', 'IndexController@leader');
 });
 
 

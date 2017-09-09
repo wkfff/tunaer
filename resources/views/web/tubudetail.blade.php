@@ -85,7 +85,7 @@
                 <p>
                     交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
                 </p>
-                <button onclick="baoming()" type="button" class="btn btn-primary"
+                <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary"
                         style="width:200px;height:50px;font-size: 20px;outline:none">马上报名</button>
             </div>
             <div style="clear:both" ></div>
@@ -176,8 +176,8 @@
             })
         }
 
-        function baoming() {
-            $.post("/tubu/baoming",{"tid":"{{$detail->id}}"},function(d){
+        function baoming(id) {
+            $.post("/tubu/baoming",{"tid":id},function(d){
                 if( ajaxdata(d) ) {
                     toast("报名成功");
                 }

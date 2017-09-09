@@ -101,12 +101,13 @@ class IndexController extends Controller
         }
 
     }
-    public function tubulist(Request $request,$type) {
+    public function tubulist(Request $request,$type=1) {
         $page = $request->input('page',1);
-        $num = $request->input('num',20);
+        $num = $request->input('num',7);
+        $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
         $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
         $res = DB::select($sql,[$type]);
-        return view("web.tubulist",["list"=>$res]);
+        return view("web.tubulist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/tubulist/".$type,$page,$num)]);
 
     }
     public function tubudetail($tid) {
@@ -115,6 +116,7 @@ class IndexController extends Controller
         if( count($res) == 0 ) {
             return view("web.error",['content'=>"没有找到相关内容"]);
         }else{
+            @DB::table("tubuhuodong")->where("id",$tid)->increment("readcnt",1);
             return view("web.tubudetail",['detail'=>$res[0]]);
         }
     }
