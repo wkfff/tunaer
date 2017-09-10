@@ -66,7 +66,7 @@
 
 <style>
     *{
-        margin:0px;padding:0px;
+        margin:0px;padding:0px;outline:none;
     }
     body{
         overflow:hidden;

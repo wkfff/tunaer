@@ -102,10 +102,16 @@ class IndexController extends Controller
         //动态
         $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
         $dongtai = DB::select($sql,[$userid]);
+//        相册
+        $sql = " select * from xiangce where uid=? ";
+        $xiangce = DB::select($sql,[$userid]);
+//        留言
+        $sql = " select * from liuyan where tid=? order by id desc ";
+        $liuyan = DB::select($sql,[$userid]);
         if( count($res) == 0 ) {
             return view("web.error",['content'=>'用户不存在']);
         }else{
-            return view('web.user',["userinfo"=>$res[0],"dongtai"=>$dongtai]);
+            return view('web.user',["userinfo"=>$res[0],"dongtai"=>$dongtai,"xiangce"=>$xiangce,"liuyan"=>$liuyan]);
         }
 
     }

@@ -1,0 +1,25 @@
+
+.leftchat,.rightchat{
+    margin:20px 0;vertical-align: middle;
+}
+.chathead{
+    display: inline-block;height:60px;width:60px;background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;cursor:pointer;
+}
+.leftchat>.chathead{
+    float:left;
+}
+.rightchat>.chathead{
+    float:right;
+}
+.chatcontent{
+    font-size:16px;float:right;max-width:400px;
+}
+.leftchat>.chatcontent{
+    float:left;color:#444;margin-left:20px;
+}
+.rightchat>.chatcontent{
+    float:right;color:blueviolet;margin-right:20px;
+}
+.chattime{
+    clear:both;color:#999;font-size:13px;margin-top:10px;text-align:left;
+}

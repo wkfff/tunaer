@@ -174,7 +174,7 @@ class PostController extends Controller{
         $sql = " select * from dasai where id=? ";
         $res = DB::select($sql,[$did]);
         if( $current < strtotime($res[0]->startday) || $current > strtotime($res[0]->endday)) {
-            echo "400-大赛不存"; return;
+            echo "400-大赛不存在"; return;
         }
 
         $sql = " insert into works (uid,did,pics,intro) values (?,?,?,?) ";
@@ -203,6 +203,74 @@ class PostController extends Controller{
             echo "200";
         }else{
             echo "400-操作失败";
+        }
+    }
+    public function uploadxiangce(Request $request) {
+        $uid = Session::get('uid');
+        $file = $request->file('file',null);
+        if ($file->isValid()) {
+            $imgname = $uid."_".time() .".". $file->getClientOriginalExtension();
+            $destinationPath = base_path() . "/public/web/data/images/";
+            if( $file->move($destinationPath,$imgname) ) {
+                $sql = " insert into xiangce (uid,pic) values (?,?) ";
+                $res = DB::insert($sql,[$uid,$imgname]);
+                echo "200";
+            }else{
+                echo "400-上传失败";
+            }
+        }else{
+            echo "400-上传失败";
+        }
+    }
+
+    public function liuyan(Request $request) {
+        $content = $request->input("content",'');
+        $userid = $request->input("userid",'');
+        if( checknull($content,$userid) ) {
+            $sql = " insert into liuyan (fid,tid,content) values(?,?,?) ";
+            $res = DB::insert($sql,[Session::get("uid"),$userid,$content]);
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-操作失败";
+            }
+        }else{
+            echo "400-无效操作";
+        }
+    }
+
+    public function zhaohu(Request $request) {
+        $user = $request->input("userid",'');
+        if( $user == '' ) {
+            echo  "400-无效操作"; return;
+        }
+        $sql = " select * from chat where fid=? and tid=? and type=2 and sdate=? ";
+        $r = DB::select($sql,[Session::get('uid'),$user,date("Y-m-d")]);
+        if( count($r) >= 1 ) {
+            echo "400-今日已打招呼"; return;
+        }
+        $sql = " insert into chat (fid,tid,content,type,sdate) values(?,?,?,?,?) ";
+        $res = DB::insert($sql,[Session::get('uid'),$user,0,2,date('Y-m-d')]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+
+    public function sendchat(Request $request) {
+        $userid = $request->input("userid",'');
+        $content = $request->input("content",'');
+        if( checknull($userid,$content) ) {
+            $sql = " insert into chat (fid,tid,content,type,sdate) values(?,?,?,?,?) ";
+            $res = DB::insert($sql,[Session::get('uid'),$userid,$content,1,date('Y-m-d')]);
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-发送失败";
+            }
+        }else{
+            echo "400-发送失败";
         }
     }
 

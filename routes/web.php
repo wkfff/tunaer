@@ -126,8 +126,11 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/fadongtai","PostController@fadongtai");
     Route::post("/dongtai/pinglun","PostController@dongtaicm");
     Route::post("/toupiao","PostController@toupiao");
-
+    Route::post("/uploadxiangce","PostController@uploadxiangce");
+    Route::post("/liuyan","PostController@liuyan");
+    Route::post("/zhaohu","PostController@zhaohu");
     Route::post("/youji/fabu","PostController@fabuyouji");
+    Route::post("/sendchat","PostController@sendchat");
     Route::post("/canjiadasai","PostController@canjiadasai");
 
 });

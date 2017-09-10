@@ -41,7 +41,7 @@ function ajaxdata(data) {
         case "400":
             toast(data.substr(4)); return false;
         case "200":
-            toast(data.substr(4)); return true;
+            return true;
     }
     switch(data) {
         case "":
@@ -136,4 +136,12 @@ function img2big(t) {
 function zuzhi(event) {
 
     event.stopPropagation();
+}
+// 打招呼
+function zhaohu(userid) {
+    $.post("/zhaohu",{"userid":userid},function(d){
+        if( ajaxdata(d) ) {
+            toast("操作成功");
+        }
+    })
 }

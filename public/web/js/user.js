@@ -77,6 +77,38 @@ function uploadImg2(t) {
     }
     oXHR.send(fd);
 }
+// 上传相册
+function uploadphoto(t) {
+    var file = t.files[0];
+    if( !checkFileAllow(file,'image',10) ) {
+        return false;
+    }
+    var fd = new FormData();
+    fd.append("file" , file );
+    var oXHR = new XMLHttpRequest();
+    oXHR.open('POST', "/uploadxiangce");
+    oXHR.onreadystatechange = function() {
+        if (oXHR.readyState == 4 && oXHR.status == 200) {
+            var d = oXHR.responseText; // 返回值
+            if( ajaxdata(d) ) {
+                location.reload();
+            }
+        }
+    }
+    oXHR.send(fd);
+}
+// 留言
+function liuyan(t){
+    var content = $(t).parent("div").children("textarea").val();
+    if( $.trim(content) == '' ) {
+        toast("请添加留言内容"); return;
+    }
+    $.post("/liuyan",{"userid":window.uid,"content":content},function(d){
+        if( ajaxdata(d) ) {
+            location.reload();
+        }
+    })
+}
 
 function fadongtai(t) {
     var content = $(".dongtai div").children("textarea").val();
@@ -172,6 +204,19 @@ function fabuyouji() {
         if( ajaxdata(d) ) {
             toast("发布成功");
             location.reload();
+        }
+    })
+}
+
+function sendchat(userid) {
+    var content = $("#chatcontent").val();
+
+    if( $.trim(content) == '' ) {
+        toast("请输入聊天内容"); return;
+    }
+    $.post("/sendchat",{"userid":userid,"content":content},function(d){
+        if( ajaxdata(d) ) {
+            toast("发送成功");
         }
     })
 }

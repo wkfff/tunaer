@@ -3,6 +3,7 @@
 @section("title","用户主页")
 @section("css")
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
+    <link rel="stylesheet" href="/web/css/user.css">
 @stop
 @section("body")
     @include("web.header")
@@ -27,11 +28,25 @@
             height:150px;width:150px;background-size:cover;float:left;margin-right:30px;
             background-position:center;background-repeat: no-repeat;margin-top:10px;
         }
+        .imgdiv2{
+            height:200px;width:270px;background-size:cover;float:left;margin-right:30px;
+            background-position:center;background-repeat: no-repeat;margin-top:30px;
+        }
         .tab{
             display: none;
         }
         #myEditor{
             height:50vh !important;
+        }
+        .searchb{
+            letter-spacing: 4px;background:#F03B6E;color:#fff;
+            border-radius:5px;cursor:pointer;
+            font-weight:bold;margin-left:50px;
+            font-size:16px;height:40px;width:120px;
+            display: inline-block;line-height:40px;text-align:center;
+        }
+        .searchb:hover{
+            box-shadow: 1px 1px 10px rgba(255,255,255,0.9);
         }
     </style>
     <div class="bgpic" style="width:100%;height:372px;
@@ -46,8 +61,11 @@
                     <script> window.sex = "男"; </script>
                     <img src="/web/images/male.png" style="height:30px;">
                 @endif
+                <div onclick="$('#myModal3').modal('show')" class="searchb"  >发消息</div>
+                <div onclick="zhaohu({{$userinfo->userid}})" style="margin-left:10px;background:dodgerblue" class="searchb"  >打招呼</div>
             </h2>
-            <div style="width:150px;height:150px;background-image: url(/head/{{$userinfo->uid}});
+
+            <div style="width:150px;height:150px;background-image: url(/head/{{$userinfo->userid}});
                 background-size:cover;background-position:center;position:absolute;right:0px;top:0px;">
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <a href="javascript:void(0)" onclick="$('.userheadinput').trigger('click');"
@@ -98,6 +116,35 @@
                 <div style="clear:both;height:20px;" ></div>
                 <div class="youjilist">
 
+                </div>
+            </div>
+            <div class="tab photos">
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
+                    <input type="file" class="uploadphoto" onchange="uploadphoto(this)" style="display:none" >
+                    <button type="button" onclick="$('.uploadphoto').trigger('click')" class="btn btn-default" style="width:120px;height:40px;">添加照片</button>
+                @endif
+                <div>
+                    @for( $i=0;$i<count($xiangce);$i++ )
+                        <div class="imgdiv2" onclick="img2big(this)" style="background-image:url(/web/data/images/{{$xiangce[$i]->pic}})" ></div>
+                    @endfor
+                </div>
+            </div>
+            <div class="tab liuyan">
+                <div>
+                    <textarea class="form-control"  rows="5" placeholder="留言内容..."></textarea>
+                    <div style="clear:both;height:20px;" ></div>
+                    <button  class="btn btn-default " onclick="liuyan(this)" style="outline:none;width:120px;height:45px;">给Ta留言</button>
+                </div>
+                <div>
+                    @for( $i=0;$i<count($liuyan);$i++ )
+                        <div style="margin:20px 0;vertical-align: middle;">
+                            <div onclick="location.href='/user/{{$liuyan[$i]->fid}}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/{{$liuyan[$i]->fid}});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="margin:15px 0;font-size:20px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">{{$liuyan[$i]->content}}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;" >
+                                {{$liuyan[$i]->ltime}}
+                            </div>
+                        </div>
+                    @endfor
                 </div>
             </div>
             <div class="tab dongtai" >
@@ -229,6 +276,46 @@
         </div>
     </div>
 
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:600px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">与 <span style="color:cornflowerblue">{{$userinfo->uname}}</span> 聊天</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="height:450px;width:100%;overflow-y: auto;" >
+                        <div style="color:dodgerblue;height:30px;width:100%;text-align:center;cursor: pointer;" >加载更多</div>
+                        <div class="chatbox">
+                            <div class="leftchat">
+                                <div class="chathead" style="background-image:url(/head/40);" ></div>
+                                <div class="chatcontent">Forget the memories, continue to be life, miss, just pass by.忘不掉的是回忆，继续的是生活，错过的，就当是路过。
+                                    <div class="chattime">
+                                        2017-09-10 21:44:32
+                                    </div>
+                                </div>
+                                <div style="clear:both" ></div>
+                            </div>
+                            <div class="rightchat">
+                                <div class="chathead" style="background-image:url(/head/30);" ></div>
+                                <div class="chatcontent">Forget the memories, continue to be life, miss, just pass by.忘不掉的是回忆，继续的是生活，错过的，就当是路过。
+                                    <div class="chattime" style="text-align:right;" >
+                                        2017-09-10 21:44:32
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input id="chatcontent" type="text" class="form-control" placeholder="请输入内容..." style="width:500px;height:34px;float:left" >
+                    <button onclick="sendchat({{$userinfo->userid}})" class="btn btn-primary" type="button" style="float:right;margin-left:10px;">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 
@@ -239,6 +326,7 @@
     <script src="/web/js/addr.js" ></script>
     <script>
         $(document).ready(function(){
+            $("#myModal3").modal("show")
             loadP();
             window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
