@@ -41,7 +41,7 @@
         </tbody>
     </table>
     <div>
-        <button onclick="addtype()" class="btn btn-primary red" >添加分类</button>
+        <button onclick="addtype()" class="btn btn-primary red" >添加Banner</button>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" style="display: none;" role="dialog" >

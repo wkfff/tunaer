@@ -58,9 +58,10 @@ class PostController extends Controller{
             $res = DB::insert($sql,[$request->input('title'),$request->input('sort'),$request->input('url'),$request->input('pic')]);
         }else{
             $sql = " update banner set title=?,sort=?,url=?,pic=? where id=? ";
-            $res = DB::insert($sql,[$request->input('title'),$request->input('sort'),$request->input('url'),$request->input('pic'),$request->input('id')]);
+            $res = DB::update($sql,[$request->input('title'),$request->input('sort'),$request->input('url'),$request->input('pic'),$request->input('id')]);
         }
         if( $res ) {
+            $request->session()->forget('banners');
             echo "200";
         }else{
             echo "400-操作失败";

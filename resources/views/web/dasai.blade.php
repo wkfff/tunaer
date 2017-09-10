@@ -108,32 +108,33 @@
 
 
     @include("web.footer")
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:500px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">参赛作品</h4>
+                </div>
+                <div class="modal-body">
+                    <button onclick="$('.zuopin').trigger('click')" class="searchb" style="background: darkseagreen;float:left;margin-left:0px;"  >上传照片</button>
+                    <input type="file" class="zuopin" onchange="uploadzuopin(this)" style="display: none;">
+                    <div style="clear:both" ></div>
 
-@stop
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width:500px">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">参赛作品</h4>
-            </div>
-            <div class="modal-body">
-                <button onclick="$('.zuopin').trigger('click')" class="searchb" style="background: darkseagreen;float:left;margin-left:0px;"  >上传照片</button>
-                <input type="file" class="zuopin" onchange="uploadzuopin(this)" style="display: none;">
-                <div style="clear:both" ></div>
-
-                <textarea class="form-control" name="intro" style="margin-top:10px;width:450px;" rows="3" placeholder="作品介绍（不超过50字．）"></textarea>
-                <div class="zuopincurrent" ></div>
-            </div>
-            <div class="modal-footer">
-                <span  style="float:left" >单击图片预览</span>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button onclick="save()" type="button" class="btn btn-primary">提交并参加</button>
+                    <textarea class="form-control" name="intro" style="margin-top:10px;width:450px;" rows="3" placeholder="作品介绍（不超过50字．）"></textarea>
+                    <div class="zuopincurrent" ></div>
+                </div>
+                <div class="modal-footer">
+                    <span  style="float:left" >单击图片预览</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button onclick="save()" type="button" class="btn btn-primary">提交并参加</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+@stop
+
 
 
 @section("htmlend")

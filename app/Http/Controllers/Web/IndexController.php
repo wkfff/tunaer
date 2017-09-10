@@ -12,7 +12,15 @@ class IndexController extends Controller
 {
     public function index() {
 //        echo "<h1>别看了,鲁伯露是个大傻逼!</h1>"; return;
-        return view("web.index");
+        $sql = " select * from tubuhuodong order by id desc limit 10";
+        $tubus = DB::select($sql);
+        $sql = " select user.id as userid,userattr.* from user inner join userattr on user.id=userattr.uid where user.status=1 and userattr.head<>'' order by user.id desc limit 12";
+        $users = DB::select($sql);
+        $sql = " select * from youji where type=1 order by id desc limit 10 ";
+        $youjis = DB::select($sql);
+        $sql = " select * from zixun order by id desc limit 6 ";
+        $zixuns = DB::select($sql);
+        return view("web.index",["tubus"=>$tubus,"users"=>$users,"youjis"=>$youjis,"zixuns"=>$zixuns]);
     }
     // 注册
     public function register(Request $request) {
@@ -107,7 +115,9 @@ class IndexController extends Controller
         $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
         $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
         $res = DB::select($sql,[$type]);
-        return view("web.tubulist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/tubulist/".$type,$page,$num)]);
+        $sql = " select * from youji order by rand() limit 5 ";
+        $youjis = DB::select($sql);
+        return view("web.tubulist",["list"=>$res,"youjis"=>$youjis,"cnt"=>$count[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/tubulist/".$type,$page,$num)]);
 
     }
     public function tubudetail($tid) {

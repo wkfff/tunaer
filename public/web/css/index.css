@@ -8,19 +8,28 @@
 
 .zixunpic{
     background-size:cover;background-repeat:no-repeat;background-position:center;height:309px;width:370px;
-    cursor:pointer;position: relative;float:left;
+    cursor:pointer;position: relative;float:left;margin-right:45px;margin-bottom:70px;
+}
+.zixunpic:hover{
+    opacity:0.9;
+}
+.zixun .zixunpic:nth-child(3n){
+    margin-right:0px !important;
 }
 .userlist{
-    margin-top:15px;margin-bottom:-20px;height:128px;width:100%;background:#4B8EE8;position:relative;padding:0 10px;
+    margin-top:15px;margin-bottom:-20px;width:100%;position:relative;padding:0px;
 }
 .userinfo{
-    margin-top:26.5px;color:#fff;float:left;font-size:14px;line-height:25px;height:75px;margin-left:10px;
+    margin-top:26.5px;color:#4B8EE8;float:left;font-size:14px;line-height:25px;
+    height:75px;margin-left:5px;  width:190px;
+    text-align: left;
+    overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 }
 .useritem{
-    height:128px;width:196px;float:left;cursor: pointer;
+    height:128px;width:293px;float:left;cursor: pointer;margin-right:6px;margin-top:10px;border:1px solid #ccc;
 }
 .userhead{
-    background-size:cover;background-repeat:no-repeat;background-position:center;height:90px;width:90px;margin-top:19px;border-radius:45px;float:left;border:2px solid rgba(255,255,255,0.7)
+    background-size:cover;background-repeat:no-repeat;background-position:center;height:90px;width:90px;margin-top:19px;border-radius:45px;float:left;border:2px solid rgba(255,255,255,0.7);margin-left:5px;
 }
 .userhead:hover{
     opacity: 0.8;
@@ -30,10 +39,11 @@
     border:1px solid #2260b4;color:#2260b4;
 }
 .picitem div div{
-    height:48px;position:absolute;bottom:0px;left:0px;overflow:hidden;line-height:24px;background:rgba(51,102,204,.7);color:#fff;
+    height:48px;position:absolute;bottom:0px;left:0px;overflow:hidden;line-height:24px;background:rgba(51,102,204,.4);color:#fff;
 }
 .sjitem div div{
     height:48px;position:absolute;bottom:-48px;left:0px;overflow:hidden;line-height:24px;color:#444;font-size: 12px;
+    text-align:left;font-size: 14px;
 }
 .picitem,.sjitem{
     background-size:cover;background-repeat:no-repeat;background-position:center;

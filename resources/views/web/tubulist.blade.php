@@ -15,7 +15,7 @@
             width:895px;float:left;
         }
         .right{
-            width:300px;height:300px;float:right;border:1px solid #ccc;
+            width:300px;float:right;
         }
         .tubuitem{
             width:860px;height:230px;margin-bottom:20px;
@@ -27,6 +27,18 @@
         .head{
             background-size:cover;background-position: center;;
             background-repeat:no-repeat;
+        }
+        .tubunav{
+            height:45px;width:860px;border-bottom:1px solid #3366cc;color:#3366cc;margin-bottom:20px;
+        }
+        .tubunav a{
+            display: block;float:left;width:100px;background:#4b8ee8;margin-right:10px;color:#fff;
+            cursor: pointer;height:45px;line-height:45px;
+            text-align: center;font-size:18px;
+            text-decoration: none;
+        }
+        .tubunav a:hover{
+            opacity:0.8;
         }
     </style>
     <div class="toppic" style="background-image: url(/admin/data/images/{{ count($list) == 0 ? '#' : $list[0]->pics}});" >
@@ -42,6 +54,20 @@
             <a style="color: #999;" href="/">首页</a>
             <span>></span>
             <a style="color: #999;" href="javascript:void(0)" onclick="location.reload();" >{{$list[0]->name }}</a>
+        </div>
+        <div class="tubunav" >
+            <?php
+            //                    动态加载分类
+            if( !Session::get('types') ) {
+                $types = DB::select(" select * from tubutypes ");
+                Session::put("types",$types);
+            }
+            $types = Session::get('types');
+            ?>
+            @for( $i=0;$i<count($types);$i++ )
+                    <a href="/tubulist/{{$types[$i]->id}}">{{$types[$i]->name}}</a>
+            @endfor
+            <div style="float:right" >当前分类有 <span style="color:#ff536a" >{{$cnt}}</span> 个活动</div>
         </div>
             <div class="left">
                 @for( $i=0;$i<count($list);$i++ )
@@ -81,7 +107,20 @@
                 @endfor
             </div>
             <div class="right">
-
+                <p style="color:#999;font-size:20px;margin-top:-40px;">精彩回顾</p>
+                @for( $i=0;$i<count($youjis);$i++ )
+                    <a href="/youji/detail/{{$youjis[$i]->id}}">
+                        <div style="width:100%;height:200px;margin-bottom:20px;color:#444;" >
+                            <div style="height:150px;width:300px;float:left;background-size:cover;background-position: center;background-repeat:no-repeat;background-image:
+                            @if($youjis[$i]->type == 2)
+                                    url(/admin/data/images/{{$youjis[$i]->pic}})
+                            @else
+                                    url(/web/data/images/{{$youjis[$i]->pic}})
+                            @endif
+                                    ;" ></div>
+                            <p style="line-height:25px;padding-right:10px;" >{{$youjis[$i]->title}}</p>
+                        </div></a>
+                @endfor
             </div>
         <div style="clear:both" ></div>
         {!! $fenye !!}

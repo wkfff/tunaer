@@ -61,7 +61,7 @@
 游记评论 youjicmt
     id uid yid(游记id) cmt(评论内容) ctime(评论时间)
 
-私信　sixi
+聊天　chat
     id fid tid content(私信内容) stime(发送时间) isread(是否查看)
 相册　xiangce
     id uid pic(图片地址) utime(上传时间)
