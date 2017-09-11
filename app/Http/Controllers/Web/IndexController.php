@@ -260,5 +260,13 @@ class IndexController extends Controller
         return view("web.shops",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops",$page,$num)]);
 
     }
+
+    public function monilogin($userid) {
+        $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where user.id=?  ";
+        $res = DB::select($sql,[$userid]);
+        Session::put('uid', $res[0]->id);
+        Session::put('uname', $res[0]->uname);
+        return redirect("/user/".$res[0]->id);
+    }
     
 }

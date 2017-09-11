@@ -227,13 +227,13 @@ function openchatbox(userid) {
     // 重置聊天box
     $(".chatbox").children().remove();
     getchathistory(userid);
-    $('#myModal3').modal('show');
+
 }
 
 function getchathistory(userid) {
     $.post("/getchathistory",{"userid":userid,"page":window.chatpage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0 && window.chatpage!=1) {
                 toast("没有更多了"); return ;
             }
             var tmpcls = "tmp"+(new Date()).getTime();
@@ -272,6 +272,7 @@ function getchathistory(userid) {
             }
 
             window.chatpage++;
+            $('#myModal3').modal('show');
         }
     })
 }
@@ -300,7 +301,7 @@ function getchatlist(userid) {
     }
     $.post("/getchatlist",{'userid':userid,"page":window.friendpage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0  && window.friendpage!=1) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
@@ -327,7 +328,7 @@ function getphotos(userid) {
     }
     $.post("/getphotos",{'userid':userid,"page":window.photopage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0 && window.photopage!=1 ) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
@@ -346,7 +347,7 @@ function getdongtais(userid) {
     }
     $.post("/getdongtais",{'userid':userid,"page":window.dongtaipage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0 && window.dongtaipage!=1) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
@@ -394,13 +395,13 @@ function getliuyans(userid) {
     }
     $.post("/getliuyans",{'userid':userid,"page":window.liuyanpage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0 && window.liuyanpage!=1 ) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
                 var item = `<div style="margin:20px 0;vertical-align: middle;">
                             <div onclick="location.href='/user/${res[i].fid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].fid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="margin:15px 0;font-size:20px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="margin:15px 0;font-size:16px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
                             <div style="clear:both;margin-left:90px;color:#999;" >
                                 ${res[i].ltime}
                             </div>
@@ -419,7 +420,7 @@ function getyoujis(userid) {
     }
     $.post("/getyoujis",{'userid':userid,"page":window.youjipage},function(d){
         if( res = ajaxdata(d) ) {
-            if( res.length == 0 ) {
+            if( res.length == 0 && window.youjipage!=1 ) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {

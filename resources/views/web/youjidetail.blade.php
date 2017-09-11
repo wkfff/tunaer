@@ -129,7 +129,7 @@
             }
             $.post("/getyoujicms",{'yid':yid,"page":window.liuyanpage},function(d){
                 if( res = ajaxdata(d) ) {
-                    if( res.length == 0 ) {
+                    if( res.length == 0 && window.liuyanpage!=1 ) {
                         toast("没有更多了"); return ;
                     }
                     for( var i=0;i<res.length;i++ ) {

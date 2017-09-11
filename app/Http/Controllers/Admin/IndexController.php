@@ -262,4 +262,10 @@ class IndexController extends Controller{
             return view("admin.updatedasai",["data"=>$res[0]]);
         }
     }
+    public function shopbanner() {
+//        die("999");
+        $sql = " select * from shopbanner order by id desc";
+        $res = DB::select($sql);
+        return view("admin.setting.shopbanner",["list"=>$res]);
+    }
 }

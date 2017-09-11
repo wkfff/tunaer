@@ -52,6 +52,8 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/fabuzixun', 'IndexController@fabuzixun');
     Route::post('/dofabuzixun', 'PostController@fabuzixun');
     Route::get('/updatezixun/{id}', 'IndexController@updatezixun');
+    Route::get('/setting/shopbanner', 'IndexController@shopbanner');
+    Route::post('/setting/shopbanner', 'PostController@shopbanner');
 
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');
@@ -113,6 +115,13 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/youji/detail/{id}","IndexController@youjidetail");
     Route::get("/dasai/{id?}","IndexController@dasai");
     Route::get("/shops","IndexController@shops");
+    Route::post("/getyoujicms","PostController@getyoujicms");
+    Route::post("/getchatlist","PostController@getchatlist");
+    Route::post("/getphotos","PostController@getphotos");
+    Route::post("/getdongtais","PostController@getdongtais");
+    Route::post("/getliuyans","PostController@getliuyans");
+    Route::post("/getyoujis","PostController@getyoujis");
+    Route::get("/monilogin/{userid}","IndexController@monilogin");
 
 });
 // 获取头像
@@ -134,12 +143,8 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/sendchat","PostController@sendchat");
     Route::post("/getchathistory","PostController@getchathistory");
     Route::post("/canjiadasai","PostController@canjiadasai");
-    Route::post("/getchatlist","PostController@getchatlist");
-    Route::post("/getphotos","PostController@getphotos");
-    Route::post("/getdongtais","PostController@getdongtais");
-    Route::post("/getliuyans","PostController@getliuyans");
-    Route::post("/getyoujis","PostController@getyoujis");
+
     Route::post("/youjicm","PostController@youjicm");
-    Route::post("/getyoujicms","PostController@getyoujicms");
+
 
 });

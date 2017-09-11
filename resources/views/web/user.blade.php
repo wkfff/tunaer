@@ -290,7 +290,6 @@
     <script>
         $(document).ready(function(){
             loadP();
-
             getchatlist({{$userinfo->userid}});
             getphotos({{$userinfo->userid}});
             getdongtais({{$userinfo->userid}});

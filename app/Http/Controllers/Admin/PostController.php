@@ -116,5 +116,20 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
+    public function shopbanner(Request $request) {
+        if( $request->input("id","no") == 'no' ) {
+            $sql = " insert into shopbanner (title,sort,url,pic) values (?,?,?,?) ";
+            $res = DB::insert($sql,[$request->input('title'),$request->input('sort'),$request->input('url'),$request->input('pic')]);
+        }else{
+            $sql = " update shopbanner set title=?,sort=?,url=?,pic=? where id=? ";
+            $res = DB::update($sql,[$request->input('title'),$request->input('sort'),$request->input('url'),$request->input('pic'),$request->input('id')]);
+        }
+        if( $res ) {
+            $request->session()->forget('shopbanners');
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
     
 }

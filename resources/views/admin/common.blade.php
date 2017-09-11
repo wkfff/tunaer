@@ -113,6 +113,7 @@
                             <li><a class="submenu" href="/admin/productlist"><i class="icon-file-alt"></i><span class="hidden-tablet">产品列表</span></a></li>
                             <li><a class="submenu" href="/admin/fabuproduct"><i class="icon-file-alt"></i><span class="hidden-tablet">发布商品</span></a></li>
                             <li><a class="submenu" href="/admin/productorder"><i class="icon-file-alt"></i><span class="hidden-tablet">订单列表</span></a></li>
+                            <li><a class="submenu" href="/admin/setting/shopbanner"><i class="icon-file-alt"></i><span class="hidden-tablet">商城banner</span></a></li>
                         </ul>
                     </li>
 
