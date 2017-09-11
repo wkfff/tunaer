@@ -1,5 +1,5 @@
 @extends("web.common")
-@section("title","游记详情")
+@section("title","{$list->title} - 游记详情")
 
 @section("css")
     <style>
@@ -47,6 +47,17 @@
             <div>
                 {!! $list->tuwen !!}
             </div>
+            <div >
+                <button onclick="youjicm(this,{{$list->id}},2)"  type="button" class="btn btn-default btn-sm">
+                    <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$list->zancnt}})</span>
+                </button>
+                <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+                <button style="margin-top:10px;" class="btn btn-success " onclick="youjicm(this,{{$list->id}},1)" style="margin-left:30px;">提交评论</button>
+            </div>
+            <div class="liuyanbox">
+
+            </div>
+            <div onclick="getyoujis({{$list->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
         </div>
         <div class="tuijian"   >
             <p style="color:#999;font-size:20px;">更多游记</p>
@@ -76,13 +87,14 @@
 @section("htmlend")
     <script>
         window.onscroll = function(){
+
             if( !window.tuijianleft ) {
                 return ;
             }
             var t = $(".tuijian")[0].getBoundingClientRect();
 
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-            console.log(scrollTop);
+//            console.log(scrollTop);
             if( scrollTop>=250 ) {
                 $(".tuijian")[0].style = "position:fixed;top:10px;left:"+tuijianleft+"px"
             }else{
@@ -91,6 +103,47 @@
         }
         $(document).ready(function () {
             window.tuijianleft = $(".tuijian")[0].getBoundingClientRect().left;
+            getyoujis({{$list->id}});
         })
+
+        function youjicm(t,yid,type) {
+            var content = $(t).parent("div").children("textarea").val();
+            if( type == 1) {
+                if( $.trim(content) == ''  ) {
+                    toast("请输入评论内容"); return;
+                }
+            }else{
+                content = 'zan';
+            }
+            $.post("/youjicm",{"yid":yid,"content":content,"type":type},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+        function getyoujis(yid) {
+            if( window.liuyanpage ) {
+                window.liuyanpage++;
+            }else{
+                window.liuyanpage = 1;
+            }
+            $.post("/getyoujicms",{'yid':yid,"page":window.liuyanpage},function(d){
+                if( res = ajaxdata(d) ) {
+                    if( res.length == 0 ) {
+                        toast("没有更多了"); return ;
+                    }
+                    for( var i=0;i<res.length;i++ ) {
+                        var item = `<div style="margin:20px 0;vertical-align: middle;">
+                            <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;" >
+                                ${res[i].ltime}
+                            </div>
+                        </div>`;
+                        $(".liuyanbox").append(item);
+                    }
+                }
+            })
+        }
     </script>
 @stop

@@ -73,9 +73,9 @@
                 @for( $i=0;$i<count($youjis);$i++ )
                     <div onclick="location.href='/youji/detail/{{$youjis[$i]->id}}'" class="sjitem" style="margin-bottom:50px;background-image:url(/web/data/images/{{$youjis[$i]->pic}})">
                         <div style="width:100%;height:100%;">
-                            <div style="position:absolute;bottom:10px;left:180px;height:20px;width:40px;color:#fff">
+                            <div style="position:absolute;bottom:0px;left:0px;height:40px;padding-right:20px;padding-top:7px;width:100%;color:#fff;background:rgba(0,0,0,0.5);text-align:right;">
                                 <img src="/web/images/love.png" style="height:20px;" alt="">
-                                <span>11</span>
+                                <span style="margin-left:10px;">{{$youjis[$i]->zancnt}}</span>
                             </div>
                             <a href="/youji/detail/{{$youjis[$i]->id}}"><div>{{$youjis[$i]->title}}</div></a>
                         </div>

@@ -99,7 +99,7 @@
                         <span>婚况：{{$list[$i]->mryst}}</span>
                         <span style="display:block">
                             <span>地区：{{$list[$i]->addr}}</span>
-                            <button  class="btn btn-xs btn-danger" style="background:#ff536a;border:none;outline:none">打招呼</button>
+                            <button onclick="zhaohu({{$list[$i]->userid}})" class="btn btn-xs btn-danger" style="background:#ff536a;border:none;outline:none">打招呼</button>
                         </span>
                     </p>
                 </div>

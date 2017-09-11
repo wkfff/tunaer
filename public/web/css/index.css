@@ -26,7 +26,7 @@
     overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 }
 .useritem{
-    height:128px;width:293px;float:left;cursor: pointer;margin-right:6px;margin-top:10px;border:1px solid #ccc;
+    height:128px;width:293px;float:left;cursor: pointer;margin-right:6px;margin-top:10px;border:1px solid #eee;
 }
 .userhead{
     background-size:cover;background-repeat:no-repeat;background-position:center;height:90px;width:90px;margin-top:19px;border-radius:45px;float:left;border:2px solid rgba(255,255,255,0.7);margin-left:5px;

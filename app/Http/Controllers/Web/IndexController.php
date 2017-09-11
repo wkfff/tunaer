@@ -100,18 +100,18 @@ class IndexController extends Controller
         $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
         $res = DB::select($sql,[$userid]);
         //动态
-        $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
-        $dongtai = DB::select($sql,[$userid]);
+//        $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
+//        $dongtai = DB::select($sql,[$userid]);
 //        相册
-        $sql = " select * from xiangce where uid=? ";
-        $xiangce = DB::select($sql,[$userid]);
+//        $sql = " select * from xiangce where uid=? ";
+//        $xiangce = DB::select($sql,[$userid]);
 //        留言
-        $sql = " select * from liuyan where tid=? order by id desc ";
-        $liuyan = DB::select($sql,[$userid]);
+//        $sql = " select * from liuyan where tid=? order by id desc ";
+//        $liuyan = DB::select($sql,[$userid]);
         if( count($res) == 0 ) {
             return view("web.error",['content'=>'用户不存在']);
         }else{
-            return view('web.user',["userinfo"=>$res[0],"dongtai"=>$dongtai,"xiangce"=>$xiangce,"liuyan"=>$liuyan]);
+            return view('web.user',["userinfo"=>$res[0]]);
         }
 
     }
@@ -220,7 +220,7 @@ class IndexController extends Controller
         return view("web.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/web/youjilist",$page,$num)]);
     }
     public function youjidetail($id) {
-        $sql = " select * from youji left join userattr on userattr.uid=youji.uid where youji.id=? ";
+        $sql = " select youji.*,userattr.uname from youji left join userattr on userattr.uid=youji.uid where youji.id=? ";
         $res = DB::select($sql,[$id]);
         @DB::table("youji")->where("id",$id)->increment("readcnt",1);
         $sql = " select * from youji order by rand() limit 5 ";
@@ -249,6 +249,16 @@ class IndexController extends Controller
             $works = DB::select($sql,[$res[0]->id,($page-1)*$num,$num]);
             return view("web.dasai",["data"=>$res[0],"zongcanjia"=>$count[0]->cnt,"zongpiao"=>$zongpiao[0]->zong,"works"=>$works,"fenye"=>fenye($count[0]->cnt,"/dasai",$page,$num)]);
         }
+    }
+
+    public function shops(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $count = DB::select(" select count(*) as cnt from product ");
+        $sql = " select * from product order by sold desc  ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("web.shops",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops",$page,$num)]);
+
     }
     
 }

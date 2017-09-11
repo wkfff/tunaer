@@ -112,6 +112,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/youjilist/{type}","IndexController@youjilist");
     Route::get("/youji/detail/{id}","IndexController@youjidetail");
     Route::get("/dasai/{id?}","IndexController@dasai");
+    Route::get("/shops","IndexController@shops");
 
 });
 // 获取头像
@@ -131,6 +132,14 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/zhaohu","PostController@zhaohu");
     Route::post("/youji/fabu","PostController@fabuyouji");
     Route::post("/sendchat","PostController@sendchat");
+    Route::post("/getchathistory","PostController@getchathistory");
     Route::post("/canjiadasai","PostController@canjiadasai");
+    Route::post("/getchatlist","PostController@getchatlist");
+    Route::post("/getphotos","PostController@getphotos");
+    Route::post("/getdongtais","PostController@getdongtais");
+    Route::post("/getliuyans","PostController@getliuyans");
+    Route::post("/getyoujis","PostController@getyoujis");
+    Route::post("/youjicm","PostController@youjicm");
+    Route::post("/getyoujicms","PostController@getyoujicms");
 
 });

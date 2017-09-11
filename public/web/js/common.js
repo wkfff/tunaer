@@ -141,7 +141,7 @@ function zuzhi(event) {
 function zhaohu(userid) {
     $.post("/zhaohu",{"userid":userid},function(d){
         if( ajaxdata(d) ) {
-            toast("操作成功");
+            toast("发送成功");
         }
     })
 }

@@ -61,7 +61,7 @@
                     <script> window.sex = "男"; </script>
                     <img src="/web/images/male.png" style="height:30px;">
                 @endif
-                <div onclick="$('#myModal3').modal('show')" class="searchb"  >发消息</div>
+                <div onclick="openchatbox({{$userinfo->userid}})" class="searchb"  >发消息</div>
                 <div onclick="zhaohu({{$userinfo->userid}})" style="margin-left:10px;background:dodgerblue" class="searchb"  >打招呼</div>
             </h2>
 
@@ -107,27 +107,30 @@
             <input type="file" class="uploadinput2" onchange="uploadImg2(this)" style="display: none;" >
             <div class="tab youji">
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
-                    <input type="text" class="form-control" placeholder="游记标题" style="width:900px;margin-bottom:10px" >
-                    <script type="text/plain" id="myEditor" style="width:900px;"></script>
-                    <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">添加封面</button>
-                    <button type="button" onclick="fabuyouji()" class="btn btn-success" style="margin-top:10px;">确认发布</button>
+                    <button type="button" onclick="$('.createyoujipanel').toggle()" class="btn btn-default" style="width:120px;height:40px;margin-left:10px;">添加游记 +</button>
+                    <div class="createyoujipanel" style="display: none;margin-top:10px;margin-left:10px;">
+                        <input type="text" class="form-control" placeholder="游记标题" style="width:900px;margin-bottom:10px" >
+                        <script type="text/plain" id="myEditor" style="width:900px;"></script>
+                        <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">添加封面</button>
+                        <button type="button" onclick="fabuyouji()" class="btn btn-success" style="margin-top:10px;">确认发布</button>
+                        <div class="youjipics"></div>
+                    </div>
                 @endif
-                <div class="youjipics"></div>
-                <div style="clear:both;height:20px;" ></div>
-                <div class="youjilist">
 
-                </div>
+                <div class="youjibox"></div>
+                <div style="clear:both;height:20px;" ></div>
+                <div onclick="getyoujis({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
             <div class="tab photos">
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <input type="file" class="uploadphoto" onchange="uploadphoto(this)" style="display:none" >
                     <button type="button" onclick="$('.uploadphoto').trigger('click')" class="btn btn-default" style="width:120px;height:40px;">添加照片</button>
                 @endif
-                <div>
-                    @for( $i=0;$i<count($xiangce);$i++ )
-                        <div class="imgdiv2" onclick="img2big(this)" style="background-image:url(/web/data/images/{{$xiangce[$i]->pic}})" ></div>
-                    @endfor
+                <div class="photosbox">
+
                 </div>
+                <div style="clear:both;height:20px;" ></div>
+                <div onclick="getphotos({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
             <div class="tab liuyan">
                 <div>
@@ -135,17 +138,15 @@
                     <div style="clear:both;height:20px;" ></div>
                     <button  class="btn btn-default " onclick="liuyan(this)" style="outline:none;width:120px;height:45px;">给Ta留言</button>
                 </div>
-                <div>
-                    @for( $i=0;$i<count($liuyan);$i++ )
-                        <div style="margin:20px 0;vertical-align: middle;">
-                            <div onclick="location.href='/user/{{$liuyan[$i]->fid}}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/{{$liuyan[$i]->fid}});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="margin:15px 0;font-size:20px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">{{$liuyan[$i]->content}}</div>
-                            <div style="clear:both;margin-left:90px;color:#999;" >
-                                {{$liuyan[$i]->ltime}}
-                            </div>
-                        </div>
-                    @endfor
+                <div class="liuyanbox"></div>
+                <div onclick="getliuyans({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+            </div>
+            <div class="tab friends">
+                <div class="friendbox">
+
                 </div>
+                <div style="clear:both;height:20px;" ></div>
+                <div onclick="getchatlist({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
             <div class="tab dongtai" >
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
@@ -158,33 +159,11 @@
                 </div>
                 @endif
                 <div style="clear:both;height:20px;" ></div>
-                @for( $i=0;$i<count($dongtai);$i++ )
-                    <div>
-                        <div>{{$dongtai[$i]->content}}</div>
-                        <?php $pics=explode("#",$dongtai[$i]->imgs); ?>
-                        @for( $j=0;$j<count($pics);$j++ )
-                            <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/data/images/{{$pics[$j]}})" ></div>
-                        @endfor
-                        <div style="clear:both;height:20px;" ></div>
-                        <div style="margin-bottom:20px">
-                            <a href="/user/{{$dongtai[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$dongtai[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
-                            <span>发布于 {{$dongtai[$i]->ftime}}</span>
-                            <button onclick="dongtaicmtmp({{$dongtai[$i]->id}},'dianzan')" style="outline:none;margin-left:10px;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞{{$dongtai[$i]->zancnt}}</span>
-                            </button>
-                            <button onclick="dongtaicmtmp({{$dongtai[$i]->id}},'liuyan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/liuyan.png" style="height:15px;"><span style="margin-left:10px;" >评论{{$dongtai[$i]->cmcnt}}</span>
-                            </button>
-                            <button onclick="zhankai({{$dongtai[$i]->id}},this)" style="outline:none;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/zhankai.png" style="width:10px;"><span style="margin-left:10px;" >展开评论</span>
-                            </button>
-                            <div style="height:100px;width:100%;border:1px solid #eee;margin-top:10px;display: none;" >
+                <div class="dongtaibox">
 
-                            </div>
-                        </div>
-                    </div>
-                @endfor
+                </div>
                 <div style="clear:both;height:20px;" ></div>
+                    <div onclick="getdongtais({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
 
         </div>
@@ -285,26 +264,10 @@
                     <h4 class="modal-title" id="myModalLabel">与 <span style="color:cornflowerblue">{{$userinfo->uname}}</span> 聊天</h4>
                 </div>
                 <div class="modal-body">
-                    <div style="height:450px;width:100%;overflow-y: auto;" >
-                        <div style="color:dodgerblue;height:30px;width:100%;text-align:center;cursor: pointer;" >加载更多</div>
+                    <div style="height:50vh; max-height:500px;min-height:400px;width:100%;overflow-y: auto;" >
+                        <div onclick="getchathistory({{$userinfo->userid}})" style="color:dodgerblue;height:30px;width:100%;text-align:center;cursor: pointer;" >加载更多</div>
                         <div class="chatbox">
-                            <div class="leftchat">
-                                <div class="chathead" style="background-image:url(/head/40);" ></div>
-                                <div class="chatcontent">Forget the memories, continue to be life, miss, just pass by.忘不掉的是回忆，继续的是生活，错过的，就当是路过。
-                                    <div class="chattime">
-                                        2017-09-10 21:44:32
-                                    </div>
-                                </div>
-                                <div style="clear:both" ></div>
-                            </div>
-                            <div class="rightchat">
-                                <div class="chathead" style="background-image:url(/head/30);" ></div>
-                                <div class="chatcontent">Forget the memories, continue to be life, miss, just pass by.忘不掉的是回忆，继续的是生活，错过的，就当是路过。
-                                    <div class="chattime" style="text-align:right;" >
-                                        2017-09-10 21:44:32
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -326,8 +289,14 @@
     <script src="/web/js/addr.js" ></script>
     <script>
         $(document).ready(function(){
-            $("#myModal3").modal("show")
             loadP();
+
+            getchatlist({{$userinfo->userid}});
+            getphotos({{$userinfo->userid}});
+            getdongtais({{$userinfo->userid}});
+            getliuyans({{$userinfo->userid}});
+            getyoujis({{$userinfo->userid}});
+
             window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
             window.diqu = "{{$userinfo->addr}}";

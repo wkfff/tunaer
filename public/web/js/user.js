@@ -220,3 +220,221 @@ function sendchat(userid) {
         }
     })
 }
+
+function openchatbox(userid) {
+    // 每次打开聊天窗口初始化聊天页数
+    window.chatpage = 1;
+    // 重置聊天box
+    $(".chatbox").children().remove();
+    getchathistory(userid);
+    $('#myModal3').modal('show');
+}
+
+function getchathistory(userid) {
+    $.post("/getchathistory",{"userid":userid,"page":window.chatpage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            var tmpcls = "tmp"+(new Date()).getTime();
+            $(".chatbox").append("<div class='"+tmpcls+"' ></div>");
+            for( var i=res.length-1;i>=0;i-- ) {
+                // 我方是发送方
+                if( res[i].fid == userid ) {
+                    var item = `<div class="rightchat">
+                                    <div class="chathead" style="background-image:url(/head/${res[i].fid});" ></div>
+                                    <div class="chatcontent">
+                                    ${chatmessage(res[i].content,res[i].fid,res[i].type,userid)}
+                                        <div class="chattime" style="text-align:right;" >
+                                            ${res[i].stime}
+                                        </div>
+                                    </div>
+                                    <div style="clear:both" ></div>
+                                </div>`;
+                }else{
+                    var item = `<div class="leftchat">
+                                    <div class="chathead" style="background-image:url(/head/${res[i].fid});" ></div>
+                                    <div class="chatcontent">
+                                    ${chatmessage(res[i].content,res[i].fid,res[i].type,userid)}
+                                        <div class="chattime" >
+                                            ${res[i].stime}
+                                        </div>
+                                    </div>
+                                    <div style="clear:both" ></div>
+                                </div>`;
+                }
+                $("."+tmpcls).append(item);
+            }
+            if( window.chatpage > 1 ) {
+                $(".chatbox").prepend($("."+tmpcls));
+            }else{
+                $(".chatbox").append($("."+tmpcls));
+            }
+
+            window.chatpage++;
+        }
+    })
+}
+
+function chatmessage(message,fid,type,userid) {
+    console.log(type);
+    if( type == "2" ) {
+        console.log("zhaohu");
+        if( fid == userid ) {
+            return "我给Ta打了个招呼";
+        }else{
+            return "Ta给我打了个招呼";
+        }
+    }else{
+        return message;
+    }
+
+}
+// 获取好友列表
+
+function getchatlist(userid) {
+    if( window.friendpage ) {
+        window.friendpage++;
+    }else{
+        window.friendpage = 1;
+    }
+    $.post("/getchatlist",{'userid':userid,"page":window.friendpage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<a href="/user/${res[i].uid}"><div class="useritem">
+                                <div class="userhead" style="background-image:url(/head/${res[i].uid});"></div>
+                                <div class="userinfo">
+                                    <div>${res[i].uname}</div>
+                                    <div>${res[i].age}岁 ${res[i].mryst}</div>
+                                    <div>${res[i].addr}</div>
+                                </div>
+                                <span class="closeitem">&times;</span>
+                            </div></a>`;
+                $(".friendbox").append(item);
+            }
+        }
+    })
+}
+
+function getphotos(userid) {
+    if( window.photopage ) {
+        window.photopage++;
+    }else{
+        window.photopage = 1;
+    }
+    $.post("/getphotos",{'userid':userid,"page":window.photopage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<div class="imgdiv2" onclick="img2big(this)" style="background-image:url(/web/data/images/${res[i].pic})" ></div>`;
+                $(".photosbox").append(item);
+            }
+        }
+    })
+}
+
+function getdongtais(userid) {
+    if( window.dongtaipage ) {
+        window.dongtaipage++;
+    }else{
+        window.dongtaipage = 1;
+    }
+    $.post("/getdongtais",{'userid':userid,"page":window.dongtaipage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var pics = res[i].imgs.split("#");
+                var item = `<div>
+                        <div>${res[i].content}</div>
+                        ${imgs2div(pics)}
+                        <div style="clear:both;height:20px;" ></div>
+                        <div style="margin-bottom:20px">
+                            <a href="/user/{{$dongtai[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
+                            <span>发布于 ${res[i].ftime}</span>
+                            <button onclick="dongtaicmtmp(${res[i].id},'dianzan')" style="outline:none;margin-left:10px;" type="button" class="btn btn-default btn-sm">
+                                <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞${res[i].zancnt}</span>
+                            </button>
+                            <button onclick="dongtaicmtmp(${res[i].id},'liuyan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
+                                <img src="/web/images/liuyan.png" style="height:15px;"><span style="margin-left:10px;" >评论${res[i].cmcnt}</span>
+                            </button>
+                            <button onclick="zhankai(${res[i].id},this)" style="outline:none;" type="button" class="btn btn-default btn-sm">
+                                <img src="/web/images/zhankai.png" style="width:10px;"><span style="margin-left:10px;" >展开评论</span>
+                            </button>
+                            <div style="height:100px;width:100%;border:1px solid #eee;margin-top:10px;display: none;" >
+
+                            </div>
+                        </div>
+                    </div>`;
+                $(".dongtaibox").append(item);
+            }
+        }
+    })
+}
+
+function imgs2div(pics) {
+    var tmp = "";
+    for( var i=0;i<pics.length;i++ ) {
+        tmp+="<div class='imgdiv' onclick='img2big(this)' style='background-image:url(/web/data/images/"+pics[i]+")' ></div>";
+    }
+    return tmp;
+}
+
+function getliuyans(userid) {
+    if( window.liuyanpage ) {
+        window.liuyanpage++;
+    }else{
+        window.liuyanpage = 1;
+    }
+    $.post("/getliuyans",{'userid':userid,"page":window.liuyanpage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<div style="margin:20px 0;vertical-align: middle;">
+                            <div onclick="location.href='/user/${res[i].fid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].fid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="margin:15px 0;font-size:20px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;" >
+                                ${res[i].ltime}
+                            </div>
+                        </div>`;
+                $(".liuyanbox").append(item);
+            }
+        }
+    })
+}
+
+function getyoujis(userid) {
+    if( window.youjipage ) {
+        window.youjipage++;
+    }else{
+        window.youjipage = 1;
+    }
+    $.post("/getyoujis",{'userid':userid,"page":window.youjipage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<a href="/youji/detail/${res[i].id}"><div class="youjiitem">
+                        <div class="youjipic" style="background-image:url(/web/data/images/${res[i].pic})" ></div>
+                            <div class="youjiuserhead" style="background-image:url(/head/${res[i].uid})" ></div>
+                        <div class="youjititle">
+                            ${res[i].title}
+                        </div>
+                        <div class="youjitime">
+                            ${res[i].ytime}
+                        </div>
+                    </div></a>`;
+                $(".youjibox").append(item);
+            }
+        }
+    })
+}

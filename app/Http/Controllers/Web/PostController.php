@@ -274,4 +274,115 @@ class PostController extends Controller{
         }
     }
 
+    public function getchathistory(Request $request) {
+        $userid = $request->input("userid",'');
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $uid = Session::get("uid");
+        if( $userid == '' ) {
+            echo "400-无效操作"; return;
+        }else{
+            $sql = " select * from chat where (fid= ? and tid=?) or ( fid=? and tid=? ) order by id desc limit ?,? ";
+            $res = DB::select($sql,[$userid,$uid,$uid,$userid,($page-1)*$num,$num]);
+            echo json_encode($res);
+        }
+    }
+//    获取聊天列表
+    public function getchatlist(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select * from userattr where uid in ( select tid as userid from chat where fid=? union select fid as userid from chat where tid=? group by userid ) order by id desc limit ?,? ";
+            $res = DB::select($sql,[$userid,$userid,($page-1)*$num,$num]);
+            echo json_encode($res);
+        }
+    }
+//    获取相册
+    public function getphotos(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select * from xiangce where uid=? order by id desc limit ?,? ";
+            $xiangce = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($xiangce);
+        }
+    }
+//    获取动态列表
+    public function getdongtais(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit ?,? ";
+            $dongtai = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($dongtai);
+        }
+    }
+
+    //    获取留言列表
+    public function getliuyans(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select * from liuyan where tid=? order by id desc limit ?,? ";
+            $liuyan = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($liuyan);
+        }
+    }
+
+    //    获取留言列表
+    public function getyoujis(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select * from youji where uid=? order by id desc limit ?,? ";
+            $youji = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($youji);
+        }
+    }
+//    评论游记
+    public function youjicm(Request $request) {
+        $content = $request->input("content",'');
+        $yid = $request->input("yid",'');
+        $type = $request->input("type",1);
+        if( checknull($content,$yid) ) {
+//            检查重复赞
+            if( $type == 2 ) {
+                $sql = " select * from youjicm where yid=? and uid=? and ltime like '%".date('Y-m-d')."%' ";
+                $r = DB::select($sql,[$yid,Session::get('uid')]);
+                if(count($r) > 0) {
+                    echo "400-今日已赞"; return ;
+                }
+            }
+            $sql = " insert into youjicm (uid,yid,content,type) values(?,?,?,?) ";
+            $res = DB::insert($sql,[Session::get('uid'),$yid,$content,$type]);
+            if( $res ) {
+                if( $type == 1 ) {
+                    @DB::table("youji")->where("id",$yid)->increment("cmcnt",1);
+                }else{
+                    @DB::table("youji")->where("id",$yid)->increment("zancnt",1);
+                }
+                echo "200";
+            }else{
+                echo "400-操作失败";
+            }
+        }
+    }
+
+    //    获取游记留言列表
+    public function getyoujicms(Request $request) {
+        $yid = $request->input('yid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($yid) ) {
+            $sql = " select * from youjicm where yid=? and type=1 order by id desc limit ?,? ";
+            $youji = DB::select($sql,[$yid,($page-1)*$num,$num]);
+            echo json_encode($youji);
+        }
+    }
+
 }
