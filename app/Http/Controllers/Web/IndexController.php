@@ -253,11 +253,13 @@ class IndexController extends Controller
 
     public function shops(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",10);
+        $num = $request->input("num",12);
         $count = DB::select(" select count(*) as cnt from product ");
-        $sql = " select * from product order by sold desc  ";
+        $sql = " select * from product order by sold desc,id desc limit ?,?  ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
-        return view("web.shops",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops",$page,$num)]);
+        $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+        $fenlei = DB::select($sql);
+        return view("web.shops",["fenlei"=>json_encode($fenlei),"list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops",$page,$num)]);
 
     }
 
@@ -267,6 +269,16 @@ class IndexController extends Controller
         Session::put('uid', $res[0]->id);
         Session::put('uname', $res[0]->uname);
         return redirect("/user/".$res[0]->id);
+    }
+
+    public function shopdetail($id) {
+        $sql = " select * from product where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>"商品不存在或已下架"]);
+        }else{
+            return view("web.shopdetail",["detail"=>$res[0]]);
+        }
     }
     
 }

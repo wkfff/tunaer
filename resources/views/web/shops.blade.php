@@ -18,20 +18,38 @@
             background: deeppink !important;
             border-raidus:0 !important;
         }
-        .smallsort{
-            width:600px;height:380px;background:rgba(182,182,180,0.95);color:#444;top:-390px;position: absolute;z-index: 2;padding-top:20px;left:200px;
+        .subsort{
+            width:600px;height:380px;color:#444;top:20px;position: absolute;z-index: 2;
+            padding-top:20px;left:200px;display: none;background:rgba(255,255,255,0.85);
         }
-        .bigsort{
-            width:200px;height:400px;background:rgba(0,0,0,0.9);top:-410px;position: absolute;z-index: 2;padding-top:20px;
+        .sort{
+            width:200px;height:400px;background:rgba(0,0,0,0.5);top:-400px;position: absolute;z-index: 2;padding-top:20px;
         }
-        .bigsort li{
+        .sort li{
             color:#f6f6f6;text-decoration: none;list-style: none;width:100%;height:40px;
             line-height:40px;display:block;font-size:14px;
-            position: relative;
             cursor: pointer;text-align: left;padding:0 15px;
         }
-        .bigsort li:hover{
-            background:rgba(255,255,255,0.7);color:#444;
+        .sort li:hover{
+            background:#fff;color:#444;
+        }
+        .subsort a{
+            margin:10px;color:#666;text-decoration: none;border-left:1px solid #999;padding-left:10px;
+            display: inline-block;min-width:50px;height:10px;line-height:10px;
+            font-weight:bold;
+            text-align: center;
+        }
+        .subsort a:hover{
+            color:deeppink;
+        }
+        .shopitem{
+            height:370px;width:260px;float:left;margin:20px;
+        }
+        .shopitem:hover{
+            opacity: 0.8;
+        }
+        .shoppic{
+            height:260px;width:258px;background-position:center;background-size:cover;
         }
     </style>
 @stop
@@ -60,24 +78,36 @@
 
     </div>
     <div class="content">
-        <div class="bigsort" >
+        <div class="sort" >
+
             <p style="height:40px;background:deeppink;color:#fff;text-align: center;line-height:40px;font-size: 16px;margin:0px;">
-                <span>徒步/旅游 装备</span>
-
+                <span>徒哪儿户外装备</span>
             </p>
-            <li>登山，女鞋，男鞋<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>旅游背包，帐篷<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>旅游手辣带，登山仗<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>防水衣，水壶<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>探险装备，运动包<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>吸汗，包裹性，速干<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-            <li>徒步鞋，雨衣成人<span style="float:right;line-height:40px;" class="glyphicon glyphicon-menu-right"></span></li>
-        </div>
-        <div class="smallsort" >
+            <p style="height:40px;background:none;color:#fff;text-align: left;line-height:40px;font-size: 16px;margin:0px;position:relative;">
+                <input placeholder="搜索商品" type="text" style="height:40px;width:200px;border:none;background:none;background:rgba(255,255,255,0.8);text-align: center;font-size:14px;color:#666;letter-spacing: 2px;">
+                <span class="glyphicon glyphicon-search" style="position:absolute;right:15px;top:10px;color:#999;font-size:20px;"></span>
+            </p>
 
         </div>
+
+        <div class="shoplist" style="padding-top:20px;" >
+            @for( $i=0;$i<count($list);$i++ )
+                <a href="/shop/detail/{{$list[$i]->id}}"><div class="shopitem" >
+                <div class="shoppic" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}});" ></div>
+                <div style="padding:10px;">
+                    <span style="color:#F40;font-size:18px;">¥{{$list[$i]->price}}</span>
+                    <span style="float:right;color:#888;">已售{{$list[$i]->sold}}件</span>
+                </div>
+                <div style="padding:10px;">
+                    <span>{{$list[$i]->title}}</span>
+                </div>
+            </div></a>
+            @endfor
+        </div>
+
         <div style="clear:both" ></div>
         {!! $fenye !!}
+
 
     </div>
     @include("web.footer")
@@ -94,6 +124,27 @@
                 // 如果需要分页器
                 pagination: '.swiper-pagination'
             })
+            loadfenlei();
         });
+        function mover(that){
+            $(that).children("div").toggle();
+        }
+        function mout(that){
+            $(that).children("div").toggle();
+        }
+        function loadfenlei() {
+            var data = eval({!! $fenlei !!});
+            for( var i=0;i<data.length;i++ ) {
+                if( $(".sort"+data[i].id).length == 0 ) {
+                    console.log(data[i].title);
+                    $(".sort").append("<li onmouseover='mover(this)' onmouseout='mover(this)' class='sort"+data[i].id+"'><span>"+data[i].title+"</span><span style='float:right;line-height:40px;color:rgba(255,255,255,0.9)' class='glyphicon glyphicon-menu-right'></span><div class='subsort subsort"+data[i].id+"' ></div></li>");
+                    for( var j=0;j<data.length;j++ ) {
+                        if( data[j].pid == data[i].id) {
+                            $(".subsort"+data[j].pid).append("<a href='#'>"+data[j].subtitle+"</a>");
+                        }
+                    }
+                }
+            }
+        }
     </script>
 @stop

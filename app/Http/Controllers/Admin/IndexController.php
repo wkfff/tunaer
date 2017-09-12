@@ -268,4 +268,10 @@ class IndexController extends Controller{
         $res = DB::select($sql);
         return view("admin.setting.shopbanner",["list"=>$res]);
     }
+
+    public function shopfenlei() {
+        $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+        $res = DB::select($sql);
+        return view("admin.setting.shopfenlei",["fenlei"=>json_encode($res)]);
+    }
 }

@@ -20,7 +20,7 @@ function ajaxdata(data) {
 
             toast(data.substr(4)); return false;
         case "200":
-            toast(data.substr(4)); return true;
+             return true;
     }
     switch(data) {
         case "":

@@ -131,5 +131,38 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
+    public function addshopsort(Request $request) {
+        $title = $request->input("title",'');
+        $sort = $request->input("sort",'');
+        $pid = $request->input("pid",'');
+        $id = $request->input("id",'');
+        if( checknull($title,$sort) ) {
+            if  ($pid == '') {
+                if( $id == '' ) {
+                    $sql = " insert into shopsort (title,sort) values (?,?) ";
+                    $res = DB::insert($sql,[$title,$sort]);
+                }else{
+                    $sql = " update shopsort set title=?,sort=? where id=? ";
+                    $res = DB::update($sql,[$title,$sort,$id]);
+                }
+
+            }else{
+                $sql = " select * from shopsort where id=? ";
+                $r = DB::select($sql,[$pid]);
+                if( count($r) == 0 ) {
+                    echo "400-父类不存在"; return;
+                }else{
+                    $sql = " insert into shopsubsort (title,sort,pid) values (?,?,?) ";
+                    $res = DB::insert($sql,[$title,$sort,$pid]);
+                }
+            }
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-操作失败";
+            }
+        }
+
+    }
     
 }

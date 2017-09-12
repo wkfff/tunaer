@@ -114,6 +114,7 @@
                             <li><a class="submenu" href="/admin/fabuproduct"><i class="icon-file-alt"></i><span class="hidden-tablet">发布商品</span></a></li>
                             <li><a class="submenu" href="/admin/productorder"><i class="icon-file-alt"></i><span class="hidden-tablet">订单列表</span></a></li>
                             <li><a class="submenu" href="/admin/setting/shopbanner"><i class="icon-file-alt"></i><span class="hidden-tablet">商城banner</span></a></li>
+                            <li><a class="submenu" href="/admin/setting/shopfenlei"><i class="icon-file-alt"></i><span class="hidden-tablet">商品分类</span></a></li>
                         </ul>
                     </li>
 

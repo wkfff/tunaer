@@ -44,6 +44,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 //    banner
     Route::get('/setting/banner', 'IndexController@setbanner');
     Route::post('/setting/banner', 'PostController@setbanner');
+    Route::post('/addshopsort', 'PostController@addshopsort');
 
 //    资讯列表
     Route::get('/zixunlist', 'IndexController@zixunlist');
@@ -54,6 +55,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/updatezixun/{id}', 'IndexController@updatezixun');
     Route::get('/setting/shopbanner', 'IndexController@shopbanner');
     Route::post('/setting/shopbanner', 'PostController@shopbanner');
+    Route::get('/setting/shopfenlei', 'IndexController@shopfenlei');
 
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');
@@ -122,6 +124,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::post("/getliuyans","PostController@getliuyans");
     Route::post("/getyoujis","PostController@getyoujis");
     Route::get("/monilogin/{userid}","IndexController@monilogin");
+    Route::get("/shop/detail/{id}","IndexController@shopdetail");
 
 });
 // 获取头像
