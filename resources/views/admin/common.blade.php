@@ -28,6 +28,18 @@
         .fenyecurrent{
             background: #f6efcc !important;color:#6d643c!important;
         }
+        .shopsort{
+            border:1px solid #eee;margin-bottom:20px;padding:10px;
+        }
+        .shopsort p{
+            font-size:20px;color:#444;padding-bottom:10px;
+        }
+        .shopsort a{
+            font-size:15px;color:dodgerblue;display: inline-block;min-width:100px;background:rgba(0,0,0,0.1);
+            height:30px;line-height:30px;text-align: center;
+            text-decoration: none !important;margin-right:10px;
+        }
+
     </style>
     <!--[if lt IE 9]>
     <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
@@ -43,7 +55,7 @@
 <body>
 <div class="navbar">
     <div class="navbar-inner">
-        <div class="container-fluid">
+        <div class="container-fluid" style="overflow: auto !important;">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -73,7 +85,7 @@
     </div>
 </div>
 
-<div class="container-fluid-full">
+<div class="container-fluid-full" >
     <div class="row-fluid">
         <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2" style="overflow-y: auto;">

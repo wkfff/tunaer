@@ -34,7 +34,13 @@
         <div style="font-size: 18px;color: #999;margin:30px 0">
             <a style="color: #999;" href="/">首页</a>
             <span>></span>
-            <a style="color: #999;" href="/member/dongtai" >会员动态</a>
+
+                @if( count($list) && $list[0]->type == 2 )
+                <a style="color: #999;" href="/youjilist/2" >官方游记
+                @else
+                <a style="color: #999;" href="/youjilist/1" >会员游记
+                @endif
+            </a>
         </div>
         @for( $i=0;$i<count($list);$i++ )
             <a href="/youji/detail/{{$list[$i]->id}}">

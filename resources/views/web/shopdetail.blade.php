@@ -1,85 +1,61 @@
 @extends("web.common")
 @section("title",$detail->title)
 @section("css")
-    <link rel="stylesheet" href="/web/css/index.css">
-    <link rel="stylesheet" href="/web/css/swiper-3.4.2.min.css">
-    <style>
-        .swiper-container {
-            width: 600px;
-            height: 400px;
 
-        }
-        .swiper-slide{
-            background-size:cover;background-repeat:no-repeat;background-position:center;
-        }
-        .swiper-pagination-bullet-active{
-            background: #194C8E !important;
-        }
+    <style>
+        html{overflow-y:scroll;}
+        body{margin:0; font:12px "\5B8B\4F53",san-serif;background:#ffffff;}
+        div,ul,li{padding:0; margin:0;}
+        li{list-style-type:none;}
+        img{vertical-align:top;border:0;}
+
+        /* box */
+        /*.box{width:610px;margin:100px auto;}*/
+        .tb-pic a{display:table-cell;text-align:center;vertical-align:middle;}
+        .tb-pic a img{vertical-align:middle;}
+        .tb-pic a{*display:block;*font-family:Arial;*line-height:1;}
+        .tb-thumb{margin:10px 0 0;overflow:hidden;}
+        .tb-thumb li{background:none repeat scroll 0 0 transparent;float:left;height:42px;margin:0 6px 0 0;overflow:hidden;padding:1px;}
+        .tb-s400, .tb-s400 a{height:420px;width:420px;padding-left:5px;}
+        .tb-s400, .tb-s400 img{max-height:420px;max-width:420px;}
+        .tb-s400 a{*font-size:271px;}
+        .tb-s40 a{*font-size:35px;}
+        .tb-s40, .tb-s40 a{height:40px;width:40px;}
+        .tb-booth{border:1px solid #CDCDCD;position:relative;z-index:1;}
+        .tb-thumb .tb-selected{border:1px solid #C30008 ;height:40px;}
+        .tb-thumb .tb-selected div{background-color:#FFFFFF;border:medium none;}
+        .tb-thumb li div{border:1px solid #CDCDCD;}
+        .zoomDiv{z-index:999;position:absolute;top:0px;left:0px;width:200px;height:200px;background:#ffffff;border:1px solid #CCCCCC;display:none;text-align:center;overflow:hidden;}
+        .zoomMask{position:absolute;background:url("/web/images/mask.png") repeat scroll 0 0 transparent;cursor:move;z-index:1;}
     </style>
 @stop
 
 @section("body")
     @include("web.header")
     <div class="content">
-        <div style="font-size: 18px;color: #999;margin:30px 0">
-            <a style="color: #999;" href="/">首页</a>
-            <span>></span>
-            <a style="color: #999;" href="/shops" >商城首页</a>
-        </div>
-        <div style="color:#4b8ee8;font-size:24px;">
-            {{$detail->title}}
-        </div>
-        <div style="float: left;margin-top:30px;">
-            <div class="swiper-container" id="swiper-container1">
-                <div class="swiper-wrapper">
-                    @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
-                        <div class="swiper-slide" style="background-image:url(/admin/data/images/{{$imgs[$i]}});"></div>
-                    @endfor
-                </div>
+
+        <div class="box" style="margin-top:20px;float:left;width:440px;">
+            <div class="tb-booth tb-pic tb-s400">
+                <a href="javascript:void(0)">
+                    <div rel="#" class="jqzoom" style="background-image:url(#);background-size:cover;background-repeat:no-repeat;background-position: center;width:400px;height:400px;">
+                    </div>
+                </a>
             </div>
-            <div class="swiper-container" id="swiper-container2" style="margin-top:20px;height:140px;">
-                <div class="swiper-wrapper">
-                    @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
-                        <div class="swiper-slide" style="background-image:url(/admin/data/images/{{$imgs[$i]}});width:100px;height:120px;"></div>
-                    @endfor
-                </div>
+            <ul class="tb-thumb" id="thumblist">
+                @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
+                    <li >
+                        <div class="tb-pic tb-s40" style="background-image:url(/admin/data/images/{{$imgs[$i]}});background-size:cover;background-repeat:no-repeat;background-position: center;" >
+                            {{--<a href="javascript:void(0)"><img src="/admin/data/images/{{$imgs[$i]}}" ></a></div>--}}
+                    </li>
+                @endfor
+
+            </ul>
+        </div>
+        <div class="shopinfo" style="margin-top:20px;height:300px;float:left;width:760px;height:420px;" >
+            <div style="font-size:16px;color:#3C3C3C;font-weight:700;line-height:30px;max-width:500px;">
+                {{$detail->title}}
             </div>
-            <div style="float:left" class="bshare-custom icon-medium-plus"><div class="bsPromo bsPromo2"></div><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到QQ好友" class="bshare-qqim" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到豆瓣" class="bshare-douban" href="javascript:void(0);"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到天涯" class="bshare-tianya" href="javascript:void(0);"></a><a title="分享到堆糖" class="bshare-duitang" href="javascript:void(0);"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="分享到一键通" class="bshare-bsharesync" href="javascript:void(0);"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count" style="float: none;">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
-        </div>
-
-        <div style="width:560px;margin-left:40px;float:left;margin-top:30px;font-size:16px;line-height: 30px" >
-
-            <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary"
-                    style="width:200px;height:50px;font-size: 20px;outline:none">马上报名</button>
-        </div>
-        <div style="clear:both" ></div>
-        <style>
-            .tuwen{
-                text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #eee;padding:10px;
-            }
-            .tuwen img{
-                max-width:100% !important;
-            }
-            .tuijian{
-                float:left;width:330px;margin-top:30px;margin-left:20px;border:1px solid #eee;padding:10px;
-                z-index:999;
-            }
-            .tuijian div{
-                height:180px;width:310px;background:#eee;background-size:cover;
-                background-position:center;background-repeat: no-repeat;
-                position: relative;margin-top:20px;
-            }
-            .tuijian div:hover{
-                opacity:0.8;
-            }
-
-        </style>
-        <div class="tuwen" >
-            {!! $detail->tuwen !!}
-        </div>
-        <div class="tuijian" >
-            <p style="color:#999;font-size:20px;">推荐活动</p>
-
+            <div style="height:90px;width:500px;background:#ddd;" ></div>
         </div>
         <div style="clear:both" ></div>
     </div>
@@ -88,8 +64,22 @@
 @stop
 
 @section("htmlend")
-    <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
+    <script type="text/javascript" src="/web/js/jquery.imagezoom.js"></script>
     <script>
+        $(document).ready(function(){
+            $(".jqzoom").imagezoom();
+            $("#thumblist li div").click(function(){
+                //增加点击的li的class:tb-selected，去掉其他的tb-selecte
+                $(this).parents("li").addClass("tb-selected").siblings().removeClass("tb-selected");
+                //赋值属性
+                var url = $(this).css("background-image");
+                var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+//                $(".jqzoom").attr('src',$(this).find("img").attr("mid"));
+                $(".jqzoom").attr('rel',"/admin/data/images/"+pic);
 
+                $(".jqzoom").css("background-image",url);
+            });
+            $($("#thumblist li div")[0]).trigger("click");
+        });
     </script>
 @stop

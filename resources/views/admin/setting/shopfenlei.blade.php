@@ -1,36 +1,16 @@
 @extends("admin.common")
 
 @section("title","徒步活动列表")
-<style>
-    .sort{
-        border:1px solid #eee;padding:20px;margin:10px 0px;
-    }
-    .sort p{
-        font-size:20px;color:#444;border-bottom:1px solid #999;padding-bottom:10px;
-    }
-    .sort a{
-        font-size:15px;color:dodgerblue;display: inline-block;min-width:100px;background:rgba(0,0,0,0.1);
-        height:40px;line-height:40px;text-align: center;
-        text-decoration: none !important;margin-right:10px;
-    }
-</style>
 @section("content")
 
-
-
-
-    <div class="sortbox" >
-        {{--<div class='sort'>--}}
-            {{--<p href='#' >登山鞋</p>--}}
-            {{--<a href='#'>男鞋</a>--}}
-            {{--<a href='#'>女鞋</a>--}}
-        {{--</div>--}}
-    </div>
-
+    <div class="sortbox" ></div>
+    <div style="clear:both" ></div>
     <div style="margin-top:20px;">
         <button onclick="addsort()" class="btn btn-default" >新增分类</button>
         <span style="margin-left:20px;line-height:30px;color:red;">子分类双击分类删除</span>
     </div>
+
+    <div style="clear:both" ></div>
 
 
 
@@ -75,26 +55,29 @@
 
 
 @stop
-
 @section("htmlend")
     <script>
-        var data = eval({!! $fenlei !!});
-        for( var i=0;i<data.length;i++ ) {
-            if( $(".sort"+data[i].id).length == 0 ) {
-                $(".sortbox").append("<div sort="+data[i].sort+" title='"+data[i].title+"' id="+data[i].id+" class='sort sort"+data[i].id+"'><p>"+data[i].title+" ( id : "+data[i].id+" ) ( 排序 : "+data[i].sort+") <span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right' table='shopsort' onclick='deletebyid(this,"+data[i].id+")'>删除</span>　<span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right;margin-right:10px;' table='shopsort' onclick='modify("+data[i].id+")'>修改</span></p></div>");
-                for( var j=0;j<data.length;j++ ) {
-                    if( data[j].pid == data[i].id) {
-                        $(".sort"+data[j].pid).append("<a table='shopsubsort' ondblclick='deletebyid(this,"+data[j].subid+")' href='javascript:void(0)'>"+data[j].subtitle+"</a>");
-                    }
-                }
-            }
-        }
+        $(document).ready(function(){
+            loadfenlei();
+        })
 //        addsort();
         function addsort() {
             $("#myModal").modal("show");
             $("input[name=pid]").removeAttr("disabled");
         }
-
+        function loadfenlei(){
+            var data = eval({!! $fenlei !!});
+            for( var i=0;i<data.length;i++ ) {
+                if( $(".sort"+data[i].id).length == 0 ) {
+                    $(".sortbox").append("<div sort="+data[i].sort+" title='"+data[i].title+"' id="+data[i].id+" class='shopsort sort"+data[i].id+"'><p>"+data[i].title+" ( id : "+data[i].id+" ) ( 排序 : "+data[i].sort+") <span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right' table='shopsort' onclick='deletebyid(this,"+data[i].id+")'>删除</span>　<span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right;margin-right:10px;' table='shopsort' onclick='modify("+data[i].id+")'>修改</span></p></div>");
+                    for( var j=0;j<data.length;j++ ) {
+                        if( data[j].pid == data[i].id) {
+                            $(".sort"+data[j].pid).append("<a table='shopsubsort' ondblclick='deletebyid(this,"+data[j].subid+")' href='javascript:void(0)'>"+data[j].subtitle+"</a>");
+                        }
+                    }
+                }
+            }
+        }
         function fabu() {
             var title = $("input[name=title]").val();
             var sort = $("input[name=sort]").val();
