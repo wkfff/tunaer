@@ -94,7 +94,7 @@
                     <li><a href="/admin/index"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 主面板</span></a></li>
                     <li><a href="/admin/userlist"><i class="icon-envelope"></i><span class="hidden-tablet"> 会员列表</span></a></li>
                     <li>
-                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步活动</span><i class="icon-angle-down"></i></a>
+                        <a class="dropmenu" style="cursor:pointer;color:#ff536a;font-weight:700"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步活动</span><i class="icon-angle-down"></i></a>
                         <ul>
                             <li><a class="submenu" href="/admin/tubulist"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步列表</span></a></li>
                             <li><a class="submenu" href="/admin/fabutubu"><i class="icon-file-alt"></i><span class="hidden-tablet">发布徒步活动</span></a></li>
@@ -119,8 +119,8 @@
                     {{--<li><a href="/admin/index"><i class="icon-edit"></i><span class="hidden-tablet"> 徒步游记</span></a></li>--}}
                     {{--<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> 聊天列表</span></a></li>--}}
                     {{--<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> 用户动态</span></a></li>--}}
-                    <li>
-                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步商城</span><i class="icon-angle-down"></i></a>
+                    <li >
+                        <a class="dropmenu" style="cursor:pointer;color:#f40;font-weight:700"><i class="icon-folder-close-alt"></i><span class="hidden-tablet" > 徒步商城</span><i class="icon-angle-down"></i></a>
                         <ul>
                             <li><a class="submenu" href="/admin/productlist"><i class="icon-file-alt"></i><span class="hidden-tablet">产品列表</span></a></li>
                             <li><a class="submenu" href="/admin/fabuproduct"><i class="icon-file-alt"></i><span class="hidden-tablet">发布商品</span></a></li>

@@ -20,7 +20,7 @@
         }
         .subsort{
             width:600px;height:380px;color:#444;top:20px;position: absolute;z-index: 2;
-            padding-top:20px;left:200px;display: none;background:rgba(255,255,255,0.85);
+            padding-top:20px;left:200px;display: none;background:rgba(255,255,255,0.99);
         }
         .sort{
             width:200px;height:400px;background:rgba(0,0,0,0.5);top:-400px;position: absolute;z-index: 2;padding-top:20px;
@@ -33,13 +33,13 @@
         .sort li:hover{
             background:#fff;color:#444;
         }
-        .subsort a{
+        .subsort i{
             margin:10px;color:#666;text-decoration: none;border-left:1px solid #999;padding-left:10px;
             display: inline-block;min-width:50px;height:10px;line-height:10px;
-            font-weight:bold;
+            font-style:normal;
             text-align: center;
         }
-        .subsort a:hover{
+        .subsort i:hover{
             color:deeppink;
         }
         .shopitem{
@@ -84,13 +84,16 @@
                 <span>徒哪儿户外装备</span>
             </p>
             <p style="height:40px;background:none;color:#fff;text-align: left;line-height:40px;font-size: 16px;margin:0px;position:relative;">
-                <input placeholder="搜索商品" type="text" style="height:40px;width:200px;border:none;background:none;background:rgba(255,255,255,0.8);text-align: center;font-size:14px;color:#666;letter-spacing: 2px;">
-                <span class="glyphicon glyphicon-search" style="position:absolute;right:15px;top:10px;color:#999;font-size:20px;"></span>
+                <input class="searchkey" onkeydown="searchkey(2)" placeholder="搜索商品" type="text" style="height:40px;width:200px;border:none;background:none;background:rgba(255,255,255,0.8);text-align: center;font-size:14px;color:#666;letter-spacing: 2px;">
+                <span class="glyphicon glyphicon-search" onclick="searchkey(3)" style="position:absolute;right:15px;top:10px;color:#999;font-size:20px;cursor:pointer;"></span>
             </p>
 
         </div>
 
-        <div class="shoplist" style="padding-top:20px;" >
+        <div class="shoplist" style="padding-top:20px;min-height:500px;" >
+            @if( count($list) == 0 )
+                <p>没有找到商品~</p>
+            @endif
             @for( $i=0;$i<count($list);$i++ )
                 <a href="/shop/detail/{{$list[$i]->id}}"><div class="shopitem" >
                 <div class="shoppic" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}});" ></div>
@@ -124,8 +127,10 @@
                 // 如果需要分页器
                 pagination: '.swiper-pagination'
             })
+
             loadfenlei();
         });
+
         function mover(that){
             $(that).children("div").toggle();
         }
@@ -136,15 +141,37 @@
             var data = eval({!! $fenlei !!});
             for( var i=0;i<data.length;i++ ) {
                 if( $(".sort"+data[i].id).length == 0 ) {
-                    console.log(data[i].title);
-                    $(".sort").append("<li onmouseover='mover(this)' onmouseout='mover(this)' class='sort"+data[i].id+"'><span>"+data[i].title+"</span><span style='float:right;line-height:40px;color:rgba(255,255,255,0.9)' class='glyphicon glyphicon-menu-right'></span><div class='subsort subsort"+data[i].id+"' ></div></li>");
+//                    console.log(data[i].title);
+                    $(".sort").append("<li onmouseover='mover(this)' onmouseout='mover(this)' class='sort"+data[i].id+"'><span onclick='searchsort(this)' search='"+data[i].id+"' >"+data[i].title+"</span><span style='float:right;line-height:40px;color:rgba(255,255,255,0.9)' class='glyphicon glyphicon-menu-right'></span><div class='subsort subsort"+data[i].id+"' ></div></li>");
                     for( var j=0;j<data.length;j++ ) {
                         if( data[j].pid == data[i].id) {
-                            $(".subsort"+data[j].pid).append("<a href='#'>"+data[j].subtitle+"</a>");
+                            $(".subsort"+data[j].pid).append("<i search='"+data[j].pid+"_"+data[j].subid+"' onclick='searchsort(this)' href='javascript:void(0)'>"+data[j].subtitle+"</i>");
                         }
                     }
                 }
             }
         }
+        function searchkey(type) {
+
+            if( type == 3 ) {
+                var key = $(".searchkey").val();
+                if( $.trim(key) != '' ) {
+                    location.href="/shops/key/"+key;
+                }
+
+            }else{
+                if( event.keyCode == 13 ) {
+                    var key = $(".searchkey").val();
+                    if( $.trim(key) != '' ) {
+                        location.href="/shops/key/"+key;
+                    }
+                }
+            }
+            zuzhi(event);
+        }
+        function searchsort(that) {
+            location.href="/shops/sort/"+$(that).attr("search");
+        }
+
     </script>
 @stop

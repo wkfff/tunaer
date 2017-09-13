@@ -39,7 +39,7 @@ function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
     if( $pagecnt <=5 ) {
         for( $i=0;$i<$pagecnt;$i++ ) {
             if( $i == $currentpage-1 ) {
-                $html .= "<a class='fenyecurrent' href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a class='fenyecurrent' href='javascript:void(0)'>".($i+1)."</a>";
             }else{
                 $html .= "<a href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }
@@ -58,7 +58,7 @@ function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
         $html .= "<a href='".$url.$search."page=".($currentpage-5>=1?$currentpage-5:1)."'><<</a>";
         for( $i=$start;$i<$end;$i++ ) {
             if( $i == $currentpage-1 ) {
-                $html .= "<a class='fenyecurrent' href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
+                $html .= "<a class='fenyecurrent' href='javascript:void(0)'>".($i+1)."</a>";
             }else{
                 $html .= "<a href='".$url.$search."page=".($i+1)."'>".($i+1)."</a>";
             }

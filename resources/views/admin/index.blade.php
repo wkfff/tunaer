@@ -1,9 +1,6 @@
 @extends('admin.common')
 
 @section("content")
-        @for( $i=0;$i<100;$i++ )
-            <div sort="10" title="家电 / 数码 / 手机" id="7" class="sort sort7"><p>家电 / 数码 / 手机 ( id : 7 ) ( 排序 : 10) <span style="color:dodgerblue;font-size:16px;cursor:pointer;float:right" table="shopsort" onclick="deletebyid(this,7)">删除</span>　<span style="color:dodgerblue;font-size:16px;cursor:pointer;float:right;margin-right:10px;" table="shopsort" onclick="modify(7)">修改</span></p><a table="shopsubsort" ondblclick="deletebyid(this,22)" href="javascript:void(0)">冬季火锅</a><a table="shopsubsort" ondblclick="deletebyid(this,23)" href="javascript:void(0)">蓝牙耳机</a><a table="shopsubsort" ondblclick="deletebyid(this,20)" href="javascript:void(0)">卷发器</a><a table="shopsubsort" ondblclick="deletebyid(this,24)" href="javascript:void(0)">蓝牙音箱</a><a table="shopsubsort" ondblclick="deletebyid(this,21)" href="javascript:void(0)">按摩器材</a><a table="shopsubsort" ondblclick="deletebyid(this,25)" href="javascript:void(0)">加湿器</a></div>
-        @endfor
         <ul class="breadcrumb">
             <li>
                 <i class="icon-home"></i>

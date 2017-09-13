@@ -35,14 +35,21 @@
             </style>
             <div class="modal-body">
                 <div id="inputcls">
-                    <input type="text" value="商品名称" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
-                    <input type="text" value="分类" placeholder="分类" name="sort" >
-                    <input type="text" value="12" placeholder="价格" name="price" ><br>
-                    <input type="text" value="3419" placeholder="已售多少" name="sold" >
-                    <input type="text" value="红色#蓝色#黑色" placeholder="颜色列表" name="colorlist" ><br>
-                    <input type="text" value="12x89#78x34" placeholder="尺寸列表" name="chicunlist" >
-                    <input type="text" value="12" placeholder="邮费" name="youfei" >
-                    <input type="text" value="999" placeholder="库存" name="kucun" >
+                    <input type="text" value="" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
+                    {{--<input type="text" value="分类" placeholder="分类" name="sort" >--}}
+                    <input type="text" value="" placeholder="价格 99" name="price" >
+                    <input type="text" value="" placeholder="已售多少　344" name="sold" ><br>
+                    <input type="text" value="" placeholder="颜色分类 红色#蓝色#黑色" name="colorlist" >
+                    <input type="text" value="" placeholder="可选尺寸 12x89#78x34" name="chicunlist" ><br>
+                    <input type="text" value="" placeholder="邮费 12,包邮" name="youfei" >
+                    <input type="text" value="" placeholder="库存 999" name="kucun" ><br>
+                    <select class="form-control" onchange="loadsubsort(this)" name="sort" style="width:250px;display: inline-block;">
+                        <option value="">===大分类===</option>
+
+                    </select>
+                    <select class="form-control" name="subsort" style="width:250px;display: inline-block;">
+                        <option value="">===小分类===</option>
+                    </select>
                 </div>
                 <br>
             </div>
@@ -81,6 +88,7 @@
     <script src="/admin/umediter/umeditor.min.js" ></script>
     <script>
         window.um = UM.getEditor('myEditor');
+        loadfenlei();
         //        window.shuxing.pictures = '';
         function fabu() {
             var t1 = $("#inputcls input");
@@ -89,6 +97,11 @@
                 if( t1[i].value == '' ) {
                     toast("属性不完整"); return ;
                 }
+            }
+            var sort = $("select[name=sort]").val();
+            var subsort = $("select[name=subsort]").val();
+            if( sort =='' || subsort == '') {
+                toast("属性不完整"); return ;
             }
             if( checkpictures() ) {
                 window.shuxing.tuwen = um.getContent();
@@ -119,13 +132,33 @@
             window.shuxing.pictures = imgs.join("#");
             return true;
         }
+        function loadfenlei () {
+            window.data = eval({!! $fenlei !!});
 
+            for( var i=0;i<data.length;i++ ) {
+                if( $('.sort'+data[i].id).length == 0 ) {
+                    $("select[name=sort]").append("<option class='sort"+data[i].id+"' value='"+data[i].id+"'>"+data[i].title+"</option>")
+                }
+            }
+
+        }
+        function loadsubsort(that) {
+            $("select[name=subsort]").children().remove();
+            var sort = $(that).val();
+            for( var i=0;i<data.length;i++ ) {
+                if( data[i].id == sort ) {
+                    $("select[name=subsort]").append("<option class='subsort"+data[i].subid+"' value='"+data[i].subid+"'>"+data[i].subtitle+"</option>")
+                }
+            }
+        }
         function save() {
-
+            var sort = $("select[name=sort]").val();
+            var subsort = $("select[name=subsort]").val();
             window.shuxing = {
 
                 "title":$("input[name=title]").val(),
-                "sort":$("input[name=sort]").val(),
+                "sort":sort,
+                "subsort":subsort,
                 "price":$("input[name=price]").val(),
                 "sold":$("input[name=sold]").val(),
                 "colorlist":$("input[name=colorlist]").val(),

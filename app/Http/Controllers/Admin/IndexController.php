@@ -127,12 +127,14 @@ class IndexController extends Controller{
         return view("admin.tubulist",['tubulist'=>$res,"count"=>$count]);
     }
     public function fabuproduct() {
-        return view("admin.fabuproduct");
+        $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+        $fenlei = DB::select($sql);
+        return view("admin.fabuproduct",["fenlei"=>json_encode($fenlei)]);
     }
 
     public function dofabuproduct(Request $request) {
-        $sql = " insert into product (title,tuwen,sort,price,sold,youfei,kucun,colorlist,chicunlist,pictures) values (?,?,?,?,?,?,?,?,?,?) ";
-        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures')]);
+        $sql = " insert into product (title,tuwen,sort,subsort,price,sold,youfei,kucun,colorlist,chicunlist,pictures) values (?,?,?,?,?,?,?,?,?,?,?) ";
+        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('subsort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures')]);
         if( $res ) {
             echo "200";
         }else{
@@ -154,12 +156,14 @@ class IndexController extends Controller{
         if( count($res) == 0 ) {
             return view("web.error",["content"=>'商品不存在']);
         }else{
-            return view("admin.updateproduct",["data"=>$res[0]]);
+            $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+            $fenlei = DB::select($sql);
+            return view("admin.updateproduct",["data"=>$res[0],"fenlei"=>json_encode($fenlei)]);
         }
     }
     public function doupdateproduct(Request $request) {
-        $sql = " update product set title=?,tuwen=?,sort=?,price=?,sold=?,youfei=?,kucun=?,colorlist=?,chicunlist=?,pictures=? where id=? ";
-        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures'),$request->input('pid')]);
+        $sql = " update product set title=?,tuwen=?,sort=?,subsort=?,price=?,sold=?,youfei=?,kucun=?,colorlist=?,chicunlist=?,pictures=? where id=? ";
+        $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('subsort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures'),$request->input('pid')]);
         if( $res ) {
             echo "200";
         }else{

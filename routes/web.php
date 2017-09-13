@@ -125,10 +125,12 @@ Route::group(['namespace' => 'Web'], function()
     Route::post("/getyoujis","PostController@getyoujis");
     Route::get("/monilogin/{userid}","IndexController@monilogin");
     Route::get("/shop/detail/{id}","IndexController@shopdetail");
+    Route::get("/shops/key/{key}","IndexController@searchkey");
+    Route::get("/shops/sort/{sort}","IndexController@searchsort");
 
 });
 // 获取头像
-Route::get("/head/{userid}","Web\PostController@userhead");
+Route::get("/head/{userid?}","Web\PostController@userhead");
 // 需要登录访问的api
 Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/updateuserinfo","PostController@updateuserinfo");

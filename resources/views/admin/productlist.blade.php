@@ -39,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/updateproduct/{{$list[$i]->id}}">修改</a></li>
-                            <li><a href="/admin/deleteproduct/{{$list[$i]->id}}">删除</a></li>
+                            <li><a href="javascript:void(0)" onclick="deletebyid({{$list[$i]->id}})" >删除</a></li>
                         </ul>
                     </li>
                 </td>
@@ -47,4 +47,17 @@
         @endfor
         </tbody>
     </table>
+@stop
+
+@section("htmlend")
+    <script>
+        function deletebyid(id) {
+            $.post("/admin/deletebyid",{
+                "table":"product",
+                "id":id
+            },function(data){
+                location.reload();
+            })
+        }
+    </script>
 @stop

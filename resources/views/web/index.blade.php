@@ -105,12 +105,13 @@
         </div>
         <a href="/zixun"><div style="background-size:cover;background-repeat:no-repeat;background-position:center;background-image:url(/web/images/zixunpanl.jpg);height:106px;width:100%;"></div></a>
     </div>
-    
+
 
     @include("web.footer")
 
 @stop
 
-@section("js")
+@section("htmlend")
     <script type='text/javascript' src="/web/js/index.js" ></script>
+
 @stop

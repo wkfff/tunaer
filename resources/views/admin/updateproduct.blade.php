@@ -36,13 +36,22 @@
             <div class="modal-body">
                 <div id="inputcls">
                     <input type="text" value="{{$data->title}}" placeholder="商品名称" name="title" style="width: 503px !important;margin-top:10px;" ><br>
-                    <input type="text" value="{{$data->sort}}" placeholder="分类" name="sort" >
-                    <input type="text" value="{{$data->price}}" placeholder="价格" name="price" ><br>
-                    <input type="text" value="{{$data->sold}}" placeholder="已售多少" name="sold" >
-                    <input type="text" value="{{$data->colorlist}}" placeholder="颜色列表" name="colorlist" ><br>
-                    <input type="text" value="{{$data->chicunlist}}" placeholder="尺寸列表" name="chicunlist" >
+
+{{--                    <input type="text" value="{{$data->sort}}" placeholder="大分类" name="sort" >--}}
+{{--                    <input type="text" value="{{$data->subsort}}" placeholder="小分类" name="sort" >--}}
+                    <input type="text" value="{{$data->price}}" placeholder="价格" name="price" >
+                    <input type="text" value="{{$data->sold}}" placeholder="已售多少" name="sold" ><br>
+                    <input type="text" value="{{$data->colorlist}}" placeholder="颜色列表" name="colorlist" >
+                    <input type="text" value="{{$data->chicunlist}}" placeholder="尺寸列表" name="chicunlist" ><br>
                     <input type="text" value="{{$data->youfei}}" placeholder="邮费" name="youfei" >
-                    <input type="text" value="{{$data->kucun}}" placeholder="库存" name="kucun" >
+                    <input type="text" value="{{$data->kucun}}" placeholder="库存" name="kucun" ><br>
+                    <select class="form-control" onchange="loadsubsort(this)" name="sort" style="width:250px;display: inline-block;">
+                        <option value="">===大分类===</option>
+
+                    </select>
+                    <select class="form-control" name="subsort" style="width:250px;display: inline-block;">
+                        <option value="">===小分类===</option>
+                    </select>
                 </div>
                 <br>
             </div>
@@ -90,16 +99,27 @@
             var img ="<div ondblclick='$(this).remove()' style='background-image: url(/admin/data/images/"+imgs[j]+");' ></div>";
             $(".pics").append(img);
         }
+
+        loadfenlei();
+        $("select[name=sort]").val("{{$data->sort}}");
+        $("select[name=sort]").trigger('change');
+        $("select[name=subsort]").val("{{$data->subsort}}");
 //            加载属性
         save();
-    },1000)
+
+    },100)
     function fabu() {
         var t1 = $("#inputcls input");
         for( var i=0;i<t1.length;i++ ) {
-            console.log(t1[i].value);
+//            console.log(t1[i].value);
             if( t1[i].value == '' ) {
                 toast("属性不完整"); return ;
             }
+        }
+        var sort = $("select[name=sort]").val();
+        var subsort = $("select[name=subsort]").val();
+        if( sort =='' || subsort == '') {
+            toast("属性不完整"); return ;
         }
         if( checkpictures() ) {
             window.shuxing.tuwen = um.getContent();
@@ -130,13 +150,34 @@
         window.shuxing.pictures = imgs.join("#");
         return true;
     }
+//    <option value=''>大分类</option>
+    function loadfenlei () {
+        window.data = eval({!! $fenlei !!});
 
+        for( var i=0;i<data.length;i++ ) {
+            if( $('.sort'+data[i].id).length == 0 ) {
+                $("select[name=sort]").append("<option class='sort"+data[i].id+"' value='"+data[i].id+"'>"+data[i].title+"</option>")
+            }
+        }
+
+    }
+    function loadsubsort(that) {
+        $("select[name=subsort]").children().remove();
+        var sort = $(that).val();
+        for( var i=0;i<data.length;i++ ) {
+            if( data[i].id == sort ) {
+                $("select[name=subsort]").append("<option class='subsort"+data[i].subid+"' value='"+data[i].subid+"'>"+data[i].subtitle+"</option>")
+            }
+        }
+    }
     function save() {
-
+        var sort = $("select[name=sort]").val();
+        var subsort = $("select[name=subsort]").val();
         window.shuxing = {
 
             "title":$("input[name=title]").val(),
-            "sort":$("input[name=sort]").val(),
+            "sort":sort,
+            "subsort":subsort,
             "price":$("input[name=price]").val(),
             "sold":$("input[name=sold]").val(),
             "colorlist":$("input[name=colorlist]").val(),

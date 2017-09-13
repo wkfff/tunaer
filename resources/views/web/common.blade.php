@@ -21,7 +21,18 @@
 </head>
 <body >
     @yield("body","")
+    <div class="suspend">
+        <dl>
+            <dt class="IE6PNG"></dt>
+            <dd class="suspendQQ"><a href="http://sc.chinaz.com" target="_blank"></a></dd>
+            <dd class="suspendTel"><a href="javascript:void(0);"></a></dd>
+        </dl>
+    </div>
 </body>
-</html>
+<!-- 代码 开始 -->
+<div id="top"></div>
+<!-- 代码 结束 -->
 
+</html>
+<script src="/web/js/common.js" ></script>
 @yield("htmlend","")

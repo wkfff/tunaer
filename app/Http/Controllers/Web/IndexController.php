@@ -277,8 +277,43 @@ class IndexController extends Controller
         if( count($res) == 0 ) {
             return view("web.error",["content"=>"商品不存在或已下架"]);
         }else{
-            return view("web.shopdetail",["detail"=>$res[0]]);
+            $sql = " select * from product order by rand() limit 5 ";
+            $tuijian = DB::select($sql);
+            return view("web.shopdetail",["detail"=>$res[0],"tuijian"=>$tuijian]);
         }
     }
+
+    public function searchkey(Request $request,$key) {
+
+        $page = $request->input("page",1);
+        $num = $request->input("num",12);
+        $count = DB::select(" select count(*) as cnt from product where title like '%".addslashes($key)."%' ");
+        $sql = " select * from product where title like '%".addslashes($key)."%' order by sold desc,id desc limit ?,?  ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+//        dd($res);
+        $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+        $fenlei = DB::select($sql);
+        return view("web.shops",["fenlei"=>json_encode($fenlei),"list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops/key/".$key,$page,$num)]);
+    }
+    public function searchsort(Request $request,$sort) {
+        $sort = addslashes($sort);
+//        搜索大分类
+        if( !strpos($sort,"_") ) {
+            $where = " sort= ".addslashes($sort);
+        }else{
+            $tmp = explode("_",$sort);
+            $where = " sort=".$tmp[0]." and subsort= ".$tmp[1];
+        }
+        $page = $request->input("page",1);
+        $num = $request->input("num",12);
+        $count = DB::select(" select count(*) as cnt from product where ".$where);
+        $sql = " select * from product where ".$where." order by sold desc,id desc limit ?,?  ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+//        dd($res);
+        $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
+        $fenlei = DB::select($sql);
+        return view("web.shops",["fenlei"=>json_encode($fenlei),"list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops/sort/".$sort,$page,$num)]);
+    }
+
     
 }

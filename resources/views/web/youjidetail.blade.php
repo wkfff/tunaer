@@ -13,6 +13,13 @@
             vertical-align: middle;
             background-repeat:no-repeat;
         }
+        .tuwen{
+            text-align: center;width:760px;float:left;margin-top:30px;border:1px solid #eee;padding:10px;
+            overflow: auto;
+        }
+        .tuwen img{
+            max-width:100% !important;
+        }
     </style>
 @stop
 @section("body")
@@ -44,7 +51,7 @@
                 <div class="bshare-custom"><div class="bsPromo bsPromo2"></div><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到堆糖" class="bshare-duitang" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到QQ好友" class="bshare-qqim" href="javascript:void(0);"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count" style="float: none;">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
                 <div style="clear:both" ></div>
             </div>
-            <div>
+            <div class="tuwen">
                 {!! $list->tuwen !!}
             </div>
             <div >

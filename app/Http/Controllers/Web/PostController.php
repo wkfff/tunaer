@@ -69,7 +69,10 @@ class PostController extends Controller{
         }
     }
 
-    public function userhead($userid) {
+    public function userhead($userid=null) {
+        if( !$userid ) {
+            header("Location:/web/images/default.gif"); return;
+        }
         $sql = " select head from userattr where uid=? ";
         $res = DB::select($sql,[$userid]);
         if( count($res) >= 1 ) {
