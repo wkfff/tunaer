@@ -94,7 +94,7 @@
         <div class="shopinfo" style="margin-top:20px;float:left;width:560px;padding-left:20px;position:relative;" >
             <div style="position: absolute;cursor:pointer;right:-150px;top:0px;width:150px;height:150px;border:1px solid #eee;">
                 <div style="background-image:url(/web/images/gouwuche.png);background-size:cover;background-repeat:no-repeat;background-position: center;height:100px;width:100px;margin:0 auto;margin-top:5px;border-radius:50px;" ></div>
-                <div style="text-align:center;font-size:20px;color:#f40;">购物车<span style="background:red;margin-left:5px;margin-top:-10px;" class="badge">42</span></div>
+                <div style="text-align:center;font-size:20px;color:#f40;">购物车<span style="background:red;margin-left:5px;margin-top:-10px;" class="badge" id="gouwuchenum"></span></div>
             </div>
             <div style="font-size:16px;color:#3C3C3C;font-weight:700;line-height:26px;max-width:500px;margin-top:10px;">
                 {{$detail->title}}
@@ -130,7 +130,7 @@
             </div>
             <div style="width:90%;margin-top:20px;">
                 <button onclick="search()" class="searchb"  >立即购买</button>
-                <button onclick="search()" class="searchb" style="background:#FF0036;color:#fff"  ><span class="glyphicon glyphicon-lock" ></span>加入购物车</button>
+                <button onclick="addgouwuche()" class="searchb" style="background:#FF0036;color:#fff"  ><span class="glyphicon glyphicon-lock" ></span>加入购物车</button>
             </div>
             <div style="margin-top:20px;">
                 <span style="margin-bottom:10px;">分享</span>
@@ -175,6 +175,34 @@
                 $(".jqzoom").css("background-image",url);
             });
             $($("#thumblist li div")[0]).trigger("click");
+            gouwuchenum
+//            购物车数量
+            if( localStorage.getItem("gouwuche") ) {
+                gouwuche = JSON.parse( localStorage.getItem("gouwuche") );
+                $("#gouwuchenum").text(gouwuche.length);
+            }
+
         });
+        function addgouwuche() {
+            var pic = "{{$detail->pictures}}";
+            var title = "{{$detail->title}}";
+            var price = "{{$detail->price}}";
+            var id = "{{$detail->id}}";
+            var gouwuche = new Array();
+            if( localStorage.getItem("gouwuche") ) {
+                gouwuche = JSON.parse( localStorage.getItem("gouwuche") );
+            }
+            for( var i=0;i<gouwuche.length;i++ ) {
+                var shopId = gouwuche[i].split("__")[0];
+                if( shopId == id ) {
+                    toast("已添加");
+                    return ;
+                }
+            }
+            var tmp = id+"__"+pic.split("#")[0]+"__"+title+"__"+price;
+            gouwuche.push(tmp);
+            localStorage.setItem("gouwuche",JSON.stringify(gouwuche));
+            toast("添加成功");
+        }
     </script>
 @stop
