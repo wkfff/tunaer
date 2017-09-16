@@ -127,7 +127,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/shop/detail/{id}","IndexController@shopdetail");
     Route::get("/shops/key/{key}","IndexController@searchkey");
     Route::get("/shops/sort/{sort}","IndexController@searchsort");
-
+    Route::get("/goumai","IndexController@goumai");
 });
 // 获取头像
 Route::get("/head/{userid?}","Web\PostController@userhead");

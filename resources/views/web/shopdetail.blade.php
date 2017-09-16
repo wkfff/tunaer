@@ -42,6 +42,12 @@
         .chicunlist span:hover{
             background-color: #f40;color:#fff;
         }
+        .colorhover {
+            background-color: #f40;color:#fff;
+        }
+        .chicunhover {
+            background-color: #f40;color:#fff;
+        }
         .searchb{
             width:180px;height:40px;border:none; border: 1px solid #FF0036;font-size:16px;
             letter-spacing: 4px; background:#ffeded;color: #FF0036;
@@ -108,7 +114,7 @@
                 <span style="font-size:14px;margin-right:50px;">颜色分类</span>
                 <div class="colorlist" style="margin-top:10px;display: inline;">
                     @for( $clist=explode("#",$detail->colorlist),$i=0;$i<count($clist);$i++ )
-                        <span>{{$clist[$i]}}</span>
+                        <span onclick="choicecolor(this)">{{$clist[$i]}}</span>
                     @endfor
 
                 </div>
@@ -117,19 +123,19 @@
                 <span style="font-size:14px;margin-right:50px;">可选尺寸</span>
                 <div class="chicunlist" style="margin-top:10px;display: inline;">
                     @for( $chilist=explode("#",$detail->chicunlist),$i=0;$i<count($chilist);$i++ )
-                        <span>{{$chilist[$i]}}</span>
+                        <span onclick="choicechicun(this)">{{$chilist[$i]}}</span>
                     @endfor
                 </div>
             </div>
             <div style="width:90%;margin-top:20px;" >
                 <span style="font-size:14px;margin-right:50px;">购买数量</span>
 
-                <input type="number" value="1" style="width:70px;height:30px;text-align:center;" >
+                <input id="item_num" type="number" value="1" style="width:70px;height:30px;text-align:center;" >
                 <span style="margin-left:5px;">件</span>
                 <span style="margin-left:30px;color:#666;">(库存{{$detail->kucun}}件)</span>
             </div>
             <div style="width:90%;margin-top:20px;">
-                <button onclick="search()" class="searchb"  >立即购买</button>
+                <button onclick="goumai()" class="searchb"  >立即购买</button>
                 <button onclick="addgouwuche()" class="searchb" style="background:#FF0036;color:#fff"  ><span class="glyphicon glyphicon-lock" ></span>加入购物车</button>
             </div>
             <div style="margin-top:20px;">
@@ -155,7 +161,6 @@
         <div style="clear:both" ></div>
     </div>
     @include("web.footer")
-
 @stop
 
 @section("htmlend")
@@ -175,7 +180,6 @@
                 $(".jqzoom").css("background-image",url);
             });
             $($("#thumblist li div")[0]).trigger("click");
-            gouwuchenum
 //            购物车数量
             if( localStorage.getItem("gouwuche") ) {
                 gouwuche = JSON.parse( localStorage.getItem("gouwuche") );
@@ -201,8 +205,37 @@
             }
             var tmp = id+"__"+pic.split("#")[0]+"__"+title+"__"+price;
             gouwuche.push(tmp);
+            $("#gouwuchenum").text(gouwuche.length);
             localStorage.setItem("gouwuche",JSON.stringify(gouwuche));
             toast("添加成功");
+        }
+//        选择尺寸
+        function choicechicun(that) {
+            window.item_chicun = $(that).val();
+            $(".chicunhover").removeClass("chicunhover");
+            $(that).addClass("chicunhover");
+        }
+//        选择颜色
+        function choicecolor(that) {
+            window.item_color = $(that).val();
+            $(".colorhover").removeClass("colorhover");
+            $(that).addClass("colorhover");
+        }
+        function goumai() {
+            var item_num = $("#item_num").val();
+            if( item_num < 1 ) {
+                toast("购买数量有误"); return;
+            }
+            var item_color = $(".colorhover").text();
+            if( $.trim(item_color) == '' ) {
+                toast("请选择颜色分类"); return;
+            }
+            var item_chicun = $(".chicunhover").text();
+            if( $.trim(item_chicun) == '' ) {
+                toast("请选择尺寸"); return;
+            }
+            var item_id = "{{$detail->id}}";
+            location.href="/goumai?id="+item_id+"&chicun="+item_chicun+"&color="+item_color+"&num="+item_num;
         }
     </script>
 @stop

@@ -315,5 +315,22 @@ class IndexController extends Controller
         return view("web.shops",["fenlei"=>json_encode($fenlei),"list"=>$res,"fenye"=>fenye($count[0]->cnt,"/shops/sort/".$sort,$page,$num)]);
     }
 
+    public function goumai(Request $request) {
+        $id = $request->input("id",'');
+        $chicun = $request->input("chicun",'');
+        $color = $request->input("color",'');
+        $num = $request->input("num",'');
+        if( checknull($id,$chicun,$color,$num) ) {
+            $sql = " select * from product where id=? ";
+            $res = DB::select($sql,[$id]);
+            if( count($res) ) {
+                return view("web.goumai",["data"=>$res[0],"color"=>$color,"chicun"=>$chicun,"num"=>$num]);
+            }else{
+                return view("web.error",["content"=>"商品不存在或已下架"]);
+            }
+        }
+
+    }
+
     
 }
