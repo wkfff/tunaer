@@ -165,6 +165,13 @@
                 <div style="clear:both;height:20px;" ></div>
                     <div onclick="getdongtais({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
+            <div class="tab shoporder">
+                <div class="shoporderbox">
+
+                </div>
+                <div style="clear:both;height:20px;" ></div>
+                <div onclick="getshoporder({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+            </div>
 
         </div>
     </div>

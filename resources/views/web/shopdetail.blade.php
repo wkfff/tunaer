@@ -98,10 +98,10 @@
             </ul>
         </div>
         <div class="shopinfo" style="margin-top:20px;float:left;width:560px;padding-left:20px;position:relative;" >
-            <div style="position: absolute;cursor:pointer;right:-150px;top:0px;width:150px;height:150px;border:1px solid #eee;">
+            <a href="/gouwuche"><div style=" position: absolute;cursor:pointer;right:-150px;top:0px;width:150px;height:150px;border:1px solid #eee;">
                 <div style="background-image:url(/web/images/gouwuche.png);background-size:cover;background-repeat:no-repeat;background-position: center;height:100px;width:100px;margin:0 auto;margin-top:5px;border-radius:50px;" ></div>
                 <div style="text-align:center;font-size:20px;color:#f40;">购物车<span style="background:red;margin-left:5px;margin-top:-10px;" class="badge" id="gouwuchenum"></span></div>
-            </div>
+            </div></a>
             <div style="font-size:16px;color:#3C3C3C;font-weight:700;line-height:26px;max-width:500px;margin-top:10px;">
                 {{$detail->title}}
             </div>
@@ -188,10 +188,25 @@
 
         });
         function addgouwuche() {
+            var item_num = $("#item_num").val();
+            if( item_num < 1 ) {
+                toast("购买数量有误"); return;
+            }
+            var item_color = $(".colorhover").text();
+            if( $.trim(item_color) == '' ) {
+                toast("请选择颜色分类"); return;
+            }
+            var item_chicun = $(".chicunhover").text();
+            if( $.trim(item_chicun) == '' ) {
+                toast("请选择尺寸"); return;
+            }
             var pic = "{{$detail->pictures}}";
             var title = "{{$detail->title}}";
             var price = "{{$detail->price}}";
             var id = "{{$detail->id}}";
+            var num = item_num;
+            var color = item_color;
+            var chicun = item_chicun;
             var gouwuche = new Array();
             if( localStorage.getItem("gouwuche") ) {
                 gouwuche = JSON.parse( localStorage.getItem("gouwuche") );
@@ -199,11 +214,11 @@
             for( var i=0;i<gouwuche.length;i++ ) {
                 var shopId = gouwuche[i].split("__")[0];
                 if( shopId == id ) {
-                    toast("已添加");
-                    return ;
+                    gouwuche.splice(i,1);
                 }
+
             }
-            var tmp = id+"__"+pic.split("#")[0]+"__"+title+"__"+price;
+            var tmp = id+"__"+pic.split("#")[0]+"__"+title+"__"+price+"__"+num+"__"+color+"__"+chicun;
             gouwuche.push(tmp);
             $("#gouwuchenum").text(gouwuche.length);
             localStorage.setItem("gouwuche",JSON.stringify(gouwuche));

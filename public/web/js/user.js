@@ -439,3 +439,31 @@ function getyoujis(userid) {
         }
     })
 }
+
+function getshoporder(userid) {
+    if( window.shoporderpage ) {
+        window.shoporderpage++;
+    }else{
+        window.shoporderpage = 1;
+    }
+    $.post("/getshoporders",{'userid':userid,"page":window.shoporderpage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 && window.shoporderpage!=1 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<div style="height:130px;width:100%;border:1px solid #eee;padding:15px;position: relative;margin-bottom:20px;" >
+                        <a href="/shop/detail/${res[i].shopid}"><div style="height:100px;width:100px;float:left;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
+                        <div style="margin-left:10px;float:left;font-size:14px;">
+                            <a href="/shop/detail/${res[i].shopid}"><p style="font-weight: bold">${res[i].title}</p></a>
+                            <p style="color:#666;font-size:13px;">颜色：${res[i].color}　尺寸：${res[i].chicun}　件数：${res[i].num}　件　收货地址：${res[i].addr}</p>
+                            <p style="color:#666;font-size:13px;">留言：${res[i].liuyan}</p>
+                            <p style="color:#666;font-size:13px;">物流状态：${res[i].kuaidi == 0 ? "等待发货" : res[i].kuaidi}</p>
+                        </div>
+                        <span style="color:cadetblue;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;" >付款：${res[i].num*res[i].price}</span>
+                    </div>`;
+                $(".shoporderbox").append(item);
+            }
+        }
+    })
+}

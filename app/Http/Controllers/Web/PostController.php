@@ -323,6 +323,16 @@ class PostController extends Controller{
             echo json_encode($dongtai);
         }
     }
+    public function getshoporders(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($userid) ) {
+            $sql = " select shoporder.*,product.title,product.pictures,product.price from shoporder left join product on product.id=shoporder.shopid where shoporder.uid=? order by shoporder.id desc limit ?,? ";
+            $shoporder = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($shoporder);
+        }
+    }
 
     //    获取留言列表
     public function getliuyans(Request $request) {
@@ -385,6 +395,34 @@ class PostController extends Controller{
             $sql = " select * from youjicm where yid=? and type=1 order by id desc limit ?,? ";
             $youji = DB::select($sql,[$yid,($page-1)*$num,$num]);
             echo json_encode($youji);
+        }
+    }
+//    统一下单
+    public function xiadan(Request $request) {
+        $orders = $request->input('order');
+        $phone = $request->input('phone');
+        $liuyan = $request->input('liuyan');
+        $addr = $request->input('addr');
+        $uid = Session::get('uid');
+        $success = 0;
+//        开启事务
+        DB::beginTransaction();
+        for( $i=0;$i<count($orders);$i++ ) {
+            $sql = " insert into shoporder (uid,shopid,num,color,chicun,phone,addr,liuyan) values (?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$orders[$i]['shopid'],$orders[$i]['num'],$orders[$i]['color'],$orders[$i]['chicun'],$phone,$addr,$liuyan]);
+            if(!$res) {
+                DB::rollback();//事务回滚
+                echo "400-下单失败，请重试或联系客服"; return ;
+            }else{
+                $success++;
+            }
+        }
+//        提交事务
+        DB::commit();
+        if( $success != count($orders) ) {
+            echo "400-部分订单未成功，请核对并联系客服";
+        }else{
+            echo "200";
         }
     }
 
