@@ -172,6 +172,13 @@
                 <div style="clear:both;height:20px;" ></div>
                 <div onclick="getshoporder({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
+            <div class="tab huodong">
+                <div class="tubuorderbox">
+
+                </div>
+                <div style="clear:both;height:20px;" ></div>
+                <div onclick="gettubuorder({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+            </div>
 
         </div>
     </div>
@@ -302,7 +309,8 @@
             getdongtais({{$userinfo->userid}});
             getliuyans({{$userinfo->userid}});
             getyoujis({{$userinfo->userid}});
-
+            getshoporder({{$userinfo->userid}});
+            gettubuorder({{$userinfo->userid}});
             window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
             window.diqu = "{{$userinfo->addr}}";

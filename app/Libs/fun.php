@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Contracts\View\Factory as ViewFactory;
+
 function checknull(...$args)
 {
     foreach( $args as $arg ){
@@ -91,7 +93,41 @@ function qujian($current,$pagecnt) {
     return array($start,$end);
 }
 
+function isMobile() {
+    $agent = isset($_SERVER["HTTP_USER_AGENT"])?$_SERVER["HTTP_USER_AGENT"]:"Unknow";
+    $agents = array("Android", "iPhone","SymbianOS", "Windows Phone","iPad", "iPod","Unknow");
+    for ($i=0; $i < count($agents); $i++) {
+        if( stripos($agent, $agents[$i])  ){
+            return true;
+        }
+    }
+    return false;
+}
+//覆盖框架的　view方法
+function view($view = null, $data = [], $mergeData = [])
+{
+    if( strtoupper($_SERVER['REQUEST_METHOD'])=="GET" && isMobile() ) {
+        $view = str_replace("web.","wap.",$view);
+    }
+    $factory = app(ViewFactory::class);
 
+    if (func_num_args() === 0) {
+        return $factory;
+    }
+
+    return $factory->make($view, $data, $mergeData);
+}
+
+
+//function myview($view = null, $data = [], $mergeData = []) {
+//    $factory = app(ViewFactory::class);
+//
+//    if (func_num_args() === 0) {
+//        return $factory;
+//    }
+//
+//    return $factory->make($view, $data, $mergeData);
+//}
 
 
 

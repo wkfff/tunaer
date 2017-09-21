@@ -18,6 +18,20 @@ class PostController extends Controller{
     }
 //    活动报名
     public function baoming(Request $request) {
+        $tid = $request->input("tid",'');
+        $orderid = "123";
+        if( $tid == '' ) {
+            echo "400-活动不存在";
+        }else{
+            $uid = Session::get('uid');
+            $sql = " insert into tubuorder (uid,tid,orderid) values (?,?,?) ";
+            $res = DB::insert($sql,[$uid,$tid,$orderid]);
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-报名失败，请联系客服";
+            }
+        }
         echo "400-支付接口未开通,功能暂不可用";
     }
     public function updateuserinfo(Request $request) {
@@ -294,7 +308,7 @@ class PostController extends Controller{
     public function getchatlist(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",8);
         if( checknull($userid) ) {
             $sql = " select * from userattr where uid in ( select tid as userid from chat where fid=? union select fid as userid from chat where tid=? group by userid ) order by id desc limit ?,? ";
             $res = DB::select($sql,[$userid,$userid,($page-1)*$num,$num]);
@@ -305,7 +319,7 @@ class PostController extends Controller{
     public function getphotos(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",8);
         if( checknull($userid) ) {
             $sql = " select * from xiangce where uid=? order by id desc limit ?,? ";
             $xiangce = DB::select($sql,[$userid,($page-1)*$num,$num]);
@@ -316,7 +330,7 @@ class PostController extends Controller{
     public function getdongtais(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",5);
         if( checknull($userid) ) {
             $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit ?,? ";
             $dongtai = DB::select($sql,[$userid,($page-1)*$num,$num]);
@@ -326,7 +340,7 @@ class PostController extends Controller{
     public function getshoporders(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",5);
         if( checknull($userid) ) {
             $sql = " select shoporder.*,product.title,product.pictures,product.price from shoporder left join product on product.id=shoporder.shopid where shoporder.uid=? order by shoporder.id desc limit ?,? ";
             $shoporder = DB::select($sql,[$userid,($page-1)*$num,$num]);
@@ -338,7 +352,7 @@ class PostController extends Controller{
     public function getliuyans(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",5);
         if( checknull($userid) ) {
             $sql = " select * from liuyan where tid=? order by id desc limit ?,? ";
             $liuyan = DB::select($sql,[$userid,($page-1)*$num,$num]);
@@ -350,7 +364,7 @@ class PostController extends Controller{
     public function getyoujis(Request $request) {
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",5);
         if( checknull($userid) ) {
             $sql = " select * from youji where uid=? order by id desc limit ?,? ";
             $youji = DB::select($sql,[$userid,($page-1)*$num,$num]);
@@ -403,13 +417,14 @@ class PostController extends Controller{
         $phone = $request->input('phone');
         $liuyan = $request->input('liuyan');
         $addr = $request->input('addr');
+        $orderid = "123";
         $uid = Session::get('uid');
         $success = 0;
 //        开启事务
         DB::beginTransaction();
         for( $i=0;$i<count($orders);$i++ ) {
-            $sql = " insert into shoporder (uid,shopid,num,color,chicun,phone,addr,liuyan) values (?,?,?,?,?,?,?,?) ";
-            $res = DB::insert($sql,[$uid,$orders[$i]['shopid'],$orders[$i]['num'],$orders[$i]['color'],$orders[$i]['chicun'],$phone,$addr,$liuyan]);
+            $sql = " insert into shoporder (uid,shopid,num,color,chicun,phone,addr,liuyan,orderid) values (?,?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$orders[$i]['shopid'],$orders[$i]['num'],$orders[$i]['color'],$orders[$i]['chicun'],$phone,$addr,$liuyan,$orderid]);
             if(!$res) {
                 DB::rollback();//事务回滚
                 echo "400-下单失败，请重试或联系客服"; return ;
@@ -424,6 +439,86 @@ class PostController extends Controller{
         }else{
             echo "200";
         }
+    }
+
+    //    获取留言列表
+    public function gettubuorders(Request $request) {
+        $userid = $request->input('userid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",5);
+        if( checknull($userid) ) {
+            $sql = " select tubuhuodong.*,tubuorder.ordertime from tubuorder left join tubuhuodong on tubuhuodong.id=tubuorder.tid where uid=? order by tubuorder.id desc limit ?,? ";
+            $orders = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            echo json_encode($orders);
+        }
+    }
+
+    // 注册
+    public function register(Request $request) {
+
+        $phone = $request->input('phone');
+        $passwd = $request->input('passwd');
+        $code = $request->input('code');
+        if( !checknull($phone,$passwd,$code) ) {
+            echo "400-请填写完整信息";
+        }else{
+            $sql = " select * from user where phone=? ";
+            $res = DB::select($sql,[$phone]);
+            if( count($res) == 0 ) {
+                if( Cache::get('code-'.$phone) == $code ) {
+                    $sql = " insert into user (phone,passwd,regip) values (?,?,?) ";
+                    $res = DB::insert($sql,[$phone,md5($passwd),$_SERVER['REMOTE_ADDR']]);
+                    if( $res ) {
+                        echo "200-注册成功";
+                        Session::forget('uid');
+                        // 直接登录
+                        login($phone,$passwd,true);
+                    }else{
+                        echo "400-注册失败";
+                    }
+                }else{
+                    echo "400-验证码不正确";
+                }
+            }else{
+                echo "400-手机号码已经注册过了，你可以直接登录";
+            }
+        }
+    }
+    // 登录
+    public function login(Request $request) {
+        $phone = $request->input('phone');
+        $passwd = $request->input('passwd');
+        $verifycode = $request->input('verifycode');
+        if( !checknull($phone,$passwd,$verifycode) ) {
+            echo "400-请填写完整信息";
+        }else{
+            if( $verifycode != Session::get('verifycode') ) {
+                echo "400-验证码错误";
+            }else{
+                login($phone,$passwd,false);
+            }
+
+        }
+    }
+
+    // 发送手机验证码
+    public function sendcode(Request $request ) {
+        $phone = $request->input('phone');
+        if( !preg_match("/^1[34578]{1}\d{9}$/",$phone) ){
+            echo "400-手机格式错误";
+            return false;
+        }
+        // $code = rand(123456,999999);
+        $code = "123456";
+        Cache::put('code-'.$phone, $code, 10);
+        echo "200-发送成功";
+    }
+    // 生成图形验证码
+    public function verifycode()
+    {
+        $x = new \App\Libs\verifycode();
+        Session::put("verifycode",$x->getcode());
+        $x->outimg();
     }
 
 }

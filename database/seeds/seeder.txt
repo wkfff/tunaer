@@ -70,6 +70,9 @@
 动态评论/点赞
     id uid did content(如果是1就是点赞，其他就是评论内容) ctime
 
+支付记录：payment
+    id uid shopid(活动id/商品id) ordertype(活动／商城) paytype(支付宝／微信) money　orderid(订单号) ptime
+
 网站设置
     tubutypes
         id name pictures intro

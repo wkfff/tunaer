@@ -89,20 +89,14 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
 {
-    Route::get('/login',function(){
-        return view('web.login');
-    });
-    Route::get('/register',function(){
-        return view('web.register');
-    });
-    Route::get('/error',function(){
-        return view('web.error');
-    });
+    Route::get('/login',function(){ return view('web.login'); });
+    Route::get('/register',function(){ return view('web.register'); });
+    Route::get('/error',function(){ return view('web.error'); });
     Route::get('/', 'IndexController@index');
-    Route::post('/register','IndexController@register');
-    Route::post('/login','IndexController@login');
-    Route::post('/sendcode','IndexController@sendcode');
-    Route::get('/verifycode', 'IndexController@verifycode');
+    Route::post('/register','PostController@register');
+    Route::post('/login','PostController@login');
+    Route::post('/sendcode','PostController@sendcode');
+    Route::get('/verifycode', 'PostController@verifycode');
     Route::get('/outlogin', 'IndexController@outlogin');
     Route::get('/user/{userid}', 'IndexController@user');
     Route::get('/tubulist/{type}', 'IndexController@tubulist');
@@ -129,9 +123,10 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/shops/sort/{sort}","IndexController@searchsort");
     Route::get("/goumai","IndexController@goumai");
     Route::get("/gouwuche","IndexController@gouwuche");
+    // 获取头像
+    Route::get("/head/{userid?}","PostController@userhead");
 });
-// 获取头像
-Route::get("/head/{userid?}","Web\PostController@userhead");
+
 // 需要登录访问的api
 Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/updateuserinfo","PostController@updateuserinfo");
@@ -151,8 +146,15 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/canjiadasai","PostController@canjiadasai");
     Route::post("/xiadan","PostController@xiadan");
     Route::post("/getshoporders","PostController@getshoporders");
+    Route::post("/gettubuorders","PostController@gettubuorders");
 
     Route::post("/youjicm","PostController@youjicm");
 
 
+});
+
+
+//前台页面  不需要认证的前端页面
+Route::group(['namespace' => 'Wap'], function(){
+    Route::get('/index', 'IndexController@index');
 });

@@ -467,3 +467,31 @@ function getshoporder(userid) {
         }
     })
 }
+
+function gettubuorder(userid) {
+    if( window.tubuorderpage ) {
+        window.tubuorderpage++;
+    }else{
+        window.tubuorderpage = 1;
+    }
+    $.post("/gettubuorders",{'userid':userid,"page":window.tubuorderpage},function(d){
+        if( res = ajaxdata(d) ) {
+            if( res.length == 0 && window.tubuorderpage!=1 ) {
+                toast("没有更多了"); return ;
+            }
+            for( var i=0;i<res.length;i++ ) {
+                var item = `<div style="height:130px;width:100%;border:1px solid #eee;padding:15px;position: relative;margin-bottom:20px;" >
+                        <a href="/tubu/tubudetail/${res[i].id}"><div style="height:100px;width:100px;float:left;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
+                        <div style="margin-left:10px;float:left;font-size:14px;">
+                            <a href="/tubu/tubudetail/${res[i].id}"><p style="font-weight: bold">${res[i].title}</p></a>
+                            <p style="color:#666;font-size:13px;">领队：${res[i].leader}　联系电话：${res[i].phone}　交通方式：${res[i].jiaotong}　目的地：${res[i].mudidi}</p>
+                            <p style="color:#666;font-size:13px;">出发时间：${res[i].startday}　集合时间：${res[i].jihetime}　集合地点：${res[i].jihedidian}</p>
+                            <p style="color:#666;font-size:13px;">活动内容：${res[i].neirong}</p>
+                        </div>
+                        <span style="color:cadetblue;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;" >付款：${res[i].price}</span>
+                    </div>`;
+                $(".tubuorderbox").append(item);
+            }
+        }
+    })
+}
