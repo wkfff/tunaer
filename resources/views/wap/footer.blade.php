@@ -1,7 +1,29 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: caojie
- * Date: 17-9-21
- * Time: 下午5:32
- */
+<div style="height:55px;" ></div>
+<div class="container-fluid" style="position:fixed;bottom:0px;left:0px;z-index:999;width:100%;height:55px;background:#fff;padding:0px;">
+    <style>
+        .footnav{
+            width:19%;height:60px;float:left;text-align:center;color:#444;
+        }
+    </style>
+    <div class="footnav">
+        <img src="/web/images/icon-footer1-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
+        <span style="display:block;font-size:14px;">主页</span>
+    </div>
+    <div class="footnav">
+        <img src="/web/images/icon-footer2-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
+        <span style="display:block;font-size:14px;">徒步活动</span>
+    </div>
+    <div class="footnav" style="width:24%;">
+        <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
+        {{--<span style="display:block;font-size:14px;">主页</span>--}}
+    </div>
+    <div class="footnav">
+        <img src="/web/images/icon-footer4-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
+        <span style="display:block;font-size:14px;">徒步商城</span>
+    </div>
+    <div class="footnav">
+        <img src="/web/images/icon-footer5-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
+        <span style="display:block;font-size:14px;">我的</span>
+    </div>
+
+</div>

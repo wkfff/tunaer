@@ -117,6 +117,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::post("/getdongtais","PostController@getdongtais");
     Route::post("/getliuyans","PostController@getliuyans");
     Route::post("/getyoujis","PostController@getyoujis");
+    Route::post("/recenttubu","PostController@recenttubu");
     Route::get("/monilogin/{userid}","IndexController@monilogin");
     Route::get("/shop/detail/{id}","IndexController@shopdetail");
     Route::get("/shops/key/{key}","IndexController@searchkey");

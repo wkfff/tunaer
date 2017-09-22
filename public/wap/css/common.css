@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+*{
+    margin:0px;padding:0px;outline:none !important;
+}
+.content{
+    width:100%;margin:0 auto;position: relative;
+}

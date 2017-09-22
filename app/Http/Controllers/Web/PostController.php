@@ -520,5 +520,14 @@ class PostController extends Controller{
         Session::put("verifycode",$x->getcode());
         $x->outimg();
     }
+    //    获取留言列表
+    public function recenttubu(Request $request) {
+
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $sql = " select * from tubuhuodong order by id desc limit ?,? ";
+        $tubus = DB::select($sql,[($page-1)*$num,$num]);
+        echo json_encode($tubus);
+    }
 
 }

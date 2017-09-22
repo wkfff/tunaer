@@ -103,6 +103,7 @@ function isMobile() {
     }
     return false;
 }
+
 //覆盖框架的　view方法
 function view($view = null, $data = [], $mergeData = [])
 {
