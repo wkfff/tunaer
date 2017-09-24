@@ -6,3 +6,15 @@
 .content{
     width:100%;margin:0 auto;position: relative;
 }
+.fenye{
+    margin:10px;
+}
+.fenye a {
+    display:inline-block;height:25px;padding:0px 10px;
+    text-align: center;color:#fff;background:#E83888;
+    font-size:14px;line-height:25px;margin:0px 2px;
+    text-decoration: none;border:none;
+}
+.fenyecurrent{
+    background: #eee !important;color:#6d643c!important;cursor:default !important;
+}

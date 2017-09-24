@@ -5,14 +5,14 @@
             width:19%;height:60px;float:left;text-align:center;color:#444;
         }
     </style>
-    <div class="footnav">
+    <a href="/"><div class="footnav">
         <img src="/web/images/icon-footer1-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">主页</span>
-    </div>
-    <div class="footnav">
+    </div></a>
+    <a href="/tubulist"><div class="footnav">
         <img src="/web/images/icon-footer2-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">徒步活动</span>
-    </div>
+        </div></a>
     <div class="footnav" style="width:24%;">
         <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
         {{--<span style="display:block;font-size:14px;">主页</span>--}}

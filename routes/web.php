@@ -89,9 +89,9 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
 {
-    Route::get('/login',function(){ return view('web.login'); });
-    Route::get('/register',function(){ return view('web.register'); });
-    Route::get('/error',function(){ return view('web.error'); });
+    Route::get('/login','IndexController@login');
+    Route::get('/register','IndexController@register');
+    Route::get('/error','IndexController@error');
     Route::get('/', 'IndexController@index');
     Route::post('/register','PostController@register');
     Route::post('/login','PostController@login');
@@ -99,7 +99,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get('/verifycode', 'PostController@verifycode');
     Route::get('/outlogin', 'IndexController@outlogin');
     Route::get('/user/{userid}', 'IndexController@user');
-    Route::get('/tubulist/{type}', 'IndexController@tubulist');
+    Route::get('/tubulist/{type?}', 'IndexController@tubulist');
     Route::get('/tubu/tubudetail/{tid}', 'IndexController@tubudetail');
     Route::get('/member/list', 'IndexController@memberlist');
     Route::get('/member/dongtai', 'IndexController@dongtai');

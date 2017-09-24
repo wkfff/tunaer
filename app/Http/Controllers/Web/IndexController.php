@@ -22,8 +22,15 @@ class IndexController extends Controller
         return view("web.index",["tubus"=>$tubus,"users"=>$users,"youjis"=>$youjis,"zixuns"=>$zixuns]);
     }
 
-
-
+    public function login() {
+        return view('web.login');
+    }
+    public function register() {
+        return view('web.register');
+    }
+    public function error() {
+        return view('web.error');
+    }
     // 退出登录
     public function outlogin() {
         Session::forget('uid');
@@ -50,12 +57,19 @@ class IndexController extends Controller
         }
 
     }
-    public function tubulist(Request $request,$type=1) {
+    public function tubulist(Request $request,$type=null) {
         $page = $request->input('page',1);
         $num = $request->input('num',7);
-        $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
-        $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
-        $res = DB::select($sql,[$type]);
+        if( $type ) {
+            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+            $res = DB::select($sql,[$type]);
+        }else{
+            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types ");
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+            $res = DB::select($sql);
+        }
+
         $sql = " select * from youji order by rand() limit 5 ";
         $youjis = DB::select($sql);
         return view("web.tubulist",["list"=>$res,"youjis"=>$youjis,"cnt"=>$count[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/tubulist/".$type,$page,$num)]);

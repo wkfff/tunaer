@@ -7,10 +7,13 @@
         }
         .tubuitem{
             width:99%;height:200px;background-size:cover;margin:0 auto;
-            background-position:center;border-radius:2px;
+            background-position:center;
             background-repeat:no-repeat;margin-top:7.5px;
             /*display: inline-block;*/
             position: relative;
+        }
+        .type a{
+            color:#fff;
         }
     </style>
 @stop
@@ -20,27 +23,27 @@
     @include("wap.banner")
     <div class="content">
         <div class="type" style="background:#FF697A;text-align:center;color:#fff;" >
-            <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
+            <a href="/tubulist"><div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <span style="font-size:14px;margin-top:10px;margin-bottom:10px;display:block;" >活动</span>
                 <img src="/web/images/hiking.png" style="height:40px;" >
-            </div>
+            </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >周边游</span>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >长途徒步</span>
+                <a href="/tubulist/3"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >周边游</span></a>
+                <a href="/tubulist/4"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >长途徒步</span></a>
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >团队徒步</span>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >自驾游</span>
+                <a href="/tubulist/7"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >团队徒步</span></a>
+                <a href="/tubulist/6"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >自驾游</span></a>
             </div>
         </div>
         <div class="type" style="background:#3D98FF;text-align:center;color:#fff;" >
-            <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
+            <a href="/member/list"><div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <span style="font-size:14px;margin-top:10px;margin-bottom:10px;display:block;" >交友</span>
                 <img src="/web/images/men-shaking-hands.png" style="height:40px;" >
-            </div>
+            </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >徒友动态</span>
+                <a href="/member/dongtai"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >徒友动态</span></a>
                 <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友交流</span>
 
             </div>
@@ -55,7 +58,7 @@
                 <img src="/web/images/sailboat.png" style="height:40px;" >
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >国内旅游</span>
+                <a href="/tubulist/8"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >国内旅游</span></a>
                 <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span>
 
             </div>

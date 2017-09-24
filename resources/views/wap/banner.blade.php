@@ -17,8 +17,6 @@
         @endfor
 
     </div>
-    <!-- 如果需要分页器 -->
-    {{--<div class="swiper-pagination"></div>--}}
 </div>
 
 <style>
@@ -26,7 +24,7 @@
         width: 99%;
         height: 150px;
         margin:0 auto;
-        border-radius:3px;
+        /*border-radius:3px;*/
         margin-top:50px;
     }
     .swiper-slide{
