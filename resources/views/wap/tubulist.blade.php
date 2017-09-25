@@ -1,5 +1,5 @@
 @extends("wap.common")
-{{--@section("title","徒友动态")--}}
+@section("title","徒步活动")
 @section("css")
 
     <style>
@@ -14,12 +14,12 @@
 @stop
 
 @section("body")
-
+    <div onclick="history.back()" style="width:40px;height:30px;background:rgba(0,0,0,0.3);color:#fff;position:fixed;left:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
+        <span class="glyphicon glyphicon-menu-left" ></span>
+    </div>
     <div class="content" >
 
-        <div onclick="history.back()" style="width:40px;height:30px;background:rgba(0,0,0,0.3);color:#fff;position:fixed;left:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
-            <span class="glyphicon glyphicon-menu-left" ></span>
-        </div>
+
 
         @for( $i=0;$i<count($list);$i++ )
             <a href="/tubu/tubudetail/{{$list[$i]->id}}"><div class="tubuitem" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}})">

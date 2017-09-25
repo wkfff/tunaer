@@ -1,83 +1,84 @@
-@extends("web.common")
-@section("title","{$data->title} - 摄影大赛")
-
+@extends("wap.common")
+@section("title","徒步活动")
 @section("css")
     <style>
-         .toppic{
-             width:100%;height:400px;background-size:cover;background-position:center;background-repeat: no-repeat;
-             position: relative;
-         }
-        .jieshao{
-            margin:10px 0px;
+        .toppic{
+            width:100%;height:200px;background-size:cover;background-position:center;background-repeat: no-repeat;
+            position: relative;
+        }
+        .tuwen{
+            font-size:1em !important;width:100%;padding:10px;
+            overflow: hidden;margin-top:10px;display:none;
+        }
+        .tuwen img{
+            max-width:100% !important;height:auto !important;
         }
         .workitem{
-            width:380px;height:250px;background:deeppink;float:left;margin:10px;
+            width:99%;height:250px;background:deeppink;margin:0 auto;
             background-size:cover;background-repeat:no-repeat;
             position: relative;margin-bottom:100px;
             background-position: center;
         }
         .fengexian{
-            font-size:20px;padding-bottom:10px;border-bottom:1px solid #aaa;margin:10px 0;color:#666;
+            font-size:16px;padding-bottom:10px;border-bottom:1px solid #aaa;margin:10px 0;color:#666;
             position: relative;
         }
-         .searchb{
-             letter-spacing: 4px;padding:6px 20px; background:#F03B6E;color:#fff;float:right;
-             margin-top:-7px;margin-left:20px;border:none;outline:none;border-radius:5px;
-         }
-         .searchb:hover{
-             opacity:0.7;color:#fff
-         }
-         .imgdiv{
-             height:300px;width:450px;background-size:cover;margin-right:30px;
-             background-position:center;background-repeat: no-repeat;margin-top:10px;
-         }
+        .searchb{
+            letter-spacing: 4px;padding:6px 20px; background:#F03B6E;color:#fff;
+            margin-top:7px;margin-left:0px;border:none;outline:none;border-radius:5px;
+        }
+        .searchb:hover{
+            opacity:0.7;color:#fff
+        }
+        .imgdiv{
+            height:200px;width:100%;background-size:cover;margin-right:30px;
+            background-position:center;background-repeat: no-repeat;margin-top:10px;
+        }
         .toupiaobtn {
             float:right;background:#ff536a;width:100px;height:30px;margin-top:10px;text-align: center;line-height:30px;vertical-align: middle;border-radius:5px;margin-right:10px;cursor:pointer;
         }
         .toupiaobtn:hover{
             opacity:0.8;
         }
-         .intro::after {
-             content:"...";
-             font-weight:bold;
-             position:absolute;
-             bottom:0;
-             right:0;
-             padding:0 20px 1px 45px;
-             background:url(/web/images/ellipsis_bg.png) repeat-y;
-         }
-        .zhegai{
-            width:380px;height:200px;background:none;position:absolute;left:0px;top:0px;cursor:pointer;
+        .intro::after {
+            content:"...";
+            font-weight:bold;
+            position:absolute;
+            bottom:0;
+            right:0;
+            padding:0 20px 1px 45px;
+            background:url(/web/images/ellipsis_bg.png) repeat-y;
         }
-        .zhegai:hover{
-            background:rgba(0,0,0,0.2);
-        }
+
     </style>
 @stop
 @section("body")
-    @include("web.header")
+
     <div class="toppic" style="background-image: url(/admin/data/images/{{ $data->pic }});" ></div>
-    <div class="content">
-        <div style="color:orangered;font-weight:bold;margin-right:30px;font-size:20px;margin:20px 0px;">
+    <div onclick="history.back()" style="width:40px;height:30px;background:rgba(0,0,0,0.3);color:#fff;position:fixed;left:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
+        <span class="glyphicon glyphicon-menu-left" ></span>
+    </div>
+    <div class="content" style="padding-left:5px;" >
+
+        <div style="color:orangered;font-weight:bold;margin-right:30px;font-size:18px;margin:10px 0px;">
             <span >主题：{{$data->title}}</span>
 
         </div>
-        <div style="color:darkblue;font-weight:bold;margin-right:30px;font-size:20px;margin:20px 0px;">
+        <div style="color:darkblue;font-weight:bold;margin-right:30px;font-size:16px;margin:10px 0px;">
             <span >时间：{{$data->startday}} - {{$data->endday}}</span>
         </div>
 
         <div class="fengexian">赛事介绍</div>
         <div class="jieshao">
-    {!! $data->tuwen !!}
+            {!! $data->tuwen !!}
         </div>
         <div class="fengexian">
-            <span>参赛作品</span>
-            <span style="height:25px;width:3px;background:#ff536a;display: inline-block;vertical-align: middle;margin:0 10px;" ></span>
             <span style="color:#2562B3">
                 <span >参赛作品：<span style="color:#ff536a" >{{$zongcanjia}}</span> 张</span>
                 <span style="margin-left:10px;">投票次数：<span style="color:#ff536a" >{{$zongpiao}}</span> 次</span>
                 <span style="margin-left:10px;">浏览次数：<span style="color:#ff536a" >{{$data->readcnt}}</span> 次</span>
             </span>
+            <br>
             <button onclick="canjia()" class="searchb"  >上传我的作品</button>
         </div>
         <div class="workbox" >
@@ -95,7 +96,6 @@
                         </div>
 
                     </div>
-                    <div class="zhegai" ></div>
                     <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px 0;overflow: hidden;" >
                         {{$works[$i]->intro}}
                     </div>
@@ -107,10 +107,10 @@
     </div>
 
 
-    @include("web.footer")
+    @include("wap.footer")
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width:500px">
+            <div class="modal-content" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
@@ -121,8 +121,10 @@
                     <input type="file" class="zuopin" onchange="uploadzuopin(this)" style="display: none;">
                     <div style="clear:both" ></div>
 
-                    <textarea class="form-control" name="intro" style="margin-top:10px;width:450px;" rows="3" placeholder="作品介绍（不超过50字．）"></textarea>
-                    <div class="zuopincurrent" ></div>
+                    <textarea class="form-control" name="intro" style="margin-top:10px;" rows="3" placeholder="作品介绍（不超过50字．）"></textarea>
+                    <div class="zuopincurrent" >
+                        {{--<div onclick="img2big(this)" class="imgdiv"  style="background-image:url(/web/data/images/1506311004.jpg)" ></div>--}}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <span  style="float:left" >单击图片预览</span>
@@ -140,8 +142,14 @@
 @section("htmlend")
     <script>
         $(document).ready(function () {
-//            window.tuijianleft = $(".tuijian")[0].getBoundingClientRect().left;
-        })
+            $(".tuwen").find("*").css("width","auto");
+            $(".tuwen").find("img").css("margin","5px 0");
+            $(".tuwen").find("div").css({
+                "padding":"0",
+                "margin":"0",
+            });
+            $(".tuwen").css("display","block");
+        });
         function canjia() {
             $("#myModal2").modal("show");
         }
@@ -176,6 +184,7 @@
 
                     $(".zuopincurrent").children().remove();
                     var d = oXHR.responseText; // 返回值
+
                     if( ajaxdata(d) ) {
                         var img =`<div onclick="img2big(this)" class="imgdiv"  style="background-image:url(/web/data/images/${d})" ></div>`;
                         $(".zuopincurrent").append(img);

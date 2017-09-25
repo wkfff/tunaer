@@ -191,8 +191,11 @@ class PostController extends Controller{
         $current = time();
         $sql = " select * from dasai where id=? ";
         $res = DB::select($sql,[$did]);
-        if( $current < strtotime($res[0]->startday) || $current > strtotime($res[0]->endday)) {
+        if( count($res) == 0 ) {
             echo "400-大赛不存在"; return;
+        }
+        if( $current < strtotime($res[0]->startday) || $current > strtotime($res[0]->endday)) {
+            echo "400-请在指定时间段参加"; return;
         }
 
         $sql = " insert into works (uid,did,pics,intro) values (?,?,?,?) ";

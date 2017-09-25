@@ -98,12 +98,12 @@ function img2big(t) {
         // 以宽作为基准来缩放
         if( (imgWidth/imgHeight - ww/hh) >= 0 ) {
 
-            imgHeight =0.7*ww*imgHeight/imgWidth;
-            imgWidth = 0.7*ww;
+            imgHeight =1*ww*imgHeight/imgWidth;
+            imgWidth = 1*ww;
             // 以高为基准来缩放
         }else{
-            imgWidth = 0.7*hh*imgWidth/imgHeight;
-            imgHeight = 0.7*hh;
+            imgWidth = 1*hh*imgWidth/imgHeight;
+            imgHeight = 1*hh;
         }
     }
 

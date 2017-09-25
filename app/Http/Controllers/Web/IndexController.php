@@ -166,7 +166,7 @@ class IndexController extends Controller
         $count = DB::select(" select count(*) as cnt from youji where type= ".$type);
         $sql = " select * from youji where type=? order by id desc limit ?,? ";
         $res = DB::select($sql,[$type,($page-1)*$num,$num]);
-        return view("web.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/web/youjilist",$page,$num)]);
+        return view("web.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/youjilist/".$type,$page,$num)]);
     }
     public function youjidetail($id) {
         $sql = " select youji.*,userattr.uname from youji left join userattr on userattr.uid=youji.uid where youji.id=? ";
@@ -196,7 +196,7 @@ class IndexController extends Controller
             $zongpiao = DB::select(" select sum(depiao) as zong from works where did= ".$res[0]->id);
             $sql = " select * from works where did=? order by depiao desc limit ?,? ";
             $works = DB::select($sql,[$res[0]->id,($page-1)*$num,$num]);
-            return view("web.dasai",["data"=>$res[0],"zongcanjia"=>$count[0]->cnt,"zongpiao"=>$zongpiao[0]->zong,"works"=>$works,"fenye"=>fenye($count[0]->cnt,"/dasai",$page,$num)]);
+            return view("web.dasai",["num"=>$num,"page"=>$page,"data"=>$res[0],"zongcanjia"=>$count[0]->cnt,"zongpiao"=>$zongpiao[0]->zong,"works"=>$works,"fenye"=>fenye($count[0]->cnt,"/dasai",$page,$num)]);
         }
     }
 

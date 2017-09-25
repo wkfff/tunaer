@@ -1,50 +1,74 @@
-@extends("web.common")
-@section("title",$data->title)
+@extends("wap.common")
+@section("title","确认订单")
 @section("css")
+
     <style>
+        .imgdiv{
+            height:100px;width:100px;background-size:cover;float:left;margin-right:10px;
+            background-position:center;background-repeat: no-repeat;margin-top:10px;
+        }
         .searchb{
             width:140px;height:40px;border:none; border: 1px solid #FF0036;font-size:16px;
             letter-spacing: 4px; background:#ffeded;color: #FF0036;
             margin-right:20px;outline:none;
         }
-        .searchb:active{
-            opacity:0.7;color:#fff
+        .shopitem{
+            height:130px;width:100%;margin-bottom:10px;
+            padding:10px 5px;background: white;
+            position: relative;
+        }
+        .shoppic{
+            height:200px;width:100%;background-position:center;background-size:cover;float:left;
+            margin-right:10px;
         }
     </style>
 @stop
 
 @section("body")
-    @include("web.header")
-    <div class="content">
+    <div  style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-menu-left" ></span>
+        <span>提交订单</span>
+    </div>
+    <div class="content" style="margin-top:50px;" >
 
-        <div style="height:160px;margin-top:20px;padding:10px;border:1px solid #ddd;" >
-            <div style="height:140px;width:140px;background: dodgerblue;float:left;background-image:url(/admin/data/images/{{$data->pictures}});background-size:cover;background-position:center" ></div>
-            <div style="height:140px;width:950px;;line-height:30px;float:left;margin-left:20px;" >
-                <div style="font-size:18px;color:#ff536a;font-weight:bold" >{{$data->title}}</div>
-                <div style="font-size:14px;margin-top:20px;" > 尺寸：{{$chicun}} 颜色：{{$color}} </div>
+        <div style="height:160px;margin-top:20px;padding:10px;" >
+            <a href="/shop/detail/{{$data->id}}">
+                <div class="shoppic" style="background-image:url(/admin/data/images/{{$data->pictures}});" ></div>
+            </a>
+            <div style="height:140px;width:100%;line-height:30px;float:left;" >
+                <div style="font-size:18px;color:#ff536a;font-weight:bold;margin-top:10px;" >{{$data->title}}</div>
+                <div style="font-size:14px;margin-top:10px;" > 尺寸：{{$chicun}} 颜色：{{$color}} </div>
                 <div style="font-size:14px;margin-top:5px;" >
                     数量：<input onchange="changemoney(this)" id="item_num" type="number" value="{{$num}}" style="width:70px;height:25px;text-align:center;" >　件
                 </div>
             </div>
             <div style="clear:both" ></div>
         </div>
-        <div class="form-group" style="margin-top:10px;">
+        <div style="clear:both" ></div>
+        <div class="form-group" style="margin:10px;">
             <label for="">联系电话</label>
-            <input type="text" value="123" class="form-control phone" placeholder="联系电话">
+            <input type="text" value="18328402805" class="form-control phone" placeholder="联系电话">
         </div>
-        <div class="form-group" >
+        <div class="form-group"  style="margin:10px;">
             <label for="">收货地址</label>
-            <input type="text"  class="form-control addr" placeholder="收货地址"  >
+            <input type="text"  class="form-control addr" value="测试地址" placeholder="收货地址"  >
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin:10px;">
             <label for="">买家留言</label>
             <input type="text" class="form-control liuyan" placeholder="买家留言">
         </div>
-        <button onclick="goumai()" class="searchb" style="background:#FF0036;color:#fff;float:right;margin-right:0px;margin-top:10px;"  ><span class="glyphicon glyphicon-yen" style="margin-right:5px;" ></span>去结算</button>
+        <div class="form-group" style="margin:10px;">
+
+            <span style="float:right;line-height:40px;font-size:20px;color:#ff536a;font-weight:bold;margin-right:30px;"><span class="money">{{$data->price}}</span> 元</span>
+            <span class="glyphicon glyphicon-yen" style="color:#ff536a;line-height:40px;float:right;margin-right:5px;margin-top:-2px;" ></span>
+            <input type="submit" onclick="goumai()" class="form-control " value="去付款" style="background:#ff536a;color:#fff;height:40px;">
+
+        </div>
+
         <span style="float:right;line-height:40px;font-size:20px;color:#ff536a;font-weight:bold;margin-right:30px;margin-top:10px;"><span class="money">{{$data->price}}</span> 元</span>
     </div>
 
-    @include("web.footer")
+    @include("wap.footer")
 @stop
 
 @section("htmlend")
@@ -98,14 +122,14 @@
                     "liuyan":$(".liuyan").val(),
                     "phone":$(".phone").val(),
                 }
-            ,function(d){
-                setTimeout(function(){
-                    window.clickxiadanlocak = false;
-                },10000);
-                if( ajaxdata(d) ) {
-                    location.href="/user/23#shoporder";
-                }
-            })
+                ,function(d){
+                    setTimeout(function(){
+                        window.clickxiadanlocak = false;
+                    },10000);
+                    if( ajaxdata(d) ) {
+                        location.href="/user/23#shoporder";
+                    }
+                })
 
         }
     </script>

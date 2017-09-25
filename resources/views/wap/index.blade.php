@@ -44,12 +44,12 @@
             </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <a href="/member/dongtai"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >徒友动态</span></a>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友交流</span>
+                <a href="/member/list"> <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友交流</span></a>
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友线路</span>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友游记</span>
+                <a href="/tubulist/5"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友线路</span></a>
+                <a href="/youjilist/1"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友游记</span></a>
             </div>
         </div>
         <div class="type" style="background:#44C522;text-align:center;color:#fff;" >
@@ -59,12 +59,12 @@
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <a href="/tubulist/8"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >国内旅游</span></a>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span>
+                <a href="/zixun"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span></a>
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >摄影大赛</span>
-                <span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步商城</span>
+                <a href="/dasai"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >摄影大赛</span></a>
+                <a href="/shops"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步商城</span></a>
             </div>
         </div>
         <p style="vertical-align: middle;height:40px;line-height:40px;padding:0px;text-align:center;margin:0px;margin-top:10px;">

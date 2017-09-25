@@ -17,13 +17,22 @@
         <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
         {{--<span style="display:block;font-size:14px;">主页</span>--}}
     </div>
-    <div class="footnav">
+    <a href="/shops"><div class="footnav">
         <img src="/web/images/icon-footer4-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">徒步商城</span>
-    </div>
-    <div class="footnav">
+        </div></a>
+
+    @if( Session::get('uid') )
+    <a href="/user/{{Session::get('uid')}}"><div class="footnav">
         <img src="/web/images/icon-footer5-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">我的</span>
-    </div>
+    </div></a>
+    @else
+    <a href="javascript:openlogion()" ><div class="footnav">
+        <img src="/web/images/icon-footer5-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
+        <span style="display:block;font-size:14px;">登录</span>
+    </div></a>
+
+    @endif
 
 </div>
