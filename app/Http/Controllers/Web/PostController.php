@@ -294,7 +294,7 @@ class PostController extends Controller{
             echo "400-发送失败";
         }
     }
-
+//查看历史消息
     public function getchathistory(Request $request) {
         $userid = $request->input("userid",'');
         $page = $request->input("page",1);
@@ -305,6 +305,8 @@ class PostController extends Controller{
         }else{
             $sql = " select * from chat where (fid= ? and tid=?) or ( fid=? and tid=? ) order by id desc limit ?,? ";
             $res = DB::select($sql,[$userid,$uid,$uid,$userid,($page-1)*$num,$num]);
+            $sql2 = " update chat set isread=0 where  (fid= ? and tid=?) or ( fid=? and tid=? )  ";
+            @DB::update($sql2,[$userid,$uid,$uid,$userid]);
             echo json_encode($res);
         }
     }
@@ -532,6 +534,17 @@ class PostController extends Controller{
         $sql = " select * from tubuhuodong order by id desc limit ?,? ";
         $tubus = DB::select($sql,[($page-1)*$num,$num]);
         echo json_encode($tubus);
+    }
+
+    public function delchat($userid) {
+        $uid = Session::get("uid");
+        $sql = " delete from chat where (fid=? and tid=?) or (fid=? and tid=?) ";
+        $res = DB::delete($sql,[$userid,$uid,$uid,$userid]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
     }
 
 }

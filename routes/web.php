@@ -124,6 +124,9 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/shops/sort/{sort}","IndexController@searchsort");
     Route::get("/goumai","IndexController@goumai");
     Route::get("/gouwuche","IndexController@gouwuche");
+    Route::get("/shoporder","IndexController@shoporder");
+    Route::get("/chatlist","IndexController@chatlist");
+    Route::get("/chatpage/{userid}","IndexController@chatpage");
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");
 });
@@ -148,6 +151,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/xiadan","PostController@xiadan");
     Route::post("/getshoporders","PostController@getshoporders");
     Route::post("/gettubuorders","PostController@gettubuorders");
+    Route::post("/delchat/{userid}","PostController@delchat");
 
     Route::post("/youjicm","PostController@youjicm");
 

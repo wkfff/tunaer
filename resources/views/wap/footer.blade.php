@@ -13,10 +13,18 @@
         <img src="/web/images/icon-footer2-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">徒步活动</span>
         </div></a>
-    <div class="footnav" style="width:24%;">
-        <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
-        {{--<span style="display:block;font-size:14px;">主页</span>--}}
-    </div>
+
+    @if( Session::get('uid') )
+        <a href="/chatlist"><div class="footnav" style="width:24%;">
+                <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
+            </div></a>
+    @else
+        <a href="javascript:openlogion()" ><div class="footnav" style="width:24%;">
+                <img src="/web/images/love-message.png" style="height:50px;margin-top:5px;margin-bottom:5px;">
+            </div></a>
+
+    @endif
+
     <a href="/shops"><div class="footnav">
         <img src="/web/images/icon-footer4-a.png" style="height:22px;margin-top:5px;margin-bottom:5px;">
         <span style="display:block;font-size:14px;">徒步商城</span>

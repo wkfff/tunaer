@@ -284,5 +284,67 @@ class IndexController extends Controller
         return view("web.gouwuche");
     }
 
+    public function shoporder(Request $request) {
+        if( !Session::get('uid') ) {
+            return redirect($_SERVER['HTTP_REFERER']);
+        }else{
+            $userid = Session::get("uid");
+            $page = $request->input("page",1);
+            $num = $request->input("num",5);
+            $sql = " select shoporder.*,product.title,product.pictures,product.price from shoporder left join product on product.id=shoporder.shopid where shoporder.uid=? order by shoporder.id desc limit ?,? ";
+            $shoporder = DB::select($sql,[$userid,($page-1)*$num,$num]);
+            $count = DB::select("select count(*) as cnt from shoporder left join product on product.id=shoporder.shopid where shoporder.uid=".$userid);
+            return view("web.shoporder",["list"=>$shoporder,"fenye"=>fenye($count[0]->cnt,"/shoporder",$page,$num)]);
+        }
+    }
+
+    public function chatlist(Request $request) {
+        if( !Session::get('uid') ) {
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
+        $page = $request->input("page",1);
+        $num = $request->input("num",60);
+        $uid = Session::get('uid');
+
+        $sql = " select t.*,userattr.uname from
+                (
+                    select uid,content,stime,isread from 
+                    (
+                        (select id,tid as uid,content,stime,isread from chat where fid=".$uid." group by tid) 
+                        union all 
+                        (select id,tid as uid,content,stime,isread from chat where tid=".$uid." group by fid)
+                        order by stime desc
+                    )
+                    as tmp group by tmp.uid order by tmp.stime desc limit 99
+                ) as t inner join userattr on t.uid=userattr.uid where t.uid<>".$uid;
+
+        $res = DB::select($sql);
+        $sql2 = " select count(*) as cnt from
+                (
+                    select id,uid,content,stime,isread from 
+                    (
+                        (select id,tid as uid,content,stime,isread from chat where fid=".$uid." group by tid) 
+                        union all 
+                        (select id,tid as uid,content,stime,isread from chat where tid=".$uid." group by fid)
+                        order by stime desc
+                    )
+                    as tmp group by tmp.uid order by tmp.stime desc limit 99
+                ) as t inner join userattr on t.uid=userattr.uid where t.uid<>".$uid;
+        $count = DB::select($sql2);
+
+        return view("web.chatlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/chatlist",$page,$num)]);
+    }
+
+    public function chatpage($userid) {
+
+        $sql = " select * from userattr where uid=? ";
+        $res = DB::select($sql,[$userid]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>"用户不存在"]);
+        }else{
+            return view("web.chatpage",["userinfo"=>$res[0]]);
+        }
+
+    }
     
 }

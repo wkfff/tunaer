@@ -1,5 +1,5 @@
 @extends("wap.common")
-{{--@section("title","徒友动态")--}}
+@section("title","徒友动态")
 @section("css")
 
     <style>
@@ -21,15 +21,16 @@
 
         @for( $i=0;$i<count($list);$i++ )
             <div style="padding:10px;" class="item{{$list[$i]->id}}">
-                <div>{{$list[$i]->content}}</div>
+                <a href="/user/{{$list[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
+                <span>发布于 {{$list[$i]->ftime}}</span>
+                <div style="margin-top:10px;">{{$list[$i]->content}}</div>
                 <?php $pics=explode("#",$list[$i]->imgs); ?>
                 @for( $j=0;$j<count($pics);$j++ )
                     <div class="imgdiv" onclick="img2big(this)" style="background-image:url(/web/data/images/{{$pics[$j]}})" ></div>
                 @endfor
                 <div style="clear:both;height:20px;" ></div>
                 <div style="margin-bottom:20px">
-                    {{--<a href="/user/{{$list[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>--}}
-                    {{--<span>发布于 {{$list[$i]->ftime}}</span>--}}
+
                     <button onclick="dongtaicmtmp({{$list[$i]->id}},'dianzan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
                         <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞{{$list[$i]->zancnt}}</span>
                     </button>

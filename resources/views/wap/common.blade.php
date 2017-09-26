@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield("meta","")
-
+    {{--<meta name="theme-color" content="#e83888">--}}
     <link rel="shortcut icon" type="image/x-icon" href="/web/images/ico.png">
     <link rel="stylesheet" href="/web/css/bootstrap.min.css">
     <link rel="stylesheet" href="/wap/css/common.css">

@@ -312,7 +312,7 @@ function getchatlist(userid) {
                                     <div>${res[i].age}岁 ${res[i].mryst}</div>
                                     <div>${res[i].addr}</div>
                                 </div>
-                                <span onclick="delchat(${res[i].uid})" class="closeitem">&times;</span>
+                                <span class="closeitem">&times;</span>
                             </div></a>`;
                 $(".friendbox").append(item);
             }
@@ -353,13 +353,15 @@ function getdongtais(userid) {
             for( var i=0;i<res.length;i++ ) {
                 var pics = res[i].imgs.split("#");
                 var item = `<div>
+                        <a href="/user/{{$dongtai[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
+                            <span>发布于 ${res[i].ftime}</span>
+                            <div style="clear:both;height:10px;" ></div>
                         <div>${res[i].content}</div>
                         ${imgs2div(pics)}
                         <div style="clear:both;height:20px;" ></div>
                         <div style="margin-bottom:20px">
-                            <a href="/user/{{$dongtai[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
-                            <span>发布于 ${res[i].ftime}</span>
-                            <button onclick="dongtaicmtmp(${res[i].id},'dianzan')" style="outline:none;margin-left:10px;" type="button" class="btn btn-default btn-sm">
+                            
+                            <button onclick="dongtaicmtmp(${res[i].id},'dianzan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
                                 <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞${res[i].zancnt}</span>
                             </button>
                             <button onclick="dongtaicmtmp(${res[i].id},'liuyan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
@@ -399,12 +401,13 @@ function getliuyans(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div style="margin:20px 0;vertical-align: middle;">
-                            <div onclick="location.href='/user/${res[i].fid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].fid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="margin:15px 0;font-size:16px;padding:10px;float:left;max-width:1100px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
-                            <div style="clear:both;margin-left:90px;color:#999;" >
+                var item = `<div style="margin:20px 0;vertical-align: middle;position:relative;">
+                            <div onclick="location.href='/user/${res[i].fid}'" style="position: absolute;top:0px;left:0px;height:40px;width:40px;background-image:url(/head/${res[i].fid});background-size:cover;background-position:center;border-radius:20px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="font-size:16px;padding-left:50px;float:left;order-radius:5px;">${res[i].content}</div>
+                            <div style="float:right;margin-right:10px;color:#999;margin-top:5px;" >
                                 ${res[i].ltime}
                             </div>
+                            <div style="clear:both;" ></div>
                         </div>`;
                 $(".liuyanbox").append(item);
             }
@@ -480,30 +483,17 @@ function gettubuorder(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div style="height:130px;width:100%;border:1px solid #eee;padding:15px;position: relative;margin-bottom:20px;" >
-                        <a href="/tubu/tubudetail/${res[i].id}"><div style="height:100px;width:100px;float:left;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
-                        <div style="margin-left:10px;float:left;font-size:14px;">
-                            <a href="/tubu/tubudetail/${res[i].id}"><p style="font-weight: bold">${res[i].title}</p></a>
-                            <p style="color:#666;font-size:13px;">领队：${res[i].leader}　联系电话：${res[i].phone}　交通方式：${res[i].jiaotong}　目的地：${res[i].mudidi}</p>
-                            <p style="color:#666;font-size:13px;">出发时间：${res[i].startday}　集合时间：${res[i].jihetime}　集合地点：${res[i].jihedidian}</p>
-                            <p style="color:#666;font-size:13px;">活动内容：${res[i].neirong}</p>
+                var item = `<div style="height:120x;width:100%;position: relative;margin-bottom:20px;position: relative;" >
+                        <a href="/tubu/tubudetail/${res[i].id}"><div style="height:100px;width:100px;position: absolute;left:0px;top:10px;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
+                        <div style="padding-left:105px;font-size:14px;">
+                            <a href="/tubu/tubudetail/${res[i].id}"><span style="width:100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;margin-top:7.5px;">${res[i].title}</span></a>
+                            <p style="color:#666;font-size:13px;">领队：${res[i].leader}　联系电话：${res[i].phone}</p>
+                            <p style="color:#666;font-size:13px;margin-top:-5px;">集合时间：${res[i].jihetime}　集合地点：${res[i].jihedidian}</p>
+                            
                         </div>
-                        <span style="color:cadetblue;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;" >付款：${res[i].price}</span>
                     </div>`;
                 $(".tubuorderbox").append(item);
             }
         }
     })
-}
-
-function delchat(userid){
-
-    if( confirm("确定删除聊天记录并解除好友？") ) {
-        $.post("/delchat/"+userid,{},function(d){
-            if(ajaxdata(d)) {
-                location.reload();
-            }
-        })
-    }
-    zuzhi();
 }
