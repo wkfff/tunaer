@@ -21,11 +21,11 @@
 @stop
 
 @section("body")
-    <div  style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
-        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-menu-left" ></span>
-        <span>{{$list->title}}</span>
+    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-menu-left" ></span>
+        <span style="max-width:180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;line-height:55px;">{{$list->title}}</span>
     </div>
-    <div class="content" style="margin-top:45px;" >
+    <div class="content" style="margin-top:55px;" >
 
         <div style="font-size:14px;text-align:center;color:#999;margin:10px 0px;padding:10px;">
             <span>发布者:管理员 </span><br><span style="margin-left:10px;">发布时间:{{$list->ptime}}</span>

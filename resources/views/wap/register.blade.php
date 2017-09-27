@@ -5,11 +5,11 @@
 @stop
 
 @section("body")
-    <div onclick="window.parent.closelogin()" style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
-        <span style="position: absolute;right:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-remove" ></span>
+    <div onclick="window.parent.closelogin()" style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span style="position: absolute;right:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-remove" ></span>
         <span>注册新用户</span>
     </div>
-    <div class="content" style="margin-top:50px;" >
+    <div class="content" style="margin-top:55px;" >
         <div style="padding:20px;">
             <div class="form-group">
                 <label>手机号</label>

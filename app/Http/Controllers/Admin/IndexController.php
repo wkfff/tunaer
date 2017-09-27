@@ -278,4 +278,12 @@ class IndexController extends Controller{
         $res = DB::select($sql);
         return view("admin.setting.shopfenlei",["fenlei"=>json_encode($res)]);
     }
+    public function singlepage() {
+        $sql = " select * from singlepage order by id desc";
+        $res = DB::select($sql);
+        return view("admin.singlepage",["list"=>$res]);
+    }
+    public function editfooter() {
+
+    }
 }

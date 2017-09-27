@@ -32,9 +32,10 @@
             {{--<img src="/web/images/top_pic3.gif" alt="">--}}
         {{--</div>--}}
         <div class="searchbox" >
-            <input placeholder="搜索目的地／活动" type="text" style="height:25px;width:240px;border:none;background:none;margin-top:10px;margin-left:20px;font-size:16px;border-right:1px solid rgba(25,76,142,0.6);padding-right:10px;" >
-            <!-- <img src="/web/images/zoom2.jpg" alt=""> -->
-            <input class="searchbtn" value="搜索" type="submit">
+            <form action="/searchtubu" method="GET">
+            <input placeholder="搜索目的地／活动" type="text" name="key" style="height:25px;width:240px;border:none;background:none;margin-top:10px;margin-left:20px;font-size:16px;border-right:1px solid rgba(25,76,142,0.6);padding-right:10px;" >
+            <input class="searchbtn" value="搜索"  type="submit">
+            </form>
         </div>
     </div>
 </div>

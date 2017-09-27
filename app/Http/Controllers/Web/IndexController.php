@@ -308,17 +308,18 @@ class IndexController extends Controller
 
         $sql = " select t.*,userattr.uname from
                 (
-                    select uid,content,stime,isread from 
+                    select uid,content,stime,isread,fid from 
                     (
-                        (select id,tid as uid,content,stime,isread from chat where fid=".$uid." group by tid) 
+                        (select id,tid as uid,content,stime,isread,fid from chat where fid=".$uid." group by tid) 
                         union all 
-                        (select id,tid as uid,content,stime,isread from chat where tid=".$uid." group by fid)
+                        (select id,tid as uid,content,stime,isread,fid from chat where tid=".$uid." group by fid)
                         order by stime desc
                     )
                     as tmp group by tmp.uid order by tmp.stime desc limit 99
                 ) as t inner join userattr on t.uid=userattr.uid where t.uid<>".$uid;
 
         $res = DB::select($sql);
+//        dd($res);
         $sql2 = " select count(*) as cnt from
                 (
                     select id,uid,content,stime,isread from 
@@ -345,6 +346,17 @@ class IndexController extends Controller
             return view("web.chatpage",["userinfo"=>$res[0]]);
         }
 
+    }
+
+    public function searchtubu(Request $request) {
+        $key = $request->input('key');
+        $page = $request->input("page",1);
+        $num = $request->input("num",6);
+        $sql = " select * from tubuhuodong where title like '%".$key."%' or mudidi like '%".$key."%' or jingdian like '%".$key."%' or leader like '%".$key."%' ";
+        $res = DB::select($sql);
+        $sql2 = " select count(*) as cnt from tubuhuodong where title like '%".$key."%' or mudidi like '%".$key."%' or jingdian like '%".$key."%' or leader like '%".$key."%' ";
+        $count = DB::select($sql2);
+        return view("web.searchtubu",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/searchtubu",$page,$num,"?key=".$key."&")]);
     }
     
 }

@@ -19,7 +19,7 @@
         }
         .shoppic{
             height:200px;width:100%;background-position:center;background-size:cover;float:left;
-            margin-right:10px;
+            /*margin-right:10px;*/
         }
     </style>
 @stop
@@ -31,11 +31,11 @@
     </div>
     <div class="content" style="margin-top:50px;" >
 
-        <div style="height:160px;margin-top:20px;padding:10px;" >
+        <div style="height:160px;margin-top:20px;" >
             <a href="/shop/detail/{{$data->id}}">
                 <div class="shoppic" style="background-image:url(/admin/data/images/{{$data->pictures}});" ></div>
             </a>
-            <div style="height:140px;width:100%;line-height:30px;float:left;" >
+            <div style="height:140px;width:100%;line-height:30px;float:left;padding:10px;" >
                 <div style="font-size:18px;color:#ff536a;font-weight:bold;margin-top:10px;" >{{$data->title}}</div>
                 <div style="font-size:14px;margin-top:10px;" > 尺寸：{{$chicun}} 颜色：{{$color}} </div>
                 <div style="font-size:14px;margin-top:5px;" >
@@ -44,14 +44,14 @@
             </div>
             <div style="clear:both" ></div>
         </div>
-        <div style="clear:both" ></div>
+        <div style="clear:both;height:10px;" ></div>
         <div class="form-group" style="margin:10px;">
             <label for="">联系电话</label>
-            <input type="text" value="18328402805" class="form-control phone" placeholder="联系电话">
+            <input type="text" value="" class="form-control phone" placeholder="联系电话">
         </div>
         <div class="form-group"  style="margin:10px;">
             <label for="">收货地址</label>
-            <input type="text"  class="form-control addr" value="测试地址" placeholder="收货地址"  >
+            <input type="text"  class="form-control addr" value="" placeholder="收货地址"  >
         </div>
         <div class="form-group" style="margin:10px;">
             <label for="">买家留言</label>

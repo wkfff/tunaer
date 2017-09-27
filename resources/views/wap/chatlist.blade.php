@@ -33,19 +33,34 @@
 @stop
 
 @section("body")
-    <div  style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
-        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-menu-left" ></span>
+    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;font-size:16px;" class="glyphicon glyphicon-menu-left" ></span>
         <span>好友列表</span>
     </div>
-    <div class="content" style="margin-top:50px;" >
+    <div class="content" style="margin-top:60px;" >
+        @if( count($list) == 0 )
+            <div style="padding:10px;" >
+                <p>你还没有好友，<a href="/member/list">立即去找</a></p>
+                <p>温馨提示：打个招呼或发一条消息你们即成为好友额</p>
+            </div>
+        @endif
         @for($i=0;$i<count($list);$i++)
             <a href="/chatpage/{{$list[$i]->uid}}"><div class="item">
                 <div class="head" style="background-image:url(/head/{{$list[$i]->uid}})"></div>
                 <div class="userinfo" >
                     <div class="uname">{{$list[$i]->uname}}</div>
-                    <div class="message">{{$list[$i]->content}}</div>
+                    @if( trim($list[$i]->content) == '0' )
+                        @if( $list[$i]->uid == $list[$i]->fid )
+                            <div class="message">Ta给我打了个招呼</div>
+                        @else
+                            <div class="message">我给Ta打了个招呼</div>
+                        @endif
+                    @else
+                        <div class="message">{{$list[$i]->content}}</div>
+                    @endif
+
                 </div>
-                @if($list[$i]->isread == 1)
+                @if($list[$i]->isread == 1 && $list[$i]->uid == $list[$i]->fid)
                 <div style="position: absolute;right:10px;top:10px;height:10px;width:10px;border-radius:5px;
             background:#e83888;z-index:1" ></div>
                 @endif

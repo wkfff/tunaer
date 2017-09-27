@@ -20,11 +20,18 @@ class PostController extends Controller{
 //    活动报名
     public function baoming(Request $request) {
         $tid = $request->input("tid",'');
+        $uid = Session::get('uid');
+
+        $sqltmp = " select * from tubuorder where uid=? and tid=? ";
+        $r = DB::select($sqltmp,[$uid,$tid]);
+        if( count($r) > 0 ) {
+            echo "400-请勿重复报名"; return ;
+        }
+
         $orderid = "123";
-        if( $tid == '' ) {
+        if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
-            $uid = Session::get('uid');
             $sql = " insert into tubuorder (uid,tid,orderid) values (?,?,?) ";
             $res = DB::insert($sql,[$uid,$tid,$orderid]);
             if( $res ) {
@@ -514,10 +521,35 @@ class PostController extends Controller{
             echo "400-手机格式错误";
             return false;
         }
-        // $code = rand(123456,999999);
-        $code = "123456";
-        Cache::put('code-'.$phone, $code, 10);
-        echo "200-发送成功";
+//    每一小时每一个ip最多发送5次验证码
+        $csql = " select * from verifycode where ip=? and stime like '%".date("Y-m-d H")."%' ";
+        $r = DB::select($csql,[$_SERVER['REMOTE_ADDR']]);
+        if( count($r) >= 5 ) {
+            echo "400-发送频繁，请稍后再试";
+        }
+        require_once app_path().'/Libs/aliyunsms/api_demo/SmsDemo.php';
+        $demo = new \SmsDemo(
+            "LTAICyYaKmLyh9sj",
+            "fh7VDi4xBUIQPY4H13eAfVx88kfwaP"
+        );
+        $code = rand(123456,999999);
+        $response = $demo->sendSms(
+            "徒哪儿", // 短信签名
+            "SMS_100220027", // 短信模板编号
+            $phone, // 短信接收者
+            Array(  // 短信模板中字段的值
+                "code"=>$code
+            ),"0"
+        );
+        if( strtoupper($response->Code) == "OK" ) {
+            Cache::put('code-'.$phone, $code, 10);
+//            记录到数据库
+            $isql = " insert into verifycode (phone,ip,code) values (?,?,?) ";
+            $r = DB::insert($isql,[$phone,$_SERVER['REMOTE_ADDR'],$code]);
+            echo "200-发送成功";
+        }else{
+            echo "200-操作失败．请联系在线客服";
+        }
     }
     // 生成图形验证码
     public function verifycode()

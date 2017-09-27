@@ -58,7 +58,7 @@
     </div>
     <div style="font-size: 14px;color:#999;padding:0 10px;text-align:right" >
         ￥<span style="font-size: 25px;color:#ff9531">{{$detail->price}}</span>元/人
-        <div style="height:34px;width:90px;background:#518FE4;border-radius:2px;color:#fff;text-align: center;line-height:38px;font-size:17px;box-shadow: 1px 1px 15px rgba(255,255,255,0.2);padding:0px;display:inline-block;margin-left:10px;margin-bottom:10px;">点击报名</div>
+        <div onclick="baoming({{$detail->id}})" style="height:34px;width:90px;background:#518FE4;border-radius:2px;color:#fff;text-align: center;line-height:38px;font-size:17px;box-shadow: 1px 1px 15px rgba(255,255,255,0.2);padding:0px;display:inline-block;margin-left:10px;margin-bottom:10px;">点击报名</div>
     </div>
 
     <div style="font-size:16px;padding:10px;font-size:#333;line-height:25px;background:rgba(66,140,226,0.1);">
@@ -101,6 +101,13 @@
 //                "height":"auto",
 //            });
         });
+        function baoming(id) {
+            $.post("/tubu/baoming",{"tid":id},function(d){
+                if( ajaxdata(d) ) {
+                    toast("报名成功");
+                }
+            })
+        }
     </script>
 
 @stop

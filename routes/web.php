@@ -80,11 +80,14 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/youjilist/{type}', 'IndexController@youjilist2');
     Route::get('/dasailist', 'IndexController@dasailist');
     Route::get('/updatedasai/{id}', 'IndexController@updatedasai');
-    Route::get('/leader', 'IndexController@leader');
+    Route::get('/singlepage', 'IndexController@singlepage');
+    Route::get('/setting/editfooter', 'IndexController@editfooter');
 });
 
 
-
+//Access Key ID	Access Key Secret	状态	创建时间	操作
+//LTAICyYaKmLyh9sj
+//fh7VDi4xBUIQPY4H13eAfVx88kfwaP 隐藏
 
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
@@ -127,6 +130,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/shoporder","IndexController@shoporder");
     Route::get("/chatlist","IndexController@chatlist");
     Route::get("/chatpage/{userid}","IndexController@chatpage");
+    Route::get("/searchtubu","IndexController@searchtubu");
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");
 });

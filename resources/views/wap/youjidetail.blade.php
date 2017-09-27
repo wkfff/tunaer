@@ -11,19 +11,26 @@
             position: relative;
         }
         .tuwen{
-            font-size:11px !important;width:100%;padding:10px;
+            font-size:11px !important;width:100%;padding:5px;
             overflow: hidden;margin-top:10px;display:none;
         }
         .tuwen img{
             max-width:100% !important;height:auto !important;
         }
+        .youjiuserhead{
+            width:30px;height:30px;background-size:cover;background-image:url(/head/{{$list->uid}});
+            background-position: center;border-radius:15px;
+            display: inline-block;
+            vertical-align: middle;
+            background-repeat:no-repeat;
+        }
     </style>
 @stop
 
 @section("body")
-    <div  style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
-        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-menu-left" ></span>
-        <span>{{$list->title}}</span>
+    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-menu-left" ></span>
+        <span style="max-width:180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;line-height:55px;">{{$list->title}}</span>
     </div>
     <div class="content" style="margin-top:60px;" >
 
@@ -35,7 +42,7 @@
             @if( $list->type == 2 )<span>发布者:管理员 </span>
             @else<span>发布者:{{$list->uname}} </span><a href="/user/{{$list->uid}}"><div class="youjiuserhead"  ></div></a>
             @endif
-
+                <br>
             <span style="margin-left:10px;">发布时间:{{substr($list->ytime,0,10)}}</span>
             <span style="margin-left:10px;">阅读:{{$list->readcnt}}</span>
         </div>
@@ -44,7 +51,7 @@
             {!! $list->tuwen !!}
         </div>
 
-        <div >
+        <div style="padding:20px;">
             <button onclick="youjicm(this,{{$list->id}},2)"  type="button" class="btn btn-default btn-sm">
                 <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$list->zancnt}})</span>
             </button>

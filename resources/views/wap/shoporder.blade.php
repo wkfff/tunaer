@@ -11,11 +11,11 @@
 @stop
 
 @section("body")
-    <div  style="width:100%;height:45px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:45px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
-        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-menu-left" ></span>
+    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+        <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-menu-left" ></span>
         <span>户外商城订单</span>
     </div>
-    <div class="content" style="margin-top:50px;padding:0 3px;" >
+    <div class="content" style="margin-top:60px;padding:0 3px;" >
         @for( $i=0;$i<count($list);$i++ )
             <div data="{{$list[$i]->color}}&{{$list[$i]->chicun}}&{{$list[$i]->num}}#**#{{$list[$i]->addr}}#**#{{$list[$i]->liuyan}}#**#{{$list[$i]->phone}}#**#{{$list[$i]->otime}}#**#{{$list[$i]->orderid}}" style="height:120px;width:100%;position: relative;margin-bottom:20px;position: relative;" >
                 <a href="/shop/detail/{{$list[$i]->shopid}}"><div style="height:100px;width:100px;position: absolute;left:0px;top:10px;background-image:url(/admin/data/images/{{$list[$i]->pictures}});background-size:cover;background-position:center;cursor: pointer;" ></div></a>

@@ -54,7 +54,7 @@
         </div>
         <div class="type" style="background:#44C522;text-align:center;color:#fff;" >
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <span style="font-size:14px;margin-top:10px;margin-bottom:10px;display:block;" >其他</span>
+                <span style="font-size:14px;margin-top:10px;margin-bottom:10px;display:block;" >徒哪儿</span>
                 <img src="/web/images/sailboat.png" style="height:40px;" >
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >

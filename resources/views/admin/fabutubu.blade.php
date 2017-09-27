@@ -91,8 +91,11 @@
 
 @section("htmlend")
 
+    {{--<script src="/admin/umediter/etpl.js" ></script>--}}
     <script src="/admin/umediter/umeditor.config.js" ></script>
     <script src="/admin/umediter/umeditor.min.js" ></script>
+    {{--<script src="/admin/umediter/lang/zh-cn/zh-cn.js"></script>--}}
+
     <script>
         window.um = UM.getEditor('myEditor');
 //        window.shuxing.pictures = '';

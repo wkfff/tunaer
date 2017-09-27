@@ -144,7 +144,8 @@
                             <li><a class="submenu" href="/admin/setting/tubutypes"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步分类</span></a></li>
                             <li><a class="submenu" href="/admin/setting/banner"><i class="icon-file-alt"></i><span class="hidden-tablet">Banner</span></a></li>
                             <li><a class="submenu" href="/admin/adminlist"><i class="icon-file-alt"></i><span class="hidden-tablet">管理员列表</span></a></li>
-                            <li><a class="submenu" href="/admin/leader"><i class="icon-file-alt"></i><span class="hidden-tablet">领队管理</span></a></li>
+                            <li><a class="submenu" href="/admin/singlepage"><i class="icon-file-alt"></i><span class="hidden-tablet">单页面</span></a></li>
+                            <li><a class="submenu" href="/admin/singlepage"><i class="icon-file-alt"></i><span class="hidden-tablet">网站footer</span></a></li>
                         </ul>
                     </li>
 

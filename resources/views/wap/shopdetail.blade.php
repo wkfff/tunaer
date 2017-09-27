@@ -123,7 +123,7 @@
             </div></a>
             <div style="float:right;width:20%;color:#666;text-align:center;"  >
                 <img src="/web/images/icon-kefu.png" style="height:25px;margin-top:5px;">
-                <p style="font-size:13px;">客服</p>
+                <a href="tel:18000548612"><p style="font-size:13px;color:#666;">客服</p></a>
             </div>
         </div>
         <div style="clear:both" ></div>
