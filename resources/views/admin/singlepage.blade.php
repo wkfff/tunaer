@@ -1,6 +1,6 @@
 
 @extends('admin.common')
-<link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("content")
 
     <table class="table">
@@ -16,9 +16,8 @@
         @for ($i = 0; $i < count($list); $i++)
             <tr>
                 <td>{{$list[$i]->id}}</td>
-                <td class="center">{{$list[$i]->title}}</td>
-
-                {{--<td title="{{$list[$i]->intro}}" class="center">{{substr($list[$i]->intro,0,10)}}</td>--}}
+                <td class="center"><a href="/single/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
+                <td class="center">/tunaer/{{$list[$i]->id}}</td>
                 <td class="center">
                     <li class="dropdown user" style="list-style: none">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -26,8 +25,10 @@
                             <i class="icon-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:deletebyid({{$list[$i]->id}})">删除</a></li>
-                            <li><a href="javascript:dongjiebyid({{$list[$i]->id}})">编辑</a></li>
+                            @if( trim($list[$i]->id) != 2 )
+                                <li><a href="javascript:deletebyid({{$list[$i]->id}})">删除</a></li>
+                            @endif
+                            <li><a href="javascript:bianji({{$list[$i]->id}})">编辑</a></li>
                         </ul>
                     </li>
                 </td>
@@ -43,25 +44,54 @@
 
         <div onclick="zuzhi(event)" style="width:1000px;height:570px;background:white;position:absolute;top:50%;left:50%;
         margin-left:-500px;margin-top:-285px;box-shadow:1px 3px 15px rgba(0,0,0,0.8);overflow-y: auto;padding:10px;  " >
-            <button onclick="$('.tubupics').slideUp();" type="button" class="btn btn-primary red" style="position:absolute;top:１0px;right:10px;" >提交保存</button>
-            <script type="text/plain" id="myEditor" style="width:900px;"></script>
+            <button onclick="tijiao()" type="button" class="btn btn-primary red" style="position:absolute;top:１0px;right:10px;" >提交保存</button>
+            <input class="pagetitle" type="text" style="height:30px;width:900px;" placeholder="标题" >
+            <input class="updateid" type="hidden" value="0" >
+            <textarea id="editor_id" name="content" style="width:900px;height:520px;"></textarea>
         </div>
     </div>
 
 @stop
 
 @section("htmlend")
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
 
     <script>
-        window.um = UM.getEditor('myEditor');
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true
+            });
+        });
         function deletebyid(tid) {
             $.post("/admin/deletebyid",{
-                "table":"user",
+                "table":"singlepage",
                 "id":tid
             },function(data){
                 location.reload();
+            })
+        }
+        function tijiao() {
+            var html = window.editor.html();
+            var title = $(".pagetitle").val();
+            $.post("/admin/singlelpage",{
+                "content":html,
+                "title":title,
+                "updateid":$(".updateid").val()
+            },function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+        function bianji(id) {
+            $.get("/admin/getsinglepage",{"id":id},function(d){
+                if( data = ajaxdata(d) ) {
+                    window.editor.html(data.content);
+                    $(".pagetitle").val(data.title);
+                    $(".updateid").val(id);
+                    $(".tubupics").slideDown();
+                }
             })
         }
     </script>

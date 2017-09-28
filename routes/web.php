@@ -71,6 +71,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post('/setting/settubutypes', 'PostController@settubutypes');
     Route::post('/deletebyid', 'PostController@deletebyid');
     Route::post('/dongjiebyid', 'PostController@dongjiebyid');
+    Route::post('/singlelpage', 'PostController@singlelpage');
     Route::get('/fabudasai', 'IndexController@fabudasai');
     Route::post('/fabudasai', 'PostController@fabudasai');
     Route::get('/fabuyouji', 'IndexController@fabuyouji');
@@ -82,9 +83,11 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/updatedasai/{id}', 'IndexController@updatedasai');
     Route::get('/singlepage', 'IndexController@singlepage');
     Route::get('/setting/editfooter', 'IndexController@editfooter');
+    Route::get('/setting/mianban', 'IndexController@mianban');
+    Route::get('/getsinglepage', 'PostController@getsinglepage');
+    Route::post('/updateoptions', 'PostController@updateoptions');
+    Route::post("/addadmin","PostController@addadmin");
 });
-
-
 //Access Key ID	Access Key Secret	状态	创建时间	操作
 //LTAICyYaKmLyh9sj
 //fh7VDi4xBUIQPY4H13eAfVx88kfwaP 隐藏
@@ -131,6 +134,8 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/chatlist","IndexController@chatlist");
     Route::get("/chatpage/{userid}","IndexController@chatpage");
     Route::get("/searchtubu","IndexController@searchtubu");
+    Route::get("/single/{id}","IndexController@singlepage");
+
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");
 });

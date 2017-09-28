@@ -23,7 +23,7 @@
         <tbody>
         @for ($i = 0; $i < count($tubulist); $i++)
             <tr>
-                <td><a target="_blank" style="color:cornflowerblue" href="/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
+                <td><a target="_blank" style="color:cornflowerblue" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
                 <td class="center">{{$tubulist[$i]->typename}}</td>
                 <td class="center">{{$tubulist[$i]->howlong}}天</td>
                 <td class="center">{{$tubulist[$i]->startday}}</td>
@@ -49,6 +49,7 @@
         @endfor
         </tbody>
     </table>
+    {!! $fenye !!}
     @if( count($tubulist) == 0 )
         <div>
             <button onclick="location.href='/admin/fabutubu'" class="btn btn-primary red" >添加徒步活动</button>

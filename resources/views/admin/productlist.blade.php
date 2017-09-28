@@ -47,6 +47,7 @@
         @endfor
         </tbody>
     </table>
+    {!! $fenye !!}
 @stop
 
 @section("htmlend")

@@ -53,10 +53,10 @@
             </div>
         </div>
         <div class="type" style="background:#44C522;text-align:center;color:#fff;" >
-            <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
+            <a href="/single/2"><div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <span style="font-size:14px;margin-top:10px;margin-bottom:10px;display:block;" >徒哪儿</span>
                 <img src="/web/images/sailboat.png" style="height:40px;" >
-            </div>
+                </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
                 <a href="/tubulist/8"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >国内旅游</span></a>
                 <a href="/zixun"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span></a>

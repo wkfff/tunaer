@@ -358,5 +358,15 @@ class IndexController extends Controller
         $count = DB::select($sql2);
         return view("web.searchtubu",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/searchtubu",$page,$num,"?key=".$key."&")]);
     }
+
+    public function singlepage($id) {
+        $sql = " select * from singlepage where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) == 0 ) {
+            return view("web.error",["content"=>"内容不存在"]);
+        }else{
+            return view("web.single",["data"=>$res[0]]);
+        }
+    }
     
 }

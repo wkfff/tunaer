@@ -35,6 +35,9 @@ function login($phone,$passwd,$returnuid=false) {
 }
 
 function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
+    if( $count == 0 ) {
+        return '';
+    }
     $pagecnt = ceil($count/$page);
     $html = "";
 //    小于５页直接输出

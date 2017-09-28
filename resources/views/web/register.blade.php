@@ -20,10 +20,10 @@
         <!-- <p class="register_terms">登录即代表你同意<a target="_blank" href="#">《似友服务条款》</a>和<a target="_blank" href="#">《隐私条款》</a> </p> -->
         <div class="register_line" ></div>
         <div class="qrcode">
-            <img src="/web/images/qrcode.png" alt="">
-            <div>扫描下载客户端APP</div>
-            <button style="background:#DC7164">QQ登录</button>
-            <button style="background:#5DDF78">微信登录</button>
+            <img src="/web/images/1506587848.png" alt="">
+            <div>扫描浏览手机版</div>
+            <button onclick="window.parent.toast('敬请期待')" style="background:#DC7164">QQ登录</button>
+            <button onclick="window.parent.toast('敬请期待')" style="background:#5DDF78">微信登录</button>
         </div>
 
         <div onclick="window.parent.closereg()" class="register_close"></div>

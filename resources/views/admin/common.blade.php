@@ -65,20 +65,8 @@
 
             <div class="nav-no-collapse header-nav">
                 <ul class="nav pull-right">
-                    <li class="dropdown">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="halflings-icon white user"></i>
-                                {{Session::get('aname')}}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu-title">
-                                <span>帐号设置</span>
-                            </li>
-                            <li><a href="javascript(0)"><i class="halflings-icon user"></i>修改密码</a></li>
-                            <li><a href="/admin/login"><i class="halflings-icon off"></i> 退出登录</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="btn"  href="javascript:void(0)"><i class="halflings-icon white user"></i>{{Session::get('aname')}}</a></li>
+                    <li><a class="btn"  href="/admin/login">退出登录</a></li>
                 </ul>
             </div>
         </div>
@@ -143,9 +131,12 @@
                         <ul>
                             <li><a class="submenu" href="/admin/setting/tubutypes"><i class="icon-file-alt"></i><span class="hidden-tablet">徒步分类</span></a></li>
                             <li><a class="submenu" href="/admin/setting/banner"><i class="icon-file-alt"></i><span class="hidden-tablet">Banner</span></a></li>
+                            @if( Session::get('adminflag') == 9 )
                             <li><a class="submenu" href="/admin/adminlist"><i class="icon-file-alt"></i><span class="hidden-tablet">管理员列表</span></a></li>
+                            @endif
                             <li><a class="submenu" href="/admin/singlepage"><i class="icon-file-alt"></i><span class="hidden-tablet">单页面</span></a></li>
-                            <li><a class="submenu" href="/admin/singlepage"><i class="icon-file-alt"></i><span class="hidden-tablet">网站footer</span></a></li>
+                            <li><a class="submenu" href="/admin/setting/editfooter"><i class="icon-file-alt"></i><span class="hidden-tablet">网站footer</span></a></li>
+                            <li><a class="submenu" href="/admin/setting/mianban"><i class="icon-file-alt"></i><span class="hidden-tablet">快捷面板</span></a></li>
                         </ul>
                     </li>
 

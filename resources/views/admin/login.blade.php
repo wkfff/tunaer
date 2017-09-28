@@ -61,17 +61,17 @@
 
                         <div class="input-prepend" title="Username">
                             <span class="add-on"><i class="halflings-icon user"></i></span>
-                            <input class="input-large span10" value="张管理" name="uname" id="username" type="text" placeholder="用户名"/>
+                            <input class="input-large span10" value="" name="uname" id="username" type="text" placeholder="用户名"/>
                         </div>
                         <div class="clearfix"></div>
 
                         <div class="input-prepend" title="Password">
                             <span class="add-on"><i class="halflings-icon lock"></i></span>
-                            <input class="input-large span10" value="111" name="passwd" id="password" type="password" placeholder="密码"/>
+                            <input class="input-large span10" value="" name="passwd" id="password" type="password" placeholder="密码"/>
                         </div>
                         <div class="clearfix"></div>
 
-                        <label class="remember" for="remember"><input type="checkbox" id="remember" />记住</label>
+                        <label class="remember" for="remember">忘记密码请联系主管理员</label>
 
                         <div class="button-login">
                             <button type="button" onclick="dologin()" class="btn btn-primary">登录</button>

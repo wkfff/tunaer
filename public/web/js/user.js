@@ -305,15 +305,15 @@ function getchatlist(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<a href="/user/${res[i].uid}"><div class="useritem">
-                                <div class="userhead" style="background-image:url(/head/${res[i].uid});"></div>
+                var item = `<div class="useritem">
+                                <a href="/user/${res[i].uid}"><div class="userhead" style="background-image:url(/head/${res[i].uid});"></div></a>
                                 <div class="userinfo">
                                     <div>${res[i].uname}</div>
                                     <div>${res[i].age}岁 ${res[i].mryst}</div>
                                     <div>${res[i].addr}</div>
                                 </div>
                                 <span onclick="delchat(${res[i].uid})" class="closeitem">&times;</span>
-                            </div></a>`;
+                            </div>`;
                 $(".friendbox").append(item);
             }
         }
@@ -496,14 +496,3 @@ function gettubuorder(userid) {
     })
 }
 
-function delchat(userid){
-
-    if( confirm("确定删除聊天记录并解除好友？") ) {
-        $.post("/delchat/"+userid,{},function(d){
-            if(ajaxdata(d)) {
-                location.reload();
-            }
-        })
-    }
-    zuzhi();
-}

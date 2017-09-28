@@ -29,6 +29,9 @@ class IndexController extends Controller{
         if( count($res) == 0 ) {
             echo "400-用户名或密码错误";return ;
         }
+        if( $res[0]->status == 0 ) {
+            echo "400-帐号已被冻结";return ;
+        }
         Session::put("aname",$res[0]->aname);
         Session::put("adminflag",$res[0]->adminflag);
         echo "200-登录成功";
@@ -36,13 +39,50 @@ class IndexController extends Controller{
     }
 //    用户列表
     public function userlist(Request $request){
-        $page = $request->input('page',1);
-        $num = $request->input('num',20);
-        $r = DB::select(" select count(*) as cnt from user ");
-        $count = $r[0]->cnt;
-        $sql = " select user.id as userid,user.phone,user.status,userattr.* from user left join userattr on user.id=userattr.uid order by id desc limit ".($page-1)*$num.", ".$num;
-        $res = DB::select($sql);
-        return view("admin.userlist",['list'=>$res,"count"=>$count]);
+        $page = $request->input("page",1);
+        $num = $request->input("num",13);
+        $ajax = $request->input("ajax","no");
+        $sex = $request->input("sex","");
+        $addr = $request->input("addr","");
+        $age = $request->input("age","");
+        $mryst = $request->input("mryst","");
+        $phone = $request->input("phone","");
+        if( $phone != '' ) {
+            $sql = " select user.id as userid,user.phone,status,userattr.* from user inner join userattr on user.id=userattr.uid where user.phone='".$phone."' ";
+            $res = DB::select($sql);
+            return view("admin.userlist",["list"=>$res,"fenye"=>""]);
+        }
+        $where = "";
+        $search='?';
+        if( $sex != '' ) {
+            $where .= " and sex='".$sex."' ";
+            $search .= "&sex=".$sex;
+        }
+        if( $addr != '' && $addr != '-' ) {
+            $where .= " and addr like '%".$addr."%' ";
+            $search .= "&addr=".$addr;
+        }
+        if( $age != '' ) {
+            $age1 = explode("-",$age);
+            $where .= " and age>".$age1[0]." and age < ".$age1[1];
+            $search .= "&age=".$age;
+        }
+        if( $mryst != '' ) {
+            $where .= " and mryst='".$mryst."' ";
+            $search .= "&mryst=".$mryst;
+        }
+        if( $search != '?' ) {
+            $search .= "&";
+        }
+        $count = DB::select("select count(*) as cnt from user inner join userattr on user.id=userattr.uid where user.status=1 ".$where);
+//        exit("select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 ".$where);
+        $sql = " select user.id as userid,user.phone,status,userattr.* from user inner join userattr on user.id=userattr.uid where 1=1 ".$where." order by user.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $ajax == 'no' ) {
+            return view("admin.userlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/userlist",$page,$num,$search)]);
+        }else{
+            echo json_encode($res);
+        }
     }
 
     public function fabutubu() {
@@ -120,11 +160,10 @@ class IndexController extends Controller{
     public function tubulist(Request $request) {
         $page = $request->input('page',1);
         $num = $request->input('num',20);
-        $r = DB::select(" select count(*) as cnt from tubuhuodong ");
-        $count = $r[0]->cnt;
+        $count = DB::select(" select count(*) as cnt from tubuhuodong ");
         $sql = " select tubuhuodong.*,tubutypes.name as typename from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by id desc limit ".($page-1)*$num.", ".$num;
         $res = DB::select($sql);
-        return view("admin.tubulist",['tubulist'=>$res,"count"=>$count]);
+        return view("admin.tubulist",['tubulist'=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubulist",$page,$num)]);
     }
     public function fabuproduct() {
         $sql = " select shopsort.*,shopsubsort.id as subid,shopsubsort.pid,shopsubsort.title as subtitle,shopsubsort.sort as subsort from shopsort left join shopsubsort on shopsort.id=shopsubsort.pid order by shopsort.sort desc,shopsubsort.sort desc ";
@@ -144,11 +183,10 @@ class IndexController extends Controller{
     public function productlist(Request $request) {
         $page = $request->input('page',1);
         $num = $request->input('num',20);
-        $r = DB::select(" select count(*) as cnt from product ");
-        $count = $r[0]->cnt;
+        $count = DB::select(" select count(*) as cnt from product ");
         $sql = " select * from product order by id desc limit ".($page-1)*$num.", ".$num;
         $res = DB::select($sql);
-        return view("admin.productlist",['list'=>$res,"count"=>$count]);
+        return view("admin.productlist",['list'=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/productlist",$page,$num)]);
     }
     public function updateproduct($pid) {
         $sql = " select * from product where id=? ";
@@ -186,8 +224,9 @@ class IndexController extends Controller{
         $json = $request->input("json","no");
         $sql = " select * from zixun order by id desc limit ?,?";
         $res = DB::select($sql,[($page-1)*$num,$num]);
+        $count = DB::select("select count(*) as cnt from zixun ");
         if( $json == "no" ) {
-            return view("admin.zixunlist",["list"=>$res]);
+            return view("admin.zixunlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/zixunlist",$page,$num)]);
         }else{
             echo json_encode($res);
         }
@@ -235,7 +274,7 @@ class IndexController extends Controller{
     }
     public function youjilist(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",7);
+        $num = $request->input("num",17);
         $count = DB::select(" select count(*) as cnt from youji ");
         $sql = " select * from youji order by id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
@@ -243,11 +282,11 @@ class IndexController extends Controller{
     }
     public function youjilist2(Request $request,$type=1) {
         $page = $request->input("page",1);
-        $num = $request->input("num",7);
+        $num = $request->input("num",17);
         $count = DB::select(" select count(*) as cnt from youji where type= ".$type);
         $sql = " select * from youji where type=? order by id desc limit ?,? ";
         $res = DB::select($sql,[$type,($page-1)*$num,$num]);
-        return view("admin.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/youjilist",$page,$num)]);
+        return view("admin.youjilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/youjilist/".$type,$page,$num)]);
     }
     public function dasailist(Request $request) {
         $page = $request->input("page",1);
@@ -284,6 +323,14 @@ class IndexController extends Controller{
         return view("admin.singlepage",["list"=>$res]);
     }
     public function editfooter() {
+        $sql = " select * from options where title='footer' limit 1 ";
+        $res = DB::select($sql);
+        return view("admin.setting.editfooter",["data"=>$res[0]]);
 
+    }
+    public function mianban() {
+        $sql = " select * from options where title='mianban' limit 1 ";
+        $res = DB::select($sql);
+        return view("admin.setting.mianban",["data"=>$res[0]]);
     }
 }

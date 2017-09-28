@@ -6,7 +6,7 @@
 <div class="top1">
     <div class="content">
         <div style="color: #727272;font-size: 12px;float:left;height:35px;overflow:hidden;">
-            <span>您好，欢迎访问成都徒步网</span><a href="#" style="color: #194C8E;font-weight: bold;font-size: 16px;line-height:35px;margin-left:10px;">下载客户端</a>
+            <span>您好，欢迎访问成都徒哪儿</span><a href="javascript:void(0)" onclick="toast('app即将上线，敬请期待．')" style="color: #194C8E;font-weight: bold;font-size: 16px;line-height:35px;margin-left:10px;">下载客户端</a>
         </div>
         <div class="top1right" style="float:right">
             {{--  <a href="#">个人中心{{Session::get('uid')}}</a>  --}}

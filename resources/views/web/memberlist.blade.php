@@ -98,7 +98,7 @@
                         <span>年龄：{{$list[$i]->age}}岁</span>
                         <span>婚况：{{$list[$i]->mryst}}</span>
                         <span style="display:block">
-                            <a target="_blank" href="/monilogin/{{$list[$i]->userid}}"><span>地区：{{$list[$i]->addr}}</span></a>
+                            <span>地区：{{$list[$i]->addr}}</span>
                             <button onclick="zhaohu({{$list[$i]->userid}})" class="btn btn-xs btn-danger" style="background:#ff536a;border:none;outline:none">打招呼</button>
                         </span>
                     </p>

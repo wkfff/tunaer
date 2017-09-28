@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="loginbox">
-    <div class="title">登录成都徒步网</div>
+    <div class="title">登录徒哪儿网</div>
 
     <input name="phone" type="text" placeholder="请输入手机号码" value="18328402801">
     <input name="passwd" type="password" placeholder="登录密码" value="123">
@@ -17,10 +17,10 @@
     <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">
     <div class="login_line" ></div>
     <div class="qrcode">
-        <img src="/web/images/qrcode.png" alt="">
-        <div>扫描下载客户端APP</div>
-        <button style="background:#DC7164">QQ登录</button>
-        <button style="background:#5DDF78">微信登录</button>
+        <img src="/web/images/1506587848.png" alt="">
+        <div>扫描浏览手机版</div>
+        <button onclick="window.parent.toast('敬请期待')" style="background:#DC7164">QQ登录</button>
+        <button onclick="window.parent.toast('敬请期待')" style="background:#5DDF78">微信登录</button>
     </div>
 
     <div class="register_close" onclick="window.parent.closelogin()"></div>

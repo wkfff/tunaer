@@ -18,7 +18,7 @@
         @for ($i = 0; $i < count($list); $i++)
             <tr>
                 <td>{{$list[$i]->id}}</td>
-                <td class="center">{{$list[$i]->title}}</td>
+                <td class="center"><a href="/zixun/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
                 <td class="center"><div onclick="img2big(this)" style="background-image:url(/admin/data/images/{{$list[$i]->pic}});background-position:center;background-repeat:no-repeat;background-size:cover;width:30px;height:20px;" ></div></td>
                 <td class="center">{{$list[$i]->readcnt}}</td>
                 <td class="center">{{$list[$i]->ptime}}</td>
@@ -38,6 +38,7 @@
         @endfor
         </tbody>
     </table>
+    {!! $fenye       !!}
 @stop
 
 @section("htmlend")

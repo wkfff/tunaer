@@ -72,7 +72,7 @@
                     $(".sortbox").append("<div sort="+data[i].sort+" title='"+data[i].title+"' id="+data[i].id+" class='shopsort sort"+data[i].id+"'><p>"+data[i].title+" ( id : "+data[i].id+" ) ( 排序 : "+data[i].sort+") <span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right' table='shopsort' onclick='deletebyid(this,"+data[i].id+")'>删除</span>　<span style='color:dodgerblue;font-size:16px;cursor:pointer;float:right;margin-right:10px;' table='shopsort' onclick='modify("+data[i].id+")'>修改</span></p></div>");
                     for( var j=0;j<data.length;j++ ) {
                         if( data[j].pid == data[i].id) {
-                            $(".sort"+data[j].pid).append("<a table='shopsubsort' ondblclick='deletebyid(this,"+data[j].subid+")' href='javascript:void(0)'>"+data[j].subtitle+"</a>");
+                            $(".sort"+data[j].pid).append("<a table='shopsubsort' style='margin:5px;' ondblclick='deletebyid(this,"+data[j].subid+")' href='javascript:void(0)'>"+data[j].subtitle+"</a>");
                         }
                     }
                 }

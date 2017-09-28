@@ -24,7 +24,7 @@
     <div class="suspend">
         <dl>
             <dt class="IE6PNG"></dt>
-            <dd class="suspendQQ"><a href="http://sc.chinaz.com" target="_blank"></a></dd>
+            <dd class="suspendQQ" onclick="javascript:window.open('http://b.qq.com/webc.htm?new=0&sid=3090434371&o=徒哪儿&q=7', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"  border="0" SRC=http://wpa.qq.com/pa?p=1:3090434371:1 alt="点击这里给我发消息"></dd>
             <dd class="suspendTel"><a href="javascript:void(0);"></a></dd>
         </dl>
     </div>

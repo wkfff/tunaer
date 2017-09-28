@@ -73,7 +73,13 @@ class PostController extends Controller{
         if( $table == 'none' || $id == "0") {
             echo "400-操作失败";
         }else{
-            $sql = " update `$table` set status=0 where id=? ";
+            $sql1 = " select * from `$table` where id=? ";
+            $r = DB::select($sql1,[$id]);
+            if( $r[0]->status == 1 ) {
+                $sql = " update `$table` set status=0 where id=? ";
+            }else{
+                $sql = " update `$table` set status=1 where id=? ";
+            }
             $res = DB::delete($sql,[$id]);
             echo "200";
         }
@@ -164,5 +170,64 @@ class PostController extends Controller{
         }
 
     }
-    
+    public function singlelpage(Request $request) {
+        $title = $request->input("title");
+        $content = $request->input("content");
+        $updateid = $request->input("updateid",0);
+        if( checknull($title,$content)) {
+            if( $updateid != 0 ) {
+                $sql = " update singlepage set title=?,content=? where id= ?";
+                $res = DB::update($sql,[$title,$content,$updateid]);
+            }else{
+                $sql = " insert into singlepage (title,content) values (?,?) ";
+                $res = DB::insert($sql,[$title,$content]);
+            }
+
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-添加失败";
+            }
+        }
+    }
+
+    public function getsinglepage(Request $request) {
+        $sql = " select * from singlepage where id= ?";
+        $res = DB::select($sql,[$request->input('id')]);
+        if( count($res) == 0 ) {
+            echo "400-没有相关数据";
+        }else{
+            echo json_encode($res[0]);
+        }
+    }
+
+    public function updateoptions(Request $request) {
+        $id = $request->input('id');
+        $content = $request->input('content');
+        if( checknull($id,$content) ) {
+            $sql = " update options set content=? where id=? ";
+            $res = DB::update($sql,[$content,$id]);
+            if( $res ) {
+                $request->session()->forget('footer');
+                $request->session()->forget('mianban');
+                echo "200";
+            }else{
+                echo "400-保存失败";
+            }
+        }
+    }
+    public function addadmin(Request $request) {
+        $aname = $request->input('aname');
+        $passwd = $request->input('passwd');
+        $adminflag = $request->input('adminflag');
+        if( checknull($aname,$passwd,$adminflag) ) {
+            $sql = " insert admin (aname,passwd,adminflag) values (?,?,?) ";
+            $res = DB::insert($sql,[$aname,md5($passwd),$adminflag]);
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-添加失败";
+            }
+        }
+    }
 }

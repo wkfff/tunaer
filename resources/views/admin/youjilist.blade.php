@@ -18,7 +18,8 @@
         @for ($i = 0; $i < count($list); $i++)
             <tr>
                 <td>{{$list[$i]->id}}</td>
-                <td class="center" style="max-width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{$list[$i]->title}}</td>
+                <td class="center" style="max-width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                    <a href="/youji/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
                 <td class="center"><div onclick="img2big(this)" style="background-image:
                             @if( $list[$i]->type == 2 )
                             url(/admin/data/images/{{$list[$i]->pic}});
@@ -49,6 +50,7 @@
         @endfor
         </tbody>
     </table>
+    {!! $fenye !!}
 @stop
 
 @section("htmlend")

@@ -92,13 +92,24 @@
             </div>
 
             <div class="usernav">
-                <span onclick="changetab('dongtai')" >最新动态</span>
-                <span onclick="changetab('youji')">我的游记</span>
-                <span onclick="changetab('huodong')">我的活动</span>
-                <span onclick="changetab('liuyan')">互动留言</span>
-                <span onclick="changetab('photos')">我的相册</span>
-                <span onclick="changetab('friends')">我的好友</span>
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
+                    <span onclick="changetab('dongtai')" >最新动态</span>
+                    <span onclick="changetab('youji')">我的游记</span>
+                    <span onclick="changetab('liuyan')">互动留言</span>
+                    <span onclick="changetab('photos')">我的相册</span>
+                    <span onclick="changetab('friends')">我的好友</span>
+                @else
+                    <span onclick="changetab('dongtai')" >Ta的动态</span>
+                    <span onclick="changetab('youji')">Ta的游记</span>
+                    <span onclick="changetab('liuyan')">互动留言</span>
+                    <span onclick="changetab('photos')">Ta的相册</span>
+                    <span onclick="changetab('friends')">Ta的好友</span>
+                @endif
+
+                @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                 <span onclick="changetab('shoporder')">商城订单</span>
+                    <span onclick="changetab('huodong')">我的活动</span>
+                    @endif
             </div>
         </div>
         <div style="clear:both;height:30px;" ></div>
@@ -304,13 +315,16 @@
     <script>
         $(document).ready(function(){
             loadP();
+            @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
+            getshoporder({{$userinfo->userid}});
+            gettubuorder({{$userinfo->userid}});
+            @endif
             getchatlist({{$userinfo->userid}});
             getphotos({{$userinfo->userid}});
             getdongtais({{$userinfo->userid}});
             getliuyans({{$userinfo->userid}});
             getyoujis({{$userinfo->userid}});
-            getshoporder({{$userinfo->userid}});
-            gettubuorder({{$userinfo->userid}});
+
             window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
             window.diqu = "{{$userinfo->addr}}";
@@ -362,6 +376,18 @@
                 var node = "<option value='"+tmps[i]+"'>"+tmps[i]+"</option>";
                 $("#city").append(node);
             }
+        }
+        function delchat(userid){
+            @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
+            if( confirm("确定删除聊天记录并解除好友？") ) {
+                $.post("/delchat/"+userid,{},function(d){
+                    if(ajaxdata(d)) {
+                        location.reload();
+                    }
+                })
+            }
+            zuzhi();
+            @endif
         }
     </script>
 @stop

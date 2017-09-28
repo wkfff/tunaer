@@ -2,7 +2,38 @@
 @extends('admin.common')
 
 @section("content")
-
+    <div class="searchbar" style="margin-bottom:10px;">
+        <input type="number" class="form-control" name="phone" placeholder="手机号">
+        <select class="form-control" name="sex" style="width:150px;display: inline-block;">
+            <option value="">性别 - 不限</option>
+            <option value="女">女生</option>
+            <option value="男">男生</option>
+        </select>
+        <select class="form-control" name="mryst" style="width:150px;display: inline-block;">
+            <option value="">婚况 - 不限</option>
+            <option value="未婚">未婚</option>
+            <option value="已婚">已婚</option>
+            <option value="离异">离异</option>
+            <option value="丧偶">丧偶</option>
+            <option value="保密">保密</option>
+        </select>
+        <select class="form-control" name="age" style="width:150px;display: inline-block;">
+            <option value="">年龄 - 不限</option>
+            <option value="1-20"><20岁</option>
+            <option value="21-30">21-30岁</option>
+            <option value="31-40">31-40岁</option>
+            <option value="41-50">41-50岁</option>
+            <option value="51-100">>51岁</option>
+        </select>
+        <select class="form-control" id="pro" onchange="loadC(this)" style="width:150px;display: inline-block;">
+            <option value="">地区 - 省</option>
+        </select>
+        <select class="form-control" id="city" style="width:150px;display: inline-block;">
+            <option value="">地区 - 市</option>
+        </select>
+        <button onclick="search()" class="btn btn-success"  >搜 索</button>
+        <button onclick="location.href='/admin/userlist'" class="btn btn-primary"   >清空条件</button>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -53,10 +84,68 @@
         @endfor
         </tbody>
     </table>
+    {!! $fenye !!}
 @stop
 
 @section("htmlend")
+    <script src="/web/js/addr.js" ></script>
     <script>
+        function loadP() {
+            for( var i=0;i<pro.length;i++ ) {
+                var node = "<option value='"+pro[i]+"'>"+pro[i]+"</option>";
+                $("#pro").append(node);
+            }
+        }
+        function loadC(that) {
+            $("#city").children().remove();
+            $("#city").append("<option value=''>地区 - 市</option>");
+            var val = $(that).val();
+            if( $.trim(val) != '' ) {
+                var tmps = city[val];
+                for( var i=0;i<tmps.length;i++ ) {
+                    var node = "<option value='"+tmps[i]+"'>"+tmps[i]+"</option>";
+                    $("#city").append(node);
+                }
+            }
+
+        }
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)
+                return decodeURI(r[2]);
+            return null;
+        }
+        $(document).ready(function(){
+            loadP();
+            if( GetQueryString('sex') ) {
+                $("select[name=sex]").val(GetQueryString('sex'));
+            }
+            if( GetQueryString('phone') ) {
+                $("input[name=phone]").val(GetQueryString('phone'));
+            }
+            if( GetQueryString('addr') ) {
+                var addrs = GetQueryString('addr');
+                var tmp = addrs.split("-");
+                console.log(tmp);
+                if( tmp.length == 1 ) {
+                    $("#pro").val(tmp[0]);
+                    $("#pro").trigger("change");
+                }else{
+                    $("#pro").val(tmp[0]);
+                    $("#pro").trigger("change");
+                    $("#city").val(tmp[1]);
+                }
+                var addr = $("#pro").val()+"-"+$("#city").val();
+            }
+            if( GetQueryString('mryst') ) {
+                $("select[name=mryst]").val(GetQueryString('mryst'));
+            }
+            if( GetQueryString('age') ) {
+                $("select[name=age]").val(GetQueryString('age'));
+            }
+        });
         function deletebyid(tid) {
             $.post("/admin/deletebyid",{
                 "table":"user",
@@ -72,6 +161,26 @@
             },function(data){
                 location.reload();
             })
+        }
+        function search() {
+            var phone = $("input[name=phone]").val();
+            var sex = $("select[name=sex]").val();
+            var mryst = $("select[name=mryst]").val();
+            var age = $("select[name=age]").val();
+            var addr = $("#pro").val()+"-"+$("#city").val();
+            if( addr == '-' ) {
+                addr = '';
+            }
+            if( $("#pro").val() != '' && $("#city").val() == '' ) {
+                addr = $("#pro").val();
+            }
+            var tmp = location.href.match(/page\=(\d+)/);
+            if( tmp && tmp.length != 0 ) {
+                page = tmp[1];
+            }else{
+                page = 1;
+            }
+            location.href="/admin/userlist?sex="+sex+"&mryst="+mryst+"&age="+age+"&addr="+addr+"&phone="+phone;
         }
     </script>
 @stop
