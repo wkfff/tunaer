@@ -43,7 +43,7 @@
     <div class="content nav">
         <a href="/" >首页</a>
         <a href="javascript:void(0)" class="nav_a_hover navlist" >
-            <span>活动</span><i></i>
+            <span>徒步活动</span><i></i>
             <div class="xiala">
                 <?php
 //                    动态加载分类
