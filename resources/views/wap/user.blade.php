@@ -286,8 +286,11 @@
             getdongtais({{$userinfo->userid}});
             getliuyans({{$userinfo->userid}});
             getyoujis({{$userinfo->userid}});
-            getshoporder({{$userinfo->userid}});
-            gettubuorder({{$userinfo->userid}});
+            @if( !empty(Session::get('uid')) && Session::get('uid') == $userinfo->userid )
+                {{--getshoporder({{$userinfo->userid}});--}}
+                gettubuorder({{$userinfo->userid}});
+            @endif
+
 //            window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
             window.diqu = "{{$userinfo->addr}}";
