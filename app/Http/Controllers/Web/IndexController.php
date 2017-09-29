@@ -368,5 +368,30 @@ class IndexController extends Controller
             return view("web.single",["data"=>$res[0]]);
         }
     }
+    public function qianjiahui() {
+        return view("wap.qianjiahui");
+    }
+    public function doqianjiahui(Request $request) {
+        $name = $request->input('name');
+        $chepai = $request->input('chepai');
+        $phone = $request->input('phone');
+        $pri = $request->input('pri');
+        $city = $request->input('city');
+        $hasjuzhuzheng = $request->input('hasjuzhuzheng');
+        $needjuzhuzheng = $request->input('needjuzhuzheng');
+        $yunying = $request->input('yunying');
+        $sql = " insert into qianjiahui (name,chepai,phone,pri,city,hasjuzhuzheng,needjuzhuzheng,yunying) values (?,?,?,?,?,?,?,?) ";
+        $res = DB::insert($sql,[$name,$chepai,$phone,$pri,$city,$hasjuzhuzheng,$needjuzhuzheng,$yunying]);
+        if( $res ) {
+            echo "提交成功,请等待通知";
+        }else{
+            echo "提交失败";
+        }
+    }
+    public function qianjiahuilist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",6);
+        $sql = " select * from qianjiahui order by id desc ";
+    }
     
 }

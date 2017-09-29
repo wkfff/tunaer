@@ -349,4 +349,5 @@ class IndexController extends Controller{
         $res = DB::select($sql,[($page-1)*$num,$num]);
         return view("admin.tubuorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubuorder",$page,$num)]);
     }
+
 }

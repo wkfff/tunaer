@@ -98,6 +98,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 //前台页面  不需要认证的前端页面
 Route::group(['namespace' => 'Web'], function()
 {
+    Route::get('/qianjiahui','IndexController@qianjiahui');
     Route::get('/login','IndexController@login');
     Route::get('/register','IndexController@register');
     Route::get('/error','IndexController@error');
