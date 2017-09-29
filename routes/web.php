@@ -55,7 +55,10 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/updatezixun/{id}', 'IndexController@updatezixun');
     Route::get('/setting/shopbanner', 'IndexController@shopbanner');
     Route::post('/setting/shopbanner', 'PostController@shopbanner');
+    Route::post('/updatekuaidi', 'PostController@updatekuaidi');
     Route::get('/setting/shopfenlei', 'IndexController@shopfenlei');
+    Route::get('/shoporder', 'IndexController@shoporder');
+    Route::get('/tubuorder', 'IndexController@tubuorder');
 
 //    上传照片
     Route::post('/uploadimg', 'IndexController@uploadimg');

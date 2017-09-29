@@ -230,4 +230,15 @@ class PostController extends Controller{
             }
         }
     }
+    public function updatekuaidi(Request $request) {
+        $id = $request->input("id");
+        $kuaidi = $request->input("kuaidi");
+        $sql = " update shoporder set kuaidi=? where id=? ";
+        $res = DB::update($sql,[$kuaidi,$id]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
 }

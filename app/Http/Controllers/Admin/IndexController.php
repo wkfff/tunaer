@@ -333,4 +333,20 @@ class IndexController extends Controller{
         $res = DB::select($sql);
         return view("admin.setting.mianban",["data"=>$res[0]]);
     }
+    public function shoporder(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $count = DB::select(" select count(*) as cnt from shoporder ");
+        $sql = " select shoporder.*,user.phone,product.title from shoporder left join user on user.id=shoporder.uid left join product on shoporder.shopid=product.id order by shoporder.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("admin.shoporder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/shoporder",$page,$num)]);
+    }
+    public function tubuorder(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $count = DB::select(" select count(*) as cnt from tubuorder ");
+        $sql = " select tubuorder.*,user.phone,userattr.uname,tubuhuodong.title from tubuorder left join user on user.id=tubuorder.uid left join userattr on tubuorder.uid=userattr.uid left join tubuhuodong on tubuorder.tid=tubuhuodong.id order by tubuorder.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("admin.tubuorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubuorder",$page,$num)]);
+    }
 }
