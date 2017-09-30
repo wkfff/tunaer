@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/web/css/common.css">
 </head>
 <body style="background:#FCFCFC;color: #222; ">
-<div style="height:44px;background:#6A6A6A;" ></div>
+<div style="height:44px;background:#337AB7;" ></div>
 <form action="/doqianjiahui" method="GET">
 <h2 class="form-title col-md-12 font-family-inherit" style="font-size: 1.667em; font-weight: normal; text-align: left;">
     千佳汇网约车司机办证信息收集表
