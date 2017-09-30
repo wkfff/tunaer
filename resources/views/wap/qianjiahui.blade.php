@@ -88,7 +88,7 @@
     <p>欢迎有意向的师傅提交资料，具体考试详情我们会以短信的方式通知您</p>
 </div>
 <div class="form-group col-md-12">
-    <input type="submit" class="form-control btn btn-primary " value="提交报名" >
+    <input type="submit" class="form-control btn btn-primary " style="height:40px;" value="提交报名" >
 </div>
 </form>
 </body>
