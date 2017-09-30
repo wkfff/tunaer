@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>千佳汇网约车证办理司机信息收集表</title>
+    <title>合法啦！网约车司机合法啦！成都千佳汇办理“网约车证”报名啦！</title>
     <link rel="stylesheet" href="/web/css/bootstrap.min.css">
     <link rel="stylesheet" href="/web/css/common.css">
 </head>
@@ -13,7 +13,7 @@
 <div style="height:44px;background:#337AB7;" ></div>
 <form action="/doqianjiahui" method="GET">
 <h2 class="form-title col-md-12 font-family-inherit" style="font-size: 1.667em; font-weight: normal; text-align: left;">
-    千佳汇网约车证办理司机信息收集表
+    成都千佳汇办理网约车证资料报名填写
 </h2>
     <div class="form-description col-md-12" style="margin-top:20px;">
     <p>* 信息请填写完整信息，不要写简称。</p>
