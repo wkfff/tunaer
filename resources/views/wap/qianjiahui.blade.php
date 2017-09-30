@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/web/css/common.css">
 </head>
 <body style="background:#FCFCFC;color: #222; ">
+<div style="position:fixed;top:0px;left:0px;z-index:-10;opacity: 0" >
+<img src="/web/images/qianjiahui.jpg" style="width:400px;" alt="网约车">
+</div>
 <div style="height:44px;background:#337AB7;" ></div>
 <form action="/doqianjiahui" method="GET">
 <h2 class="form-title col-md-12 font-family-inherit" style="font-size: 1.667em; font-weight: normal; text-align: left;">
