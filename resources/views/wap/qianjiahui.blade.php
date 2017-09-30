@@ -15,7 +15,10 @@
 <h2 class="form-title col-md-12 font-family-inherit" style="font-size: 1.667em; font-weight: normal; text-align: left;">
     千佳汇网约车司机办证信息收集表
 </h2>
-<div style="height:20px;clear:both;" ></div>
+    <div class="form-description col-md-12" style="margin-top:20px;">
+    <p>* 信息请填写完整信息，不要写简称。</p>
+
+</div>
 <div class="form-group col-md-12">
     <label for="exampleInputEmail1">司机姓名 <span style="color:red" >*</span></label>
     <input type="text" name="name" required class="form-control" placeholder="姓名" >
@@ -81,7 +84,7 @@
     </div>
 </div>
 <div class="form-description col-md-12" style="margin-top:20px;">
-    <p>* 信息请填写完整信息，不要写简称。</p>
+
     <p>
         大成都包含：锦江区、青羊区、金牛区、武侯区、成华区、龙泉驿区、青白江区、新都区、温江区、双流区、都江堰市、彭州市、邛崃市、崇州市、简阳市、金堂县、郫都区、大邑县、蒲江县、新津县</p>
 </div>
