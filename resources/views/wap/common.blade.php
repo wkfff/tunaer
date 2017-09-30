@@ -13,7 +13,7 @@
 
     @yield("css","")
 
-    <title>@yield("title","测试")</title>
+    <title>@yield("title","徒哪儿")</title>
     <script src="/web/js/jquery.min.js" ></script>
     <script src="/web/js/bootstrap.min.js" ></script>
     <script src="/wap/js/common.js" ></script>
