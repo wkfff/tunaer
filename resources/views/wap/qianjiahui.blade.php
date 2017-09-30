@@ -61,13 +61,14 @@
     <label >是否需要代办居住证 <span style="color:red" >*</span></label>
     <div class="radio">
         <label>
-            <input type="radio" name="needjuzhuzheng"  value="1" checked>
+            <input type="radio" name="needjuzhuzheng"  value="1" >
             需要
         </label>
         <label>
-            <input type="radio" name="needjuzhuzheng"  value="0">
+            <input type="radio" name="needjuzhuzheng"  value="0" checked>
             不需要
         </label>
+        (如果户口为大成都户口，则无需办居住证)
     </div>
 </div>
 <div class="form-group col-md-12">
