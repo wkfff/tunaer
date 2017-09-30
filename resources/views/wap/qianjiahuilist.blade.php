@@ -82,15 +82,3 @@
         {!! $fenye !!}
 
     </div>
-
-    @include("wap.footer")
-
-
-@stop
-
-@section("htmlend")
-    <script>
-
-    </script>
-
-@stop
