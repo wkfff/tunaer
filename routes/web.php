@@ -99,6 +99,8 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
 Route::group(['namespace' => 'Web'], function()
 {
     Route::get('/qianjiahui','IndexController@qianjiahui');
+    Route::get('/doqianjiahui','IndexController@doqianjiahui');
+    Route::get('/v9','IndexController@qianjiahuilist');
     Route::get('/login','IndexController@login');
     Route::get('/register','IndexController@register');
     Route::get('/error','IndexController@error');

@@ -22,16 +22,16 @@
 </div>
 <div class="form-group col-md-12">
     <label for="exampleInputEmail1">司机姓名 <span style="color:red" >*</span></label>
-    <input type="text" name="name" required class="form-control" >
+    <input type="text" name="name" required class="form-control" placeholder="姓名" >
 </div>
 <div class="form-group col-md-12">
     <label for="exampleInputEmail1">注册车牌 <span style="color:red" >*</span></label>
     <div>车牌一律大写</div>
-    <input type="text" name="chepai" required class="form-control" value="川A" >
+    <input type="text" name="chepai" required class="form-control" value="" placeholder="川A 68430">
 </div>
 <div class="form-group col-md-12">
     <label for="exampleInputEmail1">注册手机号 <span style="color:red" >*</span></label>
-    <input type="number" required name="phone" class="form-control" value="" >
+    <input type="number" oninput="if(value.length>11)value=value.slice(0,11)"  required name="phone" placeholder="手机号" class="form-control" value="" >
 </div>
 <div class="form-group col-md-12">
     <label for="exampleInputEmail1">户口所在地 <span style="color:red" >*</span></label>
@@ -62,11 +62,11 @@
     <label >是否需要代办居住证 <span style="color:red" >*</span></label>
     <div class="radio">
         <label>
-            <input type="radio" name="needjuzhuzheng"  value="" checked>
+            <input type="radio" name="needjuzhuzheng"  value="1" checked>
             需要
         </label>
         <label>
-            <input type="radio" name="needjuzhuzheng"  value="">
+            <input type="radio" name="needjuzhuzheng"  value="0">
             不需要
         </label>
     </div>
@@ -75,11 +75,11 @@
     <label >是否愿意转入运营性质 <span style="color:red" >*</span></label>
     <div class="radio">
         <label>
-            <input type="radio" name="yunying"  value="" checked>
+            <input type="radio" name="yunying"  value="1" checked>
             愿意
         </label>
         <label>
-            <input type="radio" name="yunying" value="option2">
+            <input type="radio" name="yunying" value="0">
             不愿意
         </label>
     </div>

@@ -380,18 +380,34 @@ class IndexController extends Controller
         $hasjuzhuzheng = $request->input('hasjuzhuzheng');
         $needjuzhuzheng = $request->input('needjuzhuzheng');
         $yunying = $request->input('yunying');
+//        检查手机号是否重复
+        $sql = " select * from qianjiahui where phone=? ";
+        $r = DB::select($sql,[$phone]);
+        if( count($r) > 0 ) {
+            return view('wap.res',["content"=>"请勿重复提交,耐心等待通知"]);
+        }
+//        检查ip恶意注册
+//        $sql = " select * from qianjiahui where ip=? ";
+//        $r = DB::select($sql,[$_SERVER['REMOTE_ADDR']]);
+//        if( count($r) > 10 ) {
+//            echo "提交成功,请等待通知"; return ;
+//        }
+
         $sql = " insert into qianjiahui (name,chepai,phone,pri,city,hasjuzhuzheng,needjuzhuzheng,yunying) values (?,?,?,?,?,?,?,?) ";
         $res = DB::insert($sql,[$name,$chepai,$phone,$pri,$city,$hasjuzhuzheng,$needjuzhuzheng,$yunying]);
         if( $res ) {
-            echo "提交成功,请等待通知";
+            return view('wap.res',["content"=>"提交成功,请等待通知"]);
         }else{
-            echo "提交失败";
+            return view('wap.res',["content"=>"提交成功,请等待通知"]);
         }
     }
     public function qianjiahuilist(Request $request) {
         $page = $request->input("page",1);
-        $num = $request->input("num",6);
-        $sql = " select * from qianjiahui order by id desc ";
+        $num = $request->input("num",20);
+        $sql = " select * from qianjiahui order by id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        $count = DB::select("select count(*) as cnt from qianjiahui");
+        return view("wap.qianjiahuilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/v9",$page,$num),"count"=>$count[0]->cnt]);
     }
     
 }
