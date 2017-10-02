@@ -78,21 +78,28 @@
                 <span style="margin-left:10px;">投票次数：<span style="color:#ff536a" >{{$zongpiao}}</span> 次</span>
                 <span style="margin-left:10px;">浏览次数：<span style="color:#ff536a" >{{$data->readcnt}}</span> 次</span>
             </span>
-            <button onclick="canjia()" class="searchb"  >上传我的作品</button>
+            @if( strtotime($data->endday) - time() <= 0 )
+                <button class="searchb"  style="background-color:grey;" >已经结束啦</button>
+                @else
+                <button onclick="canjia()" class="searchb"  >上传我的作品</button>
+            @endif
+
         </div>
         <div class="workbox" >
             @for( $i=0;$i<count($works);$i++ )
                 <div class="workitem" onclick="img2big(this)"
                      style="background-image:url(/web/data/images/{{$works[$i]->pics}});">
                     <div onclick="zuzhi(event)" style="height:50px;position: absolute;width:100%;bottom:0px;background:rgba(0,0,0,0.5);color:#fff;" >
-                        <div style="width:35px;height:35px;background-image:url(/head/{{$works[$i]->uid}});background-size:cover;background-position:center;border-radius:17.5px;margin:7.5px;float:left;vertical-align: middle;" ></div>
+                        <a href="/user/{{$works[$i]->uid}}"><div style="width:35px;height:35px;background-image:url(/head/{{$works[$i]->uid}});background-size:cover;background-position:center;border-radius:17.5px;margin:7.5px;float:left;vertical-align: middle;" ></div></a>
                         <div style="float:left;line-height:50px;font-size: 16px;font-weight: bold;margin-left:5px; " >
                             排名 <span style="color:orangered;margin-right:10px;">{{($i+1)+(($page-1)*$num)}}</span>
                             得票 <span style="color:#ff536a" >{{$works[$i]->depiao}}</span>
                         </div>
+                        @if( strtotime($data->endday) - time() > 0 )
                         <div onclick="toupiao({{$works[$i]->id}})"  class="toupiaobtn">
                             <span style="font-size: 20px;margin-right:10px;vertical-align: middle" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>投一票
                         </div>
+                        @endif
 
                     </div>
                     <div class="zhegai" ></div>

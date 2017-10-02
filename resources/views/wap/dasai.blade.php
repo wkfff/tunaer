@@ -1,5 +1,5 @@
 @extends("wap.common")
-@section("title","徒步活动")
+@section("title","{$data->title}")
 @section("css")
     <style>
         .toppic{
@@ -14,7 +14,7 @@
             max-width:100% !important;height:auto !important;
         }
         .workitem{
-            width:99%;height:250px;background:deeppink;margin:0 auto;
+            width:100%;height:250px;background:deeppink;margin:0 auto;
             background-size:cover;background-repeat:no-repeat;
             position: relative;margin-bottom:100px;
             background-position: center;
@@ -58,7 +58,7 @@
     <div onclick="history.back()" style="width:40px;height:30px;background:rgba(0,0,0,0.3);color:#fff;position:fixed;left:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
         <span class="glyphicon glyphicon-menu-left" ></span>
     </div>
-    <div class="content" style="padding-left:5px;" >
+    <div class="content" style="padding-left:0" >
 
         <div style="color:orangered;font-weight:bold;margin-right:30px;font-size:18px;margin:10px 0px;">
             <span >主题：{{$data->title}}</span>
@@ -69,17 +69,22 @@
         </div>
 
         <div class="fengexian">赛事介绍</div>
-        <div class="jieshao">
+        <div class="jieshao" style="padding:10px;">
             {!! $data->tuwen !!}
         </div>
-        <div class="fengexian">
+        <div class="fengexian" style="padding:10px;">
             <span style="color:#2562B3">
                 <span >参赛作品：<span style="color:#ff536a" >{{$zongcanjia}}</span> 张</span>
                 <span style="margin-left:10px;">投票次数：<span style="color:#ff536a" >{{$zongpiao}}</span> 次</span>
                 <span style="margin-left:10px;">浏览次数：<span style="color:#ff536a" >{{$data->readcnt}}</span> 次</span>
             </span>
             <br>
-            <button onclick="canjia()" class="searchb"  >上传我的作品</button>
+            @if( strtotime($data->endday) - time() <= 0 )
+                <button class="searchb"  style="background-color:grey;" >已经结束啦</button>
+            @else
+                <button onclick="canjia()" class="searchb"  >上传我的作品</button>
+            @endif
+            {{--<button onclick="canjia()" class="searchb"  >上传我的作品</button>--}}
         </div>
         <div class="workbox" >
             @for( $i=0;$i<count($works);$i++ )
@@ -91,12 +96,13 @@
                             排名 <span style="color:orangered;margin-right:10px;">{{($i+1)+(($page-1)*$num)}}</span>
                             得票 <span style="color:#ff536a" >{{$works[$i]->depiao}}</span>
                         </div>
-                        <div onclick="toupiao({{$works[$i]->id}})"  class="toupiaobtn">
-                            <span style="font-size: 20px;margin-right:10px;vertical-align: middle" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>投一票
-                        </div>
-
+                        @if( strtotime($data->endday) - time() > 0 )
+                            <div onclick="toupiao({{$works[$i]->id}})"  class="toupiaobtn">
+                                <span style="font-size: 20px;margin-right:10px;vertical-align: middle" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>投一票
+                            </div>
+                        @endif
                     </div>
-                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px 0;overflow: hidden;" >
+                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px;overflow: hidden;" >
                         {{$works[$i]->intro}}
                     </div>
                 </div>
