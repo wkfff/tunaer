@@ -21,6 +21,7 @@ class PostController extends Controller{
     public function baoming(Request $request) {
         $tid = $request->input("tid",'');
         $uid = Session::get('uid');
+        $jihe = "未选择";
 
         $sqltmp = " select * from tubuorder where uid=? and tid=? ";
         $r = DB::select($sqltmp,[$uid,$tid]);
@@ -32,8 +33,8 @@ class PostController extends Controller{
         if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
-            $sql = " insert into tubuorder (uid,tid,orderid) values (?,?,?) ";
-            $res = DB::insert($sql,[$uid,$tid,$orderid]);
+            $sql = " insert into tubuorder (uid,tid,orderid,jihe) values (?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$tid,$orderid,$jihe]);
             if( $res ) {
                 echo "200";
             }else{

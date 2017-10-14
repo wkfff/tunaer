@@ -1,22 +1,17 @@
 @extends('admin.common')
-
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("title","发布徒步活动")
 
 @section("content")
 
-
-    <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
     <style>
-        #myEditor{
-            height:70vh !important;
-        }
         .imgdiv{
             height:150px;width:250px;background-size:cover;float:left;margin-right:30px;
             background-position:center;background-repeat: no-repeat;margin-top:10px;
         }
     </style>
     <input type="text" name="title" placeholder="资讯标题" style="width:900px;margin-bottom:10px;height:35px;" >
-    <script type="text/plain" id="myEditor" style="width:900px;"></script>
+    <textarea id="editor_id" name="content" style="width:900px;min-height:500px;"></textarea>
     <input type="file" class="uploadinput2" onchange="uploadImg(this)" style="display: none;" >
     <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">添加封面</button>
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
@@ -28,16 +23,26 @@
 
 @section("htmlend")
 
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
+
     <script>
-        window.um = UM.getEditor('myEditor');
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
+
         function fabu() {
             var title = $("input[name=title]").val();
-            if( $.trim(title) == '' || $.trim(um.getContentTxt()) == '' ) {
+            if( $.trim(title) == '' || $.trim(window.editor.html()) == '' ) {
                 toast("请填写没一项内容");return;
             }
-            var tuwen = um.getContent();
+            var tuwen = window.editor.html();
             if( $(".youjipics").children().length == 0 ) {
                 toast("请上传封面");return ;
             }

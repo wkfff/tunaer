@@ -24,13 +24,20 @@
             <div style="font-size: 18px;color: #999;margin:30px 0">
                 <a style="color: #999;" href="/">首页</a>
                 <span>></span>
-                <a style="color: #999;" href="/tubulist/{{$detail->types}}" ">{{$detail->name}}</a>
+                <a style="color: #999;" href="/tubulist/{{$detail->types}}" >{{$detail->name}}</a>
             </div>
             <div style="color:#4b8ee8;font-size:24px;">
                 {{$detail->title}}
             </div>
             <div style="float: left;margin-top:30px;">
                 <div class="swiper-container" id="swiper-container1">
+                    <div style="height:40px;width:130px;background:rgba(75,142,232,0.8);position:absolute;left:0px;top:0px;z-index:9999;color:#fff;text-align: center;line-height:40px;font-size:18px;" >
+                        @if( strtotime($detail->startday) - time() > 0 )
+                            活动招募中
+                            @else
+                            活动已结束
+                        @endif
+                    </div>
                     <div class="swiper-wrapper">
                         @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
                             <div class="swiper-slide" style="background-image:url(/admin/data/images/{{$imgs[$i]}});"></div>
@@ -49,8 +56,26 @@
 
             <div style="width:560px;margin-left:40px;float:left;margin-top:30px;font-size:16px;line-height: 30px" >
                 <p>活动主题：<span style="color:#d85803">{{$detail->title}}</span></p>
-                <p>价格：<span style="color:#d85803" >￥{{$detail->price}}</span></p>
-                <p>
+                <div style="height:120px;background:#FFF8EE;width:100%;color:#444;padding:10px;" >
+                    <p style="border-bottom:2px dashed orange;padding-bottom:10px;">活动价格：<span style="color:orange;font-size:30px;font-weight: bold;" >￥{{$detail->price}}</span><span style="color:#777;float:right;">活动报名截止：{{$detail->startday}}</span></p>
+                    <p>
+                        @if( !$isjoined )
+                            活动特点：<span style="color:orange;">{{$detail->tese}}</span>
+                        @endif
+
+
+                        @if( strtotime($detail->startday) - time() > 0 )
+                                @if( $isjoined )
+                                    <span style="color:red;font-size:16px;">你已报名，请等待通知(出发前一天)，确保你的{{$phone}}保持畅通</span>
+                                    @else
+                                    <span style="float:right" ><button onclick="baoming({{$detail->id}})" type="button" class="btn btn-warning" style="width:150px;height:40px;font-size: 20px;outline:none">马上报名</button></span>
+                                    @endif
+                            @endif
+
+                    </p>
+                </div>
+
+                <p style="margin-top:10px;">
                     领队：<span style="color:#4b8ee8">{{$detail->leader}}</span>
                     距离：<span style="color:#4b8ee8">{{$detail->juli}}</span>
                     <span style="color:orange;margin-left:10px;" >强度等级：</span><span style="color:#4b8ee8">{{$detail->qiangdu}}</span>
@@ -58,35 +83,38 @@
                 <p>
                     电话：<span style="color:#4b8ee8">{{$detail->phone}}</span>
                 </p>
-                <p>
-                    需要：<span style="color:#4b8ee8">{{$detail->need}}人</span>
-                    报名：<span style="color:#4b8ee8">{{$detail->baoming}}人</span>
-                    剩余：<span style="color:#4b8ee8">{{$detail->need - $detail->baoming}}人</span>
-                </p>
-                <p>
-                    目的地：<span style="color:#4b8ee8">{{$detail->mudidi}}</span>
-                </p>
+                {{--<p>--}}
+                    {{--需要：<span style="color:#4b8ee8">{{$detail->need}}人</span>--}}
+                    {{--报名：<span style="color:#4b8ee8">{{$detail->baoming}}人</span>--}}
+                    {{--剩余：<span style="color:#4b8ee8">{{$detail->need - $detail->baoming}}人</span>--}}
+                {{--</p>--}}
+                {{--<p>--}}
+                    {{--目的地：<span style="color:#4b8ee8">{{$detail->mudidi}}</span>--}}
+                {{--</p>--}}
                 <p>
                     出发时间：<span style="color:#4b8ee8">{{$detail->startday}}</span>
                     返回时间：<span style="color:#4b8ee8">{{$detail->endday}}</span>
                 </p>
+                {{--<p>--}}
+                    {{--活动景点：<span style="color:#4b8ee8">{{$detail->jingdian}}</span>--}}
+                {{--</p>--}}
+                {{--<p>--}}
+                    {{--活动内容：<span style="color:#4b8ee8">{{$detail->neirong}}</span>--}}
+                {{--</p>--}}
                 <p>
-                    活动景点：<span style="color:#4b8ee8">{{$detail->jingdian}}</span>
-                </p>
-                <p>
-                    活动内容：<span style="color:#4b8ee8">{{$detail->neirong}}</span>
+                    交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
                 </p>
                 <p>
                     集合时间：<span style="color:#4b8ee8">{{$detail->jihetime}}</span>
                 </p>
-                <p>
-                    集合地点：<span style="color:#4b8ee8">{{$detail->jihedidian}}</span>
-                </p>
-                <p>
-                    交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
-                </p>
-                <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary"
-                        style="width:200px;height:50px;font-size: 20px;outline:none">马上报名</button>
+                @for( $data = explode("#",$detail->jihedidian),$i=0;$i<count($data);$i++  )
+                    <p>
+                        集合地点{{($i+1)}}：<span style="color:#4b8ee8">{{$data[$i]}}</span>
+                    </p>
+                @endfor
+
+
+
             </div>
             <div style="clear:both" ></div>
             <style>

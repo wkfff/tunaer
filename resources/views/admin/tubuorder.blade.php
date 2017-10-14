@@ -10,6 +10,7 @@
             <th>订单号</th>
             <th>活动</th>
             <th>会员</th>
+            <th>集合点</th>
             <th>手机号</th>
             {{--<th>件数</th>--}}
             {{--<th>快递状态</th>--}}
@@ -27,6 +28,7 @@
                 <td class="center">{{$list[$i]->orderid}}</td>
                 <td title="{{$list[$i]->title}}" style="width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;"><a target="_blank" style="color:cornflowerblue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
                 <td class="center"><a target="_blank" style="color:cornflowerblue" href="/user/{{$list[$i]->uid}}">{{$list[$i]->uname}}</a></td>
+                <td class="center">{{$list[$i]->jihe}}</td>
                 <td class="center">{{$list[$i]->phone}}</td>
 
                 <td class="center">{{$list[$i]->ordertime}}</td>

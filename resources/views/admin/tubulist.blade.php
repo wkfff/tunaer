@@ -10,8 +10,8 @@
             <th>标题</th>
             <th>类型</th>
             <th>行程</th>
-            <th>开始</th>
-            <th>结束</th>
+            <th>出发</th>
+            <th>返回</th>
             <th>价格</th>
             <th>需要多少人</th>
             <th>已报人数</th>
@@ -23,7 +23,7 @@
         <tbody>
         @for ($i = 0; $i < count($tubulist); $i++)
             <tr>
-                <td><a target="_blank" style="color:cornflowerblue" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
+                <td><a target="_blank" style="color:cornflowerblue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:240px;" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
                 <td class="center">{{$tubulist[$i]->typename}}</td>
                 <td class="center">{{$tubulist[$i]->howlong}}天</td>
                 <td class="center">{{$tubulist[$i]->startday}}</td>

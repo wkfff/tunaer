@@ -1,5 +1,5 @@
 @extends('admin.common')
-
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("title","发布徒步活动")
 
 @section("content")
@@ -9,12 +9,63 @@
 
     </div>
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
-    <style>
-        #myEditor{
-            height:70vh !important;
-        }
-    </style>
-    <script type="text/plain" id="myEditor" style="width:900px;"></script>
+
+    <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
+        <style>
+            .tubudetailnavbar{
+                border-bottom:1px solid #ddd;height:50px;width:100%;
+            }
+            .tubudetailnavbar a{
+                display:block;width:80px;height:30px;text-decoration: none;
+                line-height:30px;float:left;color:#333;margin-right:10px;
+                cursor: pointer;
+                text-align: center;background: #E6E6E6;margin-top:20px;
+            }
+            .tubudetailnavbar a:hover{
+                background: #4B8EE8;color:#fff;
+            }
+        </style>
+
+        <div class="tubudetailnavbar" >
+            <a href="#xcap">行程安排</a>
+            <a href="#fysm">费用说明</a>
+            <a href="#xlms">线路描述</a>
+            <a href="#ditu">目的地地图</a>
+            <a href="#bmxz">报名须知</a>
+            <a href="#hdsp">活动视频</a>
+            <a href="#xlpj">线路评价</a>
+            {{--<a href="#lydp">驴友点评</a>--}}
+        </div>
+        <div id="xcap" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>行程安排</p>
+        </div>
+        <br>
+        <div id="fysm" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>费用说明</p>
+        </div>
+        <br>
+        <div id="xlms" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>线路描述</p>
+        </div>
+        <br>
+        <div id="ditu" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>目的地地图</p>
+        </div>
+        <br>
+        <div id="bmxz" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>报名须知</p>
+        </div>
+        <br>
+        <div id="xlpj" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+            <p>线路评价</p>
+        </div>
+        <br>
+        {{--<div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >--}}
+            {{--<p>驴友点评</p>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+    </textarea>
+    {{--<script type="text/plain" id="myEditor" style="width:900px;"></script>--}}
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
 
 @stop
@@ -45,7 +96,7 @@
                     <input type="text" value="青城山目的地" placeholder="目的地" name="mudidi" ><br>
                     <input type="text" value="2017-09-01" placeholder="出发时间" name="startday" >
                     <input type="text" value="2017-09-02" placeholder="返回时间" name="endday" ><br>
-                    <input type="text" value="火车站集合地点" placeholder="集合地点" name="jihedidian" >
+                    <input type="text" value="火车站集合地点" placeholder="集合地点,多个集合地点使用#号隔开" name="jihedidian" >
                     <input type="text" value="2017-09-01 12:12:12" placeholder="集合时间" name="jihetime" ><br>
                     <input type="text" value="230" placeholder="价格" name="price" >
                     <input type="text" value="火车" placeholder="交通方式" name="jiaotong" ><br>
@@ -91,14 +142,19 @@
 
 @section("htmlend")
 
-    {{--<script src="/admin/umediter/etpl.js" ></script>--}}
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
-    {{--<script src="/admin/umediter/lang/zh-cn/zh-cn.js"></script>--}}
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
 
     <script>
-        window.um = UM.getEditor('myEditor');
-//        window.shuxing.pictures = '';
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
         function fabu() {
             var t1 = $("#inputcls input");
             for( var i=0;i<t1.length;i++ ) {
@@ -108,7 +164,7 @@
                 }
             }
             if( checkpictures() ) {
-                window.shuxing.tuwen = um.getContent();
+                window.shuxing.tuwen = window.editor.html();
 
                 $.post("/admin/dofabutubu",window.shuxing,function(data){
                     if( ajaxdata(data) ) {

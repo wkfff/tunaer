@@ -81,8 +81,22 @@ class IndexController extends Controller
         if( count($res) == 0 ) {
             return view("web.error",['content'=>"没有找到相关内容"]);
         }else{
+//            增加活动浏览量
             @DB::table("tubuhuodong")->where("id",$tid)->increment("readcnt",1);
-            return view("web.tubudetail",['detail'=>$res[0]]);
+//            检查这个用户有没有报名
+            $isjoined = false;
+            $phone = "";
+            if( Session::get("uid") ) {
+
+                $sql = " select user.phone from tubuorder inner join user on uid=user.id where uid=? and tid=? ";
+                $r = DB::select($sql,[Session::get("uid"),$tid]);
+
+                if( count($r) >= 1 ) {
+                    $phone = $r[0]->phone;
+                    $isjoined = true;
+                }
+            }
+            return view("web.tubudetail",['detail'=>$res[0],"isjoined"=>$isjoined,"phone"=>$phone]);
         }
     }
     public function memberlist(Request $request) {

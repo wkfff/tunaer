@@ -1,5 +1,5 @@
 @extends('admin.common')
-
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("title","发布商品")
 
 @section("content")
@@ -8,13 +8,14 @@
         <label for="exampleInputEmail1">图文介绍 <span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" data-toggle="modal"  data-target="#myModal">商品属性</a></span><span style="margin-left:20px;"><a href="javascript:void(0)" style="color:#ff536a;font-weight:bold;outline: none;" onclick="$('.tubupics').slideDown()">商品图片</a></span></label>
 
     </div>
-    <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
+
     <style>
         #myEditor{
             height:70vh !important;
         }
     </style>
-    <script type="text/plain" id="myEditor" style="width:900px;"></script>
+    <textarea id="editor_id" name="content" style="width:900px;min-height:600px; "></textarea>
+    {{--<script type="text/plain" id="myEditor" style="width:900px;"></script>--}}
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
 
 @stop
@@ -84,16 +85,24 @@
 
 @section("htmlend")
 
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
     <script>
-        window.um = UM.getEditor('myEditor');
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
         loadfenlei();
         //        window.shuxing.pictures = '';
         function fabu() {
             var t1 = $("#inputcls input");
             for( var i=0;i<t1.length;i++ ) {
-                console.log(t1[i].value);
+//                console.log(t1[i].value);
                 if( t1[i].value == '' ) {
                     toast("属性不完整"); return ;
                 }
@@ -104,7 +113,7 @@
                 toast("属性不完整"); return ;
             }
             if( checkpictures() ) {
-                window.shuxing.tuwen = um.getContent();
+                window.shuxing.tuwen = window.editor.html();
 
                 $.post("/admin/dofabuproduct",window.shuxing,function(data){
                     if( ajaxdata(data) ) {

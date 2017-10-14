@@ -1,5 +1,5 @@
 @extends('admin.common')
-
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("title","修改活动")
 
 @section("content")
@@ -14,7 +14,8 @@
             height:70vh !important;
         }
     </style>
-    <script type="text/plain" id="myEditor" style="width:900px;"></script>
+    <textarea id="editor_id" name="content" style="width:900px;min-height:600px; "></textarea>
+    {{--<script type="text/plain" id="myEditor" style="width:900px;"></script>--}}
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">更新保存</button>
 
 @stop
@@ -45,7 +46,7 @@
                     <input type="text" value="{{$tubu->mudidi}}" placeholder="目的地" name="mudidi" ><br>
                     <input type="text" value="{{$tubu->startday}}" placeholder="出发时间" name="startday" >
                     <input type="text" value="{{$tubu->endday}}" placeholder="返回时间" name="endday" ><br>
-                    <input type="text" value="{{$tubu->jihedidian}}" placeholder="集合地点" name="jihedidian" >
+                    <input type="text" value="{{$tubu->jihedidian}}" placeholder="集合地点,多个集合地点使用#号隔开" name="jihedidian" >
                     <input type="text" value="{{$tubu->jihetime}}" placeholder="集合时间" name="jihetime" ><br>
                     <input type="text" value="{{$tubu->price}}" placeholder="价格" name="price" >
                     <input type="text" value="{{$tubu->jiaotong}}" placeholder="交通方式" name="jiaotong" ><br>
@@ -91,12 +92,20 @@
 
 @section("htmlend")
 
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
     <script>
-        window.um = UM.getEditor('myEditor');
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
         setTimeout(function () {
-            um.setContent('{!!$tubu->tuwen!!}');
+            window.editor.html(`{!!$tubu->tuwen!!}`);
             var inputs = $("input[name=types]");
             inputs.removeAttr("checked");
             var types = '{{$tubu->types}}';
@@ -124,7 +133,7 @@
                 }
             }
             if( checkpictures() ) {
-                window.shuxing.tuwen = um.getContent();
+                window.shuxing.tuwen = window.editor.html();
                 window.shuxing.tubuid = '{{$tubu->id}}';
                 $.post("/admin/doupdatetubu",window.shuxing,function(data){
                     if( ajaxdata(data) ) {

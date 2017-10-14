@@ -62,8 +62,6 @@
                 @endfor
             </div>
         </a>
-        <a href="/tubulist/{{$guoneilvyou}}" >国内旅游</a>
-
         <a href="javascript:void(0)" class="navlist" >
             <span>徒步交友</span><i></i>
             <div class="xiala">
@@ -71,6 +69,9 @@
                 <div onclick="location.href='/member/list'">徒友交流</div>
             </div>
         </a>
+        <a href="/tubulist/{{$guoneilvyou}}" >国内旅游</a>
+
+
         <a href="/zixun" >
             <span>徒步资讯</span>
         </a>

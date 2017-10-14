@@ -1,16 +1,11 @@
 @extends('admin.common')
-
+<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
 @section("title","创建摄影大赛")
 
 @section("content")
 
-
-    <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
     <link rel="stylesheet" href="/admin/css/bootstrap-datetimepicker.min.css">
     <style>
-        #myEditor{
-            height:70vh !important;
-        }
         .imgdiv{
             height:150px;width:250px;background-size:cover;float:left;margin-right:30px;
             background-position:center;background-repeat: no-repeat;margin-top:10px;
@@ -19,7 +14,8 @@
     <input type="text" name="title" placeholder="大赛主题" style="width:900px;margin-bottom:10px;height:35px;" ><br>
     <input class="datetimepicker"   type="text" name="start" placeholder="开始时间" style="width:300px;margin-bottom:10px;height:35px;" >
     <input class="datetimepicker"   type="text" name="end" placeholder="结束时间" style="width:300px;margin-bottom:10px;height:35px;" >
-    <script type="text/plain" id="myEditor" style="width:900px;">摄影大赛详细介绍</script>
+    {{--<script type="text/plain" id="myEditor" style="width:900px;">摄影大赛详细介绍</script>--}}
+    <textarea id="editor_id" name="content" style="width:900px;min-height:500px;"></textarea>
     <input type="file" class="uploadinput2" onchange="uploadImg(this)" style="display: none;" >
     <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">顶部图片</button>
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
@@ -34,16 +30,26 @@
     <script src="/admin/js/bootstrap-datetimepicker.min.js" ></script>
     <script src="/admin/js/bootstrap-datetimepicker.zh-CN.js" ></script>
 
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
+
     <script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
         $(document).ready(function(){
             $('.datetimepicker').datetimepicker({
                 "format":"yyyy-mm-dd hh:ii:ss",
                 "language":"zh-CN"
             })
         })
-        window.um = UM.getEditor('myEditor');
+
         function fabu() {
             var title = $("input[name=title]").val();
             var starttime = $("input[name=start]").val();
