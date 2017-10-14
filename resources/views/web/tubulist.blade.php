@@ -53,7 +53,7 @@
         <div style="font-size: 18px;color: #999;margin:30px 0">
             <a style="color: #999;" href="/">首页</a>
             <span>></span>
-            <a style="color: #999;" href="javascript:void(0)" onclick="location.reload();" >{{$list[0]->name }}</a>
+            <a style="color: #999;" href="javascript:void(0)" onclick="location.reload();" >{{count($list) == 0 ? "徒步列表" : $list[0]->name }}</a>
         </div>
         <div class="tubunav" >
             <?php
