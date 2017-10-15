@@ -7,7 +7,7 @@
     @include("web.header")
     <div class="content">
 
-        <h1>正在检测用户身份，请勿操作，等待自动跳转．．．</h1>
+        <h1 style="color:darkgrey">正在检测用户身份，请勿操作，等待自动跳转．．．</h1>
     </div>
     <div class="modal fade" id="qqlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
