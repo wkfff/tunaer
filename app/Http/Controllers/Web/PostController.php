@@ -604,5 +604,26 @@ class PostController extends Controller{
             echo json_encode($tubucm);
         }
     }
+//    第三方登录
+    public function otherlogin(Request $request) {
+        $openid = $request->input("openid",false);
+        $type = $request->input("type",false);
+        if( checknull($openid,$type) ) {
+            if( $type == "qq" ) {
+                $sql = " select * from user where qqid=? ";
+            }else if( $type == "wx" ) {
+                $sql = " select * from user where wxid=? ";
+            }else{
+                echo "400-认证失败";return;
+            }
+            $res = DB::select($sql,[$openid]);
+            if( count($res) ) {
+                Session::put('uid', $res[0]->id);
+                Session::put('uname', $res[0]->uname);
+                echo "200-登录成功";
+            }
+
+        }
+    }
 
 }

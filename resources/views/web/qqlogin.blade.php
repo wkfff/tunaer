@@ -7,7 +7,7 @@
     @include("web.header")
     <div class="content">
 
-        跳转中．．．
+        <h1>正在检测用户身份，请勿操作，等待自动跳转．．．</h1>
     </div>
 
     @include("web.footer")
@@ -18,9 +18,9 @@
     <script type="text/javascript">
         if( QC.Login.check() ) {
             QC.Login.getMe(function(openId, accessToken){
-                console.log(openId);
-                console.log(accessToken);
+                otherlogin(openid);
             })
         }
+
     </script>
 @stop

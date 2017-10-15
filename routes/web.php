@@ -143,6 +143,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/searchtubu","IndexController@searchtubu");
     Route::get("/single/{id}","IndexController@singlepage");
     Route::get("/qqlogin","IndexController@qqlogin");
+    Route::post("/otherlogin","PostController@otherlogin");
 
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");

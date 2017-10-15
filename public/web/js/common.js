@@ -38,6 +38,20 @@ function toast(title) {
         $(".toast").fadeOut(1000);
     },1500)
 }
+// 第三方登录
+function otherlogin(openid,type) {
+    $.post("/otherlogin",{"openid":openid,"type":type},function(d){
+        if( ajaxdata(d) ) {
+            if( localStorage.getItem("enterurl") ) {
+                window.parent.location.href=localStorage.getItem("enterurl");
+            }else{
+                window.parent.location.reload();
+            }
+        }else{
+            toast("认证失败");
+        }
+    })
+}
 // 过滤ajax数据
 function ajaxdata(data) {
     var qianzhui = data.substr(0,3);
