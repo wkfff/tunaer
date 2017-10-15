@@ -51,7 +51,7 @@
         if( QC.Login.check() ) {
 
             QC.Login.getMe(function(openId, accessToken){
-                alert(openId+":::"+accessToken)
+//                alert(openId+":::"+accessToken);
                 localStorage.setItem("qq_access_token",accessToken);
                 localStorage.setItem("qq_openid",openId);
                 otherlogin(openId,"qq");
