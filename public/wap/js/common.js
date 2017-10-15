@@ -41,10 +41,8 @@ function openreg() {
     //     $("#regbg").css("display","block");
     // },100)
 }
-function sendcode(phone) {
-    if( !phone ) {
-        phone = $.trim( $("input[name='rg-phone']").val() );
-    }
+function sendcode() {
+    var phone = $.trim( $("input[name='rg-phone']").val() );
     var r = /^1[23456789]{1}\d{9}$/;
     if( !r.test(phone) ) {
         toast("手机格式错误"); return false;
@@ -53,6 +51,19 @@ function sendcode(phone) {
         var res = ajaxdata(data);
         $("#sendcodebtn").removeAttr("onclick");
         $("#sendcodebtn").text("已发送");
+        toast("发送成功，请注意查收");
+    })
+}
+function sendcode2() {
+    var phone = $.trim( $("input[name='ql-phone']").val() );
+    var r = /^1[23456789]{1}\d{9}$/;
+    if( !r.test(phone) ) {
+        toast("手机格式错误"); return false;
+    }
+    $.post("/sendcode",{'phone':phone},function(data){
+        var res = ajaxdata(data);
+        $(".sendcodebtn").removeAttr("onclick");
+        $(".sendcodebtn").text("已发送");
         toast("发送成功，请注意查收");
     })
 }
