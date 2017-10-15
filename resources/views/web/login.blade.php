@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>login</title>
 </head>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
+
 <body>
 <div class="loginbox">
     <div class="title">登录徒哪儿网</div>
@@ -19,7 +21,7 @@
     <div class="qrcode">
         <img src="/web/images/1506587848.png" alt="">
         <div>扫描浏览手机版</div>
-        <button onclick="window.parent.toast('敬请期待')" style="background:#DC7164">QQ登录</button>
+        <button onclick="window.parent.location.href='https://graph.qq.com/oauth/show?which=Login&display=pc&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin'" style="background:#DC7164;cursor:pointer;">QQ登录</button>
         <button onclick="window.parent.toast('敬请期待')" style="background:#5DDF78">微信登录</button>
     </div>
 
@@ -47,7 +49,12 @@
             var res = window.parent.ajaxdata(data);
             if( res ) {
                 window.parent.toast("登录成功");
-                window.parent.location.reload();
+                if( localStorage.getItem("enterurl") ) {
+                    window.parent.location.href=localStorage.getItem("enterurl");
+                }else{
+                    window.parent.location.reload();
+                }
+
             }
         })
     })

@@ -424,5 +424,9 @@ class IndexController extends Controller
         $count = DB::select("select count(*) as cnt from qianjiahui");
         return view("wap.qianjiahuilist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/v9",$page,$num),"count"=>$count[0]->cnt]);
     }
+
+    public function qqlogin(Request $request) {
+        dd($_SERVER);
+    }
     
 }

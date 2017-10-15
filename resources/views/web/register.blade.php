@@ -58,7 +58,11 @@
             var res = window.parent.ajaxdata(data);
             if( res ) {
                 window.parent.toast("注册成功");
-                window.parent.location.reload();
+                if( localStorage.getItem("enterurl") ) {
+                    window.parent.location.href=localStorage.getItem("enterurl");
+                }else{
+                    window.parent.location.reload();
+                }
             }
         })
     })

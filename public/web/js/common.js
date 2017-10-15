@@ -1,6 +1,10 @@
 
 // 打开登陆框
 function openlogion() {
+    // 记住来源地址　登录后跳回
+    localStorage.setItem("enterurl",window.location.href);
+    // alert('123');
+    console.log(localStorage.getItem("enterurl"));
     var iframe = "<div onclick='$(this).toggle();' id='loginbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/login' frameborder='0' style='max-width:95%;width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
     $("body").append(iframe);
     setTimeout(function(){
