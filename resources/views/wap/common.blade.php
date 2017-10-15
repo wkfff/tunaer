@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="APPID" data-redirecturi="REDIRECTURI" charset="utf-8"></script>
+                <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
 
                 <div style="text-align:left" >
                     <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
