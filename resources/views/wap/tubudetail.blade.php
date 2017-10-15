@@ -66,14 +66,17 @@
             <div>返回时间：{{$detail->endday}}</div>
         <div> 领队&电话：{{$detail->leader}} {{$detail->phone}}</div>
         <div>集合时间：{{$detail->jihetime}}</div>
-        <div>集合地点：{{$detail->jihedidian}}</div>
-        <div>需要：{{$detail->need}}人 报名：{{$detail->baoming}}人 </div>
-
-        <div>目的地：{{$detail->mudidi}}</div>
+{{--        <div>需要：{{$detail->need}}人 报名：{{$detail->baoming}}人 </div>--}}
+        {{--<div>目的地：{{$detail->mudidi}}</div>--}}
         <div>交通方式：{{$detail->jiaotong}}</div>
-        <div>活动景点：{{$detail->jingdian}}</div>
-        <div>活动内容：{{$detail->neirong}}</div>
+{{--        <div>活动景点：{{$detail->jingdian}}</div>--}}
+{{--        <div>活动内容：{{$detail->neirong}}</div>--}}
         <div>距离：{{$detail->juli}} 强度：{{$detail->qiangdu}}</div>
+        @for( $data = explode("#",$detail->jihedidian),$i=0;$i<count($data);$i++  )
+            <p>
+                集合地点{{($i+1)}}：<span style="color:#4b8ee8">{{$data[$i]}}</span>
+            </p>
+        @endfor
     </div>
     <div class="tuwen" >{!! $detail->tuwen !!}</div>
 
