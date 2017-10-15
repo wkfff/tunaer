@@ -1,7 +1,7 @@
 
 // 打开登陆框
 function openlogion() {
-    localStorage.setItem("enterurl",window.location.href);
+    // localStorage.setItem("enterurl",window.location.href);
     $("#regmodal").modal("hide");
     $("#loginmodal").modal("show");
 
@@ -102,15 +102,7 @@ function ql_register() {
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){
                 if( ajaxdata(d) ) {
-                    if( localStorage.getItem("enterurl") ) {
-                        if( location.href==localStorage.getItem("enterurl") ) {
-                            location.reload();
-                        }else{
-                            location.href= localStorage.getItem("enterurl");
-                        }
-                    }else{
-                        location.reload();
-                    }
+                    location.href = "/";
                 }
             })
         }
@@ -121,15 +113,7 @@ function otherlogin(openid,type) {
 
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         if( ajaxdata(d) ) {
-            if( localStorage.getItem("enterurl") ) {
-                if( location.href==localStorage.getItem("enterurl") ) {
-                    location.reload();
-                }else{
-                    location.href = localStorage.getItem("enterurl");
-                }
-            }else{
-                location.reload();
-            }
+            location.href = "/";
         }else{
             var data = QC.api("get_user_info", {
                 "access_token":localStorage.getItem("qq_access_token"),
