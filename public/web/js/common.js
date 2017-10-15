@@ -54,6 +54,7 @@ function otherlogin(openid,type) {
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
                 console.log(s.data);
+                $("#qqlogin").modal("show");
             })
 
             // $.get("https://graph.qq.com/user/get_user_info?access_token="+localStorage.getItem("qq_access_token")+"&oauth_consumer_key=101428001&openid="+localStorage.getItem("qq_openid"),{},function(d){
