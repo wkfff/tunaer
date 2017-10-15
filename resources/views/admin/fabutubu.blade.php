@@ -17,8 +17,8 @@
 
             }
             .tubudetailnavbar a{
-                display:block;width:80px;height:35px;text-decoration: none;
-                line-height:35px;float:left;color:#333;margin-right:10px;
+                display:block;text-decoration: none;padding:5px 10px;
+                float:left;color:#333;margin-right:10px;
                 cursor: pointer;font-size: 1em;
                 text-align: center;background: #E6E6E6;margin-top:15px;
             }
