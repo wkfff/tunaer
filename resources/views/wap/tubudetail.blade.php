@@ -79,7 +79,7 @@
         @endfor
     </div>
     <div class="tuwen" >
-        <{!! $detail->tuwen !!}
+        {!! $detail->tuwen !!}
     </div>
     <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:-10px 10px 10px 10px;text-align: left;" >
         <p>驴友点评</p>
