@@ -14,7 +14,7 @@
         <style>
             .tubudetailnavbar{
                 border-bottom:1px solid #ddd;width:100%;
-
+                min-height:50px;
             }
             .tubudetailnavbar a{
                 display:block;text-decoration: none;padding:5px 10px;
