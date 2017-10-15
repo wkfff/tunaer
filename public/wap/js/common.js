@@ -70,6 +70,64 @@ function rg_register() {
         }
     })
 }
+function ql_register() {
+    var phone = $.trim( $(" input[name='rg-phone']").val() );
+    var passwd = $.trim( $(" input[name='rg-passwd']").val() );
+    var code = $.trim( $(" input[name='rg-code']").val() );
+    $.post("/register",{
+        "phone":phone,
+        "passwd":passwd,
+        "code":code,
+        "qqid":localStorage.getItem("qq_openid"),
+        "wxid":""
+    },function(data){
+        var qqdata = JSON.parse(localStorage.getItem("qqdata"));
+
+        if( ajaxdata(data) ) {
+            $.post("/inituserinfo",{
+                "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
+            },function(d){
+                if( ajaxdata(d) ) {
+                    if( localStorage.getItem("enterurl") ) {
+                        if( location.href==localStorage.getItem("enterurl") ) {
+                            location.reload();
+                        }else{
+                            location.href= localStorage.getItem("enterurl");
+                        }
+                    }else{
+                        location.reload();
+                    }
+                }
+            })
+        }
+    })
+}
+// 第三方登录
+function otherlogin(openid,type) {
+    $.post("/otherlogin",{"openid":openid,"type":type},function(d){
+        if( ajaxdata(d) ) {
+            if( localStorage.getItem("enterurl") ) {
+                if( location.href==localStorage.getItem("enterurl") ) {
+                    location.reload();
+                }else{
+                    location.href = localStorage.getItem("enterurl");
+                }
+            }else{
+                location.reload();
+            }
+        }else{
+            var data = QC.api("get_user_info", {
+                "access_token":localStorage.getItem("qq_access_token"),
+                "openid":localStorage.getItem("qq_openid"),
+                "oauth_consumer_key":localStorage.getItem("101428001"),
+            }, "json", "GET").success(function(s){
+                localStorage.setItem("qqdata",JSON.stringify(s.data));
+                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>初次使用请绑定手机号码</span>")
+                $("#qqlogin").modal("show");
+            })
+        }
+    })
+}
 // 关闭登录框
 function closereg() {
     $("#regbg").remove();
