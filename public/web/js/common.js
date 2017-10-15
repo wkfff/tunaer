@@ -55,10 +55,9 @@ function ql_register() {
         var res = ajaxdata(data);
         if( res ) {
             $.post("/inituserinfo",{
-                "uname":qqdata.nickname,"sex":qqdata.gender,"age":(new Date().getFullYear() - qqdata.year),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
+                "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(data){
-                var d = ajaxdata(data);
-                if( d ) {
+                if( ajaxdata(data) ) {
                     if( localStorage.getItem("enterurl") ) {
                         location.href=localStorage.getItem("enterurl");
                     }else{
