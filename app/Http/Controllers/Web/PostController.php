@@ -480,7 +480,7 @@ class PostController extends Controller{
             if( Cache::get('code-'.$phone) != $code ) {
                 echo "400-验证码不正确"; return;
             }
-            $sql = " select * from user where phone=? ";
+            $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where phone=? ";
             $res = DB::select($sql,[$phone]);
             if( count($res) == 0 ) {
                 if( Cache::get('code-'.$phone) == $code ) {
@@ -508,6 +508,8 @@ class PostController extends Controller{
                         $r = DB::update($sql,[$wxid,md5($passwd),$res[0]->id]);
                     }
                     if( $r ) {
+                        Session::put('uid', $res[0]->id);
+                        Session::put('uname', $res[0]->uname);
                         echo "200-绑定成功";
                     }else{
                         echo "400-绑定失败";
