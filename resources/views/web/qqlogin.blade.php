@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="ql_register()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
+                    <button type="button" onclick="ql_register()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">立即绑定</button>
                 </div>
             </div>
         </div>

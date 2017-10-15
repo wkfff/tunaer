@@ -501,11 +501,11 @@ class PostController extends Controller{
 //                绑定qq或者微信 openid
                 if( ($res[0]->qqid == '' && $qqid != '') || ($res[0]->wxid == '' && $wxid != '') ) {
                     if( $qqid != '' ) {
-                        $sql = " update use set qqid=? where id=? ";
-                        $r = DB::update($sql,[$qqid,$res[0]->id]);
+                        $sql = " update use set qqid=?,passwd=? where id=? ";
+                        $r = DB::update($sql,[$qqid,md5($passwd),$res[0]->id]);
                     }else{
-                        $sql = " update use set wxid=? where id=? ";
-                        $r = DB::update($sql,[$wxid,$res[0]->id]);
+                        $sql = " update use set wxid=?,passwd=? where id=? ";
+                        $r = DB::update($sql,[$wxid,md5($passwd),$res[0]->id]);
                     }
                     if( $r ) {
                         echo "200-绑定成功";
