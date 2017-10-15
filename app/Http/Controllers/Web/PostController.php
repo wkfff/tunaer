@@ -664,5 +664,6 @@ class PostController extends Controller{
             $sql = " update userattr set uname=?,sex=?,age=?,head=?,addr=? where uid=?";
             $res = DB::update($sql,[$uname,$sex,$age,$head,$addr,Session::get('uid')]);
         }
+        echo "200-success";
     }
 }
