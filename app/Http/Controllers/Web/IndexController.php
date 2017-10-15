@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
 {
     public function index(Request $request) {
-//        $request->session()->flush();
+
         $sql = " select * from tubuhuodong order by id desc limit 10";
         $tubus = DB::select($sql);
         $sql = " select user.id as userid,userattr.* from user inner join userattr on user.id=userattr.uid where user.status=1 and userattr.head<>'' order by user.id desc limit 12";

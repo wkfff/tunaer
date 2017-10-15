@@ -144,6 +144,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/single/{id}","IndexController@singlepage");
     Route::get("/qqlogin","IndexController@qqlogin");
     Route::post("/otherlogin","PostController@otherlogin");
+    Route::post("/tokenlogin","PostController@tokenlogin");
 
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");

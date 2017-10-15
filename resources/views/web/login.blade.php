@@ -48,6 +48,7 @@
         },function(data){
             var res = window.parent.ajaxdata(data);
             if( res ) {
+                localStorage.setItem("login_token",res);
                 if( localStorage.getItem("enterurl") ) {
                     if( window.parent.location.href==localStorage.getItem("enterurl") ) {
                         window.parent.location.reload();

@@ -12,8 +12,20 @@
             {{--  <a href="#">个人中心{{Session::get('uid')}}</a>  --}}
             <a href="#">收藏本站</a>
             @if( Session::get('uid') )
-                <a href="/user/{{Session::get('uid')}}" style="color:#194C8E;font-size:14px;">{{Session::get('uname')}}</a> | <a style="color:#194C8E;font-size:14px;" href="/outlogin">退出</a>
+                <a href="/user/{{Session::get('uid')}}" style="color:#194C8E;font-size:14px;">{{Session::get('uname')}}</a> | <a style="color:#194C8E;font-size:14px;" href="javascript:void(0)" onclick="localStorage.removeItem('login_token');location.href='/outlogin';">退出</a>
             @else
+                <script>
+                    if( localStorage.getItem("login_token") ) {
+                        var token = localStorage.getItem("login_token");
+                        $.post("/tokenlogin",{"token":token},function(d){
+                            if( ajaxdata(d) ) {
+                                location.reload();
+                            }else{
+                                localStorage.removeItem("login_token");
+                            }
+                        })
+                    }
+                </script>
                 <a href="javascript:openreg()" style="margin-right:0px;font-size:14px;color:#194C8E">注册</a>
                 <span>|</span>
                 <a href="javascript:openlogion()" style="font-size:14px;color:#194C8E">登录</a>

@@ -25,7 +25,7 @@ function login($phone,$passwd,$returnuid=false) {
         Session::put('uid', $res[0]->id);
         Session::put('uname', $res[0]->uname);
         if(!$returnuid) {
-            echo "200-登录成功";
+            echo "200-".jiami($res[0]->id);
         }
     }else{
         if(!$returnuid) {
@@ -135,13 +135,39 @@ function view($view = null, $data = [], $mergeData = [])
 //自定义加密
 /**
  * @param $str　待加密字符串
- * @param $len　指定加密长度
+ * 返回：　随机字符串+[分割符 ascii(n)]+[原串ascii+n]
  */
-function jiami($str,$len) {
-    $rand = "abcdefghijklmnopqrstuvwxyz";
+//ord()　字符串－＞ascii
+//chr() ascii－＞字符串
+function jiami($str) {
+    $rand = str_shuffle("!@#$%^&*()AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890");
+    $rarr = str_split($rand);
+//    把字符串转换为数组
+    $sarr = str_split($str);
+//    随机长度
+    $need = rand(30, 50) - count($sarr);
+    $res = "";
+    for( $i=0;$i<$need;$i++ ) {
+        $res .= $rarr[$i];
+    }
+//    原串在ascii上增加的量
+    $ascii_add = rand(3,8);
+    $res .= "!xg" . ord($ascii_add) . "$1r";
+    for( $j=0;$j<count($sarr);$j++ ) {
+        $res .= chr( ord($sarr[$j]) + $ascii_add );
+    }
+    return base64_encode($res);
 }
-function jiemi() {
-
+function jiemi($str) {
+    $str = base64_decode($str);
+    preg_match_all("/!xg(\d+)\\$1r(.*)$/",$str,$matches);
+    $fg = explode($matches[1][0]."$1r",$str);
+    $sarr = str_split($fg[1]);
+    $res = "";
+    for( $i=0;$i<count($sarr);$i++ ) {
+        $res .= chr( ord($sarr[$i]) - chr($matches[1][0]) );
+    }
+    return $res;
 }
 
 

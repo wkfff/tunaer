@@ -487,7 +487,7 @@ class PostController extends Controller{
                     $sql = " insert into user (phone,passwd,regip) values (?,?,?) ";
                     $res = DB::insert($sql,[$phone,md5($passwd),$_SERVER['REMOTE_ADDR']]);
                     if( $res ) {
-                        echo "200-注册成功";
+//                        echo "200-注册成功";
                         Session::forget('uid');
                         // 直接登录
                         login($phone,$passwd,true);
@@ -667,5 +667,28 @@ class PostController extends Controller{
             $res = DB::update($sql,[$uname,$sex,$age,$head,$addr,Session::get('uid')]);
         }
         echo "200-success";
+    }
+    public function tokenlogin(Request $request) {
+        $token = $request->input("token",false);
+        if( $token ) {
+            $uid = jiemi($token);
+            $sql = " select user.*,userattr.uname from user left join userattr on user.id=userattr.uid where user.id=?  ";
+            $res = DB::select($sql,[$uid]);
+            if( count($res) >= 1 ) {
+                if( $res[0]->status == 0 ) {
+                    echo "400-账户不可用"; return;
+                }
+                if( !$res[0]->uname ) {
+                    $res[0]->uname = '请完善资料';
+                }
+                Session::put('uid', $res[0]->id);
+                Session::put('uname', $res[0]->uname);
+                echo "200-success";
+            }else{
+                echo "400-...";
+            }
+        }else{
+            echo "400-...";
+        }
     }
 }
