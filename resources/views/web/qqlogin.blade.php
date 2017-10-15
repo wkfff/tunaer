@@ -14,6 +14,13 @@
 @stop
 
 @section("htmlend")
-    <script type="text/javascript"
-            src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
+    <script type="text/javascript">
+        if( QC.Login.check() ) {
+            QC.Login.getMe(function(openId, accessToken){
+                console.log(openId);
+                console.log(accessToken);
+            })
+        }
+    </script>
 @stop
