@@ -49,7 +49,7 @@
             var res = window.parent.ajaxdata(data);
             if( res ) {
                 if( localStorage.getItem("enterurl") ) {
-                    if( window.parent.location.href=localStorage.getItem("enterurl") ) {
+                    if( window.parent.location.href==localStorage.getItem("enterurl") ) {
                         window.parent.location.reload();
                     }else{
                         window.parent.location.href= localStorage.getItem("enterurl");

@@ -59,7 +59,7 @@ function ql_register() {
             },function(d){
                 if( ajaxdata(d) ) {
                     if( localStorage.getItem("enterurl") ) {
-                        if( location.href=localStorage.getItem("enterurl") ) {
+                        if( location.href==localStorage.getItem("enterurl") ) {
                             location.reload();
                         }else{
                             location.href= localStorage.getItem("enterurl");
@@ -106,7 +106,7 @@ function otherlogin(openid,type) {
                 if( location.href==localStorage.getItem("enterurl") ) {
                     location.reload();
                 }else{
-                    location.href= localStorage.getItem("enterurl");
+                    location.href = localStorage.getItem("enterurl");
                 }
             }else{
                 location.reload();
