@@ -14,12 +14,13 @@
         <style>
             .tubudetailnavbar{
                 border-bottom:1px solid #ddd;height:50px;width:100%;
+
             }
             .tubudetailnavbar a{
-                display:block;width:80px;height:30px;text-decoration: none;
-                line-height:30px;float:left;color:#333;margin-right:10px;
-                cursor: pointer;
-                text-align: center;background: #E6E6E6;margin-top:20px;
+                display:block;width:80px;height:35px;text-decoration: none;
+                line-height:35px;float:left;color:#333;margin-right:10px;
+                cursor: pointer;font-size: 15px;
+                text-align: center;background: #E6E6E6;margin-top:15px;
             }
             .tubudetailnavbar a:hover{
                 background: #4B8EE8;color:#fff;
@@ -27,36 +28,40 @@
         </style>
 
         <div class="tubudetailnavbar" >
-            <a href="#xcap">行程安排</a>
+            <a href="#xcap" style="background: #4B8EE8;color:#fff;">行程安排</a>
             <a href="#fysm">费用说明</a>
             <a href="#xlms">线路描述</a>
             <a href="#ditu">目的地地图</a>
             <a href="#bmxz">报名须知</a>
             <a href="#hdsp">活动视频</a>
             <a href="#xlpj">线路评价</a>
-            {{--<a href="#lydp">驴友点评</a>--}}
+            <a href="#lydp">驴友点评</a>
         </div>
-        <div id="xcap" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="xcap" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>行程安排</p>
         </div>
         <br>
-        <div id="fysm" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="fysm" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>费用说明</p>
         </div>
         <br>
-        <div id="xlms" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="xlms" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>线路描述</p>
         </div>
         <br>
-        <div id="ditu" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="ditu" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>目的地地图</p>
         </div>
         <br>
-        <div id="bmxz" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="bmxz" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>报名须知</p>
         </div>
         <br>
-        <div id="xlpj" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >
+        <div id="hdsp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
+            <p>活动视频</p>
+        </div>
+        <br>
+        <div id="xlpj" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>线路评价</p>
         </div>
         <br>

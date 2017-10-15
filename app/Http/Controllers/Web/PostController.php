@@ -568,7 +568,7 @@ class PostController extends Controller{
         $tubus = DB::select($sql,[($page-1)*$num,$num]);
         echo json_encode($tubus);
     }
-
+//    删除聊天
     public function delchat($userid) {
         $uid = Session::get("uid");
         $sql = " delete from chat where (fid=? and tid=?) or (fid=? and tid=?) ";
@@ -577,6 +577,31 @@ class PostController extends Controller{
             echo "200";
         }else{
             echo "400-操作失败";
+        }
+    }
+//徒步评论
+    public function tubucm(Request $request) {
+        $content = $request->input("content",'');
+        $tid = $request->input("tid",'');
+        if( checknull($content) ) {
+            $sql = " insert into tubucm (uid,tid,content) values(?,?,?) ";
+            $res = DB::insert($sql,[Session::get('uid'),$tid,$content]);
+            if( $res ) {
+                echo "200";
+            }else{
+                echo "400-操作失败";
+            }
+        }
+    }
+//    获取徒步评论
+    public function gettubucms(Request $request) {
+        $tid = $request->input('yid','');
+        $page = $request->input("page",1);
+        $num = $request->input("num",2);
+        if( checknull($tid) ) {
+            $sql = " select * from tubucm where tid=? order by id desc limit ?,? ";
+            $tubucm = DB::select($sql,[$tid,($page-1)*$num,$num]);
+            echo json_encode($tubucm);
         }
     }
 

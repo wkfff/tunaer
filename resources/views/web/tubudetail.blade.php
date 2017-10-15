@@ -119,7 +119,7 @@
             <div style="clear:both" ></div>
             <style>
                 .tuwen{
-                    text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #eee;padding:10px;
+                    text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #efefef;padding:10px;
                 }
                 .tuwen img{
                     max-width:100% !important;
@@ -136,14 +136,38 @@
                 .tuijian div:hover{
                     opacity:0.8;
                 }
+                .tubudetailnavbar{
+                    border-bottom:1px solid #ddd;height:50px;width:100%;text-align: left;
+                }
+                .tubudetailnavbar a{
+                    display:block;width:80px;height:30px;text-decoration: none;
+                    line-height:30px;float:left;color:#333;margin-right:10px;
+                    cursor: pointer;
+                    text-align: center;background: #E6E6E6;margin-top:20px;
+                }
+                .tubudetailnavbar a:hover{
+                    background: #4B8EE8;color:#fff;
+                }
 
             </style>
             <div class="tuwen" >
-                {!! $detail->tuwen !!}
+                <div>{!! $detail->tuwen !!}</div>
+                    <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
+                        <p>驴友点评</p>
+                    </div>
+                <div >
+                    <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+                    <button style="margin-top:10px;float:left  " class="btn btn-success " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
+                </div>
+                <div style="clear:both" ></div>
+                <div class="liuyanbox">
+
+                </div>
+                <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
+
             <div class="tuijian" >
                 <p style="color:#999;font-size:20px;">推荐活动</p>
-
             </div>
             <div style="clear:both" ></div>
         </div>
@@ -185,6 +209,7 @@
             Swiper1.params.control = Swiper2;//需要在Swiper2初始化后，Swiper1控制Swiper2
             Swiper2.params.control = Swiper1;
             gettuijian();
+            gettubucms({{$detail->id}});
         });
 
         function gettuijian() {
@@ -208,6 +233,41 @@
             $.post("/tubu/baoming",{"tid":id},function(d){
                 if( ajaxdata(d) ) {
                     toast("报名成功");
+                }
+            })
+        }
+        function tubucm(t,tid) {
+            var content = $(t).parent("div").children("textarea").val();
+            if( $.trim(content) == ''  ) {
+                toast("请输入评论内容"); return;
+            }
+            $.post("/tubucm",{"tid":tid,"content":content},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+        function gettubucms(yid) {
+            if( window.liuyanpage ) {
+                window.liuyanpage++;
+            }else{
+                window.liuyanpage = 1;
+            }
+            $.post("/gettubucms",{'yid':yid,"page":window.liuyanpage},function(d){
+                if( res = ajaxdata(d) ) {
+                    if( res.length == 0 && window.liuyanpage!=1 ) {
+                        toast("没有更多了"); return ;
+                    }
+                    for( var i=0;i<res.length;i++ ) {
+                        var item = `<div style="margin:20px 0;vertical-align: middle;">
+                            <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
+                                ${res[i].ctime}
+                            </div>
+                        </div>`;
+                        $(".liuyanbox").append(item);
+                    }
                 }
             })
         }

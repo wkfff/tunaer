@@ -124,6 +124,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/dasai/{id?}","IndexController@dasai");
     Route::get("/shops","IndexController@shops");
     Route::post("/getyoujicms","PostController@getyoujicms");
+    Route::post("/gettubucms","PostController@gettubucms");
     Route::post("/getchatlist","PostController@getchatlist");
     Route::post("/getphotos","PostController@getphotos");
     Route::post("/getdongtais","PostController@getdongtais");
@@ -169,6 +170,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/delchat/{userid}","PostController@delchat");
 
     Route::post("/youjicm","PostController@youjicm");
+    Route::post("/tubucm","PostController@tubucm");
 
 
 });
