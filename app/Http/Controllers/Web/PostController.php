@@ -510,10 +510,8 @@ class PostController extends Controller{
                     if( $r ) {
                         Session::put('uid', $res[0]->id);
                         Session::put('uname', $res[0]->uname);
-                        echo "200-绑定成功";
-                    }else{
-                        echo "400-绑定失败";
                     }
+                    echo "200-绑定成功";
 
                 }else{
                     echo "400-手机号码已经注册过了，你可以直接登录";
