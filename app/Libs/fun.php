@@ -132,8 +132,17 @@ function view($view = null, $data = [], $mergeData = [])
 //
 //    return $factory->make($view, $data, $mergeData);
 //}
+//自定义加密
+/**
+ * @param $str　待加密字符串
+ * @param $len　指定加密长度
+ */
+function jiami($str,$len) {
+    $rand = "abcdefghijklmnopqrstuvwxyz";
+}
+function jiemi() {
 
-
+}
 
 
 
