@@ -48,17 +48,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
-
                 <div style="text-align:left" >
                     <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
-                    <span id="qqLoginBtn"></span>
+                    <a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=716027609&pt_3rd_aid=101428001&daid=383&pt_skey_valid=1&style=35&s_url=http%3A%2F%2Fconnect.qq.com&refer_cgi=authorize&which=&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin">
+                        <img src="/web/images/qqlogin.png" alt="">
+                    </a>
                 </div>
-                <script type="text/javascript">
-                    QC.Login({
-                        btnId:"qqLoginBtn"    //插入按钮的节点id
-                    });
-                </script>
             </div>
         </div>
     </div>
