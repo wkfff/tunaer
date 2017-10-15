@@ -48,7 +48,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div style="text-align:center" ><a href="javascript:void(0)" onclick="openreg()">注册新用户</a></div>
+                <div style="text-align:left" >
+                    <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
+                    <a href="https://graph.qq.com/oauth/show?which=Login&display=pc&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin"><img src="/web/images/qqlogin.png" alt=""></a>
+                </div>
             </div>
         </div>
     </div>
