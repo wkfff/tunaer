@@ -7,7 +7,7 @@
     @include("wap.header")
     <div class="content" style="margin-top:50px;">
 
-        <h1 style="color:darkgrey">正在检测用户身份．．．</h1>
+        <p style="color:darkgrey;text-align: center;">正在检测用户身份．．．</p>
     </div>
     <div class="modal fade" id="qqlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -47,8 +47,11 @@
 @section("htmlend")
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
     <script type="text/javascript">
+        alert('555');
         if( QC.Login.check() ) {
+            alert('123');
             QC.Login.getMe(function(openId, accessToken){
+                alert('4444');
                 localStorage.setItem("qq_access_token",accessToken);
                 localStorage.setItem("qq_openid",openId);
                 otherlogin(openId,"qq");
