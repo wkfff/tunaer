@@ -472,9 +472,14 @@ class PostController extends Controller{
         $phone = $request->input('phone');
         $passwd = $request->input('passwd');
         $code = $request->input('code');
+        $qqid = $request->input('qqid');
+        $wxid = $request->input('wxid');
         if( !checknull($phone,$passwd,$code) ) {
             echo "400-请填写完整信息";
         }else{
+            if( Cache::get('code-'.$phone) == $code ) {
+                echo "400-验证码不正确"; return;
+            }
             $sql = " select * from user where phone=? ";
             $res = DB::select($sql,[$phone]);
             if( count($res) == 0 ) {
@@ -493,7 +498,25 @@ class PostController extends Controller{
                     echo "400-验证码不正确";
                 }
             }else{
-                echo "400-手机号码已经注册过了，你可以直接登录";
+//                绑定qq或者微信 openid
+                if( ($res[0]->qqid == '' && $qqid != '') || ($res[0]->wxid == '' && $wxid != '') ) {
+                    if( $qqid != '' ) {
+                        $sql = " update use set qqid=? where id=? ";
+                        $r = DB::update($sql,[$qqid,$res[0]->id]);
+                    }else{
+                        $sql = " update use set wxid=? where id=? ";
+                        $r = DB::update($sql,[$wxid,$res[0]->id]);
+                    }
+                    if( $r ) {
+                        echo "200-绑定成功";
+                    }else{
+                        echo "400-绑定失败";
+                    }
+
+                }else{
+                    echo "400-手机号码已经注册过了，你可以直接登录";
+                }
+
             }
         }
     }

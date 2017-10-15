@@ -47,7 +47,9 @@ function ql_register() {
     $.post("/register",{
         "phone":phone,
         "passwd":passwd,
-        "code":code
+        "code":code,
+        "qqid":localStorage.getItem("qq_openid"),
+        "wxid":""
     },function(data){
         var qqdata = localStorage.getItem("qqdata");
         var res = ajaxdata(data);
@@ -74,16 +76,16 @@ function closereg() {
     $("#regbg").remove();
 }
 // 吐丝提示
-function toast(title) {
-
-    $(".toast").remove();
-    clearTimeout(window.toastst);
-    var tmp = "<div style='height:0px;width:100%;position:fixed;left:0px;bottom:250px;;text-align:center;line-height:50px;z-index:1070' class='toast'><span style='background:#194C8E;color:#fff;padding:14px 30px;border-radius:10px;font-size:16px;font-weight:bold'>"+title+"</span></div>";
-    $("body").append(tmp);
-    window.toastst = setTimeout(function(){
-        $(".toast").fadeOut(1000);
-    },1500)
-}
+// function toast(title) {
+//
+//     $(".toast").remove();
+//     clearTimeout(window.toastst);
+//     var tmp = "<div style='height:0px;width:100%;position:fixed;left:0px;bottom:250px;;text-align:center;line-height:50px;z-index:1070' class='toast'><span style='background:#194C8E;color:#fff;padding:14px 30px;border-radius:10px;font-size:16px;font-weight:bold'>"+title+"</span></div>";
+//     $("body").append(tmp);
+//     window.toastst = setTimeout(function(){
+//         $(".toast").fadeOut(1000);
+//     },1500)
+// }
 // 吐丝提示
 function toast(title) {
 
@@ -111,7 +113,7 @@ function otherlogin(openid,type) {
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
                 localStorage.setItem("qqdata",s.data);
-                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span> 请完善资料</span>")
+                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span> 初次使用请绑定手机号码</span>")
                 $("#qqlogin").modal("show");
             })
         }
