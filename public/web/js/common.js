@@ -48,9 +48,9 @@ function otherlogin(openid,type) {
                 window.parent.location.reload();
             }
         }else{
-            $.get("https://graph.qq.com/user/get_user_info?access_token="+localStorage.getItem("qq_access_token")+"&oauth_consumer_key=101428001&openid="+localStorage.getItem("qq_openid"),{},function(d){
-                console.log(d);
-            })
+            // $.get("https://graph.qq.com/user/get_user_info?access_token="+localStorage.getItem("qq_access_token")+"&oauth_consumer_key=101428001&openid="+localStorage.getItem("qq_openid"),{},function(d){
+            //     console.log(d);
+            // })
         }
     })
 }
