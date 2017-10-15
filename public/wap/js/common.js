@@ -41,8 +41,11 @@ function openreg() {
     //     $("#regbg").css("display","block");
     // },100)
 }
-function sendcode() {
-    var phone = $.trim( $("input[name='rg-phone']").val() );
+function sendcode(phone) {
+    if( !phone ) {
+        var phone = $.trim( $("input[name='rg-phone']").val() );
+    }
+
     var r = /^1[23456789]{1}\d{9}$/;
     if( !r.test(phone) ) {
         toast("手机格式错误"); return false;
