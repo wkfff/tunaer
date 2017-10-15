@@ -52,8 +52,8 @@ function ql_register() {
         "wxid":""
     },function(data){
         var qqdata = localStorage.getItem("qqdata");
-        var res = ajaxdata(data);
-        if( res ) {
+
+        if( ajaxdata(data) ) {
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(data){
@@ -65,8 +65,6 @@ function ql_register() {
                     }
                 }
             })
-        }else{
-            toast("绑定失败");
         }
     })
 }
