@@ -632,9 +632,9 @@ class PostController extends Controller{
         $type = $request->input("type",false);
         if( checknull($openid,$type) ) {
             if( $type == "qq" ) {
-                $sql = " select * from user where qqid=? ";
+                $sql = " select user.id,userattr.uname from user left join userattr on user.id=userattr.uid where qqid=? ";
             }else if( $type == "wx" ) {
-                $sql = " select * from user where wxid=? ";
+                $sql = " select user.id,userattr.uname from user left join userattr on user.id=userattr.uid where wxid=? ";
             }else{
                 echo "400-认证失败";return;
             }
