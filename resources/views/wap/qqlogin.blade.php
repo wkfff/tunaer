@@ -47,11 +47,11 @@
 @section("htmlend")
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
     <script type="text/javascript">
-        alert('555');
+
         if( QC.Login.check() ) {
-            alert('123');
+
             QC.Login.getMe(function(openId, accessToken){
-                alert('4444');
+                alert(openId+":::"+accessToken)
                 localStorage.setItem("qq_access_token",accessToken);
                 localStorage.setItem("qq_openid",openId);
                 otherlogin(openId,"qq");
