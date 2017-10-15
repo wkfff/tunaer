@@ -48,7 +48,9 @@ function otherlogin(openid,type) {
                 window.parent.location.reload();
             }
         }else{
-            toast("认证失败");
+            $.get("https://graph.qq.com/user/get_user_info?access_token=YOUR_ACCESS_TOKEN&oauth_consumer_key=YOUR_APP_ID&openid=YOUR_OPENID",{},function(d){
+                console.log(d);
+            })
         }
     })
 }
