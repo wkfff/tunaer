@@ -57,10 +57,13 @@ function ql_register() {
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){
-                console.log(d);
                 if( ajaxdata(d) ) {
                     if( localStorage.getItem("enterurl") ) {
-                        location.href=localStorage.getItem("enterurl");
+                        if( location.href=localStorage.getItem("enterurl") ) {
+                            location.reload();
+                        }else{
+                            location.href= localStorage.getItem("enterurl");
+                        }
                     }else{
                         location.reload();
                     }
@@ -99,10 +102,7 @@ function toast(title) {
 function otherlogin(openid,type) {
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         if( ajaxdata(d) ) {
-            if( localStorage.getItem("enterurl") ) {
-                location.href=localStorage.getItem("enterurl");
-            }else{
-                location.reload();
+            en location.reload();
             }
         }else{
             var data = QC.api("get_user_info", {

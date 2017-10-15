@@ -48,9 +48,12 @@
         },function(data){
             var res = window.parent.ajaxdata(data);
             if( res ) {
-                window.parent.toast("登录成功");
                 if( localStorage.getItem("enterurl") ) {
-                    window.parent.location.href=localStorage.getItem("enterurl");
+                    if( window.parent.location.href=localStorage.getItem("enterurl") ) {
+                        window.parent.location.reload();
+                    }else{
+                        window.parent.location.href= localStorage.getItem("enterurl");
+                    }
                 }else{
                     window.parent.location.reload();
                 }

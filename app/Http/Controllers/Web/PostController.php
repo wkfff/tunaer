@@ -643,6 +643,8 @@ class PostController extends Controller{
                 Session::put('uid', $res[0]->id);
                 Session::put('uname', $res[0]->uname);
                 echo "200-登录成功";
+            }else{
+                echo "400-请绑定手机号";
             }
 
         }
