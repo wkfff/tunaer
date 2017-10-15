@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label style="display: block">手机验证码</label>
                             <input name="ql-code" style="height:40px;width:50%;float:left" type="text" class="form-control"  placeholder="验证码">
-                            <button class="sendcodebtn" onclick="sendcode2()" style="float:left;margin-left:10px;height:40px;" class="btn btn-default">点击发送</button>
+                            <button onclick="sendcode2()" style="float:left;margin-left:10px;height:40px;" class="btn btn-default sendcodebtn">点击发送</button>
                         </div>
                         <div style="clear:both;height:15px;width:100%;" ></div>
                         <div class="form-group">
