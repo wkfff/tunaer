@@ -79,21 +79,20 @@
         @endfor
     </div>
     <div class="tuwen" >
-        <div>{!! $detail->tuwen !!}</div>
-        <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>驴友点评</p>
-        </div>
-        <div style="clear:both" ></div>
-        <div style="width:100%;display:block;" >
-            <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
-            <button style="margin-top:10px;float:left  " class="btn btn-success " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
-        </div>
-        <div style="clear:both" ></div>
-        <div class="liuyanbox">
-
-        </div>
-        <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+        <{!! $detail->tuwen !!}
     </div>
+    <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
+        <p>驴友点评</p>
+    </div>
+    <div style="width:100%;display:block;" >
+        <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+        <button style="margin-top:10px;float:left  " class="btn btn-success " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
+    </div>
+    <div style="clear:both" ></div>
+    <div class="liuyanbox">
+
+    </div>
+    <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
 
     @include("wap.footer")
 
