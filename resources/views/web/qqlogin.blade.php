@@ -18,7 +18,7 @@
     <script type="text/javascript">
         if( QC.Login.check() ) {
             QC.Login.getMe(function(openId, accessToken){
-                otherlogin(openid);
+                otherlogin(openid,"qq");
             })
         }
 
