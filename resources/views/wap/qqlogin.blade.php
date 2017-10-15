@@ -5,7 +5,7 @@
 
 @section("body")
     @include("wap.header")
-    <div class="content">
+    <div class="content" style="margin-top:50px;">
 
         <h1 style="color:darkgrey">正在检测用户身份．．．</h1>
     </div>
