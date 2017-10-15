@@ -79,7 +79,7 @@ function rg_register() {
 
         var res = ajaxdata(data);
         if( res ) {
-            toast("注册成功");
+            localStorage.setItem("login_token",res);
             location.reload();
         }
     })
@@ -96,8 +96,9 @@ function ql_register() {
         "wxid":""
     },function(data){
         var qqdata = JSON.parse(localStorage.getItem("qqdata"));
-
-        if( ajaxdata(data) ) {
+        var res = ajaxdata(data);
+        if( res ) {
+            localStorage.setItem("login_token",res);
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){

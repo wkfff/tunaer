@@ -642,7 +642,7 @@ class PostController extends Controller{
             if( count($res) ) {
                 Session::put('uid', $res[0]->id);
                 Session::put('uname', $res[0]->uname);
-                echo "200-登录成功";
+                echo "200-".jiami($res[0]->id);
             }else{
                 echo "400-请绑定手机号";
             }
