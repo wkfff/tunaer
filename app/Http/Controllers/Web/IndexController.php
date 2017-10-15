@@ -426,7 +426,7 @@ class IndexController extends Controller
     }
 
     public function qqlogin(Request $request) {
-        dd($_SERVER);
+        return view("web.qqlogin");
     }
     
 }
