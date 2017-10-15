@@ -499,7 +499,7 @@ class PostController extends Controller{
                 }
             }else{
 //                绑定qq或者微信 openid
-                if( ($res[0]->qqid == '' && $qqid != '') || ($res[0]->wxid == '' && $wxid != '') ) {
+                if( ($res[0]->qqid == 0 && $qqid != '') || ($res[0]->wxid == 0 && $wxid != '') ) {
                     if( $qqid != '' ) {
                         $sql = " update use set qqid=?,passwd=? where id=? ";
                         $r = DB::update($sql,[$qqid,md5($passwd),$res[0]->id]);
