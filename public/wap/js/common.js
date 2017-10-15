@@ -1,6 +1,7 @@
 
 // 打开登陆框
 function openlogion() {
+    localStorage.setItem("enterurl",window.location.href);
     $("#regmodal").modal("hide");
     $("#loginmodal").modal("show");
 
