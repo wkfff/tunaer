@@ -20,18 +20,23 @@
                 <div class="modal-body">
                     <div style="padding:20px;">
                         <div class="form-group">
-                            <label>帐号</label>
-                            <input style="height:40px;" name="ql-phone" type="number" class="form-control"  placeholder="手机号码">
+                            <label>手机号</label>
+                            <input style="height:40px;" name="rg-phone" type="number" class="form-control"  placeholder="手机号码">
                         </div>
                         <div class="form-group">
-                            <label>密码</label>
-                            <input style="height:40px;" name="ql-passwd" type="password" class="form-control"  placeholder="登录密码">
+                            <label style="display: block">手机验证码</label>
+                            <input name="rg-code" style="height:40px;width:50%;float:left" type="text" class="form-control"  placeholder="登录密码">
+                            <button id="sendcodebtn" onclick="sendcode()" style="float:left;margin-left:10px;height:40px;" class="btn btn-default">点击发送</button>
                         </div>
-                        <div style="clear:both;height:20px;width:100%;" ></div>
+                        <div style="clear:both;height:15px;width:100%;" ></div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input style="height:40px;" name="rg-passwd" type="password" class="form-control"  placeholder="登录密码">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="ql_login()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">完成</button>
+                    <button type="button" onclick="ql_register()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
                 </div>
             </div>
         </div>

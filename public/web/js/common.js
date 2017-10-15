@@ -4,7 +4,7 @@ function openlogion() {
     // 记住来源地址　登录后跳回
     localStorage.setItem("enterurl",window.location.href);
     // alert('123');
-    console.log(localStorage.getItem("enterurl"));
+    // console.log(localStorage.getItem("enterurl"));
     var iframe = "<div onclick='$(this).toggle();' id='loginbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/login' frameborder='0' style='max-width:95%;width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
     $("body").append(iframe);
     setTimeout(function(){
@@ -27,6 +27,63 @@ function openreg() {
 function closereg() {
     $("#regbg").remove();
 }
+function sendcode() {
+    var phone = $.trim( $("input[name='rg-phone']").val() );
+    var r = /^1[23456789]{1}\d{9}$/;
+    if( !r.test(phone) ) {
+        toast("手机格式错误"); return false;
+    }
+    $.post("/sendcode",{'phone':phone},function(data){
+        var res = ajaxdata(data);
+        $("#sendcodebtn").removeAttr("onclick");
+        $("#sendcodebtn").text("已发送");
+        toast("发送成功，请注意查收");
+    })
+}
+function ql_register() {
+    var phone = $.trim( $(" input[name='rg-phone']").val() );
+    var passwd = $.trim( $(" input[name='rg-passwd']").val() );
+    var code = $.trim( $(" input[name='rg-code']").val() );
+    $.post("/register",{
+        "phone":phone,
+        "passwd":passwd,
+        "code":code
+    },function(data){
+        var qqdata = localStorage.getItem("qqdata");
+        var res = ajaxdata(data);
+        if( res ) {
+            $.post("/inituserinfo",{
+                "uname":qqdata.nickname,"sex":qqdata.gender,"age":(new Date().getFullYear() - qqdata.year),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
+            },function(data){
+                var d = ajaxdata(data);
+                if( d ) {
+                    if( localStorage.getItem("enterurl") ) {
+                        location.href=localStorage.getItem("enterurl");
+                    }else{
+                        location.reload();
+                    }
+                }
+            })
+        }else{
+            toast("绑定失败");
+        }
+    })
+}
+// 关闭登录框
+function closereg() {
+    $("#regbg").remove();
+}
+// 吐丝提示
+function toast(title) {
+
+    $(".toast").remove();
+    clearTimeout(window.toastst);
+    var tmp = "<div style='height:0px;width:100%;position:fixed;left:0px;bottom:250px;;text-align:center;line-height:50px;z-index:1070' class='toast'><span style='background:#194C8E;color:#fff;padding:14px 30px;border-radius:10px;font-size:16px;font-weight:bold'>"+title+"</span></div>";
+    $("body").append(tmp);
+    window.toastst = setTimeout(function(){
+        $(".toast").fadeOut(1000);
+    },1500)
+}
 // 吐丝提示
 function toast(title) {
 
@@ -43,9 +100,9 @@ function otherlogin(openid,type) {
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         if( ajaxdata(d) ) {
             if( localStorage.getItem("enterurl") ) {
-                window.parent.location.href=localStorage.getItem("enterurl");
+                location.href=localStorage.getItem("enterurl");
             }else{
-                window.parent.location.reload();
+                location.reload();
             }
         }else{
             var data = QC.api("get_user_info", {
@@ -53,14 +110,10 @@ function otherlogin(openid,type) {
                 "openid":localStorage.getItem("qq_openid"),
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
-                console.log(s.data);
-                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>，请完善资料</span>")
+                localStorage.setItem("qqdata",s.data);
+                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span> 请完善资料</span>")
                 $("#qqlogin").modal("show");
             })
-
-            // $.get("https://graph.qq.com/user/get_user_info?access_token="+localStorage.getItem("qq_access_token")+"&oauth_consumer_key=101428001&openid="+localStorage.getItem("qq_openid"),{},function(d){
-            //     console.log(d);
-            // })
         }
     })
 }

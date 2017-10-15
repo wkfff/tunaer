@@ -50,7 +50,6 @@ class PostController extends Controller{
         $intro = $request->input('intro');
         $mryst = $request->input('mryst');
         $addr = $request->input('addr');
-
         if( checknull($uname,$sex,$age,$intro,$mryst,$addr) ) {
             $sql = " select * from userattr where uid=? ";
             $res = DB::select($sql,[Session::get('uid')]);
@@ -625,5 +624,22 @@ class PostController extends Controller{
 
         }
     }
+//    初始化用户信息
+    public function inituserinfo(Request $request) {
+        $head = $request->input("head","");
+        $uname = $request->input("uname","");
+        $sex = $request->input("sex","");
+        $age = $request->input("age","");
+        $addr = $request->input("addr","");
 
+        $sql = " select * from userattr where uid=? ";
+        $res = DB::select($sql,[Session::get('uid')]);
+        if( count($res) == 0 ) {
+            $sql = " insert into userattr (uid,sex,age,head,addr,uname) values (?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[Session::get('uid'),$sex,$age,$head,$addr,$uname]);
+        }else{
+            $sql = " update userattr set uname=?,sex=?,age=?,head=?,addr=? where uid=?";
+            $res = DB::update($sql,[$uname,$sex,$age,$head,$addr,Session::get('uid')]);
+        }
+    }
 }
