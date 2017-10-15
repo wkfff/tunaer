@@ -10,8 +10,8 @@
 <div class="loginbox">
     <div class="title">登录徒哪儿网</div>
 
-    <input name="phone" type="text" placeholder="请输入手机号码" value="18328402801">
-    <input name="passwd" type="password" placeholder="登录密码" value="123">
+    <input name="phone" type="text" placeholder="请输入手机号码" value="">
+    <input name="passwd" type="password" placeholder="登录密码" value="">
     <input name="code" style="display:inline-block;width:150px;" value="" type="text" placeholder="请输入图形验证码">
     <img class="verify" src="/verifycode" alt="" >
     <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">

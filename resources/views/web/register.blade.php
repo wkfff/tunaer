@@ -9,12 +9,12 @@
 <body>
     <div class="registerbox">
         <div class="title">注册新账号</div>
-        <input type="text" name="phone" placeholder="请输入手机号码" value="18328402805">
+        <input type="text" name="phone" placeholder="请输入手机号码" value="">
 
-        <input style="display:inline-block;width:130px;" name="code" type="text" placeholder="请输入手机验证码" value="123456" >
+        <input style="display:inline-block;width:130px;" name="code" type="text" placeholder="请输入手机验证码" value="" >
         <span id="sended" style="font-size: 12px;color:#F05050;display: none" >已发送，请注意查收</span>
         <button id="sendcodebtn" style="border:none;cursor:pointer;background-color: #00D8C9;color:white;border-radius:15px;font-size:0.9em;width:70px;height:30px;margin-left: 30px;opacity: 0.8;">发送</button>
-        <input type="password" name="passwd" placeholder="登录密码" value="123456">
+        <input type="password" name="passwd" placeholder="登录密码" value="">
 
         <input id="submit" type="button" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="注册">
         <!-- <p class="register_terms">登录即代表你同意<a target="_blank" href="#">《似友服务条款》</a>和<a target="_blank" href="#">《隐私条款》</a> </p> -->
