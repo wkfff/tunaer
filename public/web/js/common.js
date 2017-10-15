@@ -54,6 +54,9 @@ function ql_register() {
         var qqdata = localStorage.getItem("qqdata");
 
         if( ajaxdata(data) ) {
+            console.log({
+                "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
+            });return;
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(data){
