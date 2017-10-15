@@ -83,8 +83,8 @@
         <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>驴友点评</p>
         </div>
-        <div >
-            <textarea style="margin-top:10px;width:100%" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+        <div style="width:100%;display:block;" >
+            <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
             <button style="margin-top:10px;float:left  " class="btn btn-success " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
         </div>
         <div style="clear:both" ></div>
