@@ -48,11 +48,12 @@ function otherlogin(openid,type) {
                 window.parent.location.reload();
             }
         }else{
-            QC.api("get_user_info", {
+            var data = QC.api("get_user_info", {
                 "access_token":localStorage.getItem("qq_access_token"),
                 "openid":localStorage.getItem("qq_openid"),
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET");
+            console.log(data);
             // $.get("https://graph.qq.com/user/get_user_info?access_token="+localStorage.getItem("qq_access_token")+"&oauth_consumer_key=101428001&openid="+localStorage.getItem("qq_openid"),{},function(d){
             //     console.log(d);
             // })
