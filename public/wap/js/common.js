@@ -22,7 +22,7 @@ function lg_login() {
     },function(data){
         var res = ajaxdata(data);
         if( res ) {
-            toast("登录成功");
+            localStorage.setItem("login_token",res);
             location.reload();
         }
     })
