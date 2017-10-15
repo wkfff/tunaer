@@ -81,7 +81,7 @@
     <div class="tuwen" >
         <{!! $detail->tuwen !!}
     </div>
-    <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:10px;text-align: left;" >
+    <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:0 10px;text-align: left;" >
         <p>驴友点评</p>
     </div>
     <div style="margin:0 10px;" >
