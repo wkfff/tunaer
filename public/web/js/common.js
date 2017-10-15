@@ -112,7 +112,7 @@ function otherlogin(openid,type) {
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
                 localStorage.setItem("qqdata",s.data);
-                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span> <初次使用请绑定手机号码></初次使用请绑定手机号码></span>")
+                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>初次使用请绑定手机号码></span>")
                 $("#qqlogin").modal("show");
             })
         }
