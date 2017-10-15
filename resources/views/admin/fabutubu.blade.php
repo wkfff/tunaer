@@ -13,7 +13,7 @@
     <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
         <style>
             .tubudetailnavbar{
-                border-bottom:1px solid #ddd;height:50px;width:100%;
+                border-bottom:1px solid #ddd;width:100%;
 
             }
             .tubudetailnavbar a{
