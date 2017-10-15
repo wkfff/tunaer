@@ -103,7 +103,7 @@ function otherlogin(openid,type) {
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         if( ajaxdata(d) ) {
             if( localStorage.getItem("enterurl") ) {
-                if( location.href=localStorage.getItem("enterurl") ) {
+                if( location.href==localStorage.getItem("enterurl") ) {
                     location.reload();
                 }else{
                     location.href= localStorage.getItem("enterurl");
