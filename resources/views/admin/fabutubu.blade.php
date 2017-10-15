@@ -28,7 +28,7 @@
         </style>
 
         <div class="tubudetailnavbar" >
-            <a href="#xcap" style="background: #4B8EE8;color:#fff;">行程安排</a>
+            <a href="#xcap" >行程安排</a>
             <a href="#fysm">费用说明</a>
             <a href="#xlms">线路描述</a>
             <a href="#ditu">目的地地图</a>

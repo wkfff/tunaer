@@ -78,7 +78,21 @@
             </p>
         @endfor
     </div>
-    <div class="tuwen" >{!! $detail->tuwen !!}</div>
+    <div class="tuwen" >
+        <div>{!! $detail->tuwen !!}</div>
+        <div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
+            <p>驴友点评</p>
+        </div>
+        <div >
+            <textarea style="margin-top:10px;" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+            <button style="margin-top:10px;float:left  " class="btn btn-success " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
+        </div>
+        <div style="clear:both" ></div>
+        <div class="liuyanbox">
+
+        </div>
+        <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+    </div>
 
     @include("wap.footer")
 
@@ -108,6 +122,41 @@
             $.post("/tubu/baoming",{"tid":id},function(d){
                 if( ajaxdata(d) ) {
                     toast("报名成功");
+                }
+            })
+        }
+        function tubucm(t,tid) {
+            var content = $(t).parent("div").children("textarea").val();
+            if( $.trim(content) == ''  ) {
+                toast("请输入评论内容"); return;
+            }
+            $.post("/tubucm",{"tid":tid,"content":content},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+        function gettubucms(yid) {
+            if( window.liuyanpage ) {
+                window.liuyanpage++;
+            }else{
+                window.liuyanpage = 1;
+            }
+            $.post("/gettubucms",{'yid':yid,"page":window.liuyanpage},function(d){
+                if( res = ajaxdata(d) ) {
+                    if( res.length == 0 && window.liuyanpage!=1 ) {
+                        toast("没有更多了"); return ;
+                    }
+                    for( var i=0;i<res.length;i++ ) {
+                        var item = `<div style="margin:20px 0;vertical-align: middle;">
+                            <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
+                                ${res[i].ctime}
+                            </div>
+                        </div>`;
+                        $(".liuyanbox").append(item);
+                    }
                 }
             })
         }
