@@ -102,16 +102,15 @@ function toast(title) {
 function otherlogin(openid,type) {
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         if( ajaxdata(d) ) {
-            console.log(localStorage.getItem("enterurl"));
-            // if( localStorage.getItem("enterurl") ) {
-            //     if( location.href=localStorage.getItem("enterurl") ) {
-            //         location.reload();
-            //     }else{
-            //         location.href= localStorage.getItem("enterurl");
-            //     }
-            // }else{
-            //     location.reload();
-            // }
+            if( localStorage.getItem("enterurl") ) {
+                if( location.href=localStorage.getItem("enterurl") ) {
+                    location.reload();
+                }else{
+                    location.href= localStorage.getItem("enterurl");
+                }
+            }else{
+                location.reload();
+            }
         }else{
             var data = QC.api("get_user_info", {
                 "access_token":localStorage.getItem("qq_access_token"),
