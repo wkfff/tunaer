@@ -54,7 +54,7 @@ function otherlogin(openid,type) {
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
                 console.log(s.data);
-                $("#myModalLabel").text("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>，请完善资料</span>")
+                $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>，请完善资料</span>")
                 $("#qqlogin").modal("show");
             })
 
