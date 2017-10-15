@@ -56,8 +56,9 @@ function ql_register() {
         if( ajaxdata(data) ) {
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
-            },function(data){
-                if( ajaxdata(data) ) {
+            },function(d){
+                console.log(d);
+                if( ajaxdata(d) ) {
                     if( localStorage.getItem("enterurl") ) {
                         location.href=localStorage.getItem("enterurl");
                     }else{
