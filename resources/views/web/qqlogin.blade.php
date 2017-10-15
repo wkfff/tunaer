@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    @include("web.footer")
+
 @stop
 
 @section("htmlend")
