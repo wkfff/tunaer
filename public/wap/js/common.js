@@ -1,11 +1,30 @@
 
 // 打开登陆框
 function openlogion() {
-    var iframe = "<div onclick='$(this).toggle();' id='loginbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/login' frameborder='0' style='width:100%;height: 100%;background: #fff;position: absolute;left: 0%;top: 0%;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
-    $("body").append(iframe);
-    setTimeout(function(){
-        $("#loginbg").css("display","block");
-    },100)
+    $("#regmodal").modal("hide");
+    $("#loginmodal").modal("show");
+
+    // var iframe = "<div onclick='$(this).toggle();' id='loginbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/login' frameborder='0' style='width:100%;height: 100%;background: #fff;position: absolute;left: 0%;top: 0%;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
+    // $("body").append(iframe);
+    // setTimeout(function(){
+    //     $("#loginbg").css("display","block");
+    // },100)
+}
+function lg_login() {
+    var phone = $.trim( $(" input[name='lg-phone']").val() );
+    var passwd = $.trim( $(" input[name='lg-passwd']").val() );
+    var code = $.trim( $(" input[name='lg-code']").val() );
+    $.post("/login",{
+        "phone":phone,
+        "passwd":passwd,
+        "verifycode":code
+    },function(data){
+        var res = ajaxdata(data);
+        if( res ) {
+            toast("登录成功");
+            location.reload();
+        }
+    })
 }
 // 关闭登录框
 function closelogin() {
@@ -13,11 +32,43 @@ function closelogin() {
 }
 // 打开登陆框
 function openreg() {
-    var iframe = "<div onclick='$(this).toggle();' id='regbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/register' frameborder='0' style='width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
-    $("body").append(iframe);
-    setTimeout(function(){
-        $("#regbg").css("display","block");
-    },100)
+    $("#loginmodal").modal("hide");
+    $("#regmodal").modal("show");
+    // var iframe = "<div onclick='$(this).toggle();' id='regbg' style='height:100%;width:100%;position:fixed;z-index:1060;background:rgba(0,0,0,0.3);left:0px;top:0px;display:none' ><iframe src='/register' frameborder='0' style='width: 600px;height: 360px;background: #fff;position: absolute;left: 50%;top: 50%;margin-left: -300px;margin-top: -200px;box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);border-radius: 4px;z-index:1;'></iframe></div>";
+    // $("body").append(iframe);
+    // setTimeout(function(){
+    //     $("#regbg").css("display","block");
+    // },100)
+}
+function sendcode() {
+    var phone = $.trim( $("input[name='rg-phone']").val() );
+    var r = /^1[23456789]{1}\d{9}$/;
+    if( !r.test(phone) ) {
+        toast("手机格式错误"); return false;
+    }
+    $.post("/sendcode",{'phone':phone},function(data){
+        var res = ajaxdata(data);
+        $("#sendcodebtn").removeAttr("onclick");
+        $("#sendcodebtn").text("已发送");
+        toast("发送成功，请注意查收");
+    })
+}
+function rg_register() {
+    var phone = $.trim( $(" input[name='rg-phone']").val() );
+    var passwd = $.trim( $(" input[name='rg-passwd']").val() );
+    var code = $.trim( $(" input[name='rg-code']").val() );
+    $.post("/register",{
+        "phone":phone,
+        "passwd":passwd,
+        "code":code
+    },function(data){
+
+        var res = ajaxdata(data);
+        if( res ) {
+            toast("注册成功");
+            location.reload();
+        }
+    })
 }
 // 关闭登录框
 function closereg() {

@@ -25,11 +25,6 @@
                 <img class="verify" style="float:left;margin-left:10px;" src="/verifycode" alt="" >
             </div>
             <div style="clear:both;height:20px;width:100%;" ></div>
-            {{--<div class="checkbox">--}}
-                {{--<label>--}}
-                    {{--<input type="checkbox">记住登录--}}
-                {{--</label>--}}
-            {{--</div>--}}
             <button type="button" onclick="reg()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
         </div>
         <div style="text-align:center" ><a href="/register">注册新用户</a></div>
