@@ -36,8 +36,9 @@
             <a href="#hdsp">活动视频</a>
             <a href="#xlpj">线路评价</a>
             <a href="#lydp">驴友点评</a>
+            <div style="clear:both" ></div>
         </div>
-        <div style="clear:both" ></div>
+
         <div id="xcap" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
             <p>行程安排</p>
         </div>
