@@ -72,9 +72,9 @@ function rg_register() {
     })
 }
 function ql_register() {
-    var phone = $.trim( $(" input[name='rg-phone']").val() );
-    var passwd = $.trim( $(" input[name='rg-passwd']").val() );
-    var code = $.trim( $(" input[name='rg-code']").val() );
+    var phone = $.trim( $("input[name='ql-phone']").val() );
+    var passwd = $.trim( $("input[name='ql-passwd']").val() );
+    var code = $.trim( $("input[name='ql-code']").val() );
     $.post("/register",{
         "phone":phone,
         "passwd":passwd,
