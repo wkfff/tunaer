@@ -477,7 +477,7 @@ class PostController extends Controller{
         if( !checknull($phone,$passwd,$code) ) {
             echo "400-请填写完整信息";
         }else{
-            if( Cache::get('code-'.$phone) == $code ) {
+            if( Cache::get('code-'.$phone) != $code ) {
                 echo "400-验证码不正确"; return;
             }
             $sql = " select * from user where phone=? ";
