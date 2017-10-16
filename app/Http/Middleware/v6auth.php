@@ -23,7 +23,6 @@ class v6auth
             }else{
                 exit("nologin");
             }
-
         }
         return $next($request);
     }
