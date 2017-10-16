@@ -66,10 +66,15 @@
                     $types = Session::get('types');
                 ?>
                 @for( $i=0;$i<count($types);$i++ )
-                    @if( $types[$i]->name != '国内旅游' )
+                    @if( $types[$i]->name != '国内旅游' && $types[$i]->name != "交友活动" )
                         <div onclick="location.href='/tubulist/{{$types[$i]->id}}'">{{$types[$i]->name}}</div>
                     @else
-                            <span style="display:none" >{{ $guoneilvyou = $types[$i]->id }}</span>
+                        @if($types[$i]->name == "国内旅游")
+                                <span style="display:none" >{{ $guoneilvyou = $types[$i]->id }}</span>
+                            @else
+                                <span style="display:none" >{{ $jiaoyouhuodong = $types[$i]->id }}</span>
+                            @endif
+
                     @endif
                 @endfor
             </div>
@@ -78,6 +83,7 @@
             <span>徒步交友</span><i></i>
             <div class="xiala">
                 <div onclick="location.href='/member/dongtai'">徒友动态</div>
+                <div onclick="location.href='/tubulist/{{$jiaoyouhuodong}}'">交友活动</div>
                 <div onclick="location.href='/member/list'">徒友交流</div>
             </div>
         </a>
