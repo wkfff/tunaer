@@ -98,23 +98,23 @@
                     @endfor
                 </div>
                 <div id="inputcls">
-                    <input type="text" value="青城山一日游" placeholder="主题" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
-                    <input type="text" value="1" placeholder="几天" name="howlong" >
-                    <input type="text" value="青城山目的地" placeholder="目的地" name="mudidi" ><br>
-                    <input type="text" value="2017-09-01" placeholder="出发时间" name="startday" >
-                    <input type="text" value="2017-09-02" placeholder="返回时间" name="endday" ><br>
-                    <input type="text" value="火车站集合地点" placeholder="集合地点,多个集合地点使用#号隔开" name="jihedidian" >
-                    <input type="text" value="2017-09-01 12:12:12" placeholder="集合时间" name="jihetime" ><br>
-                    <input type="text" value="230" placeholder="价格" name="price" >
-                    <input type="text" value="火车" placeholder="交通方式" name="jiaotong" ><br>
-                    <input type="text" value="青城山景点" placeholder="景点" name="jingdian" >
-                    <input type="text" value="活动内容你说了算" placeholder="活动内容" name="neirong" ><br>
-                    <input type="text" value="200km" placeholder="距离" name="juli" >
-                    <input type="text" value="特色" placeholder="特色" name="tese" ><br>
-                    <input type="text" value="一般" placeholder="强度" name="qiangdu" >
-                    <input type="text" value="34" placeholder="需要多少人" name="need" ><br>
-                    <input type="text" value="张翠翠领队" placeholder="领队" name="leader" >
-                    <input type="text" value="18328402805" placeholder="联系电话" name="phone" ><br>
+                    <input type="text" value="" placeholder="主题" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
+                    <input type="text" value="" placeholder="几天" name="howlong" >
+                    <input type="text" value="" placeholder="目的地" name="mudidi" ><br>
+                    <input type="text" value="" placeholder="出发时间" name="startday" >
+                    <input type="text" value="" placeholder="返回时间" name="endday" ><br>
+                    <input type="text" value="" placeholder="集合地点,多个集合地点使用#号隔开" name="jihedidian" >
+                    <input type="text" value="" placeholder="集合时间" name="jihetime" ><br>
+                    <input type="text" value="" placeholder="价格" name="price" >
+                    <input type="text" value="" placeholder="交通方式" name="jiaotong" ><br>
+                    <input type="text" value="" placeholder="景点" name="jingdian" >
+                    <input type="text" value="" placeholder="活动内容" name="neirong" ><br>
+                    <input type="text" value="" placeholder="距离" name="juli" >
+                    <input type="text" value="" placeholder="特色" name="tese" ><br>
+                    <input type="text" value="" placeholder="强度" name="qiangdu" >
+                    <input type="text" value="" placeholder="需要多少人" name="need" ><br>
+                    <input type="text" value="" placeholder="领队" name="leader" >
+                    <input type="text" value="" placeholder="联系电话" name="phone" ><br>
                 </div>
                 <br>
             </div>

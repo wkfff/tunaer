@@ -9,7 +9,8 @@
         <tr>
             <th>编号</th>
             <th>标题</th>
-            {{--<th>分类</th>--}}
+            <th>大分类</th>
+            <th>子分类</th>
             <th>价格</th>
             <th>已售</th>
             <th>库存</th>
@@ -24,7 +25,8 @@
             <tr>
                 <td class="center">{{$list[$i]->id}}</td>
                 <td><a target="_blank" style="color:cornflowerblue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
-                {{--<td class="center">{{$list[$i]->sort}}</td>--}}
+                <td class="center">{{$list[$i]->sort}}</td>
+                <td class="center">{{$list[$i]->subsort}}</td>
                 <td class="center">{{$list[$i]->price}}元</td>
                 <td class="center">{{$list[$i]->sold}}件</td>
                 <td class="center">{{$list[$i]->kucun}}件</td>
