@@ -65,13 +65,7 @@
                 <div onclick="zhaohu({{$userinfo->userid}})" style="margin-left:10px;background:dodgerblue" class="searchb"  >打招呼</div>
             </h2>
 
-            <div style="width:150px;height:150px;background-image: url(
-            @if(strstr($userinfo->head,"http"))
-                    {{$userinfo->head}}
-                    @else
-                    /head/{{$userinfo->userid}}
-                    @endif
-            );
+            <div style="width:150px;height:150px;background-image: url(/head/{{$userinfo->userid}});
                 background-size:cover;background-position:center;position:absolute;right:0px;top:0px;">
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <a href="javascript:void(0)" onclick="$('.userheadinput').trigger('click');"

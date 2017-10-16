@@ -101,7 +101,12 @@ class PostController extends Controller{
             if( trim($res[0]->head) == '' ) {
                 header("Location:/web/images/default.gif");
             }else{
-                header("Location:/web/data/images/".$res[0]->head);
+                if( strstr($res[0]->head,"http") ) {
+                    header("Location:".$res[0]->head);
+                }else{
+                    header("Location:/web/data/images/".$res[0]->head);
+                }
+
             }
 
         }else{

@@ -64,13 +64,7 @@
     <div class="content" >
 
         <div class="toppic">
-            <div style="width:100px;height:100px;background-image: url(
-            @if(strstr($userinfo->head,"http"))
-            {{$userinfo->head}}
-            @else
-                    /head/{{$userinfo->userid}}
-            @endif
-    );border-radius:50px;
+            <div style="width:100px;height:100px;background-image: url(/head/{{$userinfo->userid}});border-radius:50px;
                     background-size:cover;background-position:center;position:absolute;left:50%;top:50%;margin-top:-70px;margin-left:-50px;overflow: hidden">
                 @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
                     <a href="javascript:void(0)" onclick="$('.userheadinput').trigger('click');"
