@@ -52,8 +52,9 @@ function ql_register() {
         "wxid":""
     },function(data){
         var qqdata = JSON.parse(localStorage.getItem("qqdata"));
-
-        if( ajaxdata(data) ) {
+        var res = ajaxdata(data);
+        if( res ) {
+            localStorage.setItem("login_token",res);
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){
@@ -97,7 +98,9 @@ function toast(title) {
 // 第三方登录
 function otherlogin(openid,type) {
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
-        if( ajaxdata(d) ) {
+        var res = ajaxdata(d);
+        if( res ) {
+            localStorage.setItem("login_token",res);
             if( localStorage.getItem("enterurl") ) {
                 location.href = localStorage.getItem("enterurl");
             }else{

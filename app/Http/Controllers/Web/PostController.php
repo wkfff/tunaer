@@ -484,11 +484,10 @@ class PostController extends Controller{
             $res = DB::select($sql,[$phone]);
             if( count($res) == 0 ) {
                 if( Cache::get('code-'.$phone) == $code ) {
-                    $sql = " insert into user (phone,passwd,regip) values (?,?,?) ";
-                    $res = DB::insert($sql,[$phone,md5($passwd),$_SERVER['REMOTE_ADDR']]);
+                    $sql = " insert into user (phone,passwd,regip,qqid,wxid) values (?,?,?,?,?) ";
+                    $res = DB::insert($sql,[$phone,md5($passwd),$_SERVER['REMOTE_ADDR'],$qqid,$wxid]);
                     if( $res ) {
-//                        echo "200-注册成功";
-                        Session::forget('uid');
+                        $request->session()->flush();
                         // 直接登录
                         login($phone,$passwd,true);
                     }else{
@@ -511,7 +510,7 @@ class PostController extends Controller{
                         Session::put('uid', $res[0]->id);
                         Session::put('uname', $res[0]->uname);
                     }
-                    echo "200-绑定成功";
+                    echo "200-".jiami($res[0]->id);
 
                 }else{
                     echo "400-手机号码已经注册过了，你可以直接登录";
@@ -668,6 +667,7 @@ class PostController extends Controller{
         }
         echo "200-success";
     }
+//    使用login_token加密字符串登录
     public function tokenlogin(Request $request) {
         $token = $request->input("token",false);
         if( $token ) {

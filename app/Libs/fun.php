@@ -25,6 +25,7 @@ function login($phone,$passwd,$returnuid=false) {
         Session::put('uid', $res[0]->id);
         Session::put('uname', $res[0]->uname);
         if(!$returnuid) {
+//            返回一个包含用户登录信息的加密字符串　有效期10天
             echo "200-".jiami($res[0]->id);
         }
     }else{
@@ -150,9 +151,9 @@ function jiami($str) {
     for( $i=0;$i<$need;$i++ ) {
         $res .= $rarr[$i];
     }
-//    原串在ascii上增加的量
+//    原串在ascii上的增量
     $ascii_add = rand(3,8);
-    $res .= "!xg" . ord($ascii_add) . "$1r";
+    $res .= "!x0" . ord($ascii_add) . "$1r";
     for( $j=0;$j<count($sarr);$j++ ) {
         $res .= chr( ord($sarr[$j]) + $ascii_add );
     }
@@ -160,7 +161,7 @@ function jiami($str) {
 }
 function jiemi($str) {
     $str = base64_decode($str);
-    preg_match_all("/!xg(\d+)\\$1r(.*)$/",$str,$matches);
+    preg_match_all("/!x0(\d+)\\$1r(.*)$/",$str,$matches);
     $fg = explode($matches[1][0]."$1r",$str);
     $sarr = str_split($fg[1]);
     $res = "";

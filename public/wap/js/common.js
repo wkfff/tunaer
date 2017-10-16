@@ -76,7 +76,6 @@ function rg_register() {
         "passwd":passwd,
         "code":code
     },function(data){
-
         var res = ajaxdata(data);
         if( res ) {
             localStorage.setItem("login_token",res);
@@ -113,7 +112,9 @@ function ql_register() {
 function otherlogin(openid,type) {
 
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
-        if( ajaxdata(d) ) {
+        var res = ajaxdata(d);
+        if( res ) {
+            localStorage.setItem("login_token",res);
             location.href = "/";
         }else{
             var data = QC.api("get_user_info", {
@@ -122,7 +123,6 @@ function otherlogin(openid,type) {
                 "oauth_consumer_key":localStorage.getItem("101428001"),
             }, "json", "GET").success(function(s){
                 localStorage.setItem("qqdata",JSON.stringify(s.data));
-                // $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>初次使用请绑定手机号码</span>")
                 $("#qqlogin").modal("show");
             })
         }

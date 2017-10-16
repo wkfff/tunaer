@@ -20,6 +20,21 @@
 
 </head>
 <body >
+@if( !Session::get('uid') )
+    <script>
+        if( localStorage.getItem("login_token") ) {
+            var token = localStorage.getItem("login_token");
+            $.post("/tokenlogin",{"token":token},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }else{
+                    localStorage.removeItem("login_token");
+                }
+            })
+        }
+    </script>
+@endif
+
 <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width:100%">
