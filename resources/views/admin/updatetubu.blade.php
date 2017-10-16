@@ -53,7 +53,7 @@
                     <input type="text" value="{{$tubu->jingdian}}" placeholder="景点" name="jingdian" >
                     <input type="text" value="{{$tubu->neirong}}" placeholder="活动内容" name="neirong" ><br>
                     <input type="text" value="{{$tubu->juli}}" placeholder="距离" name="juli" >
-                    <input type="text" value="{{$tubu->tese}}" placeholder="特色" name="tese" ><br>
+                    <input type="text" value="{{$tubu->tese}}" placeholder="特色请用#号隔开" name="tese" ><br>
                     <input type="text" value="{{$tubu->qiangdu}}" placeholder="强度" name="qiangdu" >
                     <input type="text" value="{{$tubu->need}}" placeholder="需要多少人" name="need" ><br>
                     <input type="text" value="{{$tubu->leader}}" placeholder="领队" name="leader" >

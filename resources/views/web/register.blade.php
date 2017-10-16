@@ -22,8 +22,8 @@
         <div class="qrcode">
             <img src="/web/images/1506587848.png" alt="">
             <div>扫描浏览手机版</div>
-            <button onclick="window.parent.toast('敬请期待')" style="background:#DC7164">QQ登录</button>
-            <button onclick="window.parent.toast('敬请期待')" style="background:#5DDF78">微信登录</button>
+            <button onclick="window.parent.location.href='https://graph.qq.com/oauth/show?which=Login&display=pc&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin'" style="background:#DC7164;cursor:pointer;">QQ登录</button>
+            <button  style="background:#5DDF78;cursor: not-allowed;">微信登录</button>
         </div>
 
         <div onclick="window.parent.closereg()" class="register_close"></div>

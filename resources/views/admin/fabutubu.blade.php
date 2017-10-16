@@ -11,66 +11,30 @@
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
 
     <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
-        <style>
-            .tubudetailnavbar{
-                border-bottom:1px solid #ddd;width:100%;
-                mpadding-bottom:10px;
-            }
-            .tubudetailnavbar a{
-                display:block;text-decoration: none;padding:5px 10px;
-                float:left;color:#333;margin-right:10px;
-                cursor: pointer;font-size: 1em;
-                text-align: center;background: #E6E6E6;margin-top:15px;
-            }
-            .tubudetailnavbar a:hover{
-                background: #4B8EE8;color:#fff;
-            }
-        </style>
-
-        <div class="tubudetailnavbar" >
-            <a href="#xcap" >行程安排</a>
-            <a href="#fysm">费用说明</a>
-            <a href="#xlms">线路描述</a>
-            <a href="#ditu">目的地地图</a>
-            <a href="#bmxz">报名须知</a>
-            <a href="#hdsp">活动视频</a>
-            <a href="#xlpj">线路评价</a>
-            <a href="#lydp">驴友点评</a>
-            <div style="clear:both" ></div>
-        </div>
-
-        <div id="xcap" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>行程安排</p>
+        <div id="jhxx" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">集合信息
         </div>
         <br>
-        <div id="fysm" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>费用说明</p>
+        <div id="hdxq" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">活动详情
         </div>
         <br>
-        <div id="xlms" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>线路描述</p>
+        <div id="ckxc" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">参考行程
         </div>
         <br>
-        <div id="ditu" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>目的地地图</p>
+        <div id="ydxz" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">预订须知
         </div>
         <br>
-        <div id="bmxz" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>报名须知</p>
+        <div id="qtxx" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">其他信息
         </div>
         <br>
-        <div id="hdsp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>活动视频</p>
+        <div id="hdly" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+            <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">活动留言
         </div>
         <br>
-        <div id="xlpj" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0;text-align: left;" >
-            <p>线路评价</p>
-        </div>
-        <br>
-        {{--<div id="lydp" style="color:#4b8ee8;border-bottom:1px dashed #4b8ee8;font-size:20px;;margin:20px 0" >--}}
-            {{--<p>驴友点评</p>--}}
-        {{--</div>--}}
-        {{--<br>--}}
     </textarea>
     {{--<script type="text/plain" id="myEditor" style="width:900px;"></script>--}}
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
@@ -110,7 +74,7 @@
                     <input type="text" value="" placeholder="景点" name="jingdian" >
                     <input type="text" value="" placeholder="活动内容" name="neirong" ><br>
                     <input type="text" value="" placeholder="距离" name="juli" >
-                    <input type="text" value="" placeholder="特色" name="tese" ><br>
+                    <input type="text" value="" placeholder="特色请用#号隔开" name="tese" ><br>
                     <input type="text" value="" placeholder="强度" name="qiangdu" >
                     <input type="text" value="" placeholder="需要多少人" name="need" ><br>
                     <input type="text" value="" placeholder="领队" name="leader" >
