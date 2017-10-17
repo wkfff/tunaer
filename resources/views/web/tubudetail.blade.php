@@ -58,21 +58,11 @@
                 <div style="height:120px;background:#FFF8EE;width:100%;color:#444;padding:10px;padding-left:40px;" >
                     <p style="border-bottom:2px dashed orange;padding-bottom:10px;line-height:35px;color:#999;font-size:16px;">活动价格：<span style="color:orange;font-size:30px;font-weight: bold;" >￥{{$detail->price}}</span><span style="color:#777;float:right;">{{$detail->startday}} 截止报名</span></p>
                     <p style="line-height:35px;color:#999;font-size:16px;">
-                        @if( !$isjoined )
-                            活动特点：
-                            @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
-                                <span style="color:orange;border:1px dashed orange;padding:2px 6px;font-size:14px; ">{{$tesearr[$i]}}</span>
-                            @endfor
-                            <span style="float:right;color:orange;cursor:pointer;" ><span class="glyphicon glyphicon-list" style="font-size:14px;margin-right:5px;" ></span>报名列表</span>
-                        @endif
-                        {{--@if( strtotime($detail->startday) - time() > 0 )--}}
-                                {{--@if( $isjoined )--}}
-                                    {{--<span style="color:red;font-size:16px;">你已报名，请等待通知(出发前一天)，确保你的{{$phone}}保持畅通</span>--}}
-                                    {{--@else--}}
-                                    {{--<span style="float:right" ><button onclick="baoming({{$detail->id}})" type="button" class="btn btn-warning" style="width:150px;height:40px;font-size: 20px;outline:none">马上报名</button></span>--}}
-                                    {{--@endif--}}
-                            {{--@endif--}}
-
+                        活动特点：
+                        @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
+                            <span style="color:orange;border:1px dashed orange;padding:2px 6px;font-size:14px; ">{{$tesearr[$i]}}</span>
+                        @endfor
+                        <span style="float:right;color:orange;cursor:pointer;" ><span class="glyphicon glyphicon-user" style="font-size:14px;margin-right:5px;" ></span>报名{{$detail->baoming}}人</span>
                     </p>
                 </div>
                 <div style="padding-left:40px;" >
@@ -93,31 +83,40 @@
                         领队：<span style="color:#4b8ee8">{{$detail->leader}}</span>
                         电话：<span style="color:#4b8ee8">{{$detail->phone}}</span>
                     </p>
-                    <p>
-                        支付方式：<img style="height:40px;cursor:pointer;" src="/web/images/alipay.jpg" ><img style="height:35px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
-                    </p>
+
                     <div style="color:orange;line-height:30px;position: relative" >
-                        <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
-                    <p style="color:#444">
-                        徒步通知说明：活动前一天发布具体分车,时间及车辆信息
-                    </p>
-                        <img src="/web/images/wxbaoming.jpg" style="width:100px;position: absolute;right:0px;bottom:0px;">
+
+                        @if( strtotime($detail->startday) - time() > 0 )
+                            @if( $isjoined )
+                                <span style="color:#fff;font-size:16px;width:380px;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>确保你的手机（{{$phone}}）保持畅通</span>
+                            @else
+                                <p>
+                                    支付方式：<img style="height:40px;cursor:pointer;" src="/web/images/alipay.jpg" ><img style="height:35px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
+                                </p>
+                                <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
+                                <p style="color:#444">
+                                    徒步通知说明：活动前一天发布具体分车,时间及车辆信息
+                                </p>
+                                <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button>
+                            @endif
+                        @endif
+                            <img src="/web/images/wxbaoming.jpg" style="width:100px;position: absolute;right:0px;bottom:0px;">
                     </div>
 
                     <div style="position:relative;">
-                        <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button>
+
                         <div style="width:200px;height:50px;position:absolute;top:0px;right:0px;" >
 
                             <div style="height:30px;width:40px;background-image:url(/web/images/share.png);background-size:contain;background-repeat: no-repeat;background-position:center;position: relative;float:right;margin-left:20px;cursor:pointer;" >
-                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;">20</p>
+                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;">分享</p>
                             </div>
-                            <div style="height:30px;width:40px;background-image:url(/web/images/like.png);background-size:contain;background-repeat: no-repeat;background-position:center;position: relative;float:right;margin-left:20px;cursor:pointer;" >
-                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;">20</p>
+                            <div onclick="tubucm(this,{{$detail->id}},2)" style="height:30px;width:40px;background-image:url(/web/images/like.png);background-size:contain;background-repeat: no-repeat;background-position:center;position: relative;float:right;margin-left:20px;cursor:pointer;" >
+                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;">{{$detail->zancnt}}</p>
                             </div>
 
-                            <div style="height:30px;width:40px;background-image:url(/web/images/comment.png);background-size:contain;background-repeat: no-repeat;background-position:center;position: relative;float:right;cursor:pointer;" >
-                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;">20</p>
-                            </div>
+                            <a href="#cmbox"><div style="height:30px;width:40px;background-image:url(/web/images/comment.png);background-size:contain;background-repeat: no-repeat;background-position:center;position: relative;float:right;cursor:pointer;" >
+                                <p style="position: absolute;bottom:-40px;line-height:30px;text-align:center;width:100%;color:#444">{{$detail->cmcnt}}</p>
+                            </div></a>
 
                         </div>
                     </div>
@@ -130,6 +129,7 @@
 
             </div>
             <div style="clear:both;height:20px;" ></div>
+            {{--<div style="height:40px;width:100%;background:blue;color:#fff;" ></div>--}}
             <style>
                 .tuwen{
                     text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #efefef;padding:10px;
@@ -151,8 +151,8 @@
                     opacity:0.8;
                 }
                 .tubudetailnavbar{
-                    border-top:1px solid blue;width:1200px;text-align: left;
-                    position: relative;
+                    border-top:1px solid #4B8EE8;width:1200px;text-align: left;
+                    position: relative;border-bottom:1px solid #4B8EE8;
                     height:50px;line-height:50px;background: white;z-index:10;
                 }
                 .tubudetailnavbar a{
@@ -166,23 +166,23 @@
             </style>
             <div class="tubudetailnavbar" >
                 <a href="#jhxx" >集合信息</a>
-                <a href="#hdxq" style="background: #4B8EE8;color:#fff;">活动详情</a>
+                <a href="#hdxq" >活动详情</a>
                 <a href="#ckxc">参考行程</a>
                 <a href="#ydxz">预订须知</a>
                 <a href="#qtxx">其他信息</a>
                 <a href="#hdly">活动留言</a>
-                <a id="barbaoming" href="javascript:void(0)" onclick="baoming({{$detail->id}})" style="background: orange;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
+                <a id="barbaoming" href="javascript:void(0)" onclick="baoming({{$detail->id}})" style="background: #4B8EE8;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
                 <div style="clear:both" ></div>
             </div>
             <div class="tuwen" >
                 <div>{!! $detail->tuwen !!}</div>
 
-                <div >
-                    <button onclick="youjicm(this,{{$list->id}},2)"  type="button" class="btn btn-default btn-sm">
-                        <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$list->zancnt}})</span>
+                <div id="cmbox" style="text-align:left">
+                    <button onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
+                        <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
                     </button>
                     <textarea style="margin-top:10px;border:1px solid dodgerblue" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
-                    <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}})" >提交评论</button>
+                    <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
                 </div>
                 <div style="clear:both" ></div>
                 <div class="liuyanbox">
@@ -265,12 +265,16 @@
                 }
             })
         }
-        function tubucm(t,tid) {
+        function tubucm(t,tid,type) {
             var content = $(t).parent("div").children("textarea").val();
-            if( $.trim(content) == ''  ) {
-                toast("请输入评论内容"); return;
+            if( type == 1) {
+                if( $.trim(content) == ''  ) {
+                    toast("请输入评论内容"); return;
+                }
+            }else{
+                content = 'zan';
             }
-            $.post("/tubucm",{"tid":tid,"content":content},function(d){
+            $.post("/tubucm",{"tid":tid,"content":content,"type":type},function(d){
                 if( ajaxdata(d) ) {
                     location.reload();
                 }

@@ -422,7 +422,7 @@ class PostController extends Controller{
     public function getyoujicms(Request $request) {
         $yid = $request->input('yid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",10);
         if( checknull($yid) ) {
             $sql = " select * from youjicm where yid=? and type=1 order by id desc limit ?,? ";
             $youji = DB::select($sql,[$yid,($page-1)*$num,$num]);
@@ -609,11 +609,25 @@ class PostController extends Controller{
     public function tubucm(Request $request) {
         $content = $request->input("content",'');
         $tid = $request->input("tid",'');
-        if( checknull($content) ) {
-            $sql = " insert into tubucm (uid,tid,content) values(?,?,?) ";
-            $res = DB::insert($sql,[Session::get('uid'),$tid,$content]);
+        $type = $request->input("type",1);
+        if( checknull($content,$tid) ) {
+//            检查重复赞
+            if( $type == 2 ) {
+                $sql = " select * from tubucm where tid=? and uid=? and ctime like '%".date('Y-m-d')."%' ";
+                $r = DB::select($sql,[$tid,Session::get('uid')]);
+                if(count($r) > 0) {
+                    echo "400-今日已赞"; return ;
+                }
+            }
+            $sql = " insert into tubucm (uid,tid,content,type) values(?,?,?,?) ";
+            $res = DB::insert($sql,[Session::get('uid'),$tid,$content,$type]);
             if( $res ) {
-                echo "200";
+                if( $type == 1 ) {
+                    @DB::table("tubuhuodong")->where("id",$tid)->increment("cmcnt",1);
+                }else{
+                    @DB::table("tubuhuodong")->where("id",$tid)->increment("zancnt",1);
+                }
+                echo "200-success";
             }else{
                 echo "400-操作失败";
             }
@@ -623,7 +637,7 @@ class PostController extends Controller{
     public function gettubucms(Request $request) {
         $tid = $request->input('yid','');
         $page = $request->input("page",1);
-        $num = $request->input("num",2);
+        $num = $request->input("num",10);
         if( checknull($tid) ) {
             $sql = " select * from tubucm where tid=? order by id desc limit ?,? ";
             $tubucm = DB::select($sql,[$tid,($page-1)*$num,$num]);

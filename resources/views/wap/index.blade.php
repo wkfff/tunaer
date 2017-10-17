@@ -48,7 +48,7 @@
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <a href="/tubulist/5"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友线路</span></a>
+                <a href="/tubulist/5"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友活动</span></a>
                 <a href="/youjilist/1"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友游记</span></a>
             </div>
         </div>

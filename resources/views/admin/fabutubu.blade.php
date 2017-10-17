@@ -11,27 +11,27 @@
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
 
     <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
-        <div id="jhxx" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="jhxx" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">集合信息
         </div>
         <br>
-        <div id="hdxq" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="hdxq" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">活动详情
         </div>
         <br>
-        <div id="ckxc" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="ckxc" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">参考行程
         </div>
         <br>
-        <div id="ydxz" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="ydxz" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">预订须知
         </div>
         <br>
-        <div id="qtxx" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="qtxx" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">其他信息
         </div>
         <br>
-        <div id="hdly" style="color:#555;border-bottom:1px solid dodgerblue;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
+        <div id="hdly" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">活动留言
         </div>
         <br>

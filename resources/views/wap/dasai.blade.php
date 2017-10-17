@@ -102,7 +102,8 @@
                             </div>
                         @endif
                     </div>
-                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px;overflow: hidden;" >
+                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px
+                    ;overflow: hidden;" >
                         {{$works[$i]->intro}}
                     </div>
                 </div>

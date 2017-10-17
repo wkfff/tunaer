@@ -113,7 +113,7 @@
                         var item = `<div style="margin:20px 0;vertical-align: middle;">
                             <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:40px;width:40px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:20px;vertical-align: middle;float:left;cursor:pointer;margin-left:5px;" ></div>
                             <div style="font-size:14px;padding:10px;float:left;max-width:80%;margin-left:0px;border-radius:5px;">${res[i].content}</div>
-                            <div style="clear:both;margin-left:90px;color:#999;" >
+                            <div style="clear:both;margin-left:55px;color:#999;" >
                                 ${res[i].ltime}
                             </div>
                         </div>`;
