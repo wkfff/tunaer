@@ -710,4 +710,10 @@ class PostController extends Controller{
             echo "400-...";
         }
     }
+    public function getlastestorderinfo() {
+        $uid = Session::get('uid');
+        $sql = " select * from tubuorder where uid=? limit 1 ";
+        $res = DB::select($sql,[$uid]);
+        echo json_encode($res);
+    }
 }

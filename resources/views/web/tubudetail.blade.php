@@ -26,9 +26,6 @@
                 <span>></span>
                 <a style="color: #999;" href="/tubulist/{{$detail->types}}" >{{$detail->name}}</a>
             </div>
-            {{--<div style="color:#4b8ee8;font-size:24px;">--}}
-                {{--{{$detail->title}}--}}
-            {{--</div>--}}
             <div style="float: left;margin-top:10px;">
                 <div class="swiper-container" id="swiper-container1">
                     <div style="height:40px;width:130px;background:rgba(75,142,232,0.8);position:absolute;left:0px;top:0px;z-index:9999;color:#fff;text-align: center;line-height:40px;font-size:18px;" >
@@ -97,7 +94,7 @@
                                 <p style="color:#444">
                                     徒步通知说明：活动前一天发布具体分车,时间及车辆信息
                                 </p>
-                                <button onclick="baoming({{$detail->id}})" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button>
+                                <button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button>
                             @endif
                         @endif
                             <img src="/web/images/wxbaoming.jpg" style="width:100px;position: absolute;right:0px;bottom:0px;">
@@ -120,11 +117,7 @@
 
                         </div>
                     </div>
-                    {{--@for( $data = explode("#",$detail->jihedidian),$i=0;$i<count($data);$i++  )--}}
-                        {{--<p>--}}
-                            {{--集合地点{{($i+1)}}：<span style="color:#4b8ee8">{{$data[$i]}}</span>--}}
-                        {{--</p>--}}
-                    {{--@endfor--}}
+
                 </div>
 
             </div>
@@ -171,7 +164,7 @@
                 <a href="#ydxz">预订须知</a>
                 <a href="#qtxx">其他信息</a>
                 <a href="#hdly">活动留言</a>
-                <a id="barbaoming" href="javascript:void(0)" onclick="baoming({{$detail->id}})" style="background: #4B8EE8;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
+                <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: #4B8EE8;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
                 <div style="clear:both" ></div>
             </div>
             <div class="tuwen" >
@@ -196,6 +189,56 @@
             </div>
             <div style="clear:both" ></div>
         </div>
+
+    <div class="modal fade" id="myModal" style="display: none;" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">填写报名信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >报名人数 <span style="color:red">*</span></label>
+                        <select name="tb-num" class="form-control">
+                            @for( $i=1;$i<=30;$i++  )
+                                <option value="{{$i}}">{{$i}}人</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >真实姓名 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="真实姓名" name="tb-realname" >
+                    </div>
+                    <div class="form-group">
+                        <label >联系手机 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="联系号码" name="tb-mobile" >
+                    </div>
+                    <div class="form-group">
+                        <label >身份证号 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="身份证号" name="tb-idcard" >
+                    </div>
+                    <div class="form-group">
+                        <label >选择集合地点 <span style="color:red">*</span></label>
+                        <select name="tb-jihe" class="form-control">
+                            @for( $data = explode("#",$detail->jihedidian),$i=0;$i<count($data);$i++  )
+                                <option value="{{$data[$i]}}">{{$data[$i]}}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >订单备注 </label>
+                        <textarea name="tb-mark" class="form-control"  rows="3" placeholder="添加备注..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" onclick="baoming({{$detail->id}})" class="btn btn-primary">提交报名</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @include("web.footer")
 
 @stop
@@ -303,6 +346,24 @@
                     }
                 }
             })
+        }
+        function openorderbox() {
+            @if( Session::get('uid') )
+                $.post("/getlastestorderinfo",{},function(d){
+                    var o = JSON.parse(d);
+                    if( o.length ) {
+                        $("input[name=tb-realname]").val(o[0].realname);
+                        $("input[name=tb-mobile]").val(o[0].mobile);
+                        $("input[name=tb-idcard]").val(o[0].idcard);
+                        $("input[name=tb-jihe]").val(o[0].jihe);
+                        $("input[name=tb-mark]").val(o[0].mark);
+                    }
+                    $("#myModal").modal("show");
+                })
+            @else
+                toast("请先登录");
+            @endif
+
         }
     </script>
 @stop
