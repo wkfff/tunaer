@@ -65,7 +65,7 @@
                     <input type="text" value="" placeholder="主题" name="title" style="width: 503px !important;margin-top:10px;" name="title" ><br>
                     <input type="text" value="" placeholder="几天" name="howlong" >
                     <input type="text" value="" placeholder="目的地" name="mudidi" ><br>
-                    <input type="text" value="" placeholder="出发时间" name="startday" >
+                    <input type="text" value="" placeholder="出发时间 格式:2017-12-15" name="startday" >
                     <input type="text" value="" placeholder="返回时间" name="endday" ><br>
                     <input type="text" value="" placeholder="集合地点,多个集合地点使用#号隔开" name="jihedidian" >
                     <input type="text" value="" placeholder="集合时间" name="jihetime" ><br>
