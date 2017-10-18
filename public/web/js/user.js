@@ -357,7 +357,7 @@ function getdongtais(userid) {
                         ${imgs2div(pics)}
                         <div style="clear:both;height:20px;" ></div>
                         <div style="margin-bottom:20px">
-                            <a href="/user/userid"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
+                            <a href="/user/${userid}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
                             <span>发布于 ${res[i].ftime}</span>
                             <button onclick="dongtaicmtmp(${res[i].id},'dianzan')" style="outline:none;margin-left:10px;" type="button" class="btn btn-default btn-sm">
                                 <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞${res[i].zancnt}</span>
