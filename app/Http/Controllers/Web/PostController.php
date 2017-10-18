@@ -39,6 +39,7 @@ class PostController extends Controller{
             $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,idcard,realname) values (?,?,?,?,?,?,?,?) ";
             $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$idcard,$realname]);
             if( $res ) {
+                @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,1);
                 echo "200-success";
             }else{
                 echo "400-报名失败，请联系客服";
