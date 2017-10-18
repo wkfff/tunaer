@@ -302,3 +302,7 @@ $(function()
         }
     });
 });
+
+function payment(orderid,type) {
+    toast("支付出错，请联系客服");
+}

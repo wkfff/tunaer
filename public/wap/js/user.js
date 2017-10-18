@@ -483,16 +483,24 @@ function gettubuorder(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div style="height:120x;width:100%;position: relative;margin-bottom:20px;position: relative;" >
-                        <a href="/tubu/tubudetail/${res[i].id}"><div style="height:100px;width:100px;position: absolute;left:0px;top:10px;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
-                        <div style="padding-left:105px;font-size:14px;">
-                            <a href="/tubu/tubudetail/${res[i].id}"><span style="width:100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;margin-top:7.5px;">${res[i].title}</span></a>
-                            <p style="color:#666;font-size:13px;">领队：${res[i].leader}　联系电话：${res[i].phone}</p>
-                            <p style="color:#666;font-size:13px;margin-top:-5px;">集合时间：${res[i].jihetime}　集合地点：${res[i].jihedidian}</p>
+                var item = `<div style="height:160px;width:100%;position: relative;margin-bottom:20px;position: relative;border-top:1px solid #1E90FF;padding-top:40px;" >
+    <a href="/tubu/tubudetail/${res[i].tid}"><p style="color:#1E90FF;font-size:16px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:70%;position: absolute;left:0px;top:5px;">${res[i].title}</p></a>
+                        <a href="/tubu/tubudetail/${res[i].tid}"><div style="height:100px;width:100px;position: absolute;left:0px;top:40px;background-image:url(/admin/data/images/${res[i].pictures});background-size:cover;background-position:center;cursor: pointer;" ></div></a>
+                        <div style="padding-left:110px;font-size:14px;padding-right:10px;">
+                           
+                            <p style="color:#666;font-size:14px;"><span style="color:#1E90FF" >姓名</span>：${res[i].realname}　<span style="color:#1E90FF" >报名人数</span>：${res[i].num}　</p>
+                            <p style="color:#666;font-size:14px;"><span style="color:#1E90FF" >联系电话</span>：${res[i].mobile}　</p>
+                            <!--<p style="color:#666;font-size:14px;"><span style="color:#1E90FF" >身份证</span>：${res[i].idcard}</p>-->
+                            <p style="color:#666;font-size:14px;"><span style="color:#1E90FF" >集合地点</span>：${res[i].jihe}　</p>
+                            <p title="${res[i].mark}" style="color:#666;font-size:14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:800px;"><span style="color:#1E90FF" >留言备注</span>：${res[i].mark}</p>
                             
-                        </div>
-                    </div>`;
-                $(".tubuorderbox").append(item);
+                        </div>`;
+                if( res[i].orderid == 0 ) {
+                    var tmp = "<a href='javascript:void(0)' orderid='"+res[i].orderid+"' type='tubu' onclick='payment(this,null,null)'  style='position: absolute;right:0px;top:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>";
+                }else{
+                    var tmp = "<span style='color:#1E90FF;font-weight:bold;font-size:16px;position: absolute;right:0px;top:5px;' >已付款</span></div>";
+                }
+                $(".tubuorderbox").append(item+" "+tmp);
             }
         }
     })

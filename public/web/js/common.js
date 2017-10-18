@@ -278,3 +278,12 @@ $(function()
         }
     });
 });
+// 时间比较 2017-09-12 2017-07-14
+function datecompare(d1,d2) {
+    // 检查两个参数格式是否有误
+
+}
+
+function payment(that,that,orderid,type) {
+    toast("支付出错，请联系客服");
+}

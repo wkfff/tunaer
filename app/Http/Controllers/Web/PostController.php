@@ -20,28 +20,30 @@ class PostController extends Controller{
 //    活动报名
     public function baoming(Request $request) {
         $tid = $request->input("tid",'');
+        $realname = $request->input("realname",'');
+        $mobile = $request->input("mobile",'');
+        $idcard = $request->input("idcard",'');
+        $num = $request->input("num",'');
+        $jihe = $request->input("jihe",'');
+        $mark = $request->input("mark",'');
         $uid = Session::get('uid');
-        $jihe = "未选择";
 
         $sqltmp = " select * from tubuorder where uid=? and tid=? ";
         $r = DB::select($sqltmp,[$uid,$tid]);
         if( count($r) > 0 ) {
-            echo "400-请勿重复报名"; return ;
+            echo "400-你已经报名，请等待通知"; return ;
         }
-
-        $orderid = "123";
         if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
-            $sql = " insert into tubuorder (uid,tid,orderid,jihe) values (?,?,?,?) ";
-            $res = DB::insert($sql,[$uid,$tid,$orderid,$jihe]);
+            $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,idcard,realname) values (?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$idcard,$realname]);
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-报名失败，请联系客服";
             }
         }
-        echo "400-支付接口未开通,功能暂不可用";
     }
     public function updateuserinfo(Request $request) {
         $uname = $request->input('uname');
@@ -465,7 +467,7 @@ class PostController extends Controller{
         $page = $request->input("page",1);
         $num = $request->input("num",5);
         if( checknull($userid) ) {
-            $sql = " select tubuhuodong.*,tubuorder.ordertime from tubuorder left join tubuhuodong on tubuhuodong.id=tubuorder.tid where uid=? order by tubuorder.id desc limit ?,? ";
+            $sql = " select tubuhuodong.title,tubuhuodong.pictures,tubuhuodong.startday,tubuorder.* from tubuorder left join tubuhuodong on tubuhuodong.id=tubuorder.tid where uid=? order by tubuorder.id desc limit ?,? ";
             $orders = DB::select($sql,[$userid,($page-1)*$num,$num]);
             echo json_encode($orders);
         }
@@ -712,7 +714,7 @@ class PostController extends Controller{
     }
     public function getlastestorderinfo() {
         $uid = Session::get('uid');
-        $sql = " select * from tubuorder where uid=? limit 1 ";
+        $sql = " select * from tubuorder where uid=? order by id desc limit 1 ";
         $res = DB::select($sql,[$uid]);
         echo json_encode($res);
     }

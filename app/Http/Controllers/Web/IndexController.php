@@ -89,11 +89,16 @@ class IndexController extends Controller
             $phone = "";
             if( Session::get("uid") ) {
 
-                $sql = " select user.phone from tubuorder inner join user on uid=user.id where uid=? and tid=? ";
+                $sql = " select mobile,orderid from tubuorder where uid=? and tid=? ";
                 $r = DB::select($sql,[Session::get("uid"),$tid]);
 
                 if( count($r) >= 1 ) {
-                    $phone = $r[0]->phone;
+                    if( $r[0]->orderid == 0 ) {
+                        $phone = "<span>你还没有付款，</span><a href='/user/".Session::get('uid')."#huodong' style='background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>去付款</a>";
+                    }else{
+                        $phone = "请保持你的手机".$r[0]->mobile."畅通";
+                    }
+
                     $isjoined = true;
                 }
             }

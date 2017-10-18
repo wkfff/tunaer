@@ -85,7 +85,7 @@
 
                         @if( strtotime($detail->startday) - time() > 0 )
                             @if( $isjoined )
-                                <span style="color:#fff;font-size:16px;width:380px;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>确保你的手机（{{$phone}}）保持畅通</span>
+                                <span style="color:#fff;font-size:16px;width:380px;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>{!! $phone !!}</span>
                             @else
                                 <p>
                                     支付方式：<img style="height:40px;cursor:pointer;" src="/web/images/alipay.jpg" ><img style="height:35px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
@@ -132,7 +132,7 @@
                     max-width:100% !important;
                 }
                 .tuijian{
-                    float:left;width:330px;margin-top:30px;margin-left:20px;border:1px solid #eee;padding:10px;
+                    float:right;width:330px;margin-top:30px;margin-left:20px;border:1px solid #eee;padding:10px;
                     z-index:9;
                 }
                 .tuijian div{
@@ -302,9 +302,21 @@
         }
 
         function baoming(id) {
-            $.post("/tubu/baoming",{"tid":id},function(d){
+            $.post("/tubu/baoming",{
+                "tid":id,
+                "realname":$("input[name=tb-realname]").val(),
+                "mobile":$("input[name=tb-mobile]").val(),
+                "idcard":$("input[name=tb-idcard]").val(),
+                "num":$("select[name=tb-num]").val(),
+                "jihe":$("select[name=tb-jihe]").val(),
+                "mark":$("textarea[name=tb-mark]").val(),
+            },function(d){
                 if( ajaxdata(d) ) {
-                    toast("报名成功");
+                    $("#myModal").modal("hide");
+                    toast("报名成功，请及时付款");
+                    setTimeout(function(){
+                        location.href="/user/{{Session::get('uid')}}#huodong"
+                    },500);
                 }
             })
         }
@@ -355,13 +367,11 @@
                         $("input[name=tb-realname]").val(o[0].realname);
                         $("input[name=tb-mobile]").val(o[0].mobile);
                         $("input[name=tb-idcard]").val(o[0].idcard);
-                        $("input[name=tb-jihe]").val(o[0].jihe);
-                        $("input[name=tb-mark]").val(o[0].mark);
                     }
                     $("#myModal").modal("show");
                 })
             @else
-                toast("请先登录");
+                openlogion();
             @endif
 
         }

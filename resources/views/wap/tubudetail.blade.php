@@ -92,10 +92,10 @@
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
         @if( strtotime($detail->startday) - time() > 0 )
             @if( $isjoined )
-                <span style="color:#fff;font-size:16px;width:100%;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>确保你的手机（{{$phone}}）保持畅通</span>
+                <span style="color:#fff;font-size:16px;width:380px;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>{!! $phone !!}</span>
             @else
                 <p>
-                    <a onclick="baoming({{$detail->id}})" href="javascript:void(0)" style="background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;">点击报名</a><img style="height:35px;cursor:pointer;margin-left:10px;" src="/web/images/alipay.jpg" ><img style="height:33px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
+                    <a onclick="openorderbox()" href="javascript:void(0)" style="background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;">点击报名</a><img style="height:35px;cursor:pointer;margin-left:10px;" src="/web/images/alipay.jpg" ><img style="height:33px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
 
                 </p>
                 <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
@@ -135,7 +135,7 @@
         <a href="#ydxz">预订须知</a>
         <a href="#qtxx">其他信息</a>
         <a href="#hdly">活动留言</a>
-        <a id="barbaoming" href="javascript:void(0)" onclick="baoming({{$detail->id}})" style="background: orangered;color:#fff;">马上报名</a>
+        <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: orangered;color:#fff;">马上报名</a>
         <div style="clear:both" ></div>
     </div>
     <div class="tuwen" >
@@ -153,7 +153,54 @@
 
     </div>
     <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+    <div class="modal fade" id="myModal" style="display: none;" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                {{--<div class="modal-header">--}}
+                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+                        {{--<span aria-hidden="true">&times;</span></button>--}}
+                    {{--<h4 class="modal-title" id="myModalLabel">填写报名信息</h4>--}}
+                {{--</div>--}}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >报名人数 <span style="color:red">*</span></label>
+                        <select name="tb-num" class="form-control">
+                            @for( $i=1;$i<=30;$i++  )
+                                <option value="{{$i}}">{{$i}}人</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >真实姓名 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="真实姓名" name="tb-realname" >
+                    </div>
+                    <div class="form-group">
+                        <label >联系手机 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="联系号码" name="tb-mobile" >
+                    </div>
+                    <div class="form-group">
+                        <label >身份证号 <span style="color:red">*</span></label>
+                        <input class="form-control" type="text" value="" placeholder="身份证号" name="tb-idcard" >
+                    </div>
+                    <div class="form-group">
+                        <label >选择集合地点 <span style="color:red">*</span></label>
+                        <select name="tb-jihe" class="form-control">
+                            @for( $data = explode("#",$detail->jihedidian),$i=0;$i<count($data);$i++  )
+                                <option value="{{$data[$i]}}">{{$data[$i]}}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >订单备注 </label>
+                        <textarea name="tb-mark" class="form-control"  rows="2" placeholder="添加备注..."></textarea>
+                    </div>
+                    <button type="button" onclick="baoming({{$detail->id}})" class="btn btn-primary">提交报名</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
 
+            </div>
+        </div>
+    </div>
     @include("wap.footer")
 
 @stop
@@ -188,9 +235,21 @@
             gettubucms({{$detail->id}});
         });
         function baoming(id) {
-            $.post("/tubu/baoming",{"tid":id},function(d){
+            $.post("/tubu/baoming",{
+                "tid":id,
+                "realname":$("input[name=tb-realname]").val(),
+                "mobile":$("input[name=tb-mobile]").val(),
+                "idcard":$("input[name=tb-idcard]").val(),
+                "num":$("select[name=tb-num]").val(),
+                "jihe":$("select[name=tb-jihe]").val(),
+                "mark":$("textarea[name=tb-mark]").val(),
+            },function(d){
                 if( ajaxdata(d) ) {
-                    toast("报名成功");
+                    $("#myModal").modal("hide");
+                    toast("报名成功，请及时付款");
+                    setTimeout(function(){
+                        location.href="/user/{{Session::get('uid')}}#huodong"
+                    },500);
                 }
             })
         }
@@ -208,6 +267,22 @@
                     location.reload();
                 }
             })
+        }
+        function openorderbox() {
+            @if( Session::get('uid') )
+                $.post("/getlastestorderinfo",{},function(d){
+                var o = JSON.parse(d);
+                if( o.length ) {
+                    $("input[name=tb-realname]").val(o[0].realname);
+                    $("input[name=tb-mobile]").val(o[0].mobile);
+                    $("input[name=tb-idcard]").val(o[0].idcard);
+                }
+                $("#myModal").modal("show");
+            })
+            @else
+                openlogion();
+            @endif
+
         }
         function gettubucms(yid) {
             if( window.liuyanpage ) {
