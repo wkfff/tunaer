@@ -345,7 +345,7 @@ class IndexController extends Controller{
         $page = $request->input("page",1);
         $num = $request->input("num",20);
         $count = DB::select(" select count(*) as cnt from tubuorder ");
-        $sql = " select tubuorder.*,user.phone,userattr.uname,tubuhuodong.title from tubuorder left join user on user.id=tubuorder.uid left join userattr on tubuorder.uid=userattr.uid left join tubuhuodong on tubuorder.tid=tubuhuodong.id order by tubuorder.id desc limit ?,? ";
+        $sql = " select tubuorder.*,tubuhuodong.title from tubuorder left join userattr on tubuorder.uid=userattr.uid left join tubuhuodong on tubuorder.tid=tubuhuodong.id order by tubuorder.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         return view("admin.tubuorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubuorder",$page,$num)]);
     }
