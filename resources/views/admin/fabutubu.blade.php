@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
 
     <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
+
+        <div class="m-hd m-hd-bk m-hd-rim" style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
+	<h2 style="margin:0px 0px 0px 20px;padding:0px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
+		<img style="height:20px;vertical-align: middle;" src="/web/tubiao/1.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>集合信息
+	</h2>
+</div>
+<div class="m-bd m-bd-bk m-bd-rim clearfix hd_marB15" style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
+	<div class="m-list list-helpful list-ordfix" style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
+		<p></p>
+        <br>
+	</div>
+</div>
+
+
+
         <div id="jhxx" style="color:#555;border-bottom:1px solid #4B8EE8;font-size:20px;;margin:20px 0;text-align: left;line-height:30px;padding-bottom:5px;" >
             <img src="/web/images/plane.png" style="height:25px;margin-right:10px;margin-left:10px;opacity:0.7;vertical-align: middle;">集合信息
         </div>

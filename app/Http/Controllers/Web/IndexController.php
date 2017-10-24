@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
+
     public function index(Request $request) {
 
-        $sql = " select * from tubuhuodong order by id desc limit 10";
+        $sql = " select * from tubuhuodong order by paixu desc,id desc limit 10";
         $tubus = DB::select($sql);
         $sql = " select user.id as userid,userattr.* from user inner join userattr on user.id=userattr.uid where user.status=1 and userattr.head<>'' order by user.id desc limit 12";
         $users = DB::select($sql);
@@ -63,11 +64,11 @@ class IndexController extends Controller
         $num = $request->input('num',7);
         if( $type ) {
             $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
-            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
             $res = DB::select($sql,[$type]);
         }else{
             $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types ");
-            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by tubuhuodong.id desc limit ".($page-1)*$num.", ".$num;;
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
             $res = DB::select($sql);
         }
 
@@ -89,17 +90,24 @@ class IndexController extends Controller
             $phone = "";
             if( Session::get("uid") ) {
 
-                $sql = " select mobile,orderid from tubuorder where uid=? and tid=? ";
+                $sql = " select * from tubuorder where uid=? and tid=? and del=0 ";
                 $r = DB::select($sql,[Session::get("uid"),$tid]);
 
                 if( count($r) >= 1 ) {
                     if( $r[0]->orderid == 0 ) {
-                        $phone = "<span>你还没有付款，</span><a href='/user/".Session::get('uid')."#huodong' style='background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>去付款</a>";
+                        if(time() - strtotime("+2 hours",strtotime($r[0]->ordertime)) >=0 ) {
+                            $sql3 = " update tubuorder set del=1 where id=? ";
+                            DB::update($sql3,[$r[0]->id]);
+                        }else{
+                            $phone = "<a href='/user/".Session::get('uid')."#huodong' style='background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>去付款</a><span style='margin-left:10px;color:#888;font-size:14px;'>".date("H点i分",strtotime("+2 hours",strtotime($r[0]->ordertime)))." 后自动取消报名</span>";
+                            $isjoined = true;
+                        }
                     }else{
-                        $phone = "请保持你的手机".$r[0]->mobile."畅通";
+                        $phone = "<span class='glyphicon glyphicon-earphone' style='height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;margin-right:10px;font-size:24px;' ></span><span style='color:orange;font-size:24px;font-weight: bold;line-height:40px;'>".$res[0]->phone."</span>";
+                        $isjoined = true;
                     }
 
-                    $isjoined = true;
+
                 }
             }
             return view("web.tubudetail",['detail'=>$res[0],"isjoined"=>$isjoined,"phone"=>$phone]);
@@ -432,6 +440,24 @@ class IndexController extends Controller
 
     public function qqlogin(Request $request) {
         return view("web.qqlogin");
+    }
+    public function baominglist(Request $request,$tid) {
+
+        $page = $request->input("page",1);
+        $num = $request->input("num",100);
+        $sql = " select tubuorder.*,userattr.uname,user.phone from tubuorder left join user on user.id=tubuorder.uid left join userattr on userattr.uid=tubuorder.uid where tid=? and del=0 ";
+        $res = DB::select($sql,[$tid]);
+
+        for( $i=0;$i<count($res);$i++ ) {
+            if($res[$i]->orderid == '0' && time() - strtotime("+2 hours",strtotime($res[$i]->ordertime)) >=0 ) {
+                $sql3 = " update tubuorder set del=1 where id=? ";
+                DB::update($sql3,[$res[$i]->id]);
+            }
+        }
+        $sql = " select tubuorder.*,userattr.uname,user.phone from tubuorder left join user on user.id=tubuorder.uid left join userattr on userattr.uid=tubuorder.uid where tid=? and del=0 ";
+        $res = DB::select($sql,[$tid]);
+        $count = DB::select("select count(*) as cnt from tubuorder where tid=? and del=0",[$tid]);
+        return view("web.baominglist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/v9",$page,$num),"count"=>$count[0]->cnt]);
     }
     
 }

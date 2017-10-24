@@ -90,6 +90,8 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get('/getsinglepage', 'PostController@getsinglepage');
     Route::post('/updateoptions', 'PostController@updateoptions');
     Route::post("/addadmin","PostController@addadmin");
+    Route::post("/edittubupaixu","PostController@edittubupaixu");
+
 });
 //Access Key ID	Access Key Secret	状态	创建时间	操作
 //LTAICyYaKmLyh9sj
@@ -145,6 +147,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/qqlogin","IndexController@qqlogin");
     Route::post("/otherlogin","PostController@otherlogin");
     Route::post("/tokenlogin","PostController@tokenlogin");
+    Route::get("/baominglist/{tid}","IndexController@baominglist");
 
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");

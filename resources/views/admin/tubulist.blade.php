@@ -3,10 +3,15 @@
 @section("title","徒步活动列表")
 
 @section("content")
-
+    <style>
+        .editpaixu:hover{
+            cursor: pointer;text-decoration: underline;
+        }
+    </style>
     <table class="table">
         <thead>
         <tr>
+            <th>排序(单击)</th>
             <th>标题</th>
             <th>类型</th>
             <th>行程</th>
@@ -23,7 +28,8 @@
         <tbody>
         @for ($i = 0; $i < count($tubulist); $i++)
             <tr>
-                <td><a target="_blank" style="color:cornflowerblue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:240px;" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
+                <td class="editpaixu" onclick="editpaixu(this,{{$tubulist[$i]->id}})" class="center">{{$tubulist[$i]->paixu}}</td>
+                <td ><a target="_blank" style="color:cornflowerblue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:240px;" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
                 <td class="center">{{$tubulist[$i]->typename}}</td>
                 <td class="center">{{$tubulist[$i]->howlong}}天</td>
                 <td class="center">{{$tubulist[$i]->startday}}</td>
@@ -65,6 +71,20 @@
             },function(data){
                 location.reload();
             })
+        }
+        function editpaixu(that,id) {
+
+            if( paixu = prompt("请输入数字（1-100）,数字越大越靠前",parseInt($(that).text())) ) {
+                if( parseInt(paixu) ) {
+                    $.post("/admin/edittubupaixu",{"id":id,"paixu":parseInt(paixu)},function(d){
+                        if( d== "200" ) {
+                            $(that).text(parseInt(paixu));
+                        }else{
+                            toast("操作失败");
+                        }
+                    })
+                }
+            }
         }
     </script>
     @stop

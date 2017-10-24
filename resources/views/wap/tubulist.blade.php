@@ -10,6 +10,21 @@
             /*display: inline-block;*/
             position: relative;
         }
+        .newitem{
+            height:105px;width:100%;position: relative;padding:10px;padding-left:150px;
+            border-bottom:1px solid #ddd;
+        }
+        .img{
+            width:130px;height:80px;top:10px;left:10px;background-image:url(/web/images/p1.jpg);
+            position: absolute;background-size:cover;
+        }
+        .title{
+            height:40px;overflow: hidden;line-height:20px;color:#333;
+        }
+        .price{
+            color:orange;bottom:10px;right:10px;
+            position: absolute;
+        }
     </style>
 @stop
 
@@ -18,19 +33,16 @@
         <span class="glyphicon glyphicon-menu-left" ></span>
     </div>
     <div class="content" >
-
-
-
         @for( $i=0;$i<count($list);$i++ )
-            <a href="/tubu/tubudetail/{{$list[$i]->id}}"><div class="tubuitem" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}})">
-                <div style="position: absolute;bottom:20px;left:10px;color:#fff;">出发时间 {{$list[$i]->startday}}</div>
-                <div style="height:38px;width:120px;background:#ff9531;border-radius:2px;color:#fff;text-align: center;line-height:38px;font-size:17px;position: absolute;right:15px;bottom:8px;box-shadow: 1px 1px 15px rgba(255,255,255,0.2);padding:0px;">点击报名</div>
+            <a href="/tubu/tubudetail/{{$list[$i]->id}}">
+            <div class="newitem" >
+                <div class="img" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}})"></div>
+                <p class="title">{{$list[$i]->title}}</p>
+                <span style="display:block;font-size:10px;color:#888;">出发时间：{{$list[$i]->startday}}</span>
+                <span style="display:block;font-size:10px;color:#888">活动地点：{{$list[$i]->mudidi}}</span>
+                <span class="price" >￥{{$list[$i]->price}}</span>
             </div>
-            <div style="padding:10px;">
-                <p style="font-size:20px;color:#333;text-align:left;width:100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{$list[$i]->jingdian}}</p>
-                <p style="font-size:14px;color:#999;">{{$list[$i]->title}}</p>
-
-            </div></a>
+            </a>
         @endfor
         {!! $fenye !!}
     </div>

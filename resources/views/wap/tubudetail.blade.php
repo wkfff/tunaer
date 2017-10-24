@@ -91,19 +91,23 @@
     </div>
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
         @if( strtotime($detail->startday) - time() > 0 )
+            <p>
+                支付方式：<img style="height:40px;cursor:pointer;" src="/web/images/alipay.jpg" ><img style="height:35px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
+            </p>
             @if( $isjoined )
-                <span style="color:#fff;font-size:16px;width:380px;display:inline-block;margin-top:20px;background:#66A466;padding:10px;">你已报名，请等待通知(一般在出发前一天)<br>{!! $phone !!}</span>
-            @else
-                <p>
-                    <a onclick="openorderbox()" href="javascript:void(0)" style="background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;">点击报名</a><img style="height:35px;cursor:pointer;margin-left:10px;" src="/web/images/alipay.jpg" ><img style="height:33px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
 
-                </p>
-                <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
+                <p>{!! $phone !!}</p>
                 <p style="color:#444">
-                    通知说明：活动前一天发布具体分车,时间及车辆信息
+                    徒步通知说明：活动前一天发布具体分车,时间及车辆信息
                 </p>
+            @else
 
-                {{--<button  type="button" class="btn btn-primary" style="width:100px;height:40px;font-size: 15px;outline:none">马上报名</button>--}}
+                <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
+                <p style="color:#444;">
+                    徒步通知说明：活动前一天发布具体分车,时间及车辆信息
+                </p>
+                <p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>
+
             @endif
         @endif
     </div>

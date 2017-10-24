@@ -10,4 +10,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+//    设置上海时区
+//    function __construct()
+//    {
+//        date_default_timezone_set("Asia/Shanghai");
+//    }
 }

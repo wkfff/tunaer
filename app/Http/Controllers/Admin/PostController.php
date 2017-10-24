@@ -241,4 +241,17 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
+
+    public function edittubupaixu(Request $request)
+    {
+        $id = $request->input("id");
+        $paixu = $request->input("paixu");
+        $sql = " update tubuhuodong set paixu=? where id=? ";
+        $res = DB::update($sql,[$paixu,$id]);
+        if( $res ) {
+            echo "200";
+        }else{
+            echo "400-操作失败";
+        }
+    }
 }

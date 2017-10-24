@@ -161,7 +161,7 @@ class IndexController extends Controller{
         $page = $request->input('page',1);
         $num = $request->input('num',20);
         $count = DB::select(" select count(*) as cnt from tubuhuodong ");
-        $sql = " select tubuhuodong.*,tubutypes.name as typename from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by startday desc limit ".($page-1)*$num.", ".$num;
+        $sql = " select tubuhuodong.*,tubutypes.name as typename from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;
         $res = DB::select($sql);
         return view("admin.tubulist",['tubulist'=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubulist",$page,$num)]);
     }
