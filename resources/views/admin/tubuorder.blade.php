@@ -46,7 +46,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {{--<li><a href="/admin/updateproduct/{{$list[$i]->id}}">修改</a></li>--}}
-                            <li><a href="javascript:void(0)" onclick="deletebyid({{$list[$i]->id}})" >删除</a></li>
+                            <li><a style="color:red" href="javascript:void(0)" onclick="deletebyid({{$list[$i]->id}})" >删除</a></li>
                         </ul>
                     </li>
                 </td>
@@ -60,12 +60,14 @@
 @section("htmlend")
     <script>
         function deletebyid(id) {
-            $.post("/admin/deletebyid",{
-                "table":"tubuorder",
-                "id":id
-            },function(data){
-                location.reload();
-            })
+            if (confirm("删除后不可恢复，是否继续？")) {
+                $.post("/admin/deletebyid", {
+                    "table": "tubuorder",
+                    "id": id
+                }, function (data) {
+                    location.reload();
+                })
+            }
         }
 
         function kuaidi(that) {

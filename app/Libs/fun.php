@@ -36,7 +36,7 @@ function login($phone,$passwd,$returnuid=false) {
 }
 
 function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
-    if( $count == 0 ) {
+    if( $count <= $page ) {
         return '';
     }
     $pagecnt = ceil($count/$page);

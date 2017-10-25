@@ -100,8 +100,7 @@
                         <div style="font-size:14px;margin:10px 0;max-width:500px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
                             <span>活动特色：<a href="#">{{$list[$i]->tese}}</a></span>
                         </div>
-                        <button onclick="baoming({{$list[$i]->id}})" type="button" class="btn btn-info"
-                                style="width:110px;height:40px;font-size: 20px;outline:none;position:absolute;right:10px;bottom:50px;">马上报名</button>
+                        <a href="/tubu/tubudetail/{{$list[$i]->id}}"><button type="button" class="btn btn-info"style="width:110px;height:40px;font-size: 20px;outline:none;position:absolute;right:10px;bottom:30px;">活动报名</button></a>
                     </div>
                 </div>
                 @endfor

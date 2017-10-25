@@ -15,6 +15,7 @@
         .swiper-pagination-bullet-active{
             background: #194C8E !important;
         }
+
     </style>
 @stop
 
@@ -123,8 +124,8 @@
             {{--<div style="height:40px;width:100%;background:blue;color:#fff;" ></div>--}}
             <style>
                 .tuwen{
-                    text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #efefef;padding:10px;
-                    background: #efefef;
+                    text-align: center;width:800px;float:left;margin-top:30px;border:1px solid #efefef;
+                    /*background: #efefef;*/
                 }
                 .tuwen img{
                     max-width:100% !important;
@@ -151,35 +152,47 @@
                     cursor: pointer;padding:0 30px;
                     text-align: center;
                 }
-                .tubudetailnavbar a:hover{
+                #bar_a_hover{
                     background: #4B8EE8;color:#fff;
+                }
+                .detailh2{
+                    padding:10px;
                 }
             </style>
             <div class="tubudetailnavbar" >
-                <a href="#jhxx" >集合信息</a>
-                <a href="#hdxq" >活动详情</a>
-                <a href="#ckxc">参考行程</a>
-                <a href="#ydxz">预订须知</a>
-                <a href="#qtxx">其他信息</a>
-                <a href="#hdly">活动留言</a>
+                <a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>
+                <a onclick="tiaozhuan(this)" href="#hdxq"  >活动详情</a>
+                <a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>
+                <a onclick="tiaozhuan(this)" href="#ydxz">预订须知</a>
+                <a onclick="tiaozhuan(this)" href="#qtxx">其他信息</a>
+                <a onclick="tiaozhuan(this)" href="#hdly">活动留言</a>
                 <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: #4B8EE8;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
                 <div style="clear:both" ></div>
             </div>
             <div class="tuwen" >
                 <div>{!! $detail->tuwen !!}</div>
-
-                <div id="cmbox" style="text-align:left">
-                    <button onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
-                        <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
-                    </button>
-                    <textarea style="margin-top:10px;border:1px solid dodgerblue" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
-                    <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
+                <div id="hdly" style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
+                    <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
+                        <img style="height:20px;vertical-align: middle;" src="/web/tubiao/4.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>活动留言
+                    </h2>
                 </div>
-                <div style="clear:both" ></div>
-                <div class="liuyanbox">
+                <div  style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
+                    <div style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
+                        <div id="cmbox" style="text-align:left">
 
+                            <textarea style="margin-top:10px;border:1px solid #ddd" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+                            <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
+                            <button style="margin-top:10px;margin-left:10px;" onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
+                                <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
+                            </button>
+                        </div>
+                        <div style="clear:both" ></div>
+                        <div class="liuyanbox">
+
+                        </div>
+                        <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
+                    </div>
                 </div>
-                <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
 
             <div class="tuijian" >
@@ -244,23 +257,38 @@
 @section("htmlend")
     <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
     <script>
-
+        function tiaozhuan(that) {
+            $("#bar_a_hover").removeAttr("id");
+            $(that).attr("id","bar_a_hover");
+        }
         window.onscroll = function(){
             if( !window.tuijianleft ) {
                 return ;
             }
-            var t = $(".tuijian")[0].getBoundingClientRect();
 
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
 //            console.log(scrollTop);
             if( scrollTop>=1000 ) {
                 $(".tuijian")[0].style = "position:fixed;top:-30px;left:"+tuijianleft+"px";
                 $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;";
-                $("#barbaoming").css("display","block");
+                @if( strtotime($detail->startday) - time() > 0 && !$isjoined )
+                    $("#barbaoming").css("display","block");
+                @endif
+
             }else{
                 $(".tuijian")[0].style="";
                 $(".tubudetailnavbar")[0].style="";
                 $("#barbaoming").css("display","none");
+            }
+            var allitem = $(".tubudetailnavbar").children("a");
+            for( var i=0;i<allitem.length-1;i++ ) {
+                var v = document.getElementById($(allitem[i]).attr('href').substr(1)).getBoundingClientRect().top;
+//                console.log($(allitem[i]).attr('href').substr(1)+":"+v)
+                if( v>=50 && v<=100 ) {
+                    $("#bar_a_hover").removeAttr("id");
+                    $(allitem[i]).attr("id","bar_a_hover");
+                    break;
+                }
             }
         }
         $(document).ready(function () {

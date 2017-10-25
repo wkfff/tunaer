@@ -47,7 +47,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/updatetubu/{{$tubulist[$i]->id}}">修改</a></li>
-                            <li><a href="javascript:deletebyid({{$tubulist[$i]->id}})">删除</a></li>
+                            <li><a style="color:red" href="javascript:deletebyid({{$tubulist[$i]->id}})">删除</a></li>
                         </ul>
                     </li>
                 </td>
@@ -65,12 +65,14 @@
 @section("htmlend")
     <script>
         function deletebyid(tid) {
-            $.post("/admin/deletebyid",{
-                "table":"tubuhuodong",
-                "id":tid
-            },function(data){
-                location.reload();
-            })
+            if( confirm("删除后不可恢复，是否继续？") ) {
+                $.post("/admin/deletebyid",{
+                    "table":"tubuhuodong",
+                    "id":tid
+                },function(data){
+                    location.reload();
+                })
+            }
         }
         function editpaixu(that,id) {
 

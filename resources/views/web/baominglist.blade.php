@@ -37,7 +37,7 @@
         @for ($i = 0; $i < count($list); $i++)
             <tr>
                 <td><a href="/user/{{$list[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle;margin-right:5px;" ></div>{{$list[$i]->uname}}</a></td>
-                <td >{{$list[$i]->phone}}</td>
+                <td >{{substr($list[$i]->phone,0,3)."******".substr($list[$i]->phone,9,2)}}</td>
                 <td>
                     @if( $list[$i]->orderid == '0' )
                         <span style="color:#666">未确认</span>
