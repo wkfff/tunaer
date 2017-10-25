@@ -171,6 +171,72 @@ function jiemi($str) {
     return $res;
 }
 
+/**
+ * @param $orderid  订单号
+ * @param $money    付款金额
+ * @param $type     订单类型　tubu shop
+ * @return mixed
+ */
+function wxpay_saoma($orderid,$money,$type) {
+//    $money = $money*100;
+    $appid = "wx10106332de6f9840";
+    $mch_id = "1490663772";
+    $key = "53972fb92388341e4ae2249f7a17c348";
+    $nonce_str = "rtyguhjikdfghjvascv345r23";
+    $tmpArr = array(
+        'appid'=>$appid,   //不要填成了 公众号原始id
+        'mch_id'=>$mch_id,
+        'nonce_str'=>$nonce_str,
+        'time_stamp'=>time(),
+        'product_id'=>"2345678909",
+    );
+    ksort($tmpArr);  //根据键值排序数组
+    $buff = "";
+    foreach ($tmpArr as $k => $v){
+        $buff .= $k . "=" . $v . "&";
+    }
+    $buff = trim($buff, "&");
+    $stringSignTemp=$buff."&key=".$key;
+    $sign= strtoupper(MD5($stringSignTemp));
+
+    $reurl = "weixin://wxpay/bizpayurl?sign=".$sign."&appid=".$appid."&mch_id=".$mch_id."&product_id=".$tmpArr['product_id']."&time_stamp=".$tmpArr['time_stamp']."&nonce_str=".$tmpArr['nonce_str'];
+    $posarr = array(
+        'appid'=>$appid,
+        'mch_id'=>$mch_id,
+        'nonce_str'=>$nonce_str,
+        'long_url'=>urlencode($reurl),
+    );
+    ksort($posarr);
+    $buff = "";
+    foreach ($posarr as $k => $v){
+        $buff .= $k . "=" . $v . "&";
+    }
+    $buff = trim($buff, "&");
+    $stringSignTemp=$buff."&key=".$key;
+    $sign= strtoupper(MD5($stringSignTemp));
+    $xml = "<xml>
+           <appid>".$appid."</appid>
+           <mch_id>".$mch_id."</mch_id>
+           <nonce_str>".$nonce_str."</nonce_str>
+           <sign>".$sign."</sign>
+           <long_url>".$posarr['long_url']."</long_url>
+        </xml>";
+    $posturl = "https://api.mch.weixin.qq.com/tools/shorturl";
+    $ch = curl_init($posturl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  //返回文件流
+    curl_setopt($ch, CURLOPT_POST, 1);  //使用post提交
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);   //post数据
+    $response = curl_exec($ch);
+    curl_close($ch);
+    echo $response;die;
+    $xmlobj = simplexml_load_string ($response, 'SimpleXMLElement', LIBXML_NOCDATA );
+    $arr = array();
+    foreach ($xmlobj as $key => $value) {
+        $arr[$key] = $value;
+    }
+    return $arr['short_url'];
+
+}
 
 
 

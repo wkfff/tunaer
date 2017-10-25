@@ -719,4 +719,37 @@ class PostController extends Controller{
         $res = DB::select($sql,[$uid]);
         echo json_encode($res);
     }
+
+    public function createpay(Request $request) {
+        $orderid = $request->input("orderid",'');
+        $type = $request->input("type",'');
+        $way = $request->input("way",'');
+        $money = 0;
+        if( checknull($orderid,$type,$way) ) {
+            if( $type == "tubu" ) {
+                $sql = " select tubuorder.*,tubuhuodong.price from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.id=? ";
+                $res = DB::select($sql,[$orderid]);
+                if( count($res) == 1 ) {
+                    $money = $res[0]->price;
+                }else{
+                    echo "400-支付异常";
+                    return false;
+                }
+            }else{
+                $sql = " select shoporder.*,product.price from shoporder inner join shoporder.shopid=product.id where shoporder.id=? ";
+                $res = DB::select($sql,[$orderid]);
+                if( count($res) == 1 ) {
+                    $money = $res[0]->price;
+                }else{
+                    echo "400-支付异常";
+                    return false;
+                }
+            }
+            switch($way) {
+                case "wxpay_saoma":
+                    echo wxpay_saoma($orderid,$money,$type);
+                    break;
+            }
+        }
+    }
 }

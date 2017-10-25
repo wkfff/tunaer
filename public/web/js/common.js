@@ -284,6 +284,18 @@ function datecompare(d1,d2) {
 
 }
 
-function payment(that,that,orderid,type) {
-    toast("支付出错，请联系客服");
+function payment(that,orderid,type) {
+    if( that ) {
+        orderid = $(that).attr("order_id");
+        type = $(that).attr("type");
+    }
+    window.orderid = orderid;
+    window.type = type;
+    $("#paybox").modal("show");
+}
+
+function createpay(way) {
+    $.post("/createpay",{"orderid":window.orderid,"type":window.type,"way":way},function(d){
+        console.log(d);
+    })
 }

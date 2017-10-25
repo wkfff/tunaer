@@ -304,6 +304,34 @@
         </div>
     </div>
 
+    <div class="modal fade" id="paybox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:600px">
+                <style>
+                    .payimg p{
+                        border: 1px solid #999;padding:10px;cursor: pointer;
+                    }
+                    .payimg p:hover{
+                        border: 1px solid dodgerblue;
+                        opacity:0.6;
+                    }
+                </style>
+                <div class="modal-body" style="padding:40px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h3 style="margin-bottom:40px;">
+                        请选择支付方式:
+                    </h3>
+                    <div class="payimg" style="width:100%;overflow-y: auto;" >
+                        <p onclick="createpay('alipay_pc')">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
+                        <p onclick="createpay('wxpay_saoma')">微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @stop
 
 
