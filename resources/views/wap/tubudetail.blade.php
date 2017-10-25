@@ -91,8 +91,8 @@
     </div>
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
         @if( strtotime($detail->startday) - time() > 0 )
-            <p>
-                支付方式：<img style="height:40px;cursor:pointer;" src="/web/images/alipay.jpg" ><img style="height:35px;margin-left:10px;cursor:pointer;" src="/web/images/wxpay.png" >
+            <p style="color:#444;">
+                支付方式：<img style="cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/9.png" >微信支付<img style="margin-left:10px;cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/8.png" >支付宝
             </p>
             @if( $isjoined )
 

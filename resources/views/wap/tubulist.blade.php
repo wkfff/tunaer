@@ -34,7 +34,7 @@
     </div>
     <div class="content" >
         @for( $i=0;$i<count($list);$i++ )
-            <a href="/tubu/tubudetail/{{$list[$i]->id}}">
+            <a style="text-decoration: none" href="/tubu/tubudetail/{{$list[$i]->id}}">
             <div class="newitem" >
                 <div class="img" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}})"></div>
                 <p class="title">{{$list[$i]->title}}</p>

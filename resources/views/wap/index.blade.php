@@ -120,7 +120,7 @@
                         toast("没有更多了"); return ;
                     }
                     for( var i=0;i<res.length;i++ ) {
-                        var item = `<a href="/tubu/tubudetail/${res[i].id}"><div class="newitem" >
+                        var item = `<a style="text-decoration: none" href="/tubu/tubudetail/${res[i].id}"><div class="newitem" >
                             <div class="img" style="background-image:url(/admin/data/images/${res[i].pictures})"></div>
                             <p class="title">${res[i].title}</p>
                             <span style="display:block;font-size:10px;color:#888;">出发时间：${res[i].startday}</span>
