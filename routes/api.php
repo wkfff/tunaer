@@ -15,7 +15,9 @@ use Illuminate\Http\Request;
 //aliyun:
 //帐号：tunaer
 //密码：kongxijun.kxj
-//135****9697
+//公网ip：118.190.202.81
+//ssh密码：abc123!@#
+//阿里云远程密码：abc123
 
 //徒哪儿微信公众号：
 //商户号：1490663772
