@@ -325,6 +325,8 @@
                     <div class="payimg" style="width:100%;overflow-y: auto;" >
                         <p onclick="createpay('alipay_pc')">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
                         <p onclick="createpay('wxpay_saoma')">微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p>
+                        <br>
+                        <div id="qrcode"></div>
                     </div>
                 </div>
 
@@ -340,6 +342,7 @@
     <script src="/admin/umediter/umeditor.min.js" ></script>
     <script src="/web/js/user.js"></script>
     <script src="/web/js/addr.js" ></script>
+    <script src="/web/js/jquery.qrcode.min.js" ></script>
     <script>
         $(document).ready(function(){
             loadP();

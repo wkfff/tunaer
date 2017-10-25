@@ -284,18 +284,37 @@ function datecompare(d1,d2) {
 
 }
 
-function payment(that,orderid,type) {
+function payment(that,order_id,type) {
     if( that ) {
-        orderid = $(that).attr("order_id");
+        order_id = $(that).attr("order_id");
         type = $(that).attr("type");
     }
-    window.orderid = orderid;
+    window.order_id = order_id;
     window.type = type;
     $("#paybox").modal("show");
 }
 
 function createpay(way) {
-    $.post("/createpay",{"orderid":window.orderid,"type":window.type,"way":way},function(d){
-        console.log(d);
-    })
+    switch(way){
+        case "wxpay_saoma":
+            $.post("/openpayment/wxpay_saoma.php",{
+                "order_id":window.order_id,
+                "type":type
+            },function(d){
+                $("#qrcode").children().remove();
+                $("#qrcode").append("<div>请使用微信扫一扫</div>");
+                $("#qrcode").qrcode({
+                    // render: "table", //table方式
+                    width: 300, //宽度
+                    height:300, //高度
+                    text: d //任意内容
+                });
+                $("#qrcode").css("display","block");
+            })
+            break;
+    }
+
+    // $.post("/createpay",{"orderid":window.orderid,"type":window.type,"way":way},function(d){
+    //     console.log(d);
+    // })
 }
