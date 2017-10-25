@@ -282,13 +282,17 @@
             }
             var allitem = $(".tubudetailnavbar").children("a");
             for( var i=0;i<allitem.length-1;i++ ) {
-                var v = document.getElementById($(allitem[i]).attr('href').substr(1)).getBoundingClientRect().top;
-//                console.log($(allitem[i]).attr('href').substr(1)+":"+v)
-                if( v>=50 && v<=100 ) {
-                    $("#bar_a_hover").removeAttr("id");
-                    $(allitem[i]).attr("id","bar_a_hover");
-                    break;
+                try{
+                    var v = document.getElementById($(allitem[i]).attr('href').substr(1)).getBoundingClientRect().top;
+                    if( v>=50 && v<=100 ) {
+                        $("#bar_a_hover").removeAttr("id");
+                        $(allitem[i]).attr("id","bar_a_hover");
+                        break;
+                    }
+                }catch(e){
+//                    ...
                 }
+
             }
         }
         $(document).ready(function () {
