@@ -43,9 +43,15 @@
             cursor: pointer;width:25%;
             text-align: center;
         }
-        .tubudetailnavbar a:hover{
+        /*.tubudetailnavbar a:hover{*/
+            /*background: #4B8EE8;color:#fff;*/
+        /*}*/
+        #bar_a_hover{
             background: #4B8EE8;color:#fff;
         }
+        /*.detailh2{*/
+            /*padding:10px;*/
+        /*}*/
     </style>
 @stop
 
@@ -131,12 +137,12 @@
     </div>
 
     <div class="tubudetailnavbar" >
-        <a href="#jhxx" >集合信息</a>
-        <a href="#hdxq" >活动详情</a>
-        <a href="#ckxc">参考行程</a>
-        <a href="#ydxz">预订须知</a>
-        <a href="#qtxx">其他信息</a>
-        <a href="#hdly">活动留言</a>
+        <a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>
+        <a onclick="tiaozhuan(this)" href="#hdxq" >活动详情</a>
+        <a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>
+        <a onclick="tiaozhuan(this)" href="#ydxz">预订须知</a>
+        <a onclick="tiaozhuan(this)" href="#qtxx">其他信息</a>
+        <a onclick="tiaozhuan(this)" href="#hdly">活动留言</a>
         <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: orangered;color:#fff;">马上报名</a>
         <div style="clear:both" ></div>
     </div>
@@ -210,15 +216,35 @@
 @section("htmlend")
     <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
     <script>
+        function tiaozhuan(that) {
+            $("#bar_a_hover").removeAttr("id");
+            $(that).attr("id","bar_a_hover");
+        }
         window.onscroll = function(){
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
             if( scrollTop>=1000 ) {
 
                 $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;width:"+$(window).width()+"px";
-                $("#barbaoming").css("display","block");
+                @if( strtotime($detail->startday) - time() > 0 && !$isjoined )
+                    $("#barbaoming").css("display","block");
+                @endif
             }else{
                 $(".tubudetailnavbar")[0].style="";
                 $("#barbaoming").css("display","none");
+            }
+            var allitem = $(".tubudetailnavbar").children("a");
+            for( var i=0;i<allitem.length-1;i++ ) {
+                try{
+                    var v = document.getElementById($(allitem[i]).attr('href').substr(1)).getBoundingClientRect().top;
+                    if( v>=50 && v<=100 ) {
+                        $("#bar_a_hover").removeAttr("id");
+                        $(allitem[i]).attr("id","bar_a_hover");
+                        break;
+                    }
+                }catch(e){
+//                    ...
+                }
+
             }
         }
         $(document).ready(function () {
