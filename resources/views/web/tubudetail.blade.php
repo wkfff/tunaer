@@ -89,6 +89,12 @@
                     <p>
                         交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
                     </p>
+                    <p >
+                        强度等级：<span style="color:#4b8ee8">{{$detail->qiangdu}}</span>
+                    </p>
+                    <p >
+                        年龄限制：<span style="color:#4b8ee8">5 - 65岁</span>
+                    </p>
 
                     <div style="color:orange;line-height:30px;position: relative" >
 

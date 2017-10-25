@@ -122,12 +122,10 @@
             交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
         </p>
         <p style="height:20px;">
-            距离：<span style="color:#4b8ee8">{{$detail->juli}}</span>
-            <span style="color:orange;margin-left:10px;" >强度等级：</span><span style="color:#4b8ee8">{{$detail->qiangdu}}</span>
+            强度等级：<span style="color:#4b8ee8">{{$detail->qiangdu}}</span>
         </p>
         <p style="height:20px;">
-            领队：<span style="color:#4b8ee8">{{$detail->leader}}</span>
-            电话：<span style="color:#4b8ee8">{{$detail->phone}}</span>
+            年龄限制：<span style="color:#4b8ee8">5 - 65岁</span>
         </p>
 
     </div>
