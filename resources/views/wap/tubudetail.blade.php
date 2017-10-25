@@ -222,7 +222,7 @@
         }
         window.onscroll = function(){
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-            if( scrollTop>=1000 ) {
+            if( scrollTop>=850 ) {
 
                 $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;width:"+$(window).width()+"px";
                 @if( strtotime($detail->startday) - time() > 0 && !$isjoined )
