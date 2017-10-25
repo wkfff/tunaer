@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//aliyun:
+//帐号：tunaer
+//密码：kongxijun.kxj
+//135****9697
 
 //徒哪儿微信公众号：
 //商户号：1490663772
