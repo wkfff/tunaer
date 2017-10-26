@@ -26,7 +26,7 @@ if( $type == "tubu" ) {
 
 //echo "0001";
 //$money = $_POST['money']*100;
- $money = 1;
+// $money = 1;
 //$body = $_POST['title'];
 //$token = $_POST['token'];
 $time = time();
