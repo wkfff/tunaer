@@ -31,13 +31,14 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
+//$money = $money*100;
 $money = 1;
 $tmpArr = array(
     'appid'=>$appid,   //不要填成了 公众号原始id
     'mch_id'=>$mch_id,
     'nonce_str'=>$nonce_str,
     'time_stamp'=>$time_stamp,
-    'product_id'=>$order_id."#".$type."#".$money*100,
+    'product_id'=>$order_id."#".$type."#".$money,
     );
 
 ksort($tmpArr);  //根据键值排序数组
