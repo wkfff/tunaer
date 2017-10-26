@@ -302,7 +302,7 @@ function createpay(way) {
                 "type":type
             },function(d){
                 $("#qrcode").children().remove();
-                $("#qrcode").append("<div>请使用微信扫一扫</div>");
+                $("#qrcode").append("<div>请使用微信扫一扫(扫码完成后刷新页面)</div>");
                 $("#qrcode").qrcode({
                     // render: "table", //table方式
                     width: 300, //宽度
