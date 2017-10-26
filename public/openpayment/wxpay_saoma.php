@@ -31,7 +31,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
-
+$money = 1;
 $tmpArr = array(
     'appid'=>$appid,   //不要填成了 公众号原始id
     'mch_id'=>$mch_id,
