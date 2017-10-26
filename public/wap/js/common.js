@@ -303,6 +303,25 @@ $(function()
     });
 });
 
-function payment(orderid,type) {
-    toast("支付出错，请联系客服");
+function payment(that,order_id,type) {
+    if( that ) {
+        order_id = $(that).attr("order_id");
+        type = $(that).attr("type");
+    }
+    window.order_id = order_id;
+    window.type = type;
+    $("#paybox").modal("show");
+}
+
+function createpay(way) {
+    switch(way){
+        case "wxpay_wap":
+            $.post("/openpayment/wxpay_wap.php",{
+                "order_id":window.order_id,
+                "type":type
+            },function(d){
+                location.href=d;
+            })
+            break;
+    }
 }

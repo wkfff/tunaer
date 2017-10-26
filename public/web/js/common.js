@@ -313,8 +313,4 @@ function createpay(way) {
             })
             break;
     }
-
-    // $.post("/createpay",{"orderid":window.orderid,"type":window.type,"way":way},function(d){
-    //     console.log(d);
-    // })
 }
