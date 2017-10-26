@@ -23,6 +23,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
+$money = $money*100;
 
 //echo "0001";
 //$money = $_POST['money']*100;
