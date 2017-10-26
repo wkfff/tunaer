@@ -269,7 +269,7 @@
 
     <div class="modal fade" id="paybox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width:600px">
+            <div class="modal-content" >
                 <style>
                     .payimg p{
                         border: 1px solid #999;padding:10px;cursor: pointer;
