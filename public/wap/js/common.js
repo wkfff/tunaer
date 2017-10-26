@@ -310,6 +310,13 @@ function payment(that,order_id,type) {
     }
     window.order_id = order_id;
     window.type = type;
+    $.post("/openpayment/wxpay_wap.php",{
+        "order_id":window.order_id,
+        "type":type
+    },function(d){
+        $("#wechatlink").attr("href",d);
+    })
+
     $("#paybox").modal("show");
 }
 
@@ -321,7 +328,7 @@ function createpay(way) {
                 "type":type
             },function(d){
                 // alert(d);
-                $("#payfooter").css("display","block");
+                $('#payfooter').css('display','block');
                 location.href=d;
             })
             break;
