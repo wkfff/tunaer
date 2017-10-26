@@ -7,7 +7,7 @@ foreach ($postObj as $key => $value) {
     $arr[$key] = $value;
 } 
 $pos = explode("#",$arr['product_id']);
-$price = $pos[2];
+$price = $pos[2]*100;
 $order_id = $pos[0];
 $type = $pos[1];
 // $price = 10;
