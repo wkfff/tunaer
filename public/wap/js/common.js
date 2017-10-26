@@ -317,7 +317,7 @@ function payment(that,order_id,type) {
         $("#wechatlink").attr("href",d);
     })
 
-    $("#paybox").modal("show");
+    $('#paybox').modal('show');
 }
 
 function createpay(way) {
