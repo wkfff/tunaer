@@ -1,0 +1,33 @@
+<xml><appid><![CDATA[wx10106332de6f9840]]></appid>
+<bank_type><![CDATA[CFT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[N]]></is_subscribe>
+<mch_id><![CDATA[1490663772]]></mch_id>
+<nonce_str><![CDATA[vgvdfvfg54325rf]]></nonce_str>
+<openid><![CDATA[oxnNe0oA4mSKgPEUlm-M3sY7p2H8]]></openid>
+<out_trade_no><![CDATA[1509004023zxc19zxctubu]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[8EB2681FE22EB31FADCECA874DC4E000]]></sign>
+<time_end><![CDATA[20171026154708]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<transaction_id><![CDATA[4200000018201710260434824666]]></transaction_id>
+</xml># insert into payment (paytype,money,orderid) values ('wx_saoma','0.01','4200000018201710260434824666') ##tubu## update tubuorder set orderid='4200000018201710260434824666' where id= 19##over##end#<xml><appid><![CDATA[wx10106332de6f9840]]></appid>
+<bank_type><![CDATA[CFT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[N]]></is_subscribe>
+<mch_id><![CDATA[1490663772]]></mch_id>
+<nonce_str><![CDATA[vgvdfvfg54325rf]]></nonce_str>
+<openid><![CDATA[oxnNe0oA4mSKgPEUlm-M3sY7p2H8]]></openid>
+<out_trade_no><![CDATA[1509004270zxc19zxctubu]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[83AF49FB8110ECECA008B79B0D7FFA4F]]></sign>
+<time_end><![CDATA[20171026155115]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<transaction_id><![CDATA[4200000025201710260433320844]]></transaction_id>
+</xml># insert into payment (paytype,money,orderid) values ('wx_saoma','0.01','4200000025201710260433320844') ##tubu## update tubuorder set orderid='4200000025201710260433320844' where id= 19##over##end#
