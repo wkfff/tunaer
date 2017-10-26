@@ -320,8 +320,8 @@ function createpay(way) {
                 "order_id":window.order_id,
                 "type":type
             },function(d){
-                alert(d);
-                // location.href=d;
+                // alert(d);
+                location.href=d;
             })
             break;
     }
