@@ -8,7 +8,7 @@ foreach ($postObj as $key => $value) {
 $status = $arr['result_code'];
 require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
 $handle = DB::getInstance();
-
+file_put_contents(dirname(__file__)."/log.php",file_get_contents("php://input"));
 if(trim($status) == "SUCCESS") {
 
 	$out_trade_no = $arr['transaction_id'];
