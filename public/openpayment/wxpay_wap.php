@@ -37,7 +37,7 @@ $tmpArr = array(
     'mch_id'=>"1490663772",
     'nonce_str'=>"vgvdfvfg54325rf",  
     'notify_url'=>'http://cdtunaer.com/openpayment/wxpay/wapnotify.php',
-    'out_trade_no'=>$order_id."__".$type,
+    'out_trade_no'=>$time."__".$order_id."__".$type,
     'spbill_create_ip'=>$_SERVER['REMOTE_ADDR'],
     'total_fee'=>$money,
     'trade_type'=>'MWEB'
@@ -60,13 +60,13 @@ $xml = "<xml>
            <mch_id>1490663772</mch_id>
            <nonce_str>vgvdfvfg54325rf</nonce_str>
            <notify_url>http://cdtunaer.com/openpayment/wxpay/wapnotify.php</notify_url>
-           <out_trade_no>".$order_id."__".$type."</out_trade_no>
+           <out_trade_no>".$time."__".$order_id."__".$type."</out_trade_no>
            <spbill_create_ip>".$_SERVER['REMOTE_ADDR']."</spbill_create_ip>
            <total_fee>".$money."</total_fee>
            <trade_type>MWEB</trade_type>
            <sign>".$sign."</sign>
         </xml> ";
-echo $xml;
+//echo $xml;
 $posturl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
 $ch = curl_init($posturl);
@@ -75,6 +75,6 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
 $response = curl_exec($ch);  
 curl_close($ch);
-echo $response;
+//echo $response;
 $xmlobj = json_decode(json_encode(simplexml_load_string($response, 'SimpleXMLElement', LIBXML_NOCDATA ))); 
 exit($xmlobj->mweb_url);

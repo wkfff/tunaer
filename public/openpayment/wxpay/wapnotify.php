@@ -14,8 +14,8 @@ if(trim($status) == "SUCCESS") {
     $out_trade_no = $arr['transaction_id'];
     $money = $arr['total_fee']/100;
     $tmparr = explode("__", $arr['out_trade_no']);
-    $order_id = $tmparr[0];
-    $type = $tmparr[1];
+    $order_id = $tmparr[1];
+    $type = $tmparr[2];
 
     $sql = " insert into payment (paytype,money,orderid) values ('wx_saoma','".$money."','".$out_trade_no."') ";
 //    file_put_contents(dirname(__file__)."/log.php","#".$sql.'#',FILE_APPEND);

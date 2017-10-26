@@ -320,9 +320,9 @@ function createpay(way) {
                 "order_id":window.order_id,
                 "type":type
             },function(d){
-                alert(d);
-                // $("#payfooter").css("display","block");
-                // location.href=d;
+                // alert(d);
+                $("#payfooter").css("display","block");
+                location.href=d;
             })
             break;
     }
