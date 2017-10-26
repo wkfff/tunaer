@@ -1,7 +1,5 @@
 <?php
 
-
-// file_get_contents("php://input")  接收原始输入流
 $postObj = simplexml_load_string (file_get_contents("php://input"), 'SimpleXMLElement', LIBXML_NOCDATA ); 
 
 $arr = array();
@@ -23,7 +21,7 @@ $tmparr = array(
    'detail'=>'成都徒哪儿户外网',
    'product_id'=>$price,
    'trade_type'=>'NATIVE',
-   'out_trade_no'=>time()."#".$order_id.'#'.$type,
+   'out_trade_no'=>time()."z".$order_id.'z'.$type,
    'spbill_create_ip'=>$_SERVER['REMOTE_ADDR'],
    'notify_url'=>'http://cdtunaer.com/openpayment/wxpay/saoma_notify.php',
    'total_fee'=>$price
