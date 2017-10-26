@@ -66,7 +66,7 @@ $xml = "<xml>
            <trade_type>MWEB</trade_type>
            <sign>".$sign."</sign>
         </xml> ";
-//echo $xml;
+echo $xml;
 $posturl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
 $ch = curl_init($posturl);
@@ -75,6 +75,6 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
 $response = curl_exec($ch);  
 curl_close($ch);
-//echo $response;
+echo $response;
 $xmlobj = json_decode(json_encode(simplexml_load_string($response, 'SimpleXMLElement', LIBXML_NOCDATA ))); 
 exit($xmlobj->mweb_url);
