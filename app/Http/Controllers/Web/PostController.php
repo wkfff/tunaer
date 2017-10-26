@@ -464,6 +464,14 @@ class PostController extends Controller{
 
     //    获取留言列表
     public function gettubuorders(Request $request) {
+        $sql = " select * from tubuorder where  del=0 ";
+        $res = DB::select($sql);
+        for( $i=0;$i<count($res);$i++ ) {
+            if($res[$i]->orderid == '0' && (time() - strtotime("+2 hours",strtotime($res[$i]->ordertime)) >=0) ) {
+                $sql3 = " update tubuorder set del=1 where id=? ";
+                DB::update($sql3,[$res[$i]->id]);
+            }
+        }
         $userid = $request->input('userid','');
         $page = $request->input("page",1);
         $num = $request->input("num",5);

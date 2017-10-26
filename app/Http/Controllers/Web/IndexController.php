@@ -78,6 +78,7 @@ class IndexController extends Controller
 
     }
     public function tubudetail($tid) {
+
         $sql = " select tubuhuodong.*,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where tubuhuodong.id=? ";
         $res = DB::select($sql,[$tid]);
         if( count($res) == 0 ) {
@@ -445,11 +446,11 @@ class IndexController extends Controller
 
         $page = $request->input("page",1);
         $num = $request->input("num",100);
-        $sql = " select tubuorder.*,userattr.uname,user.phone from tubuorder left join user on user.id=tubuorder.uid left join userattr on userattr.uid=tubuorder.uid where tid=? and del=0 ";
+        $sql = " select * from tubuorder where tid=? and del=0 ";
         $res = DB::select($sql,[$tid]);
 
         for( $i=0;$i<count($res);$i++ ) {
-            if($res[$i]->orderid == '0' && time() - strtotime("+2 hours",strtotime($res[$i]->ordertime)) >=0 ) {
+            if($res[$i]->orderid == '0' && (time() - strtotime("+2 hours",strtotime($res[$i]->ordertime)) >=0) ) {
                 $sql3 = " update tubuorder set del=1 where id=? ";
                 DB::update($sql3,[$res[$i]->id]);
             }
