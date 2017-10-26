@@ -490,7 +490,7 @@ function gettubuorder(userid) {
                         </div>
                     `;
                 if( res[i].orderid == 0 ) {
-                    var tmp = "<a id='okok' href='javascript:void(0)' order_id='"+res[i].id+"' type='tubu' ondblclick='payment(this,null,null)' style='position: absolute;right:15px;top:15px;background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>立即支付</a></div>";
+                    var tmp = "<a id='okok' href='javascript:void(0)' order_id='"+res[i].id+"' type='tubu' onclick='payment(this,null,null)' style='position: absolute;right:15px;top:15px;background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>立即支付</a></div>";
                 }else{
                     var tmp = "<span style='color:#1E90FF;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;' >已付款</span></div>";
                 }
