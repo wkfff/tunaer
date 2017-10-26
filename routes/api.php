@@ -23,8 +23,8 @@ use Illuminate\Http\Request;
 //商户号：1490663772
 //帐号: 409613221@qq.com
 //密码: 520tunaer.
-//AppID: wx10106332de6f9840
-//AppSecret: 53972fb92388341e4ae2249f7a17c348
+//AppID:wx10106332de6f9840
+//AppSecret: 4954bacf787c59654e7b8571831a5d38
 
 //徒哪儿商户平台：
 //帐号：1490663772@1490663772

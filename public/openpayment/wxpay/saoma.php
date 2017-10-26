@@ -8,23 +8,24 @@ $arr = array();
 foreach ($postObj as $key => $value) { 
     $arr[$key] = $value;
 } 
-$pos = explode("s",$arr['product_id']);
-$price = $pos[0];
-$userid = $pos[1];
+$pos = explode("#",$arr['product_id']);
+$price = $pos[2];
+$order_id = $pos[0];
+$type = $pos[1];
 // $price = 10;
 // $userid = "123";
 // 这些参数可以到文档去看看  有的参数是必填 有的是选填
 $tmparr = array(
-   'appid'=>'wx31ffe118466ac333',
-   'mch_id'=>'1464027602',
+   'appid'=>'wx10106332de6f9840',
+   'mch_id'=>'1490663772',
    'nonce_str'=>'vgvdfvfg54325rf',
-   'body'=>'情缘会员服务',
-   'detail'=>'情缘会员服务',
+   'body'=>'成都徒哪儿户外网',
+   'detail'=>'成都徒哪儿户外网',
    'product_id'=>$price,
    'trade_type'=>'NATIVE',
-   'out_trade_no'=>time()."s".$userid.'s'.$price,
+   'out_trade_no'=>time()."#".$order_id.'#'.$type,
    'spbill_create_ip'=>$_SERVER['REMOTE_ADDR'],
-   'notify_url'=>'http://www.zcqy520.com/openpayment/wxpay/saoma_notify.php',
+   'notify_url'=>'http://cdtunaer.com/openpayment/wxpay/saoma_notify.php',
    'total_fee'=>$price
    );
 // 注意这个地方我在订单号out_trade_no上做文章了，因为支付结果异步通知到另外一个url上，
@@ -43,21 +44,21 @@ foreach ($tmparr as $k => $v)
 }
 $buff = trim($buff, "&");
 
-$stringSignTemp=$buff."&key=51b3363e91fe317fc346526f5933f15e";
+$stringSignTemp=$buff."&key=4954bacf787c59654e7b8571831a5d38";
 $sign= strtoupper(md5($stringSignTemp));
 $xml = "
 <xml>
-   <appid>wx31ffe118466ac333</appid>
-   <mch_id>1464027602</mch_id>
+   <appid>wx10106332de6f9840</appid>
+   <mch_id>1490663772</mch_id>
    <nonce_str>vgvdfvfg54325rf</nonce_str>
    <sign>".$sign."</sign>
-   <body>情缘会员服务</body>
-   <detail>情缘会员服务</detail>
+   <body>成都徒哪儿户外网</body>
+   <detail>成都徒哪儿户外网</detail>
    <product_id>".$price."</product_id>
    <out_trade_no>".$tmparr['out_trade_no']."</out_trade_no>
    <total_fee>".$price."</total_fee>
    <spbill_create_ip>".$_SERVER['REMOTE_ADDR']."</spbill_create_ip>
-   <notify_url>http://www.zcqy520.com/openpayment/wxpay/saoma_notify.php</notify_url>
+   <notify_url>http://cdtunaer.com/openpayment/wxpay/saoma_notify.php</notify_url>
    <trade_type>NATIVE</trade_type>
 </xml>  
 ";
@@ -69,9 +70,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 $response = curl_exec($ch);
-// if(curl_errno($ch)){
-//     print curl_error($ch);
-// }
+
 curl_close($ch);
 // 将接收到的数据直接返回，这一步官方没说明，大坑
 echo $response;

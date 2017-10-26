@@ -1,4 +1,11 @@
 <?php
+
+$appid = "wx10106332de6f9840";
+$mch_id = "1490663772";
+$key = "4954bacf787c59654e7b8571831a5d38";
+$nonce_str = "rtyguhjikdfghjvascv345r23";
+$time_stamp = time();
+
 require_once dirname(__FILE__) . "/../../app/Libs/DB.php";
 $handle = DB::getInstance();
 
@@ -26,11 +33,11 @@ if( $type == "tubu" ) {
 }
 
 $tmpArr = array(
-    'appid'=>'wx10106332de6f9840',   //不要填成了 公众号原始id
-    'mch_id'=>'1490663772',
-    'nonce_str'=>'vgvdfvfg54325rf',
-    'time_stamp'=>time(),
-    'product_id'=>$order_id."s".$money*100,
+    'appid'=>$appid,   //不要填成了 公众号原始id
+    'mch_id'=>$mch_id,
+    'nonce_str'=>$nonce_str,
+    'time_stamp'=>$time_stamp,
+    'product_id'=>$order_id."#".$type."#".$money*100,
     );
 
 ksort($tmpArr);  //根据键值排序数组
@@ -42,17 +49,16 @@ foreach ($tmpArr as $k => $v)
 }
 $buff = trim($buff, "&");
 
-$stringSignTemp=$buff."&key=53972fb92388341e4ae2249f7a17c348";
+$stringSignTemp=$buff."&key=".$key;
 $sign= strtoupper(MD5($stringSignTemp));
 
-
-$reurl = "weixin://wxpay/bizpayurl?sign=".$sign."&appid=wx10106332de6f9840&mch_id=1490663772&product_id=".$tmpArr['product_id']."&time_stamp=".$tmpArr['time_stamp']."&nonce_str=".$tmpArr['nonce_str'];
+$reurl = "weixin://wxpay/bizpayurl?sign=".$sign."&appid=".$appid."&mch_id=".$mch_id."&product_id=".$tmpArr['product_id']."&time_stamp=".$time_stamp."&nonce_str=".$nonce_str;
 
 // 官方文档中介绍了有个长url转短url的API 写的还是很清楚的 没遇到坑
 $posarr = array(
-    'appid'=>'wx10106332de6f9840',
-    'mch_id'=>'1490663772',
-    'nonce_str'=>'vgvdfvfg54325rf',
+    'appid'=>$appid,
+    'mch_id'=>$mch_id,
+    'nonce_str'=>$nonce_str,
     'long_url'=>urlencode($reurl),
     // 这个地方文档中也说了 长url地址需要urlencode一下，不然你很可能得到签名错误
     );
@@ -64,15 +70,15 @@ foreach ($posarr as $k => $v)
 }
 $buff = trim($buff, "&");
 
-$stringSignTemp=$buff."&key=53972fb92388341e4ae2249f7a17c348";
+$stringSignTemp=$buff."&key=".$key;
 $sign= strtoupper(MD5($stringSignTemp));
 
 // 官方文档中说了 所有传输必须采用xml格式  post方式 https协议
 
 $xml = "<xml>
-           <appid>wx10106332de6f9840</appid>
-           <mch_id>1490663772</mch_id>
-           <nonce_str>vgvdfvfg54325rf</nonce_str>
+           <appid>".$appid."</appid>
+           <mch_id>".$mch_id."</mch_id>
+           <nonce_str>".$nonce_str."</nonce_str>
            <sign>".$sign."</sign>
            <long_url>".$posarr['long_url']."</long_url>
         </xml>";
@@ -86,7 +92,7 @@ curl_setopt($ch, CURLOPT_POST, 1);  //使用post提交
 curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);   //post数据
 $response = curl_exec($ch);  
 curl_close($ch);
-die($response);
+
 // simplexml_load_string php内置的解析简单xml文件的扩展
 $xmlobj = simplexml_load_string ($response, 'SimpleXMLElement', LIBXML_NOCDATA ); 
 // 这个地方我直接输出 $xml->short_url 居然是空的  非要经过下面几步才得行  难道是我php版本低了
