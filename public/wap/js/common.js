@@ -320,7 +320,7 @@ function createpay(way) {
                 "order_id":window.order_id,
                 "type":type
             },function(d){
-                $("#payfooter").css("display","block");
+                // $("#payfooter").css("display","block");
                 location.href=d;
             })
             break;
