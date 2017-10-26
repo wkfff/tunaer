@@ -297,6 +297,13 @@
         </div>
     </div>
 
+    <div id="payfooter" style="height:100%;width:100%;position:fixed;z-index:99999;left:0px;top:0px;display:none" >
+        <div style="position: absolute;bottom:0px;left:0px;width:100%;height:200px;background:#ddd;text-align:center;" >
+            <button onclick="location.reload()" style="border:1px solid #fff;color:#fff;height:80px;width:80%;background: #e83888;font-size:1.5em;margin:10px 0;">支付成功</button>
+            <button onclick="location.reload()" style="border:1px solid #fff;color:#000;height:80px;width:80%;background: darkgrey;font-size:1.5em">返回</button>
+        </div>
+    </div>
+
     @include("wap.footer")
 
 @stop
