@@ -339,7 +339,7 @@
     </form>
 
 
-    <form id="wxpayform" style="display:none" action='/openpayment/wxpay_sdk/example/jsapi.php' method="POST" target="_blank" >
+    <form id="wxpayform" style="display:none" action='/openpayment/wxpay_sdk/example/jsapi.php' method="POST"  >
         <input  name="order_id" />
         <input  name="type" />
     </form>
