@@ -65,13 +65,14 @@ $editAddress = $tools->GetEditAddressParameters();
 			'getBrandWCPayRequest',
 			<?php echo $jsApiParameters; ?>,
 			function(res){
-			    if( res.err_msg == "get_brand_wcpay_request:ok" ) {
-			        echo "支付成功：　<a href='/' >返回首页</a>";
-                }else{
-                    echo "支付失败：　<a href='/' >返回首页</a>";
-                }
+//			    if( res.err_msg == "get_brand_wcpay_request:ok" ) {
+//                    echo "支付成功：　<a href='/' >返回首页</a>";
+//                }else{
+//                    echo "支付失败：　<a href='/' >返回首页</a>";
+//                }
+
 //				WeixinJSBridge.log(res.err_msg);
-//				alert(res.err_code+res.err_desc+res.err_msg);
+				alert(res.err_code+res.err_desc+res.err_msg);
 			}
 		);
 	}
@@ -134,7 +135,7 @@ $editAddress = $tools->GetEditAddressParameters();
     <script>
         setTimeout(function(){
             callpay();
-        },400)
+        },10)
     </script>
 </body>
 </html>
