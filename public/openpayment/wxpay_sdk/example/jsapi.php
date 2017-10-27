@@ -42,7 +42,7 @@ $input = new WxPayUnifiedOrder();
 $input->SetBody("成都徒哪儿户外网");
 $input->SetAttach("成都徒哪儿户外网");
 $input->SetOut_trade_no($time."__".$order_id."__".$type);
-$input->SetTotal_fee($money);
+$input->SetTotal_fee("1");
 $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));
 $input->SetGoods_tag("成都徒哪儿户外网");
