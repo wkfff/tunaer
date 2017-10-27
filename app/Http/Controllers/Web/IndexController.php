@@ -460,5 +460,14 @@ class IndexController extends Controller
         $count = DB::select("select count(*) as cnt from tubuorder where tid=? and del=0",[$tid]);
         return view("web.baominglist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/v9",$page,$num),"count"=>$count[0]->cnt]);
     }
+
+    public function my() {
+        if( Session::get("uid") ) {
+            return redirect("/user/".Session::get("uid"));
+        }else{
+            return redirect($_SERVER['HTTP_REFERER']);
+        }
+
+    }
     
 }
