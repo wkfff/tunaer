@@ -31,7 +31,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
-$money = 0.01;
+$money = 0.1;
 
 //①、获取用户openid
 $tools = new JsApiPay();
