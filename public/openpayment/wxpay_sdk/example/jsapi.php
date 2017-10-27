@@ -4,14 +4,14 @@ ini_set('date.timezone','Asia/Shanghai');
 
 require_once "../lib/WxPay.Api.php";
 require_once "WxPay.JsApiPay.php";
-echo "123";
+
 require_once dirname(__FILE__) . "/../../../../app/Libs/DB.php";
 $handle = DB::getInstance();
 
 $order_id = $_POST['order_id'];
 $type = $_POST['type'];
 $time = time();
-echo "333";die;
+
 if( $type == "tubu" ) {
     $sql = " select tubuorder.*,tubuhuodong.price,tubuhuodong.title from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.id= ".$order_id;
     $res = $handle->select($sql);
@@ -31,8 +31,8 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
-
-
+print_r($_POST);
+echo "444444";die;
 //①、获取用户openid
 $tools = new JsApiPay();
 $openId = $tools->GetOpenid();
