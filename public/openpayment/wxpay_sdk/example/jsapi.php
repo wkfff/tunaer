@@ -76,7 +76,9 @@ $editAddress = $tools->GetEditAddressParameters();
 			'getBrandWCPayRequest',
 			<?php echo $jsApiParameters; ?>,
 			function(res){
-                location.href="/my";
+			    if( res.err_msg == "get_brand_wcpay_request:ok" ) {
+                    location.href="/my";
+                }
 
 //				WeixinJSBridge.log(res.err_msg);
 //				alert(res.err_code+res.err_desc+res.err_msg);
