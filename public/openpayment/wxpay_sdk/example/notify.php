@@ -5,7 +5,7 @@ ini_set('date.timezone','Asia/Shanghai');
 require_once "../lib/WxPay.Api.php";
 require_once '../lib/WxPay.Notify.php';
 //require_once 'log.php';
-file_put_contents(dirname(__file__)."/log2.php","#123#",FILE_APPEND);
+file_put_contents(dirname(__file__)."/log2.php",file_get_contents("php://input"),FILE_APPEND);
 //初始化日志
 //$logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
 //$log = Log::Init($logHandler, 15);
