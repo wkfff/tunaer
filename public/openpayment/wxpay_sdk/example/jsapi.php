@@ -1,4 +1,5 @@
-<?php 
+<?php
+die("123");
 ini_set('date.timezone','Asia/Shanghai');
 //error_reporting(E_ERROR);
 require_once "../lib/WxPay.Api.php";
@@ -51,6 +52,7 @@ $editAddress = $tools->GetEditAddressParameters();
 ?>
 
 <html>
+
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/> 
