@@ -496,7 +496,7 @@ function gettubuorder(userid) {
                             
                         </div>`;
                 if( res[i].orderid == 0 ) {
-                    var tmp = "<a href='javascript:void(0)' order_id='"+res[i].id+"' type='tubu' onclick='payment(this,null,null)'  style='position: absolute;right:0px;top:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>";
+                    var tmp = "<a href='javascript:void(0)' order_id='"+res[i].id+"' p='"+res[i].price+"' type='tubu' onclick='payment(this,null,null)'  style='position: absolute;right:0px;top:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>";
                 }else{
                     var tmp = "<span style='color:#1E90FF;font-weight:bold;font-size:16px;position: absolute;right:0px;top:5px;' >已付款</span></div>";
                 }

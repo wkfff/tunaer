@@ -310,12 +310,19 @@ function payment(that,order_id,type) {
     }
     window.order_id = order_id;
     window.type = type;
+    // weixin
     $.post("/openpayment/wxpay_wap.php",{
         "order_id":window.order_id,
         "type":type
     },function(d){
         $("#wechatlink").attr("href",d);
     })
+
+    // 支付宝
+    $("#WIDout_trade_no").val((new Date()).getTime() + "__" + order_id + "__" + type);
+    $("#WIDsubject").val("成都徒哪儿户外网");
+    $("#WIDtotal_amount").val($(that).attr("p"));
+    $("#WIDbody").val("成都徒哪儿户外网");
 
     $('#paybox').modal('show');
 }

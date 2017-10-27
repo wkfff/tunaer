@@ -476,7 +476,7 @@ class PostController extends Controller{
         $page = $request->input("page",1);
         $num = $request->input("num",5);
         if( checknull($userid) ) {
-            $sql = " select tubuhuodong.title,tubuhuodong.pictures,tubuhuodong.startday,tubuorder.* from tubuorder left join tubuhuodong on tubuhuodong.id=tubuorder.tid where uid=? and del=0 order by tubuorder.id desc limit ?,? ";
+            $sql = " select tubuhuodong.title,tubuhuodong.pictures,tubuhuodong.startday,tubuhuodong.price,tubuorder.* from tubuorder left join tubuhuodong on tubuhuodong.id=tubuorder.tid where uid=? and del=0 order by tubuorder.id desc limit ?,? ";
             $orders = DB::select($sql,[$userid,($page-1)*$num,$num]);
             echo json_encode($orders);
         }
@@ -760,4 +760,5 @@ class PostController extends Controller{
             }
         }
     }
+
 }

@@ -286,7 +286,7 @@
                         请选择支付方式:
                     </h3>
                     <div class="payimg" style="width:100%;overflow-y: auto;" >
-                        <p onclick="createpay('alipay_wap')">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
+                        <p onclick="$('#alipayform').submit();">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
                         <a id="wechatlink" href="#" target="_blank" onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');"><p >微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p></a>
                         <br>
                         <div id="qrcode"></div>
@@ -303,6 +303,40 @@
             <button onclick="location.reload()" style="border:none;border:1px solid #fff;color:#000;height:80px;width:80%;background: darkgrey;font-size:1.5em">返回</button>
         </div>
     </div>
+
+    <!-- 支付宝form -->
+    <form id="alipayform" style="display:none" action='/openpayment/alipay.php' method="POST" target="_blank">
+        <div id="body" style="clear:left">
+            <dl class="content">
+                <dt>商户订单号：</dt>
+                <dd>
+                    <input id="WIDout_trade_no" name="WIDout_trade_no" />
+                </dd>
+                <hr class="one_line">
+                <dt>订单名称：</dt>
+                <dd>
+                    <input id="WIDsubject" name="WIDsubject" />
+                </dd>
+                <hr class="one_line">
+                <dt>付款金额：</dt>
+                <dd>
+                    <input id="WIDtotal_amount" name="WIDtotal_amount" />
+                </dd>
+                <hr class="one_line">
+                <dt>商品描述：</dt>
+                <dd>
+                    <input id="WIDbody" name="WIDbody" />
+                </dd>
+                <hr class="one_line">
+                <dt></dt>
+                <dd id="btn-dd">
+                <span class="new-btn-login-sp">
+                    <button class="new-btn-login" type="submit" style="text-align:center;">确 认</button>
+                </span>
+                </dd>
+            </dl>
+        </div>
+    </form>
 
     @include("wap.footer")
 
