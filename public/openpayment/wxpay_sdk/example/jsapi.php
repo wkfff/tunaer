@@ -31,7 +31,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
-$money = 1;
+$money = 0.01;
 
 //①、获取用户openid
 $tools = new JsApiPay();
@@ -133,17 +133,17 @@ $editAddress = $tools->GetEditAddressParameters();
 	
 	</script>
 </head>
-<body style="background:#DAF5FF">
+<body>
     <br/>
     <h3 style="color:#333">
         <?php echo $title; ?>
     </h3>
-    <h2  style="color:#e83888;">
+    <h2  style="color:#e83888;font-size:2em;font-weight: bold;">
         <?php echo "￥".$money; ?>
     </h2>
 <!--    <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>-->
     <div align="center">
-        <button style="width:210px; height:50px; border-radius: 15px;background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >立即支付</button>
+        <button style="width:100%; height:50px; border-radius: 15px;background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >立即支付</button>
     </div>
 
 </body>
