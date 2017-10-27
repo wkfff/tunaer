@@ -29,7 +29,7 @@ if(trim($status) == "SUCCESS") {
     $order_id = $tmparr[1];
     $type = $tmparr[2];
 
-    $sql = " insert into payment (paytype,money,orderid) values ('wx_saoma','".$money."','".$out_trade_no."') ";
+    $sql = " insert into payment (paytype,money,orderid) values ('wx_wap','".$money."','".$out_trade_no."') ";
 //    file_put_contents(dirname(__file__)."/log.php","#".$sql.'#',FILE_APPEND);
     $handle->excute($sql);
 
