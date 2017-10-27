@@ -31,7 +31,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }
-$money = 59.9;
+$money = 1;
 
 //①、获取用户openid
 $tools = new JsApiPay();
@@ -53,7 +53,7 @@ $order = WxPayApi::unifiedOrder($input);
 //echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
 //printf_info($order);
 $jsApiParameters = $tools->GetJsApiParameters($order);
-
+die($jsApiParameters);
 //获取共享收货地址js函数参数
 $editAddress = $tools->GetEditAddressParameters();
 
