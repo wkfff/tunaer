@@ -14,12 +14,11 @@
 
 require_once 'config.php';
 require_once 'pagepay/service/AlipayTradeService.php';
-require_once "./../../openapi/DB.php" ;
-// 实例化数据库句柄
+require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
 $handle = DB::getInstance();
 
 $arr=$_POST;
-$alipaySevice = new AlipayTradeService($config); 
+$alipaySevice = new AlipayTradeService($config);
 $alipaySevice->writeLog(var_export($_POST,true));
 $result = $alipaySevice->check($arr);
 
@@ -30,109 +29,71 @@ $result = $alipaySevice->check($arr);
 4、验证app_id是否为该商户本身。
 */
 if($result) {//验证成功
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//请在这里加上商户的业务逻辑程序代
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //请在这里加上商户的业务逻辑程序代
 
-	
-	//——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-	
+
+    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+
     //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-	
-	//商户订单号
 
-	$out_trade_no = $_POST['out_trade_no'];
+    //商户订单号
 
-	//支付宝交易号
+    $out_trade_no = $_POST['out_trade_no'];
 
-	$trade_no = $_POST['trade_no'];
+    //支付宝交易号
 
-	//交易状态
-	$trade_status = $_POST['trade_status'];
+    $trade_no = $_POST['trade_no'];
+
+    //交易状态
+    $trade_status = $_POST['trade_status'];
 
 
-    if($_POST['trade_status'] == 'TRADE_FINISHED') {
+    if ($_POST['trade_status'] == 'TRADE_FINISHED') {
 
-		//判断该笔订单是否在商户网站中已经做过处理
-			//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-			//请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-			//如果有做过处理，不执行商户的业务程序
-				
-		//注意：
-		//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+        //判断该笔订单是否在商户网站中已经做过处理
+        //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+        //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+        //如果有做过处理，不执行商户的业务程序
+
+        //注意：
+        //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+    } else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+
+        $orderid = $_POST['trade_no'];
+        $money = $_POST['total_amount'];
+        $sql = " select * from payment where orderid='" . $orderid . "' ";
+        $res = $handle->select($sql);
+        if (count($res) > 0) {
+            echo "success";
+            return;
+        }
+        //商户订单号
+        $out_trade_no = htmlspecialchars($_POST['out_trade_no']);
+        $tmp = explode("__", $out_trade_no);
+        $order_id = $tmp[1];
+        $type = $tmp[2];
+
+
+        $sql = " insert into payment (paytype,money,orderid) values ('alipay_pc','" . $money . "','" . $orderid . "') ";
+//    file_put_contents(dirname(__file__)."/log.php","#".$sql.'#',FILE_APPEND);
+        $handle->excute($sql);
+
+        if ($type == 'tubu') {
+//        file_put_contents(dirname(__file__)."/log.php","#tubu#",FILE_APPEND);
+            $sql = " update tubuorder set orderid='" . $out_trade_no . "' where id= " . $order_id;
+//        file_put_contents(dirname(__file__)."/log.php","#".$sql."#",FILE_APPEND);
+            $res = $handle->excute($sql);
+        } else {
+//        file_put_contents(dirname(__file__)."/log.php","#other#",FILE_APPEND);
+            $sql = " update shoporder set orderid='" . $out_trade_no . "' where id= " . $order_id;
+            $res = $handle->excute($sql);
+        }
+        //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+        echo "success";    //请不要修改或删除
+    } else {
+        //验证失败
+        echo "fail";
     }
-    else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-		
-		$tmp = explode("__", $out_trade_no);
-		$money = $tmp[1];
-		$uid = explode("_", $out_trade_no);
-		$uid = $uid[0];
-		$day = 0;
-		$viptype = 0;
-		switch ($money) {
-			case '59':
-				$viptype = 1; $day = 30;
-				break;
-			case '198':
-				$viptype = 2; $day = 180;
-				break;
-			case '399':
-				$viptype = 3; $day = 365;
-				break;
-			case '0.01':
-				$viptype = 3; $day = 365;
-				break;
-		}
-
-		// 检查重复
-		$sql = " select * from mobile_charge where orderid='".$out_trade_no."' ";
-		$check = $handle->query($sql);
-		if( $check->num_rows ) {
-			// echo "已经处理过了";
-			$sql = " select * from mobile_vip where uid= ".$uid;
-			$res = $handle->select($sql);
-			echo "success";
-			return ;
-		}
-		//插入充值记录
-		$sql = " insert into mobile_charge (uid,money,chargefrom,orderid) values (".$uid.",'".$money."','alipay_pc','".$out_trade_no."') ";
-		$insertjilu = $handle->excute($sql,false,true);
-		if( !$insertjilu ) {
-			echo "success";
-			return ;
-		}
-		//检查这个用户之前的vip到期没有
-		$sql = " select * from mobile_vip where uid =  " . $uid;
-		$res = $handle->select($sql);
-	    if( count($res) ){
-	    	// 以前开通过会员。但是现在已经过期了
-	    	if( time() > strtotime($res[0]['endtime']) ) {
-	    		$sql = " update mobile_vip set begintime='".date("Y-m-d H:i:s")."' , endtime='".date("Y-m-d H:i:s",strtotime("+".$day." day"))."',viptype=".$viptype." where uid= ".$uid;
-
-	    		$r = $handle->excute($sql);
-	    		
-	    	}else{
-				// 会员还没有过期 ，本次操作为续费:续费有一个地方需要注意
-				// 如果之前用户开通的是普通会员，本次开通的是钻石会员，那么之前的普通会员时间直接清零
-	    		if( $viptype != $res[0]['viptype'] ) {
-	    			$endtime = date("Y-m-d H:i:s",strtotime("+".$day." day"));
-	    		}else{
-	    			$endtime = date("Y-m-d H:i:s",strtotime("+".$day." day",strtotime($res[0]['endtime'])));
-	    		}
-	    		$sql = " update mobile_vip set begintime='".date("Y-m-d H:i:s")."' , endtime='".$endtime."',viptype=".$viptype." where uid= ".$uid;
-	    		$r = $handle->excute($sql);
-	    	}
-	    }else{
-	    	// 以前没有开过会员
-	    	$sql = " insert into mobile_vip (uid,endtime,viptype) values (".$uid.",'".date("Y-m-d H:i:s",strtotime("+".$day." day"))."',".$viptype.")";
-			$r = $handle->excute($sql);
-	    }
-
-    }
-	//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-	echo "success";	//请不要修改或删除
-}else {
-    //验证失败
-    echo "fail";
-
 }
 ?>
