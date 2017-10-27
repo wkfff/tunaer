@@ -42,7 +42,7 @@ $input = new WxPayUnifiedOrder();
 $input->SetBody("成都徒哪儿户外网");
 $input->SetAttach("成都徒哪儿户外网");
 $input->SetOut_trade_no($time."__".$order_id."__".$type);
-$input->SetTotal_fee("1");
+$input->SetTotal_fee($money);
 $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));
 $input->SetGoods_tag("成都徒哪儿户外网");
@@ -142,7 +142,7 @@ $editAddress = $tools->GetEditAddressParameters();
         <?php echo $title; ?>
     </h3>
     <h2  style="color:#e83888;font-size:2em;font-weight: bold;">
-        <?php echo "￥".$money; ?>
+        <?php echo "￥".$money/100; ?>
     </h2>
 <!--    <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>-->
     <div align="center">
