@@ -460,9 +460,13 @@ function getshoporder(userid) {
                             <p style="color:#666;font-size:13px;">留言：${res[i].liuyan == ''?res[i].liuyan:'无'}</p>
                             <p style="color:#666;font-size:13px;">物流状态：${res[i].kuaidi == 0 ? "等待发货" : res[i].kuaidi}</p>
                         </div>
-                        <span style="color:cadetblue;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;" >付款：${res[i].num*res[i].price}</span>
-                    </div>`;
-                $(".shoporderbox").append(item);
+                        `;
+                if( res[i].orderid == 0 ) {
+                    var tmp = "<a href='javascript:void(0)' order_id='"+res[i].id+"' type='shop' p='"+res[i].price+"' onclick='payment(this,null,null)' style='position: absolute;right:15px;top:15px;background: #E83888;color:#fff;display:inline-block;height:35px;text-decoration: none;cursor: pointer;width:90px;text-align: center;line-height:35px;font-size:16px;border-radius:1px;'>立即支付</a></div>";
+                }else{
+                    var tmp = "<span style='color:#1E90FF;font-weight:bold;font-size:20px;position: absolute;right:15px;top:15px;' >已付款</span></div>";
+                }
+                $(".shoporderbox").append(item+" "+tmp);
             }
         }
     })

@@ -306,7 +306,7 @@ function createpay(way) {
         case "wxpay_saoma":
             $.post("/openpayment/wxpay_saoma.php",{
                 "order_id":window.order_id,
-                "type":type
+                "type":window.type
             },function(d){
                 $("#qrcode").children().remove();
                 $("#qrcode").append("<p>请使用微信扫一扫　(扫码完成后刷新页面)</p>");
