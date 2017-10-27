@@ -311,12 +311,25 @@ function payment(that,order_id,type) {
     window.order_id = order_id;
     window.type = type;
     // weixin
-    $.post("/openpayment/wxpay_wap.php",{
-        "order_id":window.order_id,
-        "type":type
-    },function(d){
-        $("#wechatlink").attr("href",d);
-    })
+    if( is_weixn() ) {
+        $("input[name=order_id]").val(order_id);
+        $("input[name=type]").val(type);
+        $("#wechatlink").attr("href","javascript:void(0)");
+        $("#wechatlink").removeAttr("onclick");
+        $("#wechatlink").click(function(){
+            $('#payfooter').css('display','block');
+            $('#paybox').modal('hide');
+            $("#wxpayform").submit();
+        });
+    }else{
+        $.post("/openpayment/wxpay_wap.php",{
+            "order_id":window.order_id,
+            "type":type
+        },function(d){
+            $("#wechatlink").attr("href",d);
+        })
+    }
+
 
     // 支付宝
     $("#WIDout_trade_no").val((new Date()).getTime() + "__" + order_id + "__" + type);
@@ -339,5 +352,14 @@ function createpay(way) {
                 location.href=d;
             })
             break;
+    }
+}
+
+function is_weixn(){
+    var ua = navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        return true;
+    } else {
+        return false;
     }
 }
