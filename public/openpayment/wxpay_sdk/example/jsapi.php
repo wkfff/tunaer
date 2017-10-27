@@ -8,8 +8,8 @@ require_once "WxPay.JsApiPay.php";
 require_once dirname(__FILE__) . "/../../../../app/Libs/DB.php";
 $handle = DB::getInstance();
 
-$order_id = $_POST['order_id'];
-$type = $_POST['type'];
+$order_id = $_GET['order_id'];
+$type = $_GET['type'];
 $time = time();
 
 if( $type == "tubu" ) {
