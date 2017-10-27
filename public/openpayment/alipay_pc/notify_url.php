@@ -81,12 +81,12 @@ if($result) {//验证成功
 
         if ($type == 'tubu') {
 //        file_put_contents(dirname(__file__)."/log.php","#tubu#",FILE_APPEND);
-            $sql = " update tubuorder set orderid='" . $out_trade_no . "' where id= " . $order_id;
+            $sql = " update tubuorder set orderid='" . $orderid . "' where id= " . $order_id;
 //        file_put_contents(dirname(__file__)."/log.php","#".$sql."#",FILE_APPEND);
             $res = $handle->excute($sql);
         } else {
 //        file_put_contents(dirname(__file__)."/log.php","#other#",FILE_APPEND);
-            $sql = " update shoporder set orderid='" . $out_trade_no . "' where id= " . $order_id;
+            $sql = " update shoporder set orderid='" . $orderid . "' where id= " . $order_id;
             $res = $handle->excute($sql);
         }
         //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
