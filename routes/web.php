@@ -176,7 +176,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/delchat/{userid}","PostController@delchat");
     Route::post("/getlastestorderinfo","PostController@getlastestorderinfo");
     Route::post("/createpay","PostController@createpay");
-    Route::post("/my","IndexController@my");
+    Route::get("/my","IndexController@my");
 
     Route::post("/inituserinfo","PostController@inituserinfo");
     Route::post("/youjicm","PostController@youjicm");
