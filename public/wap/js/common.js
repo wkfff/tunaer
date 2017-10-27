@@ -304,7 +304,6 @@ $(function()
 });
 
 function payment(that,order_id,type) {
-    alert("ok");
     if( that ) {
         order_id = $(that).attr("order_id");
         type = $(that).attr("type");
@@ -313,7 +312,6 @@ function payment(that,order_id,type) {
     window.type = type;
     // weixin
     if( is_weixn() ) {
-        alert("weixin");
         $("input[name=order_id]").val(order_id);
         $("input[name=type]").val(type);
         $("#wechatlink").attr("href","javascript:void(0)");
@@ -324,7 +322,6 @@ function payment(that,order_id,type) {
             $("#wxpayform").submit();
         });
     }else{
-        alert("not weixin");
         $.post("/openpayment/wxpay_wap.php",{
             "order_id":window.order_id,
             "type":type
