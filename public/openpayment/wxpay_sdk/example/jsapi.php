@@ -99,7 +99,7 @@ $editAddress = $tools->GetEditAddressParameters();
 				var value4 = res.addressDetailInfo;
 				var tel = res.telNumber;
 				
-				alert(value1 + value2 + value3 + value4 + ":" + tel);
+//				alert(value1 + value2 + value3 + value4 + ":" + tel);
 			}
 		);
 	}
