@@ -1,5 +1,5 @@
 <?php
-die("123");
+
 ini_set('date.timezone','Asia/Shanghai');
 //error_reporting(E_ERROR);
 require_once "../lib/WxPay.Api.php";
