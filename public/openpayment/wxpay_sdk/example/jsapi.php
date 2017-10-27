@@ -3,19 +3,19 @@ ini_set('date.timezone','Asia/Shanghai');
 //error_reporting(E_ERROR);
 require_once "../lib/WxPay.Api.php";
 require_once "WxPay.JsApiPay.php";
-require_once 'log.php';
+//require_once 'log.php';
 
 //初始化日志
-$logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
-$log = Log::Init($logHandler, 15);
+//$logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
+//$log = Log::Init($logHandler, 15);
 
 //打印输出数组信息
-function printf_info($data)
-{
-    foreach($data as $key=>$value){
-        echo "<font color='#00ff55;'>$key</font> : $value <br/>";
-    }
-}
+//function printf_info($data)
+//{
+//    foreach($data as $key=>$value){
+//        echo "<font color='#00ff55;'>$key</font> : $value <br/>";
+//    }
+//}
 
 //①、获取用户openid
 $tools = new JsApiPay();
@@ -34,8 +34,8 @@ $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
 $input->SetTrade_type("JSAPI");
 $input->SetOpenid($openId);
 $order = WxPayApi::unifiedOrder($input);
-echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
-printf_info($order);
+//echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
+//printf_info($order);
 $jsApiParameters = $tools->GetJsApiParameters($order);
 
 //获取共享收货地址js函数参数
@@ -119,9 +119,15 @@ $editAddress = $tools->GetEditAddressParameters();
 </head>
 <body>
     <br/>
-    <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>
+    <p>正在支付．．．</p>
+<!--    <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>-->
 	<div align="center">
-		<button style="width:210px; height:50px; border-radius: 15px;background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >立即支付</button>
+<!--		<button style="width:210px; height:50px; border-radius: 15px;background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >立即支付</button>-->
 	</div>
+    <script>
+        setTimeout(function(){
+            callpay();
+        },10)
+    </script>
 </body>
 </html>
