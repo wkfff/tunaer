@@ -8,7 +8,9 @@
 require_once dirname(dirname(__FILE__)).'/config.php';
 require_once dirname(__FILE__).'/service/AlipayTradeService.php';
 require_once dirname(__FILE__).'/buildermodel/AlipayTradePagePayContentBuilder.php';
-
+echo "<pre>";
+    var_dump($_POST);
+    die;
     //商户订单号，商户网站订单系统中唯一订单号，必填
     $out_trade_no = trim($_POST['WIDout_trade_no']);
 
