@@ -438,7 +438,7 @@ class PostController extends Controller{
         $phone = $request->input('phone');
         $liuyan = $request->input('liuyan');
         $addr = $request->input('addr');
-        $orderid = "123";
+//        $orderid = "123";
         $uid = Session::get('uid');
         $success = 0;
 //        开启事务
@@ -458,7 +458,7 @@ class PostController extends Controller{
         if( $success != count($orders) ) {
             echo "400-部分订单未成功，请核对并联系客服";
         }else{
-            echo "200";
+            echo "200-success";
         }
     }
 
