@@ -293,11 +293,10 @@ function payment(that,order_id,type) {
     window.type = type;
 
     // 支付宝
+    $("#WIDtotal_amount").val($(that).attr("p"));
     $("#WIDout_trade_no").val((new Date()).getTime() + "__" + order_id + "__" + type);
     $("#WIDsubject").val("成都徒哪儿户外网");
-    $("#WIDtotal_amount").val($(that).attr("p"));
     $("#WIDbody").val("成都徒哪儿户外网");
-
 
     $("#paybox").modal("show");
 }

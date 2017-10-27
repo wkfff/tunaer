@@ -344,7 +344,7 @@
                 <hr class="one_line">
                 <dt>订单名称：</dt>
                 <dd>
-                    <input id="WIDsubject" name="WIDsubject" value="" />
+                    <input id="WIDsubject" name="WIDsubject" value="会员服务" />
                 </dd>
                 <hr class="one_line">
                 <dt>付款金额：</dt>
