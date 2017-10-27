@@ -8,8 +8,20 @@ foreach ($postObj as $key => $value) {
 $status = $arr['result_code'];
 require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
 $handle = DB::getInstance();
-//file_put_contents(dirname(__file__)."/log.php",file_get_contents("php://input"),FILE_APPEND);
+$xml = "
+    <xml>
+      <return_code><![CDATA[".$status."]]></return_code>
+      <return_msg><![CDATA[OK]]></return_msg>
+    </xml>";
 if(trim($status) == "SUCCESS") {
+    $out_trade_no = $arr['transaction_id'];
+
+    $sql = " select * from payment where orderid='".$out_trade_no."' ";
+    $res = $handle->select($sql);
+    if( count($res) > 0 ) {
+        echo $xml;
+        return ;
+    }
 
     $out_trade_no = $arr['transaction_id'];
     $money = $arr['total_fee']/100;
@@ -32,11 +44,7 @@ if(trim($status) == "SUCCESS") {
         $res = $handle->excute($sql);
     }
 //    file_put_contents(dirname(__file__)."/log.php","#over#",FILE_APPEND);
-    $xml = "
-    <xml>
-      <return_code><![CDATA[".$status."]]></return_code>
-      <return_msg><![CDATA[OK]]></return_msg>
-    </xml>";
+
     echo $xml;
 //    file_put_contents(dirname(__file__)."/log.php","#end#",FILE_APPEND);
 }else {

@@ -10,7 +10,7 @@ $pos = explode("#",$arr['product_id']);
 $price = $pos[2]*100;
 $order_id = $pos[0];
 $type = $pos[1];
-// $price = 10;
+ $price = 1;
 // $userid = "123";
 // 这些参数可以到文档去看看  有的参数是必填 有的是选填
 $tmparr = array(
