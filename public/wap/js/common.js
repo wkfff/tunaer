@@ -317,8 +317,8 @@ function payment(that,order_id,type) {
         $("#wechatlink").attr("href","javascript:void(0)");
         $("#wechatlink").removeAttr("onclick");
         $("#wechatlink").click(function(){
-            $('#payfooter').css('display','block');
-            $('#paybox').modal('hide');
+            // $('#payfooter').css('display','block');
+            // $('#paybox').modal('hide');
             $("#wxpayform").submit();
         });
     }else{
