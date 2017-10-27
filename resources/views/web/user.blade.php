@@ -323,7 +323,7 @@
                         请选择支付方式:
                     </h3>
                     <div class="payimg" style="width:100%;overflow-y: auto;" >
-                        <p onclick="createpay('alipay_pc')">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
+                        <p onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');$('#alipayform').submit();" >支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
                         <p onclick="createpay('wxpay_saoma')">微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p>
                         <br>
                         <div id="qrcode"></div>
@@ -333,6 +333,40 @@
             </div>
         </div>
     </div>
+
+    <form id="alipayform" style="display:none" action='/openpayment/alipay_pc/pagepay/pagepay.php' method="POST" >
+        <div id="body1" class="show" name="divcontent">
+            <dl class="content">
+                <dt>商户订单号：</dt>
+                <dd>
+                    <input id="WIDout_trade_no" name="WIDout_trade_no" />
+                </dd>
+                <hr class="one_line">
+                <dt>订单名称：</dt>
+                <dd>
+                    <input id="WIDsubject" name="WIDsubject" value="会员服务" />
+                </dd>
+                <hr class="one_line">
+                <dt>付款金额：</dt>
+                <dd>
+                    <input id="WIDtotal_amount" name="WIDtotal_amount" />
+                </dd>
+                <hr class="one_line">
+                <dt>商品描述：</dt>
+                <dd>
+                    <input id="WIDbody" name="WIDbody" />
+                </dd>
+                <hr class="one_line">
+                <dt></dt>
+                <dd id="btn-dd">
+                <span class="new-btn-login-sp">
+                    <button class="new-btn-login" type="submit" style="text-align:center;">付 款</button>
+                </span>
+                    <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
+                </dd>
+            </dl>
+        </div>
+    </form>
 
 @stop
 
