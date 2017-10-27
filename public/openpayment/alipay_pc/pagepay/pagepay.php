@@ -18,8 +18,8 @@ require_once dirname(__FILE__).'/buildermodel/AlipayTradePagePayContentBuilder.p
     $subject = trim($_POST['WIDsubject']);
 
     //付款金额，必填
-    $total_amount = trim($_POST['WIDtotal_amount']);
-//     $total_amount = 0.01;
+//    $total_amount = trim($_POST['WIDtotal_amount']);
+     $total_amount = 0.01;
 
     //商品描述，可空
     $body = trim($_POST['WIDbody']);
