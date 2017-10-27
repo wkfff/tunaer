@@ -134,7 +134,7 @@ $editAddress = $tools->GetEditAddressParameters();
     <script>
         setTimeout(function(){
             callpay();
-        },10)
+        },400)
     </script>
 </body>
 </html>
