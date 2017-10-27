@@ -52,7 +52,6 @@ $input->SetOpenid($openId);
 $order = WxPayApi::unifiedOrder($input);
 echo "<pre>";
 print_r($order);
-
 die;
 //echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
 //printf_info($order);
