@@ -286,7 +286,7 @@
                         请选择支付方式:
                     </h3>
                     <div class="payimg" style="width:100%;overflow-y: auto;" >
-                        <p onclick="$('#alipayform').submit();">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
+                        <p onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');$('#alipayform').submit();">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
                         <a id="wechatlink" href="#" target="_blank" onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');"><p >微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p></a>
                         <br>
                         <div id="qrcode"></div>
@@ -305,7 +305,7 @@
     </div>
 
     <!-- 支付宝form -->
-    <form id="alipayform" style="display:none" action='/openpayment/alipay.php' method="POST" target="_blank">
+    <form id="alipayform" style="display:none" action='/openpayment/alipay.php' method="POST" target="_blank" >
         <div id="body" style="clear:left">
             <dl class="content">
                 <dt>商户订单号：</dt>
