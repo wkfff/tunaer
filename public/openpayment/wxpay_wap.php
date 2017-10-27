@@ -24,6 +24,7 @@ if( $type == "tubu" ) {
     }
 }
 $money = $money*100;
+$money = 1;
 
 //echo "0001";
 //$money = $_POST['money']*100;
