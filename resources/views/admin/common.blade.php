@@ -139,7 +139,7 @@
                             <li><a class="submenu" href="/admin/setting/mianban"><i class="icon-file-alt"></i><span class="hidden-tablet">快捷面板</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="/admin/payorder"><i class="icon-bar-chart"></i><span class="hidden-tablet">支付记录</span></a></li>
+                    <li><a href="/admin/payorder"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 支付记录</span></a></li>
                 </ul>
             </div>
         </div>
