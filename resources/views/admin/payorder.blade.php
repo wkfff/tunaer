@@ -28,15 +28,15 @@
                 <td class="center">{{$list[$i]->money}}</td>
                 <td class="center" style="color:green">
                     @if( $list[$i]->paytype == 'wx_saoma' )
-                        微信扫码支付
+                        微信扫码
                     @elseif( $list[$i]->paytype == 'wx_wap' )
-                        微信手机支付
+                        微信h5
                     @elseif( $list[$i]->paytype == 'wx_wxwap' )
-                        微信公众号支付
+                        公众号
                     @elseif( $list[$i]->paytype == 'alipay_wap' )
-                        支付宝手机
+                        支付宝h5
                     @elseif( $list[$i]->paytype == 'alipay_pc' )
-                        支付宝电脑
+                        支付宝pc
                     @else
                         <span style="color:red" >未知</span>
                     @endif
