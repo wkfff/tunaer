@@ -35,8 +35,9 @@
         }
         .tubudetailnavbar{
             width:100%;text-align: left;
-            position: relative;border-bottom:1px solid orangered;
+            position: relative;
             line-height:40px;background: white;z-index:10;
+            /*border-bottom:1px solid orangered;*/
         }
         .tubudetailnavbar a{
             display:block;height:40px;text-decoration: none;  float:left;color:#333;
@@ -71,13 +72,13 @@
             </div>
             <div class="swiper-pagination"></div>
             <div style="height:40px;position:absolute;bottom:0px;left:0px;z-index:1;background:rgba(0,0,0,0.2);padding:10px;color:#fff;width:100%;" >
-                <div onclick="tubucm(this,{{$detail->id}},2)" style="height:20px;float:left;margin-left:20px;cursor:pointer;" >
-                    <span class="glyphicon glyphicon-comment"></span>
-                    <span>{{$detail->cmcnt}}</span>
+                <div onclick="tubucm(this,{{$detail->id}},2)" style="height:20px;float:left;margin-left:0px;cursor:pointer;" >
+                    <img src="/web/tubiao/15.png" style="height:15px;" >
+                    <span>{{$detail->mudidi}}</span>
                 </div>
-                <div onclick="tubucm(this,{{$detail->id}},2)" style="height:20px;float:left;margin-left:20px;cursor:pointer;" >
-                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                    <span>{{$detail->zancnt}}</span>
+                <div onclick="tubucm(this,{{$detail->id}},2)" style="height:20px;float:left;margin-left:10px;cursor:pointer;" >
+                    <img src="/web/tubiao/13.png" style="height:15px;" >
+                    <span>{{$detail->startday}}</span>
                 </div>
             </div>
         </div>
@@ -92,7 +93,7 @@
             @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
                 <span style="color:orange;border:1px dashed orange;padding:2px 6px;font-size:14px; ">{{$tesearr[$i]}}</span>
             @endfor
-            <span style="float:right;color:orange;cursor:pointer;" ><span class="glyphicon glyphicon-user" style="font-size:14px;margin-right:5px;" ></span>报名{{$detail->baoming}}人</span>
+            <a style="color:#4b8ee8" href="/baominglist/{{$detail->id}}"><span style="float:right;cursor:pointer;" ><span class="glyphicon glyphicon-user" style="font-size:14px;margin-right:5px;" ></span>报名列表</span></a>
         </p>
     </div>
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
@@ -112,7 +113,7 @@
                 <p style="color:#444;">
                     徒步通知说明：活动前一天发布具体分车,时间及车辆信息
                 </p>
-                <p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>
+                {{--<p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>--}}
 
             @endif
         @endif
@@ -137,13 +138,17 @@
     </div>
 
     <div class="tubudetailnavbar" >
-        <a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>
-        <a onclick="tiaozhuan(this)" href="#hdxq" >活动详情</a>
-        <a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>
-        <a onclick="tiaozhuan(this)" href="#ydxz">预订须知</a>
-        <a onclick="tiaozhuan(this)" href="#qtxx">其他信息</a>
-        <a onclick="tiaozhuan(this)" href="#hdly">活动留言</a>
-        <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: orangered;color:#fff;">马上报名</a>
+        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#jhxx" id="bar_a_hover" >行程安排</a>
+        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#hdxq" >活动详情</a>
+        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#ydxz" >预订须知</a>
+        {{--<a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#hdxq" >活动详情</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#ydxz">预订须知</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#qtxx">其他信息</a>--}}
+        {{--<a onclick="tiaozhuan(this)" href="#hdly">活动留言</a>--}}
+        {{--<a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: orangered;color:#fff;">马上报名</a>--}}
         <div style="clear:both" ></div>
     </div>
     <div class="tuwen" >
@@ -202,6 +207,7 @@
                         <label >订单备注 </label>
                         <textarea name="tb-mark" class="form-control"  rows="2" placeholder="添加备注..."></textarea>
                     </div>
+
                     <button type="button" onclick="baoming({{$detail->id}})" class="btn btn-primary">提交报名</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
@@ -209,7 +215,37 @@
             </div>
         </div>
     </div>
-    @include("wap.footer")
+    <div style="height:70px;" ></div>
+    <div style="height:60px;width:100%;background:#fff;position:fixed;bottom:0px;left:0px;color:#333;z-index:999" >
+        <a href="tel:18000548612"><div style="float:left;width:23%;height:60px;text-align:center;line-height:60px;position: relative;" >
+            <img src="/web/tubiao/12.png" style="height:25px;margin-top:-20px;">
+            <span style="color:#333;position: absolute;top:15px;left:0px;height:20px;width:100%;">报名咨询</span>
+        </div></a>
+        <a href="#cmbox"><div style="float:left;width:23%;height:60px;text-align:center;line-height:60px;position: relative;" >
+            <img src="/web/tubiao/11.png" style="height:25px;margin-top:-20px;">
+            <span style="color:#333;position: absolute;top:15px;left:0px;height:20px;width:100%;">活动留言</span>
+            </div></a>
+
+        @if( strtotime($detail->startday) - time() > 0 )
+
+
+            @if( $isjoined )
+                @if( strpos($phone,"去付款") )
+                    <a href='/user/{{Session::get('uid')}}#huodong'"><div  style="float:left;width:54%;height:60px;background:#e83888;text-align:center;line-height:60px;font-size:18px;color:#fff" >去付款</div></a>
+                @else
+                    <div  style="float:left;width:54%;height:60px;background:#3AC8EC;text-align:center;line-height:60px;font-size:18px;color:#fff" >已报名</div>
+                @endif
+
+            @else
+                <div onclick="openorderbox()" style="float:left;width:54%;height:60px;background:#FF9531;text-align:center;line-height:60px;font-size:18px;color:#fff" >立即报名</div>
+
+            @endif
+        @else
+            <div style="float:left;width:54%;height:60px;background:grey;text-align:center;line-height:60px;font-size:18px;color:#fff" >活动已结束</div>
+        @endif
+
+
+    </div>
 
 @stop
 
@@ -222,18 +258,14 @@
         }
         window.onscroll = function(){
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-            if( scrollTop>=850 ) {
+            if( scrollTop>=750 ) {
 
                 $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;width:"+$(window).width()+"px";
-                @if( strtotime($detail->startday) - time() > 0 && !$isjoined )
-                    $("#barbaoming").css("display","block");
-                @endif
             }else{
                 $(".tubudetailnavbar")[0].style="";
-                $("#barbaoming").css("display","none");
             }
             var allitem = $(".tubudetailnavbar").children("a");
-            for( var i=0;i<allitem.length-1;i++ ) {
+            for( var i=0;i<allitem.length;i++ ) {
                 try{
                     var v = document.getElementById($(allitem[i]).attr('href').substr(1)).getBoundingClientRect().top;
                     if( v>=50 && v<=100 ) {
@@ -242,7 +274,7 @@
                         break;
                     }
                 }catch(e){
-//                    ...
+
                 }
 
             }
