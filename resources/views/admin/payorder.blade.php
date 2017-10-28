@@ -27,11 +27,11 @@
                 <td class="center">{{$list[$i]->orderid}}</td>
                 <td class="center">{{$list[$i]->money}}</td>
                 <td class="center" style="color:green">
-                    @if( $list[$i]->paytype == 'wxpay_saoma' )
+                    @if( $list[$i]->paytype == 'wx_saoma' )
                         微信扫码支付
-                    @elseif( $list[$i]->paytype == 'wxpay_wap' )
+                    @elseif( $list[$i]->paytype == 'wx_wap' )
                         微信手机支付
-                    @elseif( $list[$i]->paytype == 'wxpay_wxwap' )
+                    @elseif( $list[$i]->paytype == 'wx_wxwap' )
                         微信公众号支付
                     @elseif( $list[$i]->paytype == 'alipay_wap' )
                         支付宝手机
