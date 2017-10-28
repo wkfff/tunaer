@@ -16,7 +16,7 @@
 
         <div id="jhxx"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2" style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/1.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>集合信息
+                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/1.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>集合信息</span>
             </h2>
         </div>
         <div style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
@@ -27,7 +27,7 @@
 
         <div id="ckxc"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/2.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>参考行程
+                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/2.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>参考行程</span>
             </h2>
         </div>
         <div  style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
@@ -38,7 +38,7 @@
 
         <div id="hdxq" style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/6.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>活动详情
+                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/6.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>活动详情</span>
             </h2>
         </div>
         <div style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
@@ -49,7 +49,7 @@
 
         <div id="ydxz"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/5.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>预订须知
+                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/5.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>预订须知</span>
             </h2>
         </div>
         <div  style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
@@ -60,7 +60,7 @@
 
         <div id="qtxx"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/3.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>其他信息
+                <img style="height:20px;vertical-align: middle;" src="/web/tubiao/3.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>其他信息</span>
             </h2>
         </div>
         <div style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">

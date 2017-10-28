@@ -293,6 +293,10 @@
             });
             $(".tuwen").css("display","block");
             gettubucms({{$detail->id}});
+            setTimeout(function(){
+                $("#jhxx")[0].childNodes[1].childNodes[3].remove()
+                $("#jhxx").children("h2").append("<span>行程安排</span>");
+            },200);
         });
         function baoming(id) {
             $.post("/tubu/baoming",{
