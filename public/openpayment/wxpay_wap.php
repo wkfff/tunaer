@@ -15,7 +15,7 @@ if( $type == "tubu" ) {
         echo "400-支付异常";die;
     }
 }else{
-    $sql = " select shoporder.*,product.price from shoporder inner join shoporder.shopid=product.id where shoporder.id= ".$order_id;
+    $sql = " select shoporder.*,product.price from shoporder inner join product on  shoporder.shopid=product.id where shoporder.id= ".$order_id;
     $res = $handle->select($sql);
     if( count($res) == 1 ) {
         $money = $res[0]['price'];
