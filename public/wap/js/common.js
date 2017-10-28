@@ -20,6 +20,7 @@ function lg_login() {
         "passwd":passwd,
         "verifycode":code
     },function(data){
+        // alert(data);
         var res = ajaxdata(data);
         if( res ) {
             localStorage.setItem("login_token",res);
@@ -150,7 +151,7 @@ function ajaxdata(data) {
         case "400":
             toast(data.substr(4)); return false;
         case "200":
-            return true;
+            return data.substr(4);
     }
     switch(data) {
         case "":
