@@ -287,7 +287,7 @@
                     </h3>
                     <div class="payimg" style="width:100%;overflow-y: auto;" >
                         <p onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');$('#alipayform').submit();">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
-                        <a id="wechatlink" href="#" target="_blank" onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');"><p >微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p></a>
+                        <a style="color:#333" id="wechatlink" href="#" target="_blank" onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');"><p >微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p></a>
                         <br>
                         <div id="qrcode"></div>
                     </div>

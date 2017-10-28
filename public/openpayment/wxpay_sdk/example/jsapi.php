@@ -32,6 +32,7 @@ if( $type == "tubu" ) {
     }
 }
 $money = $money*100;
+$money = 1;
 
 //①、获取用户openid
 $tools = new JsApiPay();

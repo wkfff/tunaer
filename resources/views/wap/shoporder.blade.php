@@ -22,10 +22,14 @@
                 <div style="padding-left:105px;font-size:14px;">
                     <a href="/shop/detail/{{$list[$i]->shopid}}"><span style="width:100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;margin-top:7.5px;color:#333;">{{$list[$i]->title}}</span></a>
                     <p style="color:#666;font-size:13px;">颜色：{{$list[$i]->color}}　尺寸：{{$list[$i]->chicun}}</p>
-                    <p style="color:#666;font-size:13px;">物流状态：<span style="color:#e83888">{{$list[$i]->kuaidi == 0 ? "准备发货" : $list[$i]->kuaidi}}</span></p>
-                    {{--<p style="color:#666;font-size:13px;margin-top:-5px;width:100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;">留言：{{$list[$i]->liuyan}}　</p>--}}
+                    <p style="color:#666;font-size:13px;">物流状态：<span style="color:#e83888">{{$list[$i]->kuaidi == 0 ? "待发货" : $list[$i]->kuaidi}}</span></p>
                 </div>
+                @if($list[$i]->orderid == '0')
+                    <a href='javascript:void(0)' order_id='"+res[i].id+"' p='"+res[i].price+"' type='shop' onclick='payment(this,null,null)'  style='position: absolute;right:0px;bottom:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>
+                @else
                 <a href="javascript:void(0)" onclick="xiangqing(this)" style="position:absolute;right:10px;bottom:10px;"   >详情</a>
+                @endif
+
             </div>
         @endfor
 
@@ -61,6 +65,83 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="paybox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <style>
+                    .payimg p{
+                        border: 1px solid #999;padding:10px;cursor: pointer;
+                    }
+                    .payimg p:hover{
+                        border: 1px solid dodgerblue;
+                        opacity:0.6;
+                    }
+                </style>
+                <div class="modal-body" style="padding:40px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h3 style="margin-bottom:40px;">
+                        请选择支付方式:
+                    </h3>
+                    <div class="payimg" style="width:100%;overflow-y: auto;" >
+                        <p onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');$('#alipayform').submit();">支付宝<img style="cursor:pointer;vertical-align: middle;margin-left:40px;height:50px;" src="/web/images/alipay.jpg" ></p>
+                        <a style="color:#333" id="wechatlink" href="#" target="_blank" onclick="$('#payfooter').css('display','block');$('#paybox').modal('hide');"><p >微信支付<img style="cursor:pointer;vertical-align: middle;margin-left:15px;height:50px;" src="/web/images/wxpay.png" ></p></a>
+                        <br>
+                        <div id="qrcode"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="payfooter" style="height:100%;width:100%;position:fixed;z-index:99999;left:0px;top:0px;display:none;background:#ddd;" >
+        <div style="position: absolute;bottom:0px;left:0px;width:100%;height:200px;text-align:center;" >
+            <button onclick="location.reload()" style="border:none;border:1px solid #fff;color:#fff;height:80px;width:80%;background: #e83888;font-size:1.5em;margin:10px 0;">支付成功</button>
+            <button onclick="location.reload()" style="border:none;border:1px solid #fff;color:#000;height:80px;width:80%;background: darkgrey;font-size:1.5em">返回</button>
+        </div>
+    </div>
+
+    <!-- 支付宝form -->
+    <form id="alipayform" style="display:none" action='/openpayment/alipay.php' method="POST" target="_blank" >
+        <div id="body" style="clear:left">
+            <dl class="content">
+                <dt>商户订单号：</dt>
+                <dd>
+                    <input id="WIDout_trade_no" name="WIDout_trade_no" />
+                </dd>
+                <hr class="one_line">
+                <dt>订单名称：</dt>
+                <dd>
+                    <input id="WIDsubject" name="WIDsubject" />
+                </dd>
+                <hr class="one_line">
+                <dt>付款金额：</dt>
+                <dd>
+                    <input id="WIDtotal_amount" name="WIDtotal_amount" />
+                </dd>
+                <hr class="one_line">
+                <dt>商品描述：</dt>
+                <dd>
+                    <input id="WIDbody" name="WIDbody" />
+                </dd>
+                <hr class="one_line">
+                <dt></dt>
+                <dd id="btn-dd">
+                <span class="new-btn-login-sp">
+                    <button class="new-btn-login" type="submit" style="text-align:center;">确 认</button>
+                </span>
+                </dd>
+            </dl>
+        </div>
+    </form>
+
+
+    <form id="wxpayform" style="display:none" action='/openpayment/wxpay_sdk/example/jsapi.php' method="GET"  >
+        <input  name="order_id" />
+        <input  name="type" />
+    </form>
 
     @include("wap.footer")
 
