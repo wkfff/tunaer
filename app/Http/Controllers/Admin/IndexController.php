@@ -350,4 +350,21 @@ class IndexController extends Controller{
         return view("admin.tubuorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tubuorder",$page,$num)]);
     }
 
+    public function payorder(Request $request) {
+        $orderid = $request->input("orderid",'');
+        if( trim($orderid) != '' ) {
+            $sql = " select * from payment where orderid=? ";
+            $res = DB::select($sql,[$orderid]);
+            return view("admin.payorder",["list"=>$res,"fenye"=>'']);
+        }else{
+            $page = $request->input("page",1);
+            $num = $request->input("num",20);
+            $count = DB::select(" select count(*) as cnt from payment ");
+            $sql = " select * from payment  order by id desc limit ?,? ";
+            $res = DB::select($sql,[($page-1)*$num,$num]);
+            return view("admin.payorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/payorder",$page,$num)]);
+        }
+
+    }
+
 }
