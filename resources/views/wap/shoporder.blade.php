@@ -25,7 +25,7 @@
                     <p style="color:#666;font-size:13px;">物流状态：<span style="color:#e83888">{{$list[$i]->kuaidi == 0 ? "待发货" : $list[$i]->kuaidi}}</span></p>
                 </div>
                 @if($list[$i]->orderid == '0')
-                    <a href='javascript:void(0)' order_id='"+res[i].id+"' p='"+res[i].price+"' type='shop' onclick='payment(this,null,null)'  style='position: absolute;right:0px;bottom:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>
+                    <a href='javascript:void(0)' order_id='{{$list[$i]->id}}' p='{{$list[$i]->price}}' type='shop' onclick='payment(this,null,null)'  style='position: absolute;right:0px;bottom:5px;background: #E83888;color:#fff;display:inline-block;text-decoration: none;cursor: pointer;text-align: center;font-size:14px;padding:4px 8px;'>立即支付</a></div>
                 @else
                 <a href="javascript:void(0)" onclick="xiangqing(this)" style="position:absolute;right:10px;bottom:10px;"   >详情</a>
                 @endif
