@@ -469,5 +469,16 @@ class IndexController extends Controller
         }
 
     }
+
+    public function tububaoming($tid) {
+        $sql = " select * from tubuhuodong where id=? limit 1 ";
+        $res = DB::select($sql,[$tid]);
+        if( count($res) == 1 ) {
+            return view("web.tububaoming",["data"=>$res[0]]);
+        }else{
+            return view("web.error",["content"=>"内容不存在"]);
+        }
+
+    }
     
 }
