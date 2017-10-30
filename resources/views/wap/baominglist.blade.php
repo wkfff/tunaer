@@ -43,7 +43,7 @@
                         @else
                             <span style="color:green">[已确认]</span>
                         @endif
-                            {{substr($list[$i]->phone,0,3)."******".substr($list[$i]->phone,9,2)}}
+                            {{substr($list[$i]->phone,0,3)."***".substr($list[$i]->phone,9,2)}}
                     </td>
                     <td style="width:100px;line-height:40px;">{{substr($list[$i]->ordertime,5,11)}}</td>
                     {{--<td >{{$list[$i]->jihe}}</td>--}}
