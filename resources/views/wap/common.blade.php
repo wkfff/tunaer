@@ -17,9 +17,14 @@
     <script src="/web/js/jquery.min.js" ></script>
     <script src="/web/js/bootstrap.min.js" ></script>
     <script src="/wap/js/common.js" ></script>
-
+    <script>
+        if( location.host == "cdtunaer.com" ) {
+            location.href = location.href.replace("cdtunaer.com","www.cdtunaer.com");
+        }
+    </script>
 </head>
 <body >
+
 @if( !Session::get('uid') )
     <script>
         if( localStorage.getItem("login_token") ) {
@@ -34,6 +39,8 @@
         }
     </script>
 @endif
+
+
 
 <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

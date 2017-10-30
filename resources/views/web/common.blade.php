@@ -17,9 +17,14 @@
     <script src="/web/js/jquery.min.js" ></script>
     <script src="/web/js/bootstrap.min.js" ></script>
     <script src="/web/js/common.js" ></script>
-
+    <script>
+        if( location.host == "cdtunaer.com" ) {
+            location.href = location.href.replace("cdtunaer.com","www.cdtunaer.com");
+        }
+    </script>
 </head>
 <body >
+
     @yield("body","")
     <div class="suspend">
         <dl>
