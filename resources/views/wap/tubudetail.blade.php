@@ -37,7 +37,8 @@
             width:100%;text-align: left;
             position: relative;
             line-height:40px;background: white;z-index:10;
-            /*border-bottom:1px solid orangered;*/
+            border-top:1px solid #ddd;
+            border-bottom:1px solid #ddd;
         }
         .tubudetailnavbar a{
             display:block;height:40px;text-decoration: none;  float:left;color:#333;
