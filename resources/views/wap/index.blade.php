@@ -44,13 +44,13 @@
                 <img src="/web/images/hiking.png" style="height:40px;" >
             </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <a href="/tubulist/3"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >周边游</span></a>
-                <a href="/tubulist/4"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >长途徒步</span></a>
+                <a href="/tubulist/3"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >一日徒步</span></a>
+                <a href="/tubulist/4"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >周边徒步</span></a>
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <a href="/tubulist/7"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >团队徒步</span></a>
-                <a href="/tubulist/6"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >自驾游</span></a>
+                <a href="/tubulist/5"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >定制徒步</span></a>
+                <a href="/tubulist/7"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >国内旅游</span></a>
             </div>
         </div>
         <div class="type" style="background:#3D98FF;text-align:center;color:#fff;" >
@@ -64,7 +64,7 @@
 
             </div>
             <div style="height:100px;width:33%;display:inline-block;float:left;" >
-                <a href="/tubulist/5"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友活动</span></a>
+                <a href="/tubulist/6"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >交友活动</span></a>
                 <a href="/youjilist/1"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒友游记</span></a>
             </div>
         </div>
@@ -74,7 +74,7 @@
                 <img src="/web/images/sailboat.png" style="height:40px;" >
                 </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <a href="/tubulist/8"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >国内旅游</span></a>
+                <a href="/tubulist/2"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >官方游记</span></a>
                 <a href="/zixun"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span></a>
 
             </div>

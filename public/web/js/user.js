@@ -192,9 +192,9 @@ function fabuyouji() {
     if( $(".youjipics").children().length == 0 ) {
         toast("请上传封面");return ;
     }
-    var tuwen = um.getContent();
+    var tuwen = window.editor.html();
     var title = $(".youji input").val();
-    if( $.trim(title) == '' || $.trim(um.getContentTxt()) == '' ) {
+    if( $.trim(title) == '' ) {
         toast("请填写没一项内容");return;
     }
     var url = $($(".youjipics div")[0]).css("background-image");

@@ -142,7 +142,7 @@ class PostController extends Controller{
         $sql = " insert into dongtai (uid,content,imgs) values (?,?,?) ";
         $res = DB::insert($sql,[Session::get("uid"),$content,$imgs]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-发布失败";
         }
@@ -164,7 +164,7 @@ class PostController extends Controller{
             }else{
                 @DB::table('dongtai')->where('id', $did)->increment('cmcnt', 1);
             }
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -184,7 +184,7 @@ class PostController extends Controller{
         $sql = " insert into youji (uid,title,tuwen,pic) values (?,?,?,?) ";
         $res = DB::insert($sql,[Session::get("uid"),$title,$content,$pic]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-发布失败";
         }
@@ -216,7 +216,7 @@ class PostController extends Controller{
         $sql = " insert into works (uid,did,pics,intro) values (?,?,?,?) ";
         $res = DB::insert($sql,[Session::get('uid'),$did,$pic,$intro]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -236,7 +236,7 @@ class PostController extends Controller{
         $res = DB::insert($sql,[$uid,$wid,date("Y-m-d")]);
         if( $res ) {
             @DB::table("works")->where("id",$wid)->increment("depiao",1);
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -250,7 +250,7 @@ class PostController extends Controller{
             if( $file->move($destinationPath,$imgname) ) {
                 $sql = " insert into xiangce (uid,pic) values (?,?) ";
                 $res = DB::insert($sql,[$uid,$imgname]);
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-上传失败";
             }
@@ -266,7 +266,7 @@ class PostController extends Controller{
             $sql = " insert into liuyan (fid,tid,content) values(?,?,?) ";
             $res = DB::insert($sql,[Session::get("uid"),$userid,$content]);
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-操作失败";
             }
@@ -288,7 +288,7 @@ class PostController extends Controller{
         $sql = " insert into chat (fid,tid,content,type,sdate) values(?,?,?,?,?) ";
         $res = DB::insert($sql,[Session::get('uid'),$user,0,2,date('Y-m-d')]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -301,7 +301,7 @@ class PostController extends Controller{
             $sql = " insert into chat (fid,tid,content,type,sdate) values(?,?,?,?,?) ";
             $res = DB::insert($sql,[Session::get('uid'),$userid,$content,1,date('Y-m-d')]);
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-发送失败";
             }
@@ -414,7 +414,7 @@ class PostController extends Controller{
                 }else{
                     @DB::table("youji")->where("id",$yid)->increment("zancnt",1);
                 }
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-操作失败";
             }
@@ -611,7 +611,7 @@ class PostController extends Controller{
         $sql = " delete from chat where (fid=? and tid=?) or (fid=? and tid=?) ";
         $res = DB::delete($sql,[$userid,$uid,$uid,$userid]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }

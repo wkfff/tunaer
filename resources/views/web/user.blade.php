@@ -2,7 +2,7 @@
 
 @section("title","用户主页")
 @section("css")
-    <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
+    <link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
     <link rel="stylesheet" href="/web/css/user.css">
 @stop
 @section("body")
@@ -121,7 +121,8 @@
                     <button type="button" onclick="$('.createyoujipanel').toggle()" class="btn btn-default" style="width:120px;height:40px;margin-left:10px;">添加游记 +</button>
                     <div class="createyoujipanel" style="display: none;margin-top:10px;margin-left:10px;">
                         <input type="text" class="form-control" placeholder="游记标题" style="width:900px;margin-bottom:10px" >
-                        <script type="text/plain" id="myEditor" style="width:900px;"></script>
+                        <textarea id="editor_id" name="content" style="width:900px;height:500px; "></textarea>
+
                         <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">添加封面</button>
                         <button type="button" onclick="fabuyouji()" class="btn btn-success" style="margin-top:10px;">确认发布</button>
                         <div class="youjipics"></div>
@@ -372,12 +373,21 @@
 
 
 @section("htmlend")
-    <script src="/admin/umediter/umeditor.config.js" ></script>
-    <script src="/admin/umediter/umeditor.min.js" ></script>
+    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
+    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
     <script src="/web/js/user.js"></script>
     <script src="/web/js/addr.js" ></script>
     <script src="/web/js/jquery.qrcode.min.js" ></script>
     <script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('textarea[name="content"]', {
+                allowImageUpload : true,
+                filterMode:false,
+                uploadJson : '/web/kindeditor/php/upload_json.php',
+                fileManagerJson : '/web/kindeditor/php/file_manager_json.php',
+                allowFileManager : true
+            });
+        });
         $(document).ready(function(){
             loadP();
             @if( !empty(Session::get("uid")) && Session::get("uid") == $userinfo->userid )
@@ -390,7 +400,7 @@
             getliuyans({{$userinfo->userid}});
             getyoujis({{$userinfo->userid}});
 
-            window.um = UM.getEditor('myEditor');
+//            window.um = UM.getEditor('myEditor');
             window.uid = "{{$userinfo->userid}}";
             window.diqu = "{{$userinfo->addr}}";
             var tab = location.href.split("#");
