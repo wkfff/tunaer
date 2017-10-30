@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             @for ($i = 0; $i < count($list); $i++)
-                <tr style="font-size:13px;">
+                <tr style="font-size:14px;">
                     <td style="text-align:center"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;vertical-align: middle;margin-right:5px;" ></div>
                         <a style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:60px;margin-top:10px;" href="/user/{{$list[$i]->uid}}">{{$list[$i]->uname}}</a></td>
                     <td style="width:140px;line-height:40px;">
