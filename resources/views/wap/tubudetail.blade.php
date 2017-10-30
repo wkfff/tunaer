@@ -39,6 +39,7 @@
             line-height:40px;background: white;z-index:10;
             border-top:1px solid #ddd;
             border-bottom:1px solid #ddd;
+            padding:2px 0;
         }
         .tubudetailnavbar a{
             display:block;height:40px;text-decoration: none;  float:left;color:#333;
