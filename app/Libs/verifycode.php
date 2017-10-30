@@ -7,7 +7,7 @@ class verifycode {
     private $code; //验证码
     private $img;  //图像的资源
     //构造方法， 三个参数
-    function __construct($width=100, $height=40, $num=4) {
+    function __construct($width=70, $height=35, $num=3) {
         $this->width = $width;
         $this->height = $height;
         $this->num = $num;
@@ -24,7 +24,7 @@ class verifycode {
         //画字 (大小， 字体颜色)
         $this->outstring();
         //干扰元素(点， 线条)
-       $this->setdisturbcolor();
+//       $this->setdisturbcolor();
         //输出图像
         $this->printimg();
     }
@@ -44,7 +44,7 @@ class verifycode {
     private function outstring() {
         for($i=0; $i<$this->num; $i++) {
             $color= imagecolorallocate($this->img, rand(0, 128), rand(0, 128), rand(0, 128));
-            $fontsize=10; //字体大小
+            $fontsize=50; //字体大小
             $x = 3+($this->width/$this->num)*$i; //水平位置
             $y = imagefontheight($fontsize);
             //画出每个字符
@@ -88,7 +88,7 @@ class verifycode {
         for($i=0; $i < $this->num; $i++) {
             $code .=$codes{rand(0, strlen($codes)-1)};
         }
-        $_SESSION['verifycode'] = strtolower($code) ;
+//        $_SESSION['verifycode'] = strtolower($code) ;
         return $code;
     }
     //用于自动销毁图像资源
