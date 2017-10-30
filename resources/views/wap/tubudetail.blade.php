@@ -29,6 +29,7 @@
         .tuwen{
             font-size:11px !important;width:100%;
             overflow: hidden;margin-top:20px;display:none;
+            background-color:#F6F5F5;
         }
         .tuwen img{
             max-width:100% !important;height:auto !important;
