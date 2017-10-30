@@ -109,7 +109,7 @@
                 </p>
             @else
 
-                <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
+                {{--<span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）--}}
                 <p style="color:#444;">
                     徒步通知说明：活动前一天发布具体分车,时间及车辆信息
                 </p>
@@ -118,24 +118,24 @@
             @endif
         @endif
     </div>
-    <div style="font-size:16px;padding:10px;font-size:#333;line-height:25px;background:rgba(66,140,226,0.1);">
-        <p style="height:20px;margin-top:10px;">
-            活动时间：<span style="color:#4b8ee8">{{$detail->startday}}</span>
-        </p>
-        <p style="height:20px;">
-            活动地点：<span style="color:#4b8ee8">{{$detail->mudidi}}</span>
-        </p>
-        <p style="height:20px;">
-            交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>
-        </p>
-        <p style="height:20px;">
-            强度等级：<span style="color:#4b8ee8">{{$detail->qiangdu}}</span>
-        </p>
-        <p style="height:20px;">
-            年龄限制：<span style="color:#4b8ee8">5 - 65岁</span>
-        </p>
+    {{--<div style="font-size:16px;padding:10px;font-size:#333;line-height:25px;background:rgba(66,140,226,0.1);">--}}
+        {{--<p style="height:20px;margin-top:10px;">--}}
+            {{--活动时间：<span style="color:#4b8ee8">{{$detail->startday}}</span>--}}
+        {{--</p>--}}
+        {{--<p style="height:20px;">--}}
+            {{--活动地点：<span style="color:#4b8ee8">{{$detail->mudidi}}</span>--}}
+        {{--</p>--}}
+        {{--<p style="height:20px;">--}}
+            {{--交通方式：<span style="color:#4b8ee8">{{$detail->jiaotong}}</span>--}}
+        {{--</p>--}}
+        {{--<p style="height:20px;">--}}
+            {{--强度等级：<span style="color:#4b8ee8">{{$detail->qiangdu}}</span>--}}
+        {{--</p>--}}
+        {{--<p style="height:20px;">--}}
+            {{--年龄限制：<span style="color:#4b8ee8">5 - 65岁</span>--}}
+        {{--</p>--}}
 
-    </div>
+    {{--</div>--}}
 
     <div class="tubudetailnavbar" >
         <a onclick="tiaozhuan(this)" style="width:33.3%" href="#jhxx" id="bar_a_hover" >行程安排</a>
