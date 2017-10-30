@@ -45,7 +45,7 @@
                         @endif
                             {{substr($list[$i]->phone,0,3)."***".substr($list[$i]->phone,9,2)}}
                     </td>
-                    <td style="width:80px;line-height:40px;">{{substr($list[$i]->ordertime,5,11)}}</td>
+                    <td style="width:90px;line-height:40px;">{{substr($list[$i]->ordertime,5,11)}}</td>
                     {{--<td >{{$list[$i]->jihe}}</td>--}}
 {{--                    <td >{{$list[$i]->ordertime}}</td>--}}
 {{--                    <td>{{$list[$i]->mark}}</td>--}}
