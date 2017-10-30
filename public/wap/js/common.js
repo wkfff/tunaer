@@ -335,7 +335,7 @@ function payment(that,order_id,type) {
     // 支付宝
     $("#WIDout_trade_no").val((new Date()).getTime() + "__" + order_id + "__" + type);
     $("#WIDsubject").val("成都徒哪儿户外网");
-    $("#WIDtotal_amount").val($(that).attr("p"));
+    $("#WIDtotal_amount").val($(that).attr("p")*$(that).attr("num"));
     $("#WIDbody").val("成都徒哪儿户外网");
 
     $('#paybox').modal('show');

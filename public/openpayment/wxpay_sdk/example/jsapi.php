@@ -16,7 +16,7 @@ if( $type == "tubu" ) {
     $sql = " select tubuorder.*,tubuhuodong.price,tubuhuodong.title from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.id= ".$order_id;
     $res = $handle->select($sql);
     if( count($res) == 1 ) {
-        $money = $res[0]['price'];
+        $money = $res[0]['price']*$res[0]['num'];
         $title = $res[0]['title'];
     }else{
         echo "400-支付异常";die;
@@ -25,7 +25,7 @@ if( $type == "tubu" ) {
     $sql = " select shoporder.*,product.price,product.title from shoporder inner join product on shoporder.shopid=product.id where shoporder.id= ".$order_id;
     $res = $handle->select($sql);
     if( count($res) == 1 ) {
-        $money = $res[0]['price'];
+        $money = $res[0]['price']*$res[0]['num'];
         $title = $res[0]['title'];
     }else{
         echo "400-支付异常";die;
