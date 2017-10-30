@@ -235,9 +235,9 @@
                         <label >
                             <input type="radio" value="丧偶" name="mryst">丧偶
                         </label>
-                        <label >
-                            <input type="radio" value="保密" name="mryst">保密
-                        </label>
+                        {{--<label >--}}
+                            {{--<input type="radio" value="保密" name="mryst">保密--}}
+                        {{--</label>--}}
                     </div>
                     <div class="form-group">
                         <label >常住地</label><br>
