@@ -27,7 +27,7 @@
             text-align: right !important;
         }
         .tuwen{
-            font-size:11px !important;width:100%;padding:10px;
+            font-size:11px !important;width:100%;
             overflow: hidden;margin-top:20px;display:none;
         }
         .tuwen img{
@@ -256,6 +256,9 @@
             $("#bar_a_hover").removeAttr("id");
             $(that).attr("id","bar_a_hover");
         }
+        setTimeout(function(){
+            $(".tuwen").find("p").css("padding","10px");
+        },500)
         window.onscroll = function(){
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
             if( scrollTop>=750 ) {
