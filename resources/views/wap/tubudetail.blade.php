@@ -260,7 +260,7 @@
             $(that).attr("id","bar_a_hover");
         }
         setTimeout(function(){
-            $(".tuwen").find("p").css("padding","10px");
+            $(".tuwen>div:nth-child(even)").css("padding","10px");
         },500)
         window.onscroll = function(){
             var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
