@@ -71,15 +71,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label >真实姓名 <span style="color:red">*</span></label>
-                        <input class="form-control" type="text" value="张三" placeholder="真实姓名" name="bm-realname" >
+                        <input class="form-control" type="text" value="" placeholder="真实姓名" name="bm-realname" >
                     </div>
                     <div class="form-group">
                         <label >联系手机 <span style="color:red">*</span></label>
-                        <input class="form-control" type="text" value="18328402805" placeholder="联系号码" name="bm-mobile" >
+                        <input class="form-control" type="text" value="" placeholder="联系号码" name="bm-mobile" >
                     </div>
                     <div class="form-group">
                         <label >身份证号 <span style="color:red">*</span></label>
-                        <input class="form-control" type="text" value="511002199309186419" placeholder="身份证号" name="bm-idcard" >
+                        <input class="form-control" type="text" value="" placeholder="身份证号" name="bm-idcard" >
                     </div>
                     <button onclick="addyouke()" type="button" class="btn btn-primary">添加</button>
                 </div>
