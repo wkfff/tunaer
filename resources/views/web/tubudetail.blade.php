@@ -397,15 +397,16 @@
         }
         function openorderbox() {
             @if( Session::get('uid') )
-                $.post("/getlastestorderinfo",{},function(d){
-                    var o = JSON.parse(d);
-                    if( o.length ) {
-                        $("input[name=tb-realname]").val(o[0].realname);
-                        $("input[name=tb-mobile]").val(o[0].mobile);
-                        $("input[name=tb-idcard]").val(o[0].idcard);
-                    }
-                    $("#myModal").modal("show");
-                })
+                location.href = "/tububaoming/{{$detail->id}}";
+//                $.post("/getlastestorderinfo",{},function(d){
+//                    var o = JSON.parse(d);
+//                    if( o.length ) {
+//                        $("input[name=tb-realname]").val(o[0].realname);
+//                        $("input[name=tb-mobile]").val(o[0].mobile);
+//                        $("input[name=tb-idcard]").val(o[0].idcard);
+//                    }
+//                    $("#myModal").modal("show");
+//                })
             @else
                 openlogion();
             @endif

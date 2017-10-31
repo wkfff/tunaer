@@ -474,7 +474,24 @@ class IndexController extends Controller
         $sql = " select * from tubuhuodong where id=? limit 1 ";
         $res = DB::select($sql,[$tid]);
         if( count($res) == 1 ) {
-            return view("web.tububaoming",["data"=>$res[0]]);
+            $youkes = array();
+            if( Session::get("uid") ) {
+                $sql = " select * from youkes where uid=? group by name order by id desc ";
+                $youkes = DB::select($sql,[Session::get("uid")]);
+
+//                查看有没有之前的订单信息
+                $sql = " select * from tubuorder where uid=? order by id desc limit 1 ";
+                $user = DB::select($sql,[Session::get("uid")]);
+                if( count($user) == 1 ) {
+                    $c_name = $user[0]->realname;
+                    $c_mobile = $user[0]->mobile;
+                }else{
+                    $c_name = "";
+                    $c_mobile = "";
+                }
+
+            }
+            return view("web.tububaoming",["data"=>$res[0],"youkes"=>$youkes,"c_name"=>$c_name,"c_mobile"=>$c_mobile]);
         }else{
             return view("web.error",["content"=>"内容不存在"]);
         }

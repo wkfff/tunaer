@@ -36,10 +36,10 @@
         </div>
         <div style="background-color: #fff;">
             <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;font-size:16px;" >姓名：
-                <input type="text" value="张三" style="border:none;background:none;" placeholder="联系人姓名"  >
+                <input name="c-name" type="text" value="{{$c_name}}" style="border:none;background:none;" placeholder="联系人姓名"  >
             </div>
             <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;font-size:16px;" >电话：
-                <input type="text" value="18328402805" style="border:none;background:none;" placeholder="联系人电话"  >
+                <input name="c-mobile" type="text" value="{{$c_mobile}}" style="border:none;background:none;" placeholder="联系人电话"  >
             </div>
         </div>
 
@@ -49,14 +49,14 @@
         <div style="background-color: #fff;">
             <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;font-size:16px;" >出发日期：{{$data->startday}}</div>
             <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;font-size:16px;" >集合地点：
-                <select name="tb-jihe" class="form-control" style="width:240px;display: inline-block">
+                <select name="jihe" class="form-control" style="width:240px;display: inline-block">
                     @for( $res = explode("#",$data->jihedidian),$i=0;$i<count($res);$i++  )
                         <option value="{{$res[$i]}}">{{$res[$i]}}</option>
                     @endfor
                 </select>
             </div>
             <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;font-size:16px;" >信息备注：
-                <input type="text" class="form-control" style="width:240px;display: inline-block"></div>
+                <input name="mark" type="text" class="form-control" style="width:240px;display: inline-block"></div>
         </div>
         
 
@@ -95,11 +95,17 @@
             <div class="modal-content" style="width:100%">
 
                 <div class="modal-body">
-                    <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;">
-                        <p>xcsac TEL：csacs</p>
-                        <p>身份证：csacsa</p>
-                        <div onclick="xuanzeyouke(this,'csdcsdc','csdcsdcds','csdcsdcsd')" style="position: absolute;right:20px;color:#FF9531;top:25px;font-size:20px;" ><span class="glyphicon glyphicon-plus-sign" ></span></div>
-                    </div>
+                    @if( count($youkes) == 0 )
+                        <p>没有相关数据</p>
+                    @endif
+                    @for( $i=0;$i<count($youkes);$i++  )
+                        <div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;">
+                            <p>{{$youkes[$i]->name}} TEL：{{$youkes[$i]->mobile}}</p>
+                            <p>身份证：{{$youkes[$i]->idcard}}</p>
+                            <div onclick="xuanzeyouke(this,'{{$youkes[$i]->name}}','{{$youkes[$i]->mobile}}','{{$youkes[$i]->idcard}}')" style="position: absolute;right:20px;color:#FF9531;top:25px;font-size:20px;" ><span class="glyphicon glyphicon-plus-sign" ></span></div>
+                        </div>
+                    @endfor
+
                 </div>
             </div>
         </div>
@@ -109,7 +115,7 @@
     <div style="height:70px;" ></div>
     <div style="height:60px;width:100%;background:#fff;position:fixed;bottom:0px;left:0px;color:#333;z-index:999" >
         <div onclick="openorderbox()" style="float:left;width:60%;height:50px;background:#eee;text-align:center;line-height:50px;font-size:20px;color:#FF9531" >￥<span class="currentmoney" >0</span> <span style="font-size:14px;color:#333">(<span class="num" >0</span>人)</span></div>
-        <div onclick="openorderbox()" style="float:left;width:40%;height:50px;background:#FF9531;text-align:center;line-height:50px;font-size:18px;color:#fff" >提交订单</div>
+        <div onclick="tijiaobaoming()" style="float:left;width:40%;height:50px;background:#FF9531;text-align:center;line-height:50px;font-size:18px;color:#fff" >提交订单</div>
     </div>
 
 
@@ -121,9 +127,12 @@
             var realname = $("input[name='bm-realname']").val();
             var mobile = $("input[name='bm-mobile']").val();
             var idcard = $("input[name='bm-idcard']").val();
+            if( $.trim(realname) == '' || mobile.length != 11 || idcard.length != 18  ) {
+                toast("信息格式填写有误");return ;
+            }
             var item = `<div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;">
-                <p>${realname} TEL：${mobile}</p>
-                <p>身份证：${idcard}</p>
+                <p>${realname} TEL: ${mobile}</p>
+                <p>身份证: ${idcard}</p>
                 <div onclick="removeyouke(this)" style="position: absolute;right:20px;color:#FF9531;top:25px;font-size:20px;" ><span class="glyphicon glyphicon-minus-sign" ></span></div>
             </div>`;
             $(".youkelist").append(item);
@@ -139,8 +148,8 @@
 
         function xuanzeyouke(that,realname,mobile,idcard) {
             var item = `<div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;">
-                <p>${realname} TEL：${mobile}</p>
-                <p>身份证：${idcard}</p>
+                <p>${realname} TEL: ${mobile}</p>
+                <p>身份证: ${idcard}</p>
                 <div onclick="removeyouke(this)" style="position: absolute;right:20px;color:#FF9531;top:25px;font-size:20px;" ><span class="glyphicon glyphicon-minus-sign" ></span></div>
             </div>`;
             $(".youkelist").append(item);
@@ -149,6 +158,44 @@
             $(".num").text($(".youkelist").children("div").length);
         }
 
-    </script>
+        function tijiaobaoming() {
+            var c_name = $("input[name='c-name']").val();
+            var c_mobile = $("input[name='c-mobile']").val();
+            var jihe = $("select[name='jihe']").val();
+            var mark = $("input[name='mark']").val();
+            var youkes = new Array();
+            var tmp = $(".youkelist").children("div");
+            if( tmp.length == 0 ) {
+                toast("请至少添加一个游客"); return ;
+            }
+            for( var i=0;i<tmp.length;i++ ) {
+                var pos = {
+                    "name":$($(tmp[i]).children("p")[0]).text().substr(0,2),
+                    "mobile":$($(tmp[i]).children("p")[0]).text().substr(-11),
+                    "idcard":$($(tmp[i]).children("p")[1]).text().substr(5),
+                };
+                youkes.push(pos);
+            }
+            youkes = JSON.stringify(youkes);
+            $.post("/tubu/baoming",{
+                "tid":"{{$data->id}}",
+                "realname":c_name,
+                "mobile":c_mobile,
+//                "idcard":$("input[name=tb-idcard]").val(),
+                "num":tmp.length,
+                "jihe":jihe,
+                "youkes":youkes,
+                "mark":mark,
+            },function(d){
+                if( ajaxdata(d) ) {
+                    $("#myModal").modal("hide");
+                    toast("报名成功，请及时付款");
+                    setTimeout(function(){
+                        location.href="/user/{{Session::get('uid')}}#huodong"
+                    },500);
+                }
+            })
+}
+</script>
 
 @stop

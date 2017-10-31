@@ -150,7 +150,6 @@ Route::group(['namespace' => 'Web'], function()
     Route::post("/tokenlogin","PostController@tokenlogin");
     Route::get("/baominglist/{tid}","IndexController@baominglist");
     Route::get("/tububaoming/{tid}","IndexController@tububaoming");
-
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");
 });

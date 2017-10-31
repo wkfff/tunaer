@@ -19,10 +19,12 @@ class PostController extends Controller{
     }
 //    活动报名
     public function baoming(Request $request) {
+
         $tid = $request->input("tid",'');
         $realname = $request->input("realname",'');
         $mobile = $request->input("mobile",'');
-        $idcard = $request->input("idcard",'');
+//        $idcard = $request->input("idcard",'');
+        $youkes = $request->input("youkes",'');
         $num = $request->input("num",'');
         $jihe = $request->input("jihe",'');
         $mark = $request->input("mark",'') == ''?"无":$request->input("mark",'');
@@ -36,11 +38,17 @@ class PostController extends Controller{
         if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
-            $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,idcard,realname) values (?,?,?,?,?,?,?,?) ";
-            $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$idcard,$realname]);
+            $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,youkes,realname) values (?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname]);
             if( $res ) {
                 @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,1);
                 echo "200-success";
+//                添加常用游客
+                $youkearr = json_decode($youkes);
+                for( $i=0;$i<count($youkearr);$i++ ) {
+                    $sql = "insert into youkes (uid,name,mobile,idcard) values (?,?,?,?) ";
+                    DB::insert($sql,[$uid,$youkearr[$i]->name,$youkearr[$i]->mobile,$youkearr[$i]->idcard]);
+                }
             }else{
                 echo "400-报名失败，请联系客服";
             }
