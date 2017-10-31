@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use PHPExcel;
+use IOFactory;
 
 class IndexController extends Controller{
 
@@ -364,6 +366,8 @@ class IndexController extends Controller{
             $res = DB::select($sql,[($page-1)*$num,$num]);
             return view("admin.payorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/payorder",$page,$num)]);
         }
+    }
+    public function test() {
 
     }
 

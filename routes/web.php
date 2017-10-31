@@ -92,6 +92,7 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post("/addadmin","PostController@addadmin");
     Route::post("/edittubupaixu","PostController@edittubupaixu");
     Route::get("/payorder","IndexController@payorder");
+    Route::get("/test","IndexController@test");
 
 });
 //Access Key ID	Access Key Secret	状态	创建时间	操作
