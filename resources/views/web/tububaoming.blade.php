@@ -19,7 +19,7 @@
         <div style="clear:both" ></div>
         <div style="height:60px;line-height:60px;background: #f5f5f5;padding:0 10px;margin-top:40px;" >
             <span style="float:left" >游客信息</span>
-            <span style="float:right;color:orange;" onclick="$('#myModal3').modal('show')" >常用游客</span>
+            <span style="float:right;color:orange;cursor:pointer" onclick="$('#myModal3').modal('show')" >常用游客</span>
         </div>
         <div style="background:#fff;" class="youkelist">
             {{--<div style="padding:5px 10px;border-bottom:1px solid #ddd;position: relative;">--}}
