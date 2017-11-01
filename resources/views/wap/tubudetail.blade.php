@@ -255,12 +255,9 @@
         },500)
         window.onscroll = function(){
 //            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-            var scrollTop = window.pageYOffset  //用于FF
-                || document.documentElement.scrollTop
-                || document.body.scrollTop
-                || 0;
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
             if( scrollTop>=750 ) {
-
+                alert(scrollTop);
                 $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;width:"+$(window).width()+"px";
             }else{
                 $(".tubudetailnavbar")[0].style="";
