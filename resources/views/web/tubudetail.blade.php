@@ -176,7 +176,7 @@
                 <div style="clear:both" ></div>
             </div>
             <div class="tuwen" >
-                <div>{!! $detail->tuwen !!}</div>
+                {!! $detail->tuwen !!}
                 <div id="hdly" style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
                     <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
                         <img style="height:20px;vertical-align: middle;" src="/web/tubiao/4.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span>活动留言
@@ -267,6 +267,9 @@
             $("#bar_a_hover").removeAttr("id");
             $(that).attr("id","bar_a_hover");
         }
+        setTimeout(function(){
+            $(".tuwen>div:nth-child(even)").css("padding","10px");
+        },500)
         window.onscroll = function(){
             if( !window.tuijianleft ) {
                 return ;
