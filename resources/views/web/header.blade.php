@@ -31,7 +31,7 @@
                 <a href="javascript:openlogion()" style="font-size:14px;color:#194C8E">登录</a>
             @endif
             
-            <a href="#" >联系管理员：028-61667788</a>
+            <a href="#" >联系管理员：13540139792</a>
         </div>
     </div>
 </div>
