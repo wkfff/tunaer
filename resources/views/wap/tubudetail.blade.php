@@ -257,8 +257,7 @@
 //            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
             var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
             if( scrollTop>=750 ) {
-                alert(scrollTop);
-                $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;width:"+$(window).width()+"px";
+                $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;left:0px;width:"+$(window).width()+"px";
             }else{
                 $(".tubudetailnavbar")[0].style="";
             }
