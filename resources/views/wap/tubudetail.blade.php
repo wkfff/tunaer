@@ -280,6 +280,7 @@
                 pagination: '.swiper-pagination'
             })
             $(".tuwen").find("*").css("width","auto");
+            $(".tuwen").find("img").removeAttr("style");
             $(".tuwen").find("img").css("margin","5px 0");
             $(".tuwen").find("div").css({
                 "padding":"0",
