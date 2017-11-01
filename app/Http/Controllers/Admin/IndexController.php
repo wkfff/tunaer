@@ -436,10 +436,9 @@ class IndexController extends Controller{
         $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuhuodong left join tubuorder on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
         $res = DB::select($sql,[$tid,($page-1)*$num,$num]);
         $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
-        if( count($res) == 0 ) {
-            $cntmoney = 0;
-            $cntpeople = 0;
-        }else{
+        $cntmoney = 0;
+        $cntpeople = 0;
+        if( count($res) > 0 ) {
             $cntmoney = $cntnum[0]->cnt*$res[0]->price;
             $cntpeople = $cntnum[0]->cnt;
         }
