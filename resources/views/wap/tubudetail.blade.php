@@ -141,9 +141,9 @@
     {{--</div>--}}
 
     <div class="tubudetailnavbar" >
-        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#jhxx" id="bar_a_hover" >行程安排</a>
-        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#hdxq" >活动详情</a>
-        <a onclick="tiaozhuan(this)" style="width:33.3%" href="#ydxz" >预订须知</a>
+        <a onclick="tiaozhuan(this);bbb(this);return false;" style="width:33.3%" href="#jhxx" id="bar_a_hover" >行程安排</a>
+        <a onclick="tiaozhuan(this);bbb(this);return false;" style="width:33.3%" href="#hdxq" >活动详情</a>
+        <a onclick="tiaozhuan(this);bbb(this);return false;" style="width:33.3%" href="#ydxz" >预订须知</a>
         {{--<a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>--}}
         {{--<a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>--}}
         {{--<a onclick="tiaozhuan(this)" href="#hdxq" >活动详情</a>--}}
@@ -246,6 +246,9 @@
         function tiaozhuan(that) {
             $("#bar_a_hover").removeAttr("id");
             $(that).attr("id","bar_a_hover");
+        }
+        function bbb(obj){
+            location.replace(obj.href);
         }
         setTimeout(function(){
             $(".tuwen>div:nth-child(even)").css("padding","10px");
