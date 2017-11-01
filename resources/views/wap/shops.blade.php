@@ -50,7 +50,7 @@
     <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #ddd;font-weight:bold;font-size:16px;letter-spacing: 3px;">
         <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-menu-left" ></span>
         <span>徒步装备</span>
-        <span data-toggle="modal" data-target="#myModal2" style="position: absolute;right:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-search" ></span>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal2" style="color:#666;"><span  style="position: absolute;right:0px;top:0px;line-height:55px;height:55px;width:55px;" class="glyphicon glyphicon-search" ></span></a>
 
     </div>
     <div class="content" style="margin-top:55px;background:#efefef" >
