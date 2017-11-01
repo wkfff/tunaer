@@ -177,28 +177,31 @@
             </div>
             <div class="tuwen" >
                 {!! $detail->tuwen !!}
-                <div id="hdly" style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
+                <div id="hdly"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
                     <h2 class="detailh2"  style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
-                        <img style="height:20px;vertical-align: middle;" src="/web/tubiao/6.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>活动留言</span>
+                        <img style="height:20px;vertical-align: middle;" src="/web/tubiao/3.png"><span class="icon-bright" style="margin:0px 10px 0px 0px;padding:0px;border:0px;vertical-align:middle;-webkit-tap-highlight-color:transparent;background-image:url(&quot;background-repeat:no-repeat;display:inline-block;width:16px;height:16px;background-position:-217px -80px;">&nbsp;</span><span>活动留言</span>
                     </h2>
                 </div>
-                <div  style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
+                <div style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
                     <div style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
-                        <div id="cmbox" style="text-align:left">
+                        <div style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
+                            <div id="cmbox" style="text-align:left">
 
-                            <textarea style="margin-top:10px;border:1px solid #ddd" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
-                            <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
-                            <button style="margin-top:10px;margin-left:10px;" onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
-                            </button>
-                        </div>
-                        <div style="clear:both" ></div>
-                        <div class="liuyanbox">
+                                <textarea style="margin-top:10px;border:1px solid #ddd" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+                                <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
+                                <button style="margin-top:10px;margin-left:10px;" onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
+                                    <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
+                                </button>
+                            </div>
+                            <div style="clear:both" ></div>
+                            <div class="liuyanbox">
 
+                            </div>
+                            <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
                         </div>
-                        <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
                     </div>
                 </div>
+
             </div>
 
             <div class="tuijian" >
