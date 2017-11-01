@@ -435,11 +435,12 @@ class IndexController extends Controller{
 
         $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
         $res = DB::select($sql,[$tid,($page-1)*$num,$num]);
-        $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
-        $cntmoney = $cntnum[0]->cnt*$res[0]->price;
-        if( count($res) == 1 ) {
+
+        if( count($res) == 0 ) {
             return view("web.error",["content"=>"活动不存在"]);
         }else{
+            $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
+            $cntmoney = $cntnum[0]->cnt*$res[0]->price;
             return view("admin.baominginfo",["list"=>$res,"cntmoney"=>$cntmoney,"cnt"=>$cntnum[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/admin/baominginfo/".$tid,$page,$num)]);
         }
     }
