@@ -37,7 +37,7 @@
 </div>
 <div class="top2">
     <div class="content">
-        <a href="/"><img src="/web/images/newlogo.jpg" style="float:left;height:80px;" alt=""></a>
+        <a href="/"><img src="/web/images/newlogo.png" style="float:left;height:70px;margin-top:10px;" alt=""></a>
         {{--<div style="margin-left:20px;float:left;margin-top:10px;">--}}
             {{--<img src="/web/images/top_pic1.png" alt="">--}}
             {{--<img src="/web/images/top_pic2.png" alt="">--}}
