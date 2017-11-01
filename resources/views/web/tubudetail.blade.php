@@ -183,22 +183,13 @@
                     </h2>
                 </div>
                 <div style="margin:0px 0px 15px;padding:0px 0px 6px;border-width:0px 1px 1px;border-style:solid;border-color:#DCDCDC;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;background:#F6F5F5;font-size:14px;color:#666666;letter-spacing:0.5px;white-space:normal;">
-                    <div style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
-                        <div style="margin:0px;padding:10px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;">
-                            <div id="cmbox" style="text-align:left">
+                    <div id="cmbox" style="text-align:left">
 
-                                <textarea style="margin-top:10px;border:1px solid #ddd" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
-                                <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
-                                <button style="margin-top:10px;margin-left:10px;" onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
-                                    <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
-                                </button>
-                            </div>
-                            <div style="clear:both" ></div>
-                            <div class="liuyanbox">
-
-                            </div>
-                            <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
-                        </div>
+                        <textarea style="margin-top:10px;border:1px solid #ddd" class="form-control"  rows="5" placeholder="评论内容..."></textarea>
+                        <button style="margin-top:10px;float:left  " class="btn btn-primary " onclick="tubucm(this,{{$detail->id}},1)" >提交评论</button>
+                        <button style="margin-top:10px;margin-left:10px;" onclick="tubucm(this,{{$detail->id}},2)"  type="button" class="btn btn-default btn-sm">
+                            <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞 ({{$detail->zancnt}})</span>
+                        </button>
                     </div>
                 </div>
 
