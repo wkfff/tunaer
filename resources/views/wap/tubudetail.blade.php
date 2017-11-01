@@ -47,6 +47,9 @@
             cursor: pointer;width:25%;
             text-align: center;
         }
+        #guding{
+            position:fixed;top:0px;left:0px;width:100%;
+        }
         /*.tubudetailnavbar a:hover{*/
             /*background: #4B8EE8;color:#fff;*/
         /*}*/
@@ -257,8 +260,10 @@
 //            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
             var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
             if( scrollTop>=750 ) {
-                $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;left:0px;width:"+$(window).width()+"px";
+                $(".tubudetailnavbar").attr("id","guding");
+//                $(".tubudetailnavbar")[0].style = "position:fixed;top:0px;left:0px;width:"+$(window).width()+"px";
             }else{
+                $(".tubudetailnavbar").removeAttr("id");
                 $(".tubudetailnavbar")[0].style="";
             }
             var allitem = $(".tubudetailnavbar").children("a");
