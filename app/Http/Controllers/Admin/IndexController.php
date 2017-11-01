@@ -438,10 +438,12 @@ class IndexController extends Controller{
         $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
         if( count($res) == 0 ) {
             $cntmoney = 0;
+            $cntpeople = 0;
         }else{
             $cntmoney = $cntnum[0]->cnt*$res[0]->price;
+            $cntpeople = $cntnum[0]->cnt;
         }
-        return view("admin.baominginfo",["list"=>$res,"cntmoney"=>$cntmoney,"cnt"=>$cntnum[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/admin/baominginfo/".$tid,$page,$num)]);
+        return view("admin.baominginfo",["list"=>$res,"cntmoney"=>$cntmoney,"cnt"=>$cntpeople,"fenye"=>fenye($count[0]->cnt,"/admin/baominginfo/".$tid,$page,$num)]);
 
     }
 
