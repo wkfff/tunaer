@@ -12,7 +12,7 @@
             <th>真实姓名</th>
             <th>人数</th>
             <th>集合点</th>
-            <th>身份证</th>
+            <th>详情</th>
             <th>手机号</th>
             <th>备注</th>
             {{--<th>件数</th>--}}
@@ -33,7 +33,7 @@
                 <td class="center"><a target="_blank" style="color:cornflowerblue" href="/user/{{$list[$i]->uid}}">{{$list[$i]->realname}}</a></td>
                 <td class="center">{{$list[$i]->num}}</td>
                 <td class="center">{{$list[$i]->jihe}}</td>
-                <td class="center">{{$list[$i]->idcard}}</td>
+                <td class="center">{{$list[$i]->youkes}}</td>
                 <td class="center">{{$list[$i]->mobile}}</td>
                 <td class="center" title="{{$list[$i]->mark}}" ><div style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;" >{{$list[$i]->mark}}</div></td>
 

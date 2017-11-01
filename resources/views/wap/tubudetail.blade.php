@@ -230,19 +230,7 @@
             </div></a>
 
         @if( strtotime($detail->startday) - time() > 0 )
-
-
-            @if( $isjoined )
-                @if( strpos($phone,"去付款") )
-                    <a href='/user/{{Session::get('uid')}}#huodong'"><div  style="float:left;width:54%;height:60px;background:#e83888;text-align:center;line-height:60px;font-size:18px;color:#fff" >去付款</div></a>
-                @else
-                    <div  style="float:left;width:54%;height:60px;background:#3AC8EC;text-align:center;line-height:60px;font-size:18px;color:#fff" >已报名</div>
-                @endif
-
-            @else
-                <div onclick="openorderbox()" style="float:left;width:54%;height:60px;background:#FF9531;text-align:center;line-height:60px;font-size:18px;color:#fff" >立即报名</div>
-
-            @endif
+            <div onclick="openorderbox()" style="float:left;width:54%;height:60px;background:#FF9531;text-align:center;line-height:60px;font-size:18px;color:#fff" >立即报名</div>
         @else
             <div style="float:left;width:54%;height:60px;background:grey;text-align:center;line-height:60px;font-size:18px;color:#fff" >活动已结束</div>
         @endif

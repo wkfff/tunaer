@@ -32,9 +32,9 @@ class PostController extends Controller{
 
         $sqltmp = " select * from tubuorder where uid=? and tid=? and del=0 ";
         $r = DB::select($sqltmp,[$uid,$tid]);
-        if( count($r) > 0 ) {
-            echo "400-你已经报名，请等待通知"; return ;
-        }
+//        if( count($r) > 0 ) {
+//            echo "400-你已经报名，请等待通知"; return ;
+//        }
         if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
@@ -452,8 +452,8 @@ class PostController extends Controller{
 //        开启事务
         DB::beginTransaction();
         for( $i=0;$i<count($orders);$i++ ) {
-            $sql = " insert into shoporder (uid,shopid,num,color,chicun,phone,addr,liuyan,orderid) values (?,?,?,?,?,?,?,?,?) ";
-            $res = DB::insert($sql,[$uid,$orders[$i]['shopid'],$orders[$i]['num'],$orders[$i]['color'],$orders[$i]['chicun'],$phone,$addr,$liuyan,$orderid]);
+            $sql = " insert into shoporder (uid,shopid,num,color,chicun,phone,addr,liuyan) values (?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$orders[$i]['shopid'],$orders[$i]['num'],$orders[$i]['color'],$orders[$i]['chicun'],$phone,$addr,$liuyan]);
             if(!$res) {
                 DB::rollback();//事务回滚
                 echo "400-下单失败，请重试或联系客服"; return ;

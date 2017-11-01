@@ -160,7 +160,7 @@
                     },5000);
                     if( ajaxdata(d) ) {
 //                        console.log(orders);
-                        location.href="/user/{{Session::get('uid')}}#shoporder";
+                        location.href="/shoporder";
                     }
                 })
 

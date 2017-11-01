@@ -113,7 +113,7 @@
             {!! $detail->tuwen !!}
         </div>
 
-        <div style="width:100%;position:fixed;bottom:55px;left:0px;background:#eee;width:100%;z-index:999;height:50px;">
+        <div style="width:100%;position:fixed;bottom:0px;left:0px;background:#eee;width:100%;z-index:999;height:50px;">
             <button onclick="goumai()"  class="searchb" style="float:right;width:30%;background:#FF0036;color:#fff"  >立即购买</button>
             <button onclick="addgouwuche()" class="searchb" style="float:right;width:30%;background:#FFB03F;color:#fff"  >加入购物车</button>
             <a href="/gouwuche"><div style="float:right;width:20%;color:#666;text-align:center;position:relative;"  >
@@ -129,7 +129,7 @@
         <div style="clear:both" ></div>
         <div style="height:10px;" ></div>
     </div>
-    @include("wap.footer")
+    {{--@include("wap.footer")--}}
 @stop
 
 @section("htmlend")

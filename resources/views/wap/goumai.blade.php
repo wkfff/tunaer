@@ -127,7 +127,7 @@
                         window.clickxiadanlocak = false;
                     },10000);
                     if( ajaxdata(d) ) {
-                        location.href="/user/23#shoporder";
+                        location.href="/shoporder";
                     }
                 })
 

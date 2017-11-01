@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use League\Flysystem\Exception;
 use PHPExcel;
-use IOFactory;
+use PHPExcel_IOFactory;
 
 class IndexController extends Controller{
 
@@ -367,8 +368,80 @@ class IndexController extends Controller{
             return view("admin.payorder",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/payorder",$page,$num)]);
         }
     }
-    public function test() {
 
+    public function exportfenche($tid) {
+        $sql = " select tubuorder.*,tubuhuodong.price from tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where tid=? and orderid<>'0' order by fenche asc ";
+        $res = DB::select($sql,[$tid]);
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setTitle("fenche_data");
+        $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '分车号')
+            ->setCellValue('B1', '联系人')
+            ->setCellValue('C1', '联系电话')
+            ->setCellValue('D1', '游客信息')
+            ->setCellValue('E1', '集合点')
+            ->setCellValue('F1', '付款')
+            ->setCellValue('G1', '备注')
+            ->setCellValue('H1', '订单时间');
+        for( $i=0;$i<count($res);$i++ ) {
+            $youkes = json_decode($res[$i]->youkes);
+            $youkestr = "";
+            for( $j=0;$j<count($youkes);$j++ ) {
+//                $youkestr .= '#'.$youkes[$j]->name.",".$youkes[$j]->mobile.",".$youkes[$j]->idcard;
+                $youkestr .= '#'.$youkes[$j]->name.",".$youkes[$j]->mobile;
+            }
+            $youkestr = trim($youkestr,"#");
+            $objPHPExcel->getActiveSheet()->getRowDimension($i+2)->setRowHeight(30);
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A'.($i+2), $res[$i]->fenche."号车")
+                ->setCellValue('B'.($i+2), $res[$i]->realname."(".$res[$i]->num."人)")
+                ->setCellValue('C'.($i+2), $res[$i]->mobile)
+                ->setCellValue('D'.($i+2), $youkestr)
+                ->setCellValue('E'.($i+2), $res[$i]->jihe)
+                ->setCellValue('F'.($i+2), "￥".$res[$i]->num*$res[$i]->price)
+                ->setCellValue('G'.($i+2), $res[$i]->mark)
+                ->setCellValue('H'.($i+2), $res[$i]->ordertime);
+        }
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(55);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(35);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+
+        $objPHPExcel->getActiveSheet()->setTitle('分车数据');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="分车数据.xlsx"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+        header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header ('Pragma: public'); // HTTP/1.0
+        $objWriter =PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        exit;
+    }
+//    活动报名情况
+    public function baominginfo(Request $request,$tid) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",100);
+        $count = DB::select(" select count(*) as cnt from tubuorder where tid=? ",[$tid]);
+
+        $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
+        $res = DB::select($sql,[$tid,($page-1)*$num,$num]);
+        $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
+        $cntmoney = $cntnum[0]->cnt*$res[0]->price;
+        if( count($res) == 1 ) {
+            return view("web.error",["content"=>"活动不存在"]);
+        }else{
+            return view("admin.baominginfo",["list"=>$res,"cntmoney"=>$cntmoney,"cnt"=>$cntnum[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/admin/baominginfo/".$tid,$page,$num)]);
+        }
     }
 
 }

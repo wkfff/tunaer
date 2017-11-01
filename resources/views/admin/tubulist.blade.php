@@ -47,6 +47,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/admin/updatetubu/{{$tubulist[$i]->id}}">修改</a></li>
+                            <li><a href="/admin/baominginfo/{{$tubulist[$i]->id}}">报名情况</a></li>
                             <li><a style="color:red" href="javascript:deletebyid({{$tubulist[$i]->id}})">删除</a></li>
                         </ul>
                     </li>

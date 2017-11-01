@@ -254,4 +254,19 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
+
+    public function fenche(Request $request){
+        $tid = $request->input("tid");
+        $fenche = $request->input("fenche");
+        $order_ids = $request->input("order_ids");
+        if( checknull($tid,$order_ids) ) {
+            $sql = " update tubuorder set fenche='".$fenche."' where tid=".$tid." and id in (".$order_ids.") ";
+            $res = DB::update($sql);
+            if( $res ) {
+                echo "200-success";
+            }else{
+                echo "400-error";
+            }
+        }
+    }
 }

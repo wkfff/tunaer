@@ -23,7 +23,7 @@
         }
         .price{
             color:orange;bottom:10px;right:10px;
-            position: absolute;
+            position: absolute;font-weight:bold;font-size:1.3em;
         }
     </style>
 @stop
@@ -38,8 +38,8 @@
             <div class="newitem" >
                 <div class="img" style="background-image:url(/admin/data/images/{{$list[$i]->pictures}})"></div>
                 <p class="title">{{$list[$i]->title}}</p>
-                <span style="display:block;font-size:10px;color:#888;">出发时间：{{$list[$i]->startday}}</span>
-                <span style="display:block;font-size:10px;color:#888">活动地点：{{$list[$i]->mudidi}}</span>
+                <span style="display:block;font-size:12px;color:#666;margin-top:-5px;">出发时间：{{$list[$i]->startday}}</span>
+                <span style="display:block;font-size:12px;color:#666">活动地点：{{$list[$i]->mudidi}}</span>
                 <span class="price" >￥{{$list[$i]->price}}</span>
             </div>
             </a>

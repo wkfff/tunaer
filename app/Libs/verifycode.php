@@ -83,7 +83,8 @@ class verifycode {
     //生成验证码字符串
     private function createcode() {
         // $codes = "3456789abcdefghijkmnpqrstuvwxyABCDEFGHIJKLMNPQRSTUVWXY";
-        $codes = "3456789abcdefghijkmnpqrstuvwxy";
+//        $codes = "3456789abcdefghijkmnpqrstuvwxy";
+        $codes = "1234567890";
         $code = "";
         for($i=0; $i < $this->num; $i++) {
             $code .=$codes{rand(0, strlen($codes)-1)};

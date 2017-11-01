@@ -29,6 +29,7 @@
         .price{
             color:orange;bottom:10px;right:10px;
             position: absolute;
+            font-weight:bold;font-size:1.3em;
         }
 
     </style>
@@ -74,7 +75,7 @@
                 <img src="/web/images/sailboat.png" style="height:40px;" >
                 </div></a>
             <div style="height:100px;width:33%;display:inline-block;float:left;border-right:1px solid #fff;" >
-                <a href="/tubulist/2"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >官方游记</span></a>
+                <a href="/youjilist/2"><span style="font-size:14px;display:block;height:49px;line-height:49px;border-bottom:1px solid #fff;" >官方游记</span></a>
                 <a href="/zixun"><span style="font-size:14px;display:block;height:50px;line-height:50px;" >徒步资讯</span></a>
 
             </div>
@@ -123,8 +124,8 @@
                         var item = `<a style="text-decoration: none" href="/tubu/tubudetail/${res[i].id}"><div class="newitem" >
                             <div class="img" style="background-image:url(/admin/data/images/${res[i].pictures})"></div>
                             <p class="title">${res[i].title}</p>
-                            <span style="display:block;font-size:10px;color:#888;">出发时间：${res[i].startday}</span>
-                            <span style="display:block;font-size:10px;color:#888">活动地点：${res[i].mudidi}</span>
+                            <span style="display:block;font-size:12px;color:#666;margin-top:-5px;">出发时间：${res[i].startday}</span>
+                            <span style="display:block;font-size:12px;color:#666">活动地点：${res[i].mudidi}</span>
                             <span class="price" >￥${res[i].price}</span>
                         </div></a>`;
                         $(".tublist").append(item);
