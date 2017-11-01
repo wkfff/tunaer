@@ -433,7 +433,7 @@ class IndexController extends Controller{
         $num = $request->input("num",100);
         $count = DB::select(" select count(*) as cnt from tubuorder where tid=? ",[$tid]);
 
-        $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuorder inner join tubuhuodong on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
+        $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuhuodong left join tubuorder on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
         $res = DB::select($sql,[$tid,($page-1)*$num,$num]);
 
         if( count($res) == 0 ) {
