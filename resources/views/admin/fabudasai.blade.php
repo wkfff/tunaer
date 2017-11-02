@@ -54,10 +54,10 @@
             var title = $("input[name=title]").val();
             var starttime = $("input[name=start]").val();
             var endtime = $("input[name=end]").val();
-            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' || $.trim(um.getContentTxt()) == '' ) {
+            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' ) {
                 toast("请填写每一项内容");return;
             }
-            var tuwen = um.getContent();
+            var tuwen = window.editor.html();
             if( $(".youjipics").children().length == 0 ) {
                 toast("请上传顶部图片");return ;
             }
