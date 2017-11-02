@@ -14,7 +14,7 @@ class PostController extends Controller{
             $res = DB::update($sql,[$request->input('name'),$request->input('intro'),$request->input('pics'),$request->input('tid')]);
         }
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -31,7 +31,7 @@ class PostController extends Controller{
                 $sql = " delete from userattr where uid=? ";
                 $res = DB::delete($sql,[$id]);
             }
-            echo "200";
+            echo "200-success";
         }
     }
     public function fabuzixun(Request $request) {
@@ -47,7 +47,7 @@ class PostController extends Controller{
             $res = DB::update($sql,[$title,$tuwen,$pic,$zid]);
         }
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -62,7 +62,7 @@ class PostController extends Controller{
         }
         if( $res ) {
             $request->session()->forget('banners');
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -81,7 +81,7 @@ class PostController extends Controller{
                 $sql = " update `$table` set status=1 where id=? ";
             }
             $res = DB::delete($sql,[$id]);
-            echo "200";
+            echo "200-success";
         }
     }
     public function dofabuyouji(Request $request) {
@@ -97,7 +97,7 @@ class PostController extends Controller{
             $res = DB::update($sql,[$title,$tuwen,$pic,$id]);
         }
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -107,17 +107,18 @@ class PostController extends Controller{
         $tuwen = $request->input("tuwen");
         $startday = $request->input("startday");
         $endday = $request->input("endday");
+        $uploadend = $request->input("uploadend");
         $pic = $request->input("pic");
         $id = $request->input("id","no");
         if( $id == 'no' ) {
-            $sql = " insert into dasai (endday,startday,title,tuwen,pic) values(?,?,?,?,?) ";
-            $res = DB::insert($sql,[$endday,$startday,$title,$tuwen,$pic]);
+            $sql = " insert into dasai (endday,startday,title,tuwen,pic,uploadend) values(?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$endday,$startday,$title,$tuwen,$pic,$uploadend]);
         }else{
-            $sql = " update dasai set title=?,tuwen=?,pic=?,endday=?,startday=? where id=? ";
-            $res = DB::update($sql,[$title,$tuwen,$pic,$endday,$startday,$id]);
+            $sql = " update dasai set title=?,tuwen=?,pic=?,endday=?,startday=?,uploadend=? where id=? ";
+            $res = DB::update($sql,[$title,$tuwen,$pic,$endday,$startday,$uploadend,$id]);
         }
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -132,7 +133,7 @@ class PostController extends Controller{
         }
         if( $res ) {
             $request->session()->forget('shopbanners');
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -163,7 +164,7 @@ class PostController extends Controller{
                 }
             }
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-操作失败";
             }
@@ -184,7 +185,7 @@ class PostController extends Controller{
             }
 
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-添加失败";
             }
@@ -210,7 +211,7 @@ class PostController extends Controller{
             if( $res ) {
                 $request->session()->forget('footer');
                 $request->session()->forget('mianban');
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-保存失败";
             }
@@ -224,7 +225,7 @@ class PostController extends Controller{
             $sql = " insert admin (aname,passwd,adminflag) values (?,?,?) ";
             $res = DB::insert($sql,[$aname,md5($passwd),$adminflag]);
             if( $res ) {
-                echo "200";
+                echo "200-success";
             }else{
                 echo "400-添加失败";
             }
@@ -236,7 +237,7 @@ class PostController extends Controller{
         $sql = " update shoporder set kuaidi=? where id=? ";
         $res = DB::update($sql,[$kuaidi,$id]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }
@@ -249,7 +250,7 @@ class PostController extends Controller{
         $sql = " update tubuhuodong set paixu=? where id=? ";
         $res = DB::update($sql,[$paixu,$id]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-操作失败";
         }

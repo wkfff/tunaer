@@ -14,6 +14,7 @@
     <input type="text" name="title" placeholder="大赛主题" style="width:900px;margin-bottom:10px;height:35px;" ><br>
     <input class="datetimepicker"   type="text" name="start" placeholder="开始时间" style="width:300px;margin-bottom:10px;height:35px;" >
     <input class="datetimepicker"   type="text" name="end" placeholder="结束时间" style="width:300px;margin-bottom:10px;height:35px;" >
+    <input type="number" name="uploadend" placeholder="上传作品天数，这期间不允许投票" style="width:295px;margin-bottom:10px;height:35px;" >
     {{--<script type="text/plain" id="myEditor" style="width:900px;">摄影大赛详细介绍</script>--}}
     <textarea id="editor_id" name="content" style="width:900px;min-height:500px;"></textarea>
     <input type="file" class="uploadinput2" onchange="uploadImg(this)" style="display: none;" >
@@ -54,7 +55,8 @@
             var title = $("input[name=title]").val();
             var starttime = $("input[name=start]").val();
             var endtime = $("input[name=end]").val();
-            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' ) {
+            var uploadend = $("input[name=uploadend]").val();
+            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' || $.trim(uploadend) == '' ) {
                 toast("请填写每一项内容");return;
             }
             var tuwen = window.editor.html();
@@ -63,7 +65,7 @@
             }
             var url = $($(".youjipics div")[0]).css("background-image");
             var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
-            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime},function(d){
+            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime,"uploadend":uploadend},function(d){
                 if( ajaxdata(d) ) {
                     toast("创建成功");
                     location.href="/admin/dasailist";

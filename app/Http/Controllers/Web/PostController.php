@@ -217,8 +217,11 @@ class PostController extends Controller{
         if( count($res) == 0 ) {
             echo "400-大赛不存在"; return;
         }
-        if( $current < strtotime($res[0]->startday) || $current > strtotime($res[0]->endday)) {
-            echo "400-请在指定时间段参加"; return;
+        if( $current < strtotime($res[0]->startday) ) {
+            echo "400-活动准备中，请关注开始时间";return ;
+        }
+        if( $current > strtotime($res[0]->endday)) {
+            echo "400-活动已经结束啦"; return;
         }
 
         $sql = " insert into works (uid,did,pics,intro) values (?,?,?,?) ";
@@ -233,6 +236,20 @@ class PostController extends Controller{
         $wid = $request->input('wid',"no");
         if( $wid == 'no' ) {
             echo "400-操作无效"; return;
+        }
+//        判断投票是否开始 或　活动是否结束
+        $sql = " select dasai.startday,dasai.uploadend,dasai.endday from works inner join dasai on works.did=dasai.id where works.id=? ";
+        $res = DB::select($sql,[$wid]);
+        if( count($res) ) {
+            if( time() - strtotime($res[0]->endday) > 0 ) {
+                echo "400-活动已经结束啦"; return ;
+            }
+            if( time() - strtotime($res[0]->startday) - $res[0]->uploadend*86400 < 0 ) {
+                echo "400-".date("Y-m-d H:i:s",strtotime('+5 day',strtotime($res[0]->startday)))."后开放投票";
+                return ;
+            }
+        }else{
+            echo "400-操作异常";
         }
         $uid = Session::get("uid");
         $sql = " select * from toupiao where uid=? and tday=? ";

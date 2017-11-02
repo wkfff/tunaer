@@ -17,6 +17,7 @@
     <input type="text" name="title" value="{{$data->title}}" placeholder="大赛主题" style="width:900px;margin-bottom:10px;height:35px;" ><br>
     <input class="datetimepicker" value="{{$data->startday}}"  type="text" name="start" placeholder="开始时间" style="width:300px;margin-bottom:10px;height:35px;" >
     <input class="datetimepicker" value="{{$data->endday}}"  type="text" name="end" placeholder="结束时间" style="width:300px;margin-bottom:10px;height:35px;" >
+    <input type="number" value="{{$data->uploadend}}" name="uploadend" placeholder="上传作品天数，这期间不允许投票" style="width:295px;margin-bottom:10px;height:35px;" >
     <textarea id="editor_id" name="content" style="width:900px;min-height:500px;">{!! $data->tuwen !!}</textarea>
     <input type="file" class="uploadinput2" onchange="uploadImg(this)" style="display: none;" >
     <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;" type="button" class="btn btn-default">顶部图片</button>
@@ -59,7 +60,8 @@
             var title = $("input[name=title]").val();
             var starttime = $("input[name=start]").val();
             var endtime = $("input[name=end]").val();
-            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' ) {
+            var uploadend = $("input[name=uploadend]").val();
+            if( $.trim(starttime) == '' || $.trim(endtime) == '' || $.trim(title) == '' || $.trim(uploadend) == '' ) {
                 toast("请填写每一项内容");return;
             }
             var tuwen = window.editor.html();
