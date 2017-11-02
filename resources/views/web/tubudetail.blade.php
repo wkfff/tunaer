@@ -166,12 +166,12 @@
                 }
             </style>
             <div class="tubudetailnavbar" >
-                <a onclick="tiaozhuan(this)" href="#jhxx" id="bar_a_hover" >集合信息</a>
-                <a onclick="tiaozhuan(this)" href="#hdxq"  >活动详情</a>
-                <a onclick="tiaozhuan(this)" href="#ckxc">参考行程</a>
-                <a onclick="tiaozhuan(this)" href="#ydxz">预订须知</a>
-                <a onclick="tiaozhuan(this)" href="#qtxx">其他信息</a>
-                <a onclick="tiaozhuan(this)" href="#hdly">活动留言</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#jhxx" id="bar_a_hover" >集合信息</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#hdxq"  >活动详情</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#ckxc">参考行程</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#ydxz">预订须知</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#qtxx">其他信息</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#hdly">活动留言</a>
                 <a id="barbaoming" href="javascript:void(0)" onclick="openorderbox()" style="background: #4B8EE8;color:#fff;position: absolute;right:0px;display:none">马上报名</a>
                 <div style="clear:both" ></div>
             </div>
@@ -260,6 +260,9 @@
         function tiaozhuan(that) {
             $("#bar_a_hover").removeAttr("id");
             $(that).attr("id","bar_a_hover");
+        }
+        function bbb(obj){
+            location.replace(obj.href);
         }
         setTimeout(function(){
             $(".tuwen>div:nth-child(even)").css("padding","10px");
