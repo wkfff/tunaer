@@ -53,7 +53,7 @@
         </div>
 
     </div>
-
+    <div style="height:70px;" ></div>
     {{--@include("wap.footer")--}}
 
 
@@ -143,6 +143,8 @@
                                     <div style="clear:both" ></div>
                                 </div>`;
                                 $("."+tmpcls).append(item);
+                    $("#chatinput").val('');
+                    $(".chatbox")[0].scrollTop = $(".chatbox")[0].scrollHeight;
                 }
             })
         }
