@@ -339,9 +339,9 @@ class IndexController extends Controller
                 (
                     select uid,content,stime,isread,fid from 
                     (
-                        (select id,tid as uid,content,stime,isread,fid from chat where fid=".$uid." group by tid) 
+                        (select id,tid as uid,content,stime,isread,fid from chat where fid=".$uid." ) 
                         union all 
-                        (select id,tid as uid,content,stime,isread,fid from chat where tid=".$uid." group by fid)
+                        (select id,tid as uid,content,stime,isread,fid from chat where tid=".$uid." )
                         order by stime desc
                     )
                     as tmp group by tmp.uid order by tmp.stime desc limit 99
@@ -353,9 +353,9 @@ class IndexController extends Controller
                 (
                     select id,uid,content,stime,isread from 
                     (
-                        (select id,tid as uid,content,stime,isread from chat where fid=".$uid." group by tid) 
+                        (select id,tid as uid,content,stime,isread from chat where fid=".$uid." ) 
                         union all 
-                        (select id,tid as uid,content,stime,isread from chat where tid=".$uid." group by fid)
+                        (select id,tid as uid,content,stime,isread from chat where tid=".$uid." )
                         order by stime desc
                     )
                     as tmp group by tmp.uid order by tmp.stime desc limit 99

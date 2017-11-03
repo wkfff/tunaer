@@ -47,14 +47,14 @@
 
         </div>
 
-        <div style="height:50px;position:fixed;bottom:55px;left:0px;width:100%;" >
+        <div style="height:50px;position:fixed;bottom:0px;left:0px;width:100%;" >
             <input id="chatinput" placeholder="请输入内容..." type="text" style="height:50px;width:80%;border:none;background:none;background:#efefef;float:left;font-size:16px;padding-left:10px;" >
             <div onclick="sendchat({{$userinfo->uid}})" style="float:left;width:20%;height:50px;background:#e83888;text-align:center;line-height:50px;font-size:16px;color:#fff;" >发送</div>
         </div>
 
     </div>
 
-    @include("wap.footer")
+    {{--@include("wap.footer")--}}
 
 
 @stop

@@ -60,10 +60,12 @@
                     @endif
 
                 </div>
-                @if($list[$i]->isread == 1 && $list[$i]->uid == $list[$i]->fid)
-                <div style="position: absolute;right:10px;top:10px;height:10px;width:10px;border-radius:5px;
-            background:#e83888;z-index:1" ></div>
+                @if($list[$i]->isread == 1 && $list[$i]->uid != $list[$i]->fid)
+                <div style="position: absolute;right:10px;top:10px;border-radius:5px;
+            color:#e83888;z-index:1;font-size:0.5em;" >未读</div>
                 @endif
+                <div style="position: absolute;right:10px;bottom:10px;font-size:0.8em;color:#888;
+            z-index:1" >{{str_replace("-","/",substr($list[$i]->stime,5,11))}}</div>
             </div></a>
         @endfor
         @if( count($list) >= 60 )
