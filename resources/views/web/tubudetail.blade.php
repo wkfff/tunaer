@@ -166,9 +166,9 @@
                 }
             </style>
             <div class="tubudetailnavbar" >
-                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#jhxx" id="bar_a_hover" >集合信息</a>
-                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#hdxq"  >活动详情</a>
+                <a onclick="tiaozhuan(this);bbb(this);return false;" href="#jhxx" id="bar_a_hover" >集合信息</a> 
                 <a onclick="tiaozhuan(this);bbb(this);return false;" href="#ckxc">参考行程</a>
+		<a onclick="tiaozhuan(this);bbb(this);return false;" href="#hdxq"  >活动详情</a>
                 <a onclick="tiaozhuan(this);bbb(this);return false;" href="#ydxz">预订须知</a>
                 <a onclick="tiaozhuan(this);bbb(this);return false;" href="#qtxx">其他信息</a>
                 <a onclick="tiaozhuan(this);bbb(this);return false;" href="#hdly">活动留言</a>
