@@ -58,6 +58,7 @@
                     <input type="text" value="{{$tubu->need}}" placeholder="需要多少人" name="need" ><br>
                     <input type="text" value="{{$tubu->leader}}" placeholder="领队" name="leader" >
                     <input type="text" value="{{$tubu->phone}}" placeholder="联系电话" name="phone" ><br>
+                    <input type="text" style="width:504px !important;" value="{{$tubu->jiezhi}}" placeholder="报名截止时间 格式:2017-12-15 09:30:00" name="jiezhi" ><br>
                 </div>
                 <br>
             </div>
@@ -183,6 +184,7 @@
                 "qiangdu":$("input[name=qiangdu]").val(),
                 "need":$("input[name=need]").val(),
                 "leader":$("input[name=leader]").val(),
+                "jiezhi":$("input[name=jiezhi]").val(),
                 "phone":$("input[name=phone]").val(),
             };
             $("#myModal").modal('hide');

@@ -140,9 +140,10 @@ class IndexController extends Controller{
         $phone = $request->input('phone');
         $leader = $request->input('leader');
         $pictures = $request->input('pictures');
+        $jiezhi = $request->input('jiezhi');
         $juli = $request->input('juli');
         $tese = $request->input('tese');
-        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,jiaotong,need,phone,leader,pictures,juli,tese) values ('".$title."','".$tuwen."','".$types."','".$howlong."','".$startday."','".$endday."','".$price."','".$mudidi."','".$jingdian."','".$neirong."','".$jihetime."','".$jihedidian."','".$qiangdu."','".$jiaotong."','".$need."','".$phone."','".$leader."','".$pictures."','".$juli."','".$tese."') ";
+        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,jiaotong,need,phone,leader,pictures,juli,tese,jiezhi) values ('".$title."','".$tuwen."','".$types."','".$howlong."','".$startday."','".$endday."','".$price."','".$mudidi."','".$jingdian."','".$neirong."','".$jihetime."','".$jihedidian."','".$qiangdu."','".$jiaotong."','".$need."','".$phone."','".$leader."','".$pictures."','".$juli."','".$tese."','".$jiezhi."') ";
         $res = DB::insert($sql,[]);
         if( $res ) {
             echo "200";
@@ -151,8 +152,8 @@ class IndexController extends Controller{
         }
     }
     public function doupdatetubu(Request $request) {
-        $sql = " update tubuhuodong set title=?,tuwen=?,types=?,howlong=?,startday=?,endday=?,price=?,mudidi=?,jingdian=?,neirong=?,jihetime=?,jihedidian=?,qiangdu=?,jiaotong=?,need=?,phone=?,leader=?,pictures=?,juli=?,tese=? where id=?";
-        $res = DB::update($sql,[$request->input('title'),$request->input('tuwen'),$request->input('types'),$request->input('howlong'),$request->input('startday'),$request->input('endday'),$request->input('price'),$request->input('mudidi'),$request->input('jingdian'),$request->input('neirong'),$request->input('jihetime'),$request->input('jihedidian'),$request->input('qiangdu'),$request->input('jiaotong'),$request->input('need'),$request->input('phone'),$request->input('leader'),$request->input('pictures'),$request->input('juli'),$request->input('tese'),$request->input('tubuid')]);
+        $sql = " update tubuhuodong set title=?,tuwen=?,types=?,howlong=?,startday=?,endday=?,price=?,mudidi=?,jingdian=?,neirong=?,jihetime=?,jihedidian=?,qiangdu=?,jiaotong=?,need=?,phone=?,leader=?,pictures=?,juli=?,tese=?,jiezhi=? where id=?";
+        $res = DB::update($sql,[$request->input('title'),$request->input('tuwen'),$request->input('types'),$request->input('howlong'),$request->input('startday'),$request->input('endday'),$request->input('price'),$request->input('mudidi'),$request->input('jingdian'),$request->input('neirong'),$request->input('jihetime'),$request->input('jihedidian'),$request->input('qiangdu'),$request->input('jiaotong'),$request->input('need'),$request->input('phone'),$request->input('leader'),$request->input('pictures'),$request->input('juli'),$request->input('tese'),$request->input('jiezhi'),$request->input('tubuid')]);
         if( $res ) {
             echo "200";
         }else{

@@ -30,8 +30,17 @@ class PostController extends Controller{
         $mark = $request->input("mark",'') == ''?"无":$request->input("mark",'');
         $uid = Session::get('uid');
 
-        $sqltmp = " select * from tubuorder where uid=? and tid=? and del=0 ";
-        $r = DB::select($sqltmp,[$uid,$tid]);
+        $sql1 = " select count(*) as baomingnum,need,jiezhi from tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where tid=? and orderid<>'0' ";
+        $res1 = DB::select($sql1,[$tid]);
+        if( date("Y-m-d H:i:s") > $res1[0]->jiezhi ) {
+            echo "400-报名已截止"; return ;
+        }
+        if( ( $res1[0]->baomingnum + $num ) >$res1[0]->need ) {
+            echo "400-报名人数已满"; return ;
+        }
+//        echo "400-测试";die;
+//        $sqltmp = " select * from tubuorder where uid=? and tid=? and del=0 ";
+//        $r = DB::select($sqltmp,[$uid,$tid]);
 //        if( count($r) > 0 ) {
 //            echo "400-你已经报名，请等待通知"; return ;
 //        }
@@ -41,6 +50,7 @@ class PostController extends Controller{
             $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,youkes,realname) values (?,?,?,?,?,?,?,?) ";
             $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname]);
             if( $res ) {
+//                添加报名人数
                 @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,1);
                 echo "200-success";
 //                添加常用游客
