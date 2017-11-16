@@ -70,7 +70,7 @@
 
                 <p style="padding-left:40px;"><span style="color:#333;font-size:20px;">{{$detail->title}}</span></p>
                 <div style="height:120px;background:#FFF8EE;width:100%;color:#444;padding:10px;padding-left:40px;" >
-                    <p style="border-bottom:2px dashed orange;padding-bottom:10px;line-height:35px;color:#999;font-size:16px;">活动价格：<span style="color:orange;font-size:30px;font-weight: bold;" >￥{{$detail->price}}</span><span style="color:#777;float:right;">{{$detail->startday}} 截止报名</span></p>
+                    <p style="border-bottom:2px dashed orange;padding-bottom:10px;line-height:35px;color:#999;font-size:16px;">活动价格：<span style="color:orange;font-size:30px;font-weight: bold;" >￥{{$detail->price}}</span><span style="color:#777;float:right;">{{str_replace("-","/",substr($detail->jiezhi,5,11))}} 截止报名</span></p>
                     <p style="line-height:35px;color:#999;font-size:16px;">
                         活动特点：
                         @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
@@ -98,7 +98,7 @@
 
                     <div style="color:orange;line-height:30px;position: relative" >
 
-                        @if( strtotime($detail->startday) - time() > 0 )
+                        @if( strtotime($detail->jiezhi) - time() > 0 )
                             <p style="color:#444;">
                                 支付方式：<img style="cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/9.png" >微信支付<img style="margin-left:10px;cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/8.png" >支付宝
                             </p>
