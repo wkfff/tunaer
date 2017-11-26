@@ -36,7 +36,7 @@
         <tbody>
         @for ($i = 0; $i < count($list); $i++)
             <tr>
-                <td><a href="/user/{{$list[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle;margin-right:5px;" ></div>{{$list[$i]->uname}}</a></td>
+                <td><a href="/user/{{$list[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/{{$list[$i]->uid}});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle;margin-right:5px;" ></div></a>({{$list[$i]->num}}人)</td>
                 <td >{{substr($list[$i]->phone,0,3)."******".substr($list[$i]->phone,9,2)}}</td>
                 <td>
                     @if( $list[$i]->orderid == '0' )
@@ -44,6 +44,7 @@
                         @else
                         <span style="color:green">已确认</span>
                     @endif
+
                 </td>
                 <td >{{$list[$i]->jihe}}</td>
                 <td >{{$list[$i]->ordertime}}</td>

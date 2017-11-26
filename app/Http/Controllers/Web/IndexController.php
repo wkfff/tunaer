@@ -455,7 +455,7 @@ class IndexController extends Controller
                 DB::update($sql3,[$res[$i]->id]);
             }
         }
-        $sql = " select tubuorder.*,userattr.uname,user.phone from tubuorder left join user on user.id=tubuorder.uid left join userattr on userattr.uid=tubuorder.uid where tid=? and del=0 ";
+        $sql = " select tubuorder.*,userattr.uname,user.phone from tubuorder left join user on user.id=tubuorder.uid left join userattr on userattr.uid=tubuorder.uid where tid=? and del=0 order by tubuorder.id asc  ";
         $res = DB::select($sql,[$tid]);
         $count = DB::select("select count(*) as cnt from tubuorder where tid=? and del=0",[$tid]);
         return view("web.baominglist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/v9",$page,$num),"count"=>$count[0]->cnt]);
