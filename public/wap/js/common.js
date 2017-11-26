@@ -322,6 +322,7 @@ function payment(that,order_id,type) {
             $('#paybox').modal('hide');
             $("#wxpayform").submit();
         });
+	$($(".payimg").find("p")[0]).remove();
     }else{
         $.post("/openpayment/wxpay_wap.php",{
             "order_id":window.order_id,

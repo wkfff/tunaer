@@ -18,7 +18,7 @@
             overflow: auto;
         }
         .tuwen img{
-            max-width:100% !important;
+            max-width:100% !important;margin:10px 0;
         }
     </style>
 @stop

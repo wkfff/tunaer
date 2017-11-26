@@ -58,6 +58,9 @@
         <div style="width:40px;height:30px;color:#fff;position:absolute;right:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
             <span data-toggle="modal" data-target="#myModal" style="font-size:18px;position: absolute;right:10px;top:0px;line-height:45px;" class="glyphicon glyphicon-edit" ></span>
         </div>
+	<a href="javascript:void(0)" onclick="localStorage.removeItem('login_token'); location.href='/outlogin'" ><div style="width:40px;height:30px;color:#fff;position:absolute;right:50px;top:18px;z-index:999;text-align:center;line-height:30px;">退出
+        </div></a>
+	
     @endif
 
 
