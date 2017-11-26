@@ -390,7 +390,7 @@ class IndexController extends Controller{
             $youkestr = "";
             for( $j=0;$j<count($youkes);$j++ ) {
 //                $youkestr .= '#'.$youkes[$j]->name.",".$youkes[$j]->mobile.",".$youkes[$j]->idcard;
-                $youkestr .= '#'.$youkes[$j]->name.",".$youkes[$j]->mobile;
+                $youkestr .= '#'.$youkes[$j]->name.",".$youkes[$j]->mobile.",".$youkes[$j]->idcard;
             }
             $youkestr = trim($youkestr,"#");
             $objPHPExcel->getActiveSheet()->getRowDimension($i+2)->setRowHeight(30);
