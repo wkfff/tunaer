@@ -17,6 +17,7 @@
     <input name="code" style="display:inline-block;width:150px;" value="" type="text" placeholder="请输入图形验证码">
     <img class="verify" src="/verifycode" alt="" >
     <input type="button" id="submit" style="background: #00D8C9;border-radius:20px;color:#FFF;text-align: center;" value="登录">
+    <p style="text-align:center;margin-top:10px" ><a href="/forgetpassword" target="_blank" style="color:#444;font-size:14px;">忘记密码？</a></p>
     <div class="login_line" ></div>
     <div class="qrcode">
         <img src="/web/images/1506587848.png" alt="">

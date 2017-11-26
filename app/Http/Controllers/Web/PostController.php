@@ -796,4 +796,23 @@ class PostController extends Controller{
         }
     }
 
+    public function changepasswd(Request $request) {
+        $mobile = $request->input("mobile");
+        $vcode = $request->input("vcode");
+        $newpasswd = $request->input("newpasswd");
+        if( Cache::get('code-'.$mobile) == $vcode ) {
+            $sql = " select * from user where phone=? ";
+            $res = DB::select($sql,[$mobile]);
+            if( count($res) == 1 ) {
+                $sql = " update user set passwd=? where phone=?  ";
+                $res = DB::update($sql,[md5($newpasswd),$mobile]);
+                echo "200-修改成功"; return ;
+            }else{
+                echo "400-该手机号码没有注册"; return ;
+            }
+        }else{
+            echo "400-验证码错误";
+        }
+    }
+
 }

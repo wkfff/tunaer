@@ -156,6 +156,9 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/tububaoming/{tid}","IndexController@tububaoming");
     // 获取头像
     Route::get("/head/{userid?}","PostController@userhead");
+    Route::get("/forgetpassword","IndexController@forgetpassword");
+    Route::post("/changepasswd","PostController@changepasswd");
+
 });
 
 // 需要登录访问的api

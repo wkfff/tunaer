@@ -67,6 +67,7 @@
                     </div>
                     <div style="clear:both;height:20px;width:100%;" ></div>
                     <button type="button" onclick="lg_login()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
+                    <p style="text-align:center;margin-top:10px" ><a href="/forgetpassword" target="_blank" style="color:#444;font-size:14px;">忘记密码？</a></p>
                 </div>
             </div>
             <div class="modal-footer">
