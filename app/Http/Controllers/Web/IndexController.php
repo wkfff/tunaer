@@ -495,7 +495,6 @@ class IndexController extends Controller
         }else{
             return view("web.error",["content"=>"内容不存在"]);
         }
-
     }
 
     public function forgetpassword() {

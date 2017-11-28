@@ -815,4 +815,20 @@ class PostController extends Controller{
         }
     }
 
+    //http://www.ihuyi.com 短信接口
+//    public static function bmtongzhi($mobile,$num,$content) {
+//        $content = "您已经预订".$num."张，徒哪儿11-18 途步线路，已付59.00元。请您提前到达集合地点1：西南财大对面加油站旁（8.30集合）。请注意遵守时间，过时不候。对接人：徒哪儿户外俱乐部18000548612。欢迎加入此次客户QQ群(群号订单中查看)，分车及详细信息可以同时在订单中和群内公告查看。";
+//        $url="http://106.ihuyi.com/webservice/sms.php?method=Submit";
+//        $curlPost = array ("account" => "bob","password" => "12345","mobile"=>$mobile,"content"=>$content,"time"=>time(),"format"=>"js");
+//        $curl = curl_init();
+//        curl_setopt($curl, CURLOPT_URL, $url);
+//        curl_setopt($curl, CURLOPT_HEADER, false);
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($curl, CURLOPT_NOBODY, true);
+//        curl_setopt($curl, CURLOPT_POST, true);
+//        curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+//        $return_str = curl_exec($curl);
+//        curl_close($curl);
+//    }
+
 }

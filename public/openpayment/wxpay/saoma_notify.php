@@ -52,5 +52,3 @@ if(trim($status) == "SUCCESS") {
     echo "fail";	//请不要修改或删除
 
 }
-
-

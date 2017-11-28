@@ -48,4 +48,7 @@ use Illuminate\Http\Request;
 //    阿里云账号：tunaer
 //          密码：kongxijun.kxj
 
+//验证码通道管理平台地址：http://user.ihuyi.com/login.html
+//账号：48111534
+//密码：17780708586
 
