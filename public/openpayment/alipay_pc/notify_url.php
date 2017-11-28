@@ -14,8 +14,9 @@
 
 require_once 'config.php';
 require_once 'pagepay/service/AlipayTradeService.php';
-require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
-$handle = DB::getInstance();
+require_once dirname(__FILE__) . "/../donotify.php";
+//require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
+//$handle = DB::getInstance();
 
 $arr=$_POST;
 $alipaySevice = new AlipayTradeService($config);
@@ -29,71 +30,73 @@ $result = $alipaySevice->check($arr);
 4、验证app_id是否为该商户本身。
 */
 if($result) {//验证成功
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //请在这里加上商户的业务逻辑程序代
-
-
-    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-
-    //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-
-    //商户订单号
-
-    $out_trade_no = $_POST['out_trade_no'];
-
-    //支付宝交易号
-
-    $trade_no = $_POST['trade_no'];
-
-    //交易状态
-    $trade_status = $_POST['trade_status'];
-
-
-    if ($_POST['trade_status'] == 'TRADE_FINISHED') {
-
-        //判断该笔订单是否在商户网站中已经做过处理
-        //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-        //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-        //如果有做过处理，不执行商户的业务程序
-
-        //注意：
-        //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
-    } else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-
-        $orderid = $_POST['trade_no'];
-        $money = $_POST['total_amount'];
-        $sql = " select * from payment where orderid='" . $orderid . "' ";
-        $res = $handle->select($sql);
-        if (count($res) > 0) {
-            echo "success";
-            return;
-        }
-        //商户订单号
-        $out_trade_no = htmlspecialchars($_POST['out_trade_no']);
-        $tmp = explode("__", $out_trade_no);
-        $order_id = $tmp[1];
-        $type = $tmp[2];
-
-
-        $sql = " insert into payment (paytype,money,orderid) values ('alipay_pc','" . $money . "','" . $orderid . "') ";
-//    file_put_contents(dirname(__file__)."/log.php","#".$sql.'#',FILE_APPEND);
-        $handle->excute($sql);
-
-        if ($type == 'tubu') {
-//        file_put_contents(dirname(__file__)."/log.php","#tubu#",FILE_APPEND);
-            $sql = " update tubuorder set orderid='" . $orderid . "' where id= " . $order_id;
-//        file_put_contents(dirname(__file__)."/log.php","#".$sql."#",FILE_APPEND);
-            $res = $handle->excute($sql);
-        } else {
-//        file_put_contents(dirname(__file__)."/log.php","#other#",FILE_APPEND);
-            $sql = " update shoporder set orderid='" . $orderid . "' where id= " . $order_id;
-            $res = $handle->excute($sql);
-        }
-        //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-        echo "success";    //请不要修改或删除
+    $tmp = explode("__", $_POST['out_trade_no']);
+    $donotify = new Donotify("alipay_pc",$tmp[2],$_POST['total_amount'],$_POST['trade_no'],$tmp[1]);
+//    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//    //请在这里加上商户的业务逻辑程序代
+//
+//
+//    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+//
+//    //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
+//
+//    //商户订单号
+//
+//    $out_trade_no = $_POST['out_trade_no'];
+//
+//    //支付宝交易号
+//
+//    $trade_no = $_POST['trade_no'];
+//
+//    //交易状态
+//    $trade_status = $_POST['trade_status'];
+//
+//
+//    if ($_POST['trade_status'] == 'TRADE_FINISHED') {
+//
+//        //判断该笔订单是否在商户网站中已经做过处理
+//        //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+//        //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+//        //如果有做过处理，不执行商户的业务程序
+//
+//        //注意：
+//        //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+//    } else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+//
+//        $orderid = $_POST['trade_no'];
+//        $money = $_POST['total_amount'];
+//        $sql = " select * from payment where orderid='" . $orderid . "' ";
+//        $res = $handle->select($sql);
+//        if (count($res) > 0) {
+//            echo "success";
+//            return;
+//        }
+//        //商户订单号
+//        $out_trade_no = htmlspecialchars($_POST['out_trade_no']);
+//        $tmp = explode("__", $out_trade_no);
+//        $order_id = $tmp[1];
+//        $type = $tmp[2];
+//
+//
+//        $sql = " insert into payment (paytype,money,orderid) values ('alipay_pc','" . $money . "','" . $orderid . "') ";
+////    file_put_contents(dirname(__file__)."/log.php","#".$sql.'#',FILE_APPEND);
+//        $handle->excute($sql);
+//
+//        if ($type == 'tubu') {
+////        file_put_contents(dirname(__file__)."/log.php","#tubu#",FILE_APPEND);
+//            $sql = " update tubuorder set orderid='" . $orderid . "' where id= " . $order_id;
+////        file_put_contents(dirname(__file__)."/log.php","#".$sql."#",FILE_APPEND);
+//            $res = $handle->excute($sql);
+//        } else {
+////        file_put_contents(dirname(__file__)."/log.php","#other#",FILE_APPEND);
+//            $sql = " update shoporder set orderid='" . $orderid . "' where id= " . $order_id;
+//            $res = $handle->excute($sql);
+//        }
+//        //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+//        echo "success";    //请不要修改或删除
     } else {
         //验证失败
         echo "fail";
     }
-}
+//}
 ?>

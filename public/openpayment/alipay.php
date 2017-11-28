@@ -15,7 +15,7 @@ if (!empty($_POST['WIDout_trade_no'])&& trim($_POST['WIDout_trade_no'])!=""){
 
     //付款金额，必填
     $total_amount = $_POST['WIDtotal_amount'];
-     $total_amount = 0.01;
+//     $total_amount = 0.01;
 
     //商品描述，可空
     $body = $_POST['WIDbody'];
