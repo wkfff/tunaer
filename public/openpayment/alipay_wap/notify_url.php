@@ -11,7 +11,8 @@ $alipaySevice = new AlipayTradeService($config);
 $result = $alipaySevice->check($arr);
 
 if($result) {//验证成功
-
+    $tmp = explode("__", $_GET['out_trade_no']);
+    $donotify = new Donotify("alipay_wap",$tmp[2],$_GET['total_amount'],$_GET['trade_no'],$tmp[1]);
 //    $orderid = $_GET['trade_no'];
 //    $money = $_GET['total_amount'];
 //    $sql = " select * from payment where orderid='".$orderid."' ";

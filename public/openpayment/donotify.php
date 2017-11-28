@@ -44,11 +44,9 @@ class Donotify {
                     tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where 
                     tubuorder.id= ".$this->order_id . " limit 1 ";
             $res = $this->db->select($sql);
-            if(count($res) == 1) {
-                /*发送通知短信*/
-                self::bmtongzhi($res[0]['mobile'],$res[0]['num'],$res[0]['startday'],$this->money,
-                    $res[0]['jihe'],$res[0]['phone']);
-            }
+            /*发送通知短信*/
+            self::bmtongzhi($res[0]['mobile'],$res[0]['num'],$res[0]['startday'],$this->money,
+                $res[0]['jihe'],$res[0]['phone']);
         }else{
             $sql = " update shoporder set orderid='".$this->trade_id."' where id= ".$this->order_id;
             $this->db->excute($sql);
