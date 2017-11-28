@@ -40,11 +40,13 @@ class Donotify {
             $sql = " update tubuorder set orderid='".$this->trade_id."' where id= ".$this->order_id;
             $this->db->excute($sql);
             /*查询数据*/
+            file_put_contents(dirname(__file__)."/log.php","#查询数据#",FILE_APPEND);
             $sql = " select tubuorder.*,tubuhuodong.startday,tubuhuodong.phone from 
                     tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where 
                     tubuorder.id= ".$this->order_id . " limit 1 ";
             $res = $this->db->select($sql);
             /*发送通知短信*/
+            file_put_contents(dirname(__file__)."/log.php","#发送短信通知#",FILE_APPEND);
             $this->bmtongzhi($res[0]['mobile'],$res[0]['num'],$res[0]['startday'],$this->money,
                 $res[0]['jihe'],$res[0]['phone']);
         }else{
@@ -69,7 +71,7 @@ class Donotify {
         }
     }
     private function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
-        file_put_contents(dirname(__file__)."/log.php","#发送通知#",FILE_APPEND);
+        file_put_contents(dirname(__file__)."/log.php","#进入发送#",FILE_APPEND);
         $demo = new \SmsDemo(
             "LTAICyYaKmLyh9sj",
             "fh7VDi4xBUIQPY4H13eAfVx88kfwaP"
@@ -86,7 +88,7 @@ class Donotify {
                 "phone"=>$phone,
             ),"0"
         );
-        file_put_contents("./log.php","#".$response->Code."#",FILE_APPEND);
+        file_put_contents(dirname(__file__)."/log.php","#发送结果#",FILE_APPEND);
         if( strtoupper($response->Code) == "OK" ) {
             return true;
         }else{
