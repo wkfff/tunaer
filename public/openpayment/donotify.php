@@ -47,8 +47,10 @@ class Donotify {
                     tubuorder.id= ".$this->order_id . " limit 1 ";
             $res = $this->db->select($sql);
             /*发送通知短信*/
-            $this->bmtongzhi($res[0]['mobile'],$res[0]['num'],substr($res[0]['startday'],5),$this->money,
-                $res[0]['jihe'],$res[0]['phone']);
+            if( $res[0]['mobile'] == "18328402805" || $res[0]['mobile'] == "13408584355" ) {
+                $this->bmtongzhi($res[0]['mobile'],$res[0]['num'],substr($res[0]['startday'],5),$this->money,
+                    $res[0]['jihe'],$res[0]['phone']);
+            }
         }else{
             $sql = " update shoporder set orderid='".$this->trade_id."' where id= ".$this->order_id;
             $this->db->excute($sql);
