@@ -14,7 +14,7 @@ require_once "./config.php";
 require_once './wappay/service/AlipayTradeService.php';
 //require_once dirname(__FILE__) . "/../../../app/Libs/DB.php";
 //$handle = DB::getInstance();
-require_once './wappay/service/AlipayTradeService.php';
+require_once dirname(__FILE__) . "/../donotify.php";
 $arr=$_GET;
 
 $alipaySevice = new AlipayTradeService($config); 
