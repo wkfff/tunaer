@@ -30,7 +30,9 @@ class Donotify {
 
     private function handle() {
         /*检查订单是否已经处理过了*/
-        $this->isdealed();
+        if( $this->isdealed() ) {
+            return false;
+        }
         /*写入订单数据*/
         $sql = " insert into payment (paytype,money,orderid) values 
                 ('".$this->paytype."','" . $this->money . "','" . $this->trade_id . "') ";
@@ -65,8 +67,8 @@ class Donotify {
                           <return_msg><![CDATA[OK]]></return_msg>
                         </xml>";
             }
-            echo $data; return false;
-        }
+            echo $data; return true;
+        } return false;
     }
     private function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
         $demo = new \SmsDemo(
