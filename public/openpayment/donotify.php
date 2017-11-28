@@ -45,7 +45,7 @@ class Donotify {
                     tubuorder.id= ".$this->order_id . " limit 1 ";
             $res = $this->db->select($sql);
             /*发送通知短信*/
-            self::bmtongzhi($res[0]['mobile'],$res[0]['num'],$res[0]['startday'],$this->money,
+            $this->bmtongzhi($res[0]['mobile'],$res[0]['num'],$res[0]['startday'],$this->money,
                 $res[0]['jihe'],$res[0]['phone']);
         }else{
             $sql = " update shoporder set orderid='".$this->trade_id."' where id= ".$this->order_id;
@@ -68,7 +68,7 @@ class Donotify {
             echo $data; return false;
         }
     }
-    public static function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
+    private function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
         file_put_contents(dirname(__file__)."/log.php","#发送通知#",FILE_APPEND);
         $demo = new \SmsDemo(
             "LTAICyYaKmLyh9sj",
