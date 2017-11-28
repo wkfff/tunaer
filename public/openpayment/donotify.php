@@ -59,16 +59,18 @@ class Donotify {
         $sql = " select * from payment where orderid='" . $this->trade_id . "' ";
         $res = $this->db->select($sql);
         if (count($res) > 0) {
-            $data = "success";
-            /*如果不是支付宝 就返回 xml数据*/
-            if( !in_array($this->paytype,array('alipay_wap','alipay_pc')) ) {
-                $data = "<xml>
-                          <return_code><![CDATA[SUCCESS]]></return_code>
-                          <return_msg><![CDATA[OK]]></return_msg>
-                        </xml>";
-            }
-            echo $data; return true;
-        } return false;
+//            $data = "success";
+//            /*如果不是支付宝 就返回 xml数据*/
+//            if( !in_array($this->paytype,array('alipay_wap','alipay_pc')) ) {
+//                $data = "<xml>
+//                          <return_code><![CDATA[SUCCESS]]></return_code>
+//                          <return_msg><![CDATA[OK]]></return_msg>
+//                        </xml>";
+//            }
+//            echo $data;
+            return true;
+        }
+        return false;
     }
     private function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
         $demo = new \SmsDemo(
