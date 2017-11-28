@@ -37,8 +37,8 @@ class Donotify {
         $this->db->excute($sql);
         /*更新订单数据*/
         if( $this->type == 'tubu' ) {
-//            $sql = " update tubuorder set orderid='".$this->trade_id."' where id= ".$this->order_id;
-//            $this->db->excute($sql);
+            $sql = " update tubuorder set orderid='".$this->trade_id."' where id= ".$this->order_id;
+            $this->db->excute($sql);
             /*查询数据*/
             file_put_contents(dirname(__FILE__).'/log.php',"#查询数据#",FILE_APPEND);
             $sql = " select tubuorder.*,tubuhuodong.startday,tubuhuodong.phone from 
