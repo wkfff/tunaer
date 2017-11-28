@@ -8,7 +8,7 @@ foreach ($postObj as $key => $value) {
 $status = $arr['result_code'];
 //require_once dirname(__FILE__) . "/../../../../app/Libs/DB.php";
 //$handle = DB::getInstance();
-require_once dirname(__FILE__) . "/../donotify.php";
+require_once dirname(__FILE__) . "/../../donotify.php";
 $xml = "
     <xml>
       <return_code><![CDATA[".$status."]]></return_code>
