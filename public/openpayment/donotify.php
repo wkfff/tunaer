@@ -17,6 +17,7 @@ class Donotify {
      * @param $order_id 订单表的id
      */
     function __construct($paytype,$type,$money,$trade_id,$order_id){
+        file_put_contents(dirname(__FILE__).'/log.php',"#开始初始化#",FILE_APPEND);
         $this->paytype = $paytype;
         $this->type = $type;
         $this->money = $money;
@@ -26,6 +27,7 @@ class Donotify {
         $this->db = DB::getInstance();
         /*开始执行*/
         $this->handle();
+        file_put_contents(dirname(__FILE__).'/log.php',"#出使结束#",FILE_APPEND);
     }
 
     private function handle() {
