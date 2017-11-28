@@ -69,6 +69,7 @@ class Donotify {
         }
     }
     public static function bmtongzhi($mobile,$num,$date,$money,$addr,$phone) {
+        file_put_contents(dirname(__file__)."/log.php","#发送通知#",FILE_APPEND);
         $demo = new \SmsDemo(
             "LTAICyYaKmLyh9sj",
             "fh7VDi4xBUIQPY4H13eAfVx88kfwaP"
@@ -85,6 +86,7 @@ class Donotify {
                 "phone"=>$phone,
             ),"0"
         );
+        file_put_contents("./log.php","#".$response->Code."#",FILE_APPEND);
         if( strtoupper($response->Code) == "OK" ) {
             return true;
         }else{

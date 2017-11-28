@@ -170,7 +170,7 @@
             }
             for( var i=0;i<tmp.length;i++ ) {
                 var pos = {
-                    "name":$($(tmp[i]).children("p")[0]).text().substr(0,10),
+                    "name":$($(tmp[i]).children("p")[0]).text().split("TEL")[0],
                     "mobile":$($(tmp[i]).children("p")[0]).text().substr(-11),
                     "idcard":$($(tmp[i]).children("p")[1]).text().substr(5),
                 };
