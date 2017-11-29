@@ -16,7 +16,7 @@ $xml = "
     </xml>";
 if(trim($status) == "SUCCESS") {
     $tmparr = explode("__", $arr['out_trade_no']);
-    $donotify = new Donotify("wx_wap",$tmparr[2],$arr['total_fee']/100,$arr['transaction_id'],$tmparr[1]);
+    $donotify = new Donotify("wx_wxwap",$tmparr[2],$arr['total_fee']/100,$arr['transaction_id'],$tmparr[1]);
 //    $out_trade_no = $arr['transaction_id'];
 //
 //    $sql = " select * from payment where orderid='".$out_trade_no."' ";
