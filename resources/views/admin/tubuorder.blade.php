@@ -12,7 +12,7 @@
             <th>真实姓名</th>
             <th>人数</th>
             <th>集合点</th>
-            <th>详情</th>
+            {{--<th>详情</th>--}}
             <th>手机号</th>
             <th>备注</th>
             {{--<th>件数</th>--}}
@@ -28,12 +28,18 @@
         <tbody>
         @for ($i = 0; $i < count($list); $i++)
             <tr>
-                <td class="center">{{$list[$i]->orderid}}</td>
-                <td title="{{$list[$i]->title}}" style="width:150px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;"><a target="_blank" style="color:cornflowerblue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
-                <td class="center"><a target="_blank" style="color:cornflowerblue" href="/user/{{$list[$i]->uid}}">{{$list[$i]->realname}}</a></td>
+                <td  class="center">
+                    @if($list[$i]->orderid == '0')
+                        <span style="color:red" >未付款</span>
+                        @else
+                        <a style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;color:green;text-decoration: underline;" href="/admin/payorder?orderid={{$list[$i]->orderid}}">{{$list[$i]->orderid}}</a>
+                    @endif
+                </td>
+                <td title="{{$list[$i]->title}}" ><a target="_blank" style="width:200px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;color:#333" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
+                <td class="center"><a target="_blank" style="color:orangered" href="/user/{{$list[$i]->uid}}">{{$list[$i]->realname}}</a></td>
                 <td class="center">{{$list[$i]->num}}</td>
                 <td class="center">{{$list[$i]->jihe}}</td>
-                <td class="center">{{$list[$i]->youkes}}</td>
+{{--                <td class="center">{{$list[$i]->youkes}}</td>--}}
                 <td class="center">{{$list[$i]->mobile}}</td>
                 <td class="center" title="{{$list[$i]->mark}}" ><div style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;" >{{$list[$i]->mark}}</div></td>
 

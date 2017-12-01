@@ -24,10 +24,10 @@
         @for ($i = 0; $i < count($list); $i++)
             <tr>
                 <td class="center">{{$list[$i]->id}}</td>
-                <td><a target="_blank" style="color:cornflowerblue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
+                <td><a  target="_blank" style="color:blue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:340px;color:blue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
                 <td class="center">{{$list[$i]->sort}}</td>
                 <td class="center">{{$list[$i]->subsort}}</td>
-                <td class="center">{{$list[$i]->price}}元</td>
+                <td style="color:red" class="center">{{$list[$i]->price}}元</td>
                 <td class="center">{{$list[$i]->sold}}件</td>
                 <td class="center">{{$list[$i]->kucun}}件</td>
                 {{--<td class="center">{{$list[$i]->youfei}}元</td>--}}

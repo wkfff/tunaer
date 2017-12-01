@@ -29,14 +29,14 @@
         @for ($i = 0; $i < count($tubulist); $i++)
             <tr>
                 <td class="editpaixu" onclick="editpaixu(this,{{$tubulist[$i]->id}})" class="center">{{$tubulist[$i]->paixu}}</td>
-                <td ><a target="_blank" style="color:cornflowerblue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:240px;" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
-                <td class="center">{{$tubulist[$i]->typename}}</td>
-                <td class="center">{{$tubulist[$i]->howlong}}天</td>
+                <td ><a target="_blank" style="color:blue;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;max-width:240px;" href="/tubu/tubudetail/{{$tubulist[$i]->id}}">{{$tubulist[$i]->title}}</a></td>
+                <td >{{$tubulist[$i]->typename}}</td>
+                <td style="color:green" class="center">{{$tubulist[$i]->howlong}}天</td>
                 <td class="center">{{$tubulist[$i]->startday}}</td>
                 <td class="center">{{$tubulist[$i]->endday}}</td>
-                <td class="center">{{$tubulist[$i]->price}}元</td>
+                <td style="color:mediumvioletred" class="center">{{$tubulist[$i]->price}}元</td>
                 <td class="center">{{$tubulist[$i]->need}}人</td>
-                <td class="center">{{$tubulist[$i]->baoming}}人</td>
+                <td style="color:green" class="center">{{$tubulist[$i]->baoming}}人</td>
                 <td class="center">{{$tubulist[$i]->juli}}</td>
                 <td class="center">{{$tubulist[$i]->leader}}</td>
                 <td class="center">

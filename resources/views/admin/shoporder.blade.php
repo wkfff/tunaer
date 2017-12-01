@@ -11,7 +11,7 @@
             <th>商品</th>
             <th>手机号</th>
             <th>件数</th>
-            <th>快递状态</th>
+            <th>快递状态(单击更改)</th>
             <th>收货地址</th>
             <th>留言</th>
             <th>颜色</th>
@@ -23,8 +23,14 @@
         <tbody>
         @for ($i = 0; $i < count($list); $i++)
             <tr>
-                <td class="center">{{$list[$i]->orderid}}</td>
-                <td title="{{$list[$i]->title}}" style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;"><a target="_blank" style="color:cornflowerblue" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
+                <td  class="center">
+                    @if($list[$i]->orderid == '0')
+                        <span style="color:red" >未付款</span>
+                    @else
+                        <a style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;color:green;text-decoration: underline;" href="/admin/payorder?orderid={{$list[$i]->orderid}}">{{$list[$i]->orderid}}</a>
+                    @endif
+                </td>
+                <td title="{{$list[$i]->title}}" style="width:100px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display: inline-block;"><a target="_blank" style="color:#333" href="/shop/detail/{{$list[$i]->id}}">{{$list[$i]->title}}</a></td>
                 <td class="center"><a target="_blank" style="color:cornflowerblue" href="/user/{{$list[$i]->uid}}">{{$list[$i]->phone}}</a></td>
                 <td class="center">{{$list[$i]->num}}件</td>
                 @if( $list[$i]->kuaidi == '0' )
