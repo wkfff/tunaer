@@ -26,7 +26,7 @@
 
         <div class="form-group" style="margin:10px;">
             <label for="">联系电话</label>
-            <input type="text" value="18328402805" class="form-control phone" placeholder="联系电话">
+            <input type="text" value="" class="form-control phone" placeholder="联系电话">
         </div>
         <div class="form-group" style="margin:10px;">
             <label for="">收货地址</label>
