@@ -26,7 +26,7 @@
         </div>
         <div class="form-group" >
             <label for="">收货地址</label>
-            <input type="text" value="成都市青阳区晓峰区一栋三单元"  class="form-control addr" placeholder="收货地址"  >
+            <input type="text" value=""  class="form-control addr" placeholder="收货地址"  >
         </div>
         <div class="form-group">
             <label for="">买家留言</label>
