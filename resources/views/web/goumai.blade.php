@@ -30,7 +30,7 @@
         </div>
         <div class="form-group" style="margin-top:10px;">
             <label for="">联系电话</label>
-            <input type="text" value="123" class="form-control phone" placeholder="联系电话">
+            <input type="text" value="" class="form-control phone" placeholder="联系电话">
         </div>
         <div class="form-group" >
             <label for="">收货地址</label>
@@ -103,7 +103,7 @@
                     window.clickxiadanlocak = false;
                 },10000);
                 if( ajaxdata(d) ) {
-                    location.href="/user/23#shoporder";
+                    location.href="/user/{{Session::get('uid')}}#shoporder";
                 }
             })
 
