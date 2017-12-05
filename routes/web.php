@@ -96,6 +96,14 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get("/baominginfo/{tid}","IndexController@baominginfo");
     Route::get("/exportfenche/{tid}","IndexController@exportfenche");
     Route::post("/fenche","PostController@fenche");
+    Route::post("/addtubuorder","PostController@addtubuorder");
+    Route::post("/adduser","PostController@adduser");
+    Route::post("/changepasswd","PostController@changepasswd");
+    Route::get("/addorder/{tid}","IndexController@addorder");
+    Route::post("/addorder","PostController@addorder");
+    Route::post("/tubumiandan","PostController@tubumiandan");
+    Route::post("/tubuvisible/{tid}","PostController@tubuvisible");
+    Route::post("/copytubu/{tid}","PostController@copytubu");
 
 });
 //Access Key ID	Access Key Secret	状态	创建时间	操作

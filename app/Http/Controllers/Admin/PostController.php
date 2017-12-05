@@ -270,4 +270,107 @@ class PostController extends Controller{
             }
         }
     }
+    public function addtubuorder(Request $reqeust) {
+
+    }
+    public function adduser(Request $request) {
+        $phone = $request->input('phone');
+        $sql = "select * from user where phone=?";
+        $res = DB::select($sql,[$phone]);
+        if( count($res) > 0 ) {
+            echo "400-手机号码已被注册";
+        }else {
+            $sql = " insert into user (phone,passwd,regip) values (?,?,?) ";
+            $res = DB::insert($sql,[$phone,md5($phone),"adminInsert"]);
+            if( $res ) {
+                $sql = "select * from user where phone=?";
+                $res = DB::select($sql,[$phone]);
+                if( count($res) > 0 ) {
+                    $sql = " insert into userattr (uid) values (?) ";
+                    $res = DB::insert($sql,[$res[0]->id]);
+                }
+                echo "200-success";
+            }else{
+                echo "400-添加出错";
+            }
+        }
+    }
+    public function changepasswd(Request $request) {
+        $passwd = $request->input('passwd');
+        $uid = $request->input('uid');
+        $sql = " update user set passwd=? where id=? ";
+        $res = DB::update($sql,[md5($passwd),$uid]);
+        if( $res ) {
+            echo "200-修改成功";
+        }else{
+            echo "400-修改无效";
+        }
+    }
+    public function addorder(Request $request) {
+        $tid = $request->input("tid",'');
+        $realname = $request->input("realname",'');
+        $mobile = $request->input("mobile",'');
+        $youkes = $request->input("youkes",'');
+        $num = $request->input("num",'');
+        $jihe = $request->input("jihe",'');
+        $mark = $request->input("mark",'') == ''?"无":$request->input("mark",'');
+        $userphone = $request->input("userphone",'');
+        $sql = " select * from user where phone=? ";
+        $res = DB::select($sql,[$userphone]);
+        if( count($res) == 0 ) {
+            echo "400-会员手机号不存在"; return ;
+        }else{
+            $uid = $res[0]->id;
+        }
+
+        $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,youkes,realname) values (?,?,?,?,?,?,?,?) ";
+        $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname]);
+        if( $res ) {
+            echo "200-添加成功";
+//                添加报名人数
+            @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,1);
+
+//                添加常用游客
+            $youkearr = json_decode($youkes);
+            for( $i=0;$i<count($youkearr);$i++ ) {
+                $sql = "insert into youkes (uid,name,mobile,idcard) values (?,?,?,?) ";
+                DB::insert($sql,[$uid,$youkearr[$i]->name,$youkearr[$i]->mobile,$youkearr[$i]->idcard]);
+            }
+        }else{
+            echo "400-报名失败，请联系客服";
+        }
+    }
+    public function tubumiandan(Request $request) {
+        $id = $request->input("id");
+        $sql = " update tubuorder set orderid=? where id=? ";
+        $res = DB::update($sql,["免费订单",$id]);
+        if( $res ) {
+            echo "200-操作成功";
+        }else{
+            echo "400-操作失败";
+        }
+    }
+    public function tubuvisible($tid) {
+        $sql = " select * from tubuhuodong where id=? ";
+        $res = DB::select($sql,[$tid]);
+        if( count($res) ) {
+            $sql =  " update tubuhuodong set visible=? where id=? ";
+            $res = DB::update($sql,[$res[0]->visible == "1" ? "0" : "1",$tid]);
+            if( $res ){
+                echo "200-success";
+            }else{
+                echo "400-操作失败";
+            }
+        }
+    }
+
+    public function copytubu($tid) {
+        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,baoming,phone,leader,pictures,tese,paixu,ptime,visible) select title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,baoming,phone,leader,pictures,tese,paixu,ptime,0 from tubuhuodong where id=?  ";
+        $res = DB::insert($sql,[$tid]);
+        if( $res ){
+            echo "200-success";
+        }else{
+            echo "400-操作失败";
+        }
+    }
 }

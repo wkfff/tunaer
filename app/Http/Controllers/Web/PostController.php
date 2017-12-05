@@ -51,8 +51,8 @@ class PostController extends Controller{
             $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname]);
             if( $res ) {
 //                添加报名人数
-                @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,1);
-                echo "200-success";
+//                @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,$num);
+//                echo "200-success";
 //                添加常用游客
                 $youkearr = json_decode($youkes);
                 for( $i=0;$i<count($youkearr);$i++ ) {

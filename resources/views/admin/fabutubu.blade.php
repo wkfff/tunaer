@@ -114,6 +114,7 @@
                     <input type="text" value="" placeholder="领队" name="leader" >
                     <input type="text" value="" placeholder="联系电话" name="phone" ><br>
                     <input type="text" style="width:504px !important;" value="" placeholder="报名截止时间 格式:2017-12-15 09:30:00" name="jiezhi" ><br>
+                    <input type="text" style="width:504px !important;" value="" placeholder="活动通知说明" name="shuoming" ><br>
                 </div>
 
             </div>
@@ -164,7 +165,7 @@
         function fabu() {
             var t1 = $("#inputcls input");
             for( var i=0;i<t1.length;i++ ) {
-                console.log(t1[i].value);
+//                console.log(t1[i].value);
                 if( t1[i].value == '' ) {
                     toast("属性不完整"); return ;
                 }
@@ -221,6 +222,7 @@
                 "need":$("input[name=need]").val(),
                 "leader":$("input[name=leader]").val(),
                 "jiezhi":$("input[name=jiezhi]").val(),
+                "shuoming":$("input[name=shuoming]").val(),
                 "phone":$("input[name=phone]").val(),
             };
             $("#myModal").modal('hide');

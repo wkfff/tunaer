@@ -51,7 +51,7 @@
                             <i class="icon-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            {{--<li><a href="/admin/updateproduct/{{$list[$i]->id}}">修改</a></li>--}}
+                            <li><a href="javascript:void(0)" onclick="miandan({{$list[$i]->id}})">免单</a></li>
                             <li><a style="color:red" href="javascript:void(0)" onclick="deletebyid({{$list[$i]->id}})" >删除</a></li>
                         </ul>
                     </li>
@@ -74,6 +74,14 @@
                     location.reload();
                 })
             }
+        }
+
+        function miandan(id) {
+            $.post("/admin/tubumiandan",{"id":id},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
         }
 
         function kuaidi(that) {

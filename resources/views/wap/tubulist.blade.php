@@ -22,7 +22,7 @@
             height:40px;overflow: hidden;line-height:20px;color:#333;
         }
         .price{
-            color:orange;bottom:10px;right:10px;
+            color:orange;bottom:5px;right:10px;
             position: absolute;font-weight:bold;font-size:1.3em;
         }
     </style>
@@ -40,7 +40,12 @@
                 <p class="title">{{$list[$i]->title}}</p>
                 <span style="display:block;font-size:12px;color:#666;margin-top:-5px;">出发时间：{{$list[$i]->startday}}</span>
                 <span style="display:block;font-size:12px;color:#666">活动地点：{{$list[$i]->mudidi}}</span>
-                <span class="price" >￥{{$list[$i]->price}}</span>
+                @if( time() - strtotime($list[$i]->jiezhi) > 0 )
+                    <span style="width:70px;height:30px;outline:none;position:absolute;right:10px;bottom:5px;background:#ddd;text-align: center;line-height:30px;color:#777;">活动结束</span>
+                @else
+                    <span class="price"  >￥{{$list[$i]->price}}</span>
+                @endif
+
             </div>
             </a>
         @endfor

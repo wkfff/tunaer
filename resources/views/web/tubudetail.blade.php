@@ -76,7 +76,7 @@
                         @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
                             <span style="color:orange;border:1px dashed orange;padding:2px 6px;font-size:14px; ">{{$tesearr[$i]}}</span>
                         @endfor
-                        <a href="/baominglist/{{$detail->id}}"><span style="float:right;color:orange;cursor:pointer;" ><span class="glyphicon glyphicon-th-list" style="font-size:14px;margin-right:5px;" ></span>报名列表</span></a>
+                        <a href="/baominglist/{{$detail->id}}"><span style="float:right;color:orange;cursor:pointer;" ><span class="glyphicon glyphicon-th-list" style="font-size:14px;margin-right:5px;" ></span>报名列表（{{$detail->baoming}}人）</span></a>
                     </p>
                 </div>
                 <div style="padding-left:40px;" >
@@ -112,7 +112,8 @@
 
                                 <span class="glyphicon glyphicon-earphone" style="color:orange;height:30px;width:30px;border:2px solid orange;border-radius:15px;text-align:center;line-height:30px;margin-right:10px;" ></span>报名成功可见（短信通知里可见）
                                 <p style="color:#444;">
-                                    徒步通知说明：活动前一天发布具体分车,时间及车辆信息
+                                    {{--徒步通知说明：活动前一天发布具体分车,时间及车辆信息--}}
+                                    {{$detail->shuoming}}
                                 </p>
                                 <p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>
 
@@ -192,6 +193,11 @@
                         </button>
                     </div>
                 </div>
+                <div style="clear:both" ></div>
+                <div class="liuyanbox">
+
+                </div>
+                <div onclick="gettubucms({{$detail->id}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
 
             </div>
 
@@ -385,7 +391,7 @@
                     for( var i=0;i<res.length;i++ ) {
                         var item = `<div style="margin:20px 0;vertical-align: middle;">
                             <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;">${res[i].content}</div>
+                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;">${res[i].content}<a href="javascript:void(0)" onclick="huifu(this,${res[i].id})">回复</a></div>
                             <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
                                 ${res[i].ctime}
                             </div>
@@ -394,6 +400,24 @@
                     }
                 }
             })
+        }
+        function huifu(that,pid) {
+            if( content = prompt("输入回复内容","") ) {
+                var item = `<div style="margin:20px 0;vertical-align: middle;margin-left:60px;">
+                            <div onclick="location.href='/user/1'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/87);background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
+                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;">${content}</div>
+                            <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
+                                ${(new Date()).toLocaleDateString()}
+                            </div>
+                        </div>`;
+                $(that).parent().parent().append(item);
+//                $.post("/subcomment",{"pid":pid,"content":content},function(d){
+//                    if( ajaxdata(d) ) {
+//                        location.reload();
+//                    }
+//                })
+            }
+
         }
         function openorderbox() {
             @if( Session::get('uid') )

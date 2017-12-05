@@ -141,26 +141,26 @@ class IndexController extends Controller{
         $leader = $request->input('leader');
         $pictures = $request->input('pictures');
         $jiezhi = $request->input('jiezhi');
+        $shuoming = $request->input('shuoming');
         $juli = $request->input('juli');
         $tese = $request->input('tese');
-        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,jiaotong,need,phone,leader,pictures,juli,tese,jiezhi) values ('".$title."','".$tuwen."','".$types."','".$howlong."','".$startday."','".$endday."','".$price."','".$mudidi."','".$jingdian."','".$neirong."','".$jihetime."','".$jihedidian."','".$qiangdu."','".$jiaotong."','".$need."','".$phone."','".$leader."','".$pictures."','".$juli."','".$tese."','".$jiezhi."') ";
+        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,jiaotong,need,phone,leader,pictures,juli,tese,jiezhi,shuoming) values ('".$title."','".$tuwen."','".$types."','".$howlong."','".$startday."','".$endday."','".$price."','".$mudidi."','".$jingdian."','".$neirong."','".$jihetime."','".$jihedidian."','".$qiangdu."','".$jiaotong."','".$need."','".$phone."','".$leader."','".$pictures."','".$juli."','".$tese."','".$jiezhi."','".$shuoming."') ";
         $res = DB::insert($sql,[]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-发布失败";
         }
     }
     public function doupdatetubu(Request $request) {
-        $sql = " update tubuhuodong set title=?,tuwen=?,types=?,howlong=?,startday=?,endday=?,price=?,mudidi=?,jingdian=?,neirong=?,jihetime=?,jihedidian=?,qiangdu=?,jiaotong=?,need=?,phone=?,leader=?,pictures=?,juli=?,tese=?,jiezhi=? where id=?";
-        $res = DB::update($sql,[$request->input('title'),$request->input('tuwen'),$request->input('types'),$request->input('howlong'),$request->input('startday'),$request->input('endday'),$request->input('price'),$request->input('mudidi'),$request->input('jingdian'),$request->input('neirong'),$request->input('jihetime'),$request->input('jihedidian'),$request->input('qiangdu'),$request->input('jiaotong'),$request->input('need'),$request->input('phone'),$request->input('leader'),$request->input('pictures'),$request->input('juli'),$request->input('tese'),$request->input('jiezhi'),$request->input('tubuid')]);
+        $sql = " update tubuhuodong set title=?,tuwen=?,types=?,howlong=?,startday=?,endday=?,price=?,mudidi=?,jingdian=?,neirong=?,jihetime=?,jihedidian=?,qiangdu=?,jiaotong=?,need=?,phone=?,leader=?,pictures=?,juli=?,tese=?,jiezhi=?,shuoming=? where id=?";
+        $res = DB::update($sql,[$request->input('title'),$request->input('tuwen'),$request->input('types'),$request->input('howlong'),$request->input('startday'),$request->input('endday'),$request->input('price'),$request->input('mudidi'),$request->input('jingdian'),$request->input('neirong'),$request->input('jihetime'),$request->input('jihedidian'),$request->input('qiangdu'),$request->input('jiaotong'),$request->input('need'),$request->input('phone'),$request->input('leader'),$request->input('pictures'),$request->input('juli'),$request->input('tese'),$request->input('jiezhi'),$request->input('shuoming'),$request->input('tubuid')]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-没有做任何修改";
         }
     }
-
     public function tubulist(Request $request) {
         $page = $request->input('page',1);
         $num = $request->input('num',20);
@@ -179,7 +179,7 @@ class IndexController extends Controller{
         $sql = " insert into product (title,tuwen,sort,subsort,price,sold,youfei,kucun,colorlist,chicunlist,pictures) values (?,?,?,?,?,?,?,?,?,?,?) ";
         $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('subsort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures')]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-发布失败";
         }
@@ -207,7 +207,7 @@ class IndexController extends Controller{
         $sql = " update product set title=?,tuwen=?,sort=?,subsort=?,price=?,sold=?,youfei=?,kucun=?,colorlist=?,chicunlist=?,pictures=? where id=? ";
         $res = DB::insert($sql,[$request->input('title'),$request->input('tuwen'),$request->input('sort'),$request->input('subsort'),$request->input('price'),$request->input('sold'),$request->input('youfei'),$request->input('kucun'),$request->input('colorlist'),$request->input('chicunlist'),$request->input('pictures'),$request->input('pid')]);
         if( $res ) {
-            echo "200";
+            echo "200-success";
         }else{
             echo "400-没有做任何修改";
         }
@@ -434,7 +434,7 @@ class IndexController extends Controller{
         $num = $request->input("num",100);
         $count = DB::select(" select count(*) as cnt from tubuorder where tid=? ",[$tid]);
 
-        $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price from tubuhuodong left join tubuorder on tubuorder.tid=tubuhuodong.id where tubuorder.tid=? order by id desc limit ?,?";
+        $sql = " select tubuorder.*,tubuhuodong.title,tubuhuodong.price,payment.money from tubuhuodong left join tubuorder on tubuorder.tid=tubuhuodong.id left join payment on payment.orderid=tubuorder.orderid where tubuorder.tid=? order by id desc limit ?,?";
         $res = DB::select($sql,[$tid,($page-1)*$num,$num]);
         $cntnum = DB::select(" select sum(num) as cnt from tubuorder where tid=? and orderid<>'0' ",[$tid]);
         $cntmoney = 0;
@@ -445,6 +445,11 @@ class IndexController extends Controller{
         }
         return view("admin.baominginfo",["list"=>$res,"cntmoney"=>$cntmoney,"cnt"=>$cntpeople,"fenye"=>fenye($count[0]->cnt,"/admin/baominginfo/".$tid,$page,$num)]);
 
+    }
+    public function addorder($tid) {
+        $sql = " select * from tubuhuodong where id=? limit 1 ";
+        $res = DB::select($sql,[$tid]);
+        return view("admin.addorder",["data"=>$res[0]]);
     }
 
 }

@@ -5,7 +5,7 @@
     <style>
         .swiper-container {
             width: 99%;
-            height: 200px;
+            height: 350px;
             margin:0 auto;
             /*border-radius:3px;*/
             /*margin-top:50px;*/

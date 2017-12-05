@@ -99,19 +99,20 @@
             @for( $tesearr = explode("#",$detail->tese),$i=0;$i<count($tesearr);$i++ )
                 <span style="color:orange;border:1px dashed orange;padding:2px 6px;font-size:14px; ">{{$tesearr[$i]}}</span>
             @endfor
-            <a style="color:#4b8ee8" href="/baominglist/{{$detail->id}}"><span style="float:right;cursor:pointer;" ><span class="glyphicon glyphicon-user" style="font-size:14px;margin-right:5px;" ></span>报名列表</span></a>
+            <a style="color:#4b8ee8" href="/baominglist/{{$detail->id}}"><span style="float:right;cursor:pointer;" ><span class="glyphicon glyphicon-user" style="font-size:14px;margin-right:5px;" ></span>报名列表（{{$detail->baoming}}人）</span></a>
         </p>
     </div>
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
         @if( strtotime($detail->startday) - time() > 0 )
-            <p style="color:#444;">
+            <p id="fukuanfangshi" style="color:#444;">
                 支付方式：<img style="cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/9.png" >微信支付<img style="margin-left:10px;cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/8.png" >支付宝
             </p>
             @if( $isjoined )
 
                 <p>{!! $phone !!}</p>
                 <p style="color:#444">
-                    徒步通知说明：活动前一天发布具体分车,时间及车辆信息
+                    {{--徒步通知说明：活动前一天发布具体分车,时间及车辆信息--}}
+                    {{$detail->shuoming}}
                 </p>
             @else
 
@@ -246,6 +247,11 @@
 @section("htmlend")
     <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
     <script>
+        $(document).ready(function(){
+            if(is_weixn()) {
+                $($("#fukuanfangshi").children("img")[1]).remove();
+            }
+        })
         function tiaozhuan(that) {
             $("#bar_a_hover").removeAttr("id");
             $(that).attr("id","bar_a_hover");

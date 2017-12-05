@@ -17,10 +17,9 @@ function ajaxdata(data) {
     var qianzhui = data.substr(0,3);
     switch(qianzhui) {
         case "400":
-
             toast(data.substr(4)); return false;
         case "200":
-             return true;
+            return data.substr(4);
     }
     switch(data) {
         case "":

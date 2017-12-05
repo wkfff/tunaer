@@ -51,7 +51,7 @@
                     @if( $list[$i]->orderid == '0' || strlen($list[$i]->orderid) <=5 )
                         <span style="color:red" >未付款[￥{{$list[$i]->num*$list[$i]->price}}]</span>
                         @else
-                        <span style="color:green" >已付款[￥{{$list[$i]->num*$list[$i]->price}}]</span>
+                        <span style="color:green" >已付款[￥{{isset($list[$i]->money)?$list[$i]->money:"免单支付"}}]</span>
                     @endif
                 </td>
                 <td class="center">

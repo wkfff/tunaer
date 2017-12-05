@@ -12,6 +12,9 @@ class IndexController extends Controller
 {
 
     public function index(Request $request) {
+//        $tt = '[{"name":"石楠","mobile":"18628018542","idcard":"510102196307177528"}]';
+//        $aa = json_decode($tt);
+//        dd($aa);
 
         $sql = " select * from tubuhuodong order by paixu desc,id desc limit 10";
         $tubus = DB::select($sql);
@@ -63,12 +66,12 @@ class IndexController extends Controller
         $page = $request->input('page',1);
         $num = $request->input('num',7);
         if( $type ) {
-            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=".$type);
-            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where types=? order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
+            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where visible=1 and types=".$type);
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where  visible=1 and  types=? order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
             $res = DB::select($sql,[$type]);
         }else{
-            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types ");
-            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
+            $count = DB::select("select count(*) as cnt from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where  visible=1 ");
+            $sql = " select tubuhuodong.*,tubutypes.pics,tubutypes.intro,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where  visible=1  order by paixu desc,id desc limit ".($page-1)*$num.", ".$num;;
             $res = DB::select($sql);
         }
 
@@ -448,7 +451,7 @@ class IndexController extends Controller
         $num = $request->input("num",100);
         $sql = " select * from tubuorder where tid=? and del=0 ";
         $res = DB::select($sql,[$tid]);
-
+//        把两小时内没有付款的软删除
         for( $i=0;$i<count($res);$i++ ) {
             if($res[$i]->orderid == '0' && (time() - strtotime("+2 hours",strtotime($res[$i]->ordertime)) >=0) ) {
                 $sql3 = " update tubuorder set del=1 where id=? ";

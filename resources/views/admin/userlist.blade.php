@@ -33,6 +33,7 @@
         </select>
         <button onclick="search()" class="btn btn-success"  >搜 索</button>
         <button onclick="location.href='/admin/userlist'" class="btn btn-primary"   >清空条件</button>
+        <button  class="btn btn-success" data-toggle="modal" data-target="#myModal"  >添加会员</button>
     </div>
     <table class="table">
         <thead>
@@ -75,8 +76,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/admin/monidenglu/{{$list[$i]->userid}}">登陆用户</a></li>
-                        <li><a href="javascript:deletebyid({{$list[$i]->userid}})">删除会员</a></li>
+                        <li><a style="color:red" href="javascript:deletebyid({{$list[$i]->userid}})">删除会员</a></li>
                         <li><a href="javascript:dongjiebyid({{$list[$i]->userid}})">冻结会员</a></li>
+                        <li><a href="javascript:changepasswd({{$list[$i]->userid}})">修改密码</a></li>
                     </ul>
                 </li>
             </td>
@@ -85,11 +87,53 @@
         </tbody>
     </table>
     {!! $fenye !!}
+
+    <div class="modal fade" id="myModal" style="display: none;" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加会员</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">手机号</label>
+                        <input type="text" class="form-control" id="adduserphone" placeholder="手机号码">
+                    </div>
+                    <p>*密码默认为手机号码，稍后可修改*</p>
+                    <p>其他资料可以登录用户后修改</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="adduser()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section("htmlend")
     <script src="/web/js/addr.js" ></script>
     <script>
+        function adduser() {
+            var phone = $("#adduserphone").val();
+            if( $.trim(phone) == '' ) return;
+            $.post("/admin/adduser",{"phone":$.trim(phone)},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+        function changepasswd(uid) {
+            var passwd=prompt("输入新密码","");
+            if( $.trim(passwd) ) {
+                $.post("/admin/changepasswd",{"uid":uid,"passwd":passwd},function(d){
+                    if( res = ajaxdata(d) ) {
+                        toast(res);
+                    }
+                })
+            }
+        }
         function loadP() {
             for( var i=0;i<pro.length;i++ ) {
                 var node = "<option value='"+pro[i]+"'>"+pro[i]+"</option>";
@@ -147,12 +191,15 @@
             }
         });
         function deletebyid(tid) {
-            $.post("/admin/deletebyid",{
-                "table":"user",
-                "id":tid
-            },function(data){
-                location.reload();
-            })
+            if( confirm("删除后不可恢复，确定继续？") ) {
+                $.post("/admin/deletebyid",{
+                    "table":"user",
+                    "id":tid
+                },function(data){
+                    location.reload();
+                })
+            }
+
         }
         function dongjiebyid(id) {
             $.post("/admin/dongjiebyid",{

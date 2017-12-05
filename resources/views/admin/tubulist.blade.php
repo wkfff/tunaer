@@ -22,6 +22,7 @@
             <th>已报人数</th>
             <th>徒步距离</th>
             <th>领队</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -39,6 +40,7 @@
                 <td style="color:green" class="center">{{$tubulist[$i]->baoming}}人</td>
                 <td class="center">{{$tubulist[$i]->juli}}</td>
                 <td class="center">{{$tubulist[$i]->leader}}</td>
+                <td class="center">{{$tubulist[$i]->visible == "1"?"显示":"隐藏"}}</td>
                 <td class="center">
                     <li class="dropdown user" style="list-style: none">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -46,8 +48,11 @@
                             <i class="icon-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)" onclick="copytubu({{$tubulist[$i]->id}})" >复制线路</a></li>
                             <li><a href="/admin/updatetubu/{{$tubulist[$i]->id}}">修改</a></li>
+                            <li><a href="/admin/addorder/{{$tubulist[$i]->id}}">添加订单</a></li>
                             <li><a href="/admin/baominginfo/{{$tubulist[$i]->id}}">报名情况</a></li>
+                            <li><a href="javascript:void(0)" onclick="visible({{$tubulist[$i]->id}})" >显示/隐藏</a></li>
                             <li><a style="color:red" href="javascript:deletebyid({{$tubulist[$i]->id}})">删除</a></li>
                         </ul>
                     </li>
@@ -65,6 +70,21 @@
 @stop
 @section("htmlend")
     <script>
+        function visible(tid) {
+            $.post("/admin/tubuvisible/"+tid,{},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
+
+        function copytubu(tid) {
+            $.post("/admin/copytubu/"+tid,{},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
+        }
         function deletebyid(tid) {
             if( confirm("删除后不可恢复，是否继续？") ) {
                 $.post("/admin/deletebyid",{

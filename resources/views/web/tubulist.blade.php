@@ -100,7 +100,12 @@
                         <div style="font-size:14px;margin:10px 0;max-width:500px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
                             <span>活动特色：<a href="#">{{$list[$i]->tese}}</a></span>
                         </div>
-                        <a href="/tubu/tubudetail/{{$list[$i]->id}}"><button type="button" class="btn btn-info"style="width:110px;height:40px;font-size: 20px;outline:none;position:absolute;right:10px;bottom:30px;">活动报名</button></a>
+                        @if( time() - strtotime($list[$i]->jiezhi) > 0 )
+                            <span style="width:110px;height:40px;outline:none;position:absolute;right:10px;bottom:30px;background:#aaa;text-align: center;line-height:40px;color:#fff;">活动结束</span>
+                        @else
+                            <a href="/tubu/tubudetail/{{$list[$i]->id}}"><button type="button" class="btn btn-info"style="width:110px;height:40px;font-size: 20px;outline:none;position:absolute;right:10px;bottom:30px;">活动报名</button></a>
+                        @endif
+
                     </div>
                 </div>
                 @endfor
