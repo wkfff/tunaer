@@ -114,24 +114,26 @@ class PostController extends Controller{
 
     public function userhead($userid=null) {
         if( !$userid ) {
-            header("Location:/web/images/default.gif"); return;
+            header("Location:/web/images/defaultgirl.png"); return;
         }
-        $sql = " select head from userattr where uid=? ";
+        $sql = " select head,sex from userattr where uid=? ";
         $res = DB::select($sql,[$userid]);
-        if( count($res) >= 1 ) {
-            if( trim($res[0]->head) == '' ) {
-                header("Location:/web/images/default.gif");
+        if( count($res) > 0 ) {
+            if( !trim($res[0]->head) ) {
+                header("Location:/web/images/".($res[0]->sex=="男" ? "defaultboy.png":"defaultgirl.png"));
             }else{
                 if( strstr($res[0]->head,"http") ) {
-                    header("Location:".$res[0]->head);
+                    if(strlen($res[0]->head) <= 25) {
+                        header("Location:/web/images/".($res[0]->sex=="男" ? "defaultboy.png":"defaultgirl.png"));
+                    }else{
+                        header("Location:".$res[0]->head);
+                    }
                 }else{
                     header("Location:/web/data/images/".$res[0]->head);
                 }
-
             }
-
         }else{
-            header("Location:/web/images/default.gif");
+            header("Location:/web/images/defaultgirl.png");
         }
     }
 
@@ -462,9 +464,31 @@ class PostController extends Controller{
         $page = $request->input("page",1);
         $num = $request->input("num",10);
         if( checknull($yid) ) {
-            $sql = " select * from youjicm where yid=? and type=1 order by id desc limit ?,? ";
-            $youji = DB::select($sql,[$yid,($page-1)*$num,$num]);
-            echo json_encode($youji);
+//            $sql = " select * from youjicm where yid=? and type=1 order by id desc limit ?,? ";
+//            $youji = DB::select($sql,[$yid,($page-1)*$num,$num]);
+//            echo json_encode($youji);
+            $sql = " select * from youjicm where yid=? and pid=0 and type=1 order by id desc limit ?,? ";
+            $youjicm = DB::select($sql,[$yid,($page-1)*$num,$num]);
+            if( count($youjicm) == 0 ) {
+                echo json_encode(array()); return;
+            }
+            $youjicmids = array();
+            for($i=0;$i<count($youjicm);$i++) {
+                array_push($youjicmids,$youjicm[$i]->id);
+                $youjicm[$i]->sub = array();
+            }
+            $sql = " select * from youjicm where yid=? and pid in (".implode(',',$youjicmids).") order by id desc limit 200 ";
+            $subcm = DB::select($sql,[$yid]);
+            if( count($subcm) ) {
+                foreach($subcm as $key=>$val) {
+                    for($i=0;$i<count($youjicm);$i++) {
+                        if( $youjicm[$i]->id == $val->pid ) {
+                            array_push($youjicm[$i]->sub,$val);
+                        }
+                    }
+                }
+            }
+            echo json_encode($youjicm);
         }
     }
 //    统一下单
@@ -659,7 +683,7 @@ class PostController extends Controller{
         if( checknull($content,$tid) ) {
 //            检查重复赞
             if( $type == 2 ) {
-                $sql = " select * from tubucm where tid=? and uid=? and ctime like '%".date('Y-m-d')."%' ";
+                $sql = " select * from tubucm where tid=? and uid=? and type=2 and ctime like '%".date('Y-m-d')."%' ";
                 $r = DB::select($sql,[$tid,Session::get('uid')]);
                 if(count($r) > 0) {
                     echo "400-今日已赞"; return ;
@@ -679,14 +703,59 @@ class PostController extends Controller{
             }
         }
     }
+//    回复游记评论
+    public function youjisubcomment(Request $request) {
+        $yid = $request->input('yid');
+        $pid = $request->input('pid');
+        $content = $request->input('content');
+        $sql = " insert into youjicm (uid,yid,content,pid) values(?,?,?,?) ";
+        $res = DB::insert($sql,[Session::get('uid'),$yid,$content,$pid]);
+        if( $res ) {
+            echo "200-评论成功";
+        }else{
+            echo "400-评论失败";
+        }
+    }
+//    回复徒步评论
+    public function tubusubcomment(Request $request) {
+        $tid = $request->input('tid');
+        $pid = $request->input('pid');
+        $content = $request->input('content');
+        $sql = " insert into tubucm (uid,tid,content,pid) values(?,?,?,?) ";
+        $res = DB::insert($sql,[Session::get('uid'),$tid,$content,$pid]);
+        if( $res ) {
+            echo "200-评论成功";
+        }else{
+            echo "400-评论失败";
+        }
+    }
 //    获取徒步评论
     public function gettubucms(Request $request) {
         $tid = $request->input('yid','');
         $page = $request->input("page",1);
         $num = $request->input("num",10);
         if( checknull($tid) ) {
-            $sql = " select * from tubucm where tid=? order by id desc limit ?,? ";
+            $sql = " select * from tubucm where tid=? and pid=0 and type=1 order by id desc limit ?,? ";
             $tubucm = DB::select($sql,[$tid,($page-1)*$num,$num]);
+            if( count($tubucm) == 0 ) {
+                echo json_encode(array()); return;
+            }
+            $tubucmids = array();
+            for($i=0;$i<count($tubucm);$i++) {
+                array_push($tubucmids,$tubucm[$i]->id);
+                $tubucm[$i]->sub = array();
+            }
+            $sql = " select * from tubucm where tid=? and pid in (".implode(',',$tubucmids).") order by id desc limit 200 ";
+            $subcm = DB::select($sql,[$tid]);
+            if( count($subcm) ) {
+                foreach($subcm as $key=>$val) {
+                    for($i=0;$i<count($tubucm);$i++) {
+                        if( $tubucm[$i]->id == $val->pid ) {
+                            array_push($tubucm[$i]->sub,$val);
+                        }
+                    }
+                }
+            }
             echo json_encode($tubucm);
         }
     }

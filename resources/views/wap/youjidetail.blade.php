@@ -110,17 +110,38 @@
                         toast("没有更多了"); return ;
                     }
                     for( var i=0;i<res.length;i++ ) {
-                        var item = `<div style="margin:20px 0;vertical-align: middle;">
-                            <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:40px;width:40px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:20px;vertical-align: middle;float:left;cursor:pointer;margin-left:5px;" ></div>
-                            <div style="font-size:14px;padding:10px;float:left;max-width:80%;margin-left:0px;border-radius:5px;">${res[i].content}</div>
-                            <div style="clear:both;margin-left:55px;color:#999;" >
-                                ${res[i].ltime}
-                            </div>
-                        </div>`;
+                        var item = "<div style=\"margin:20px 0;vertical-align: middle;\">\
+                            <div onclick=\"location.href='/user/"+res[i].uid+"'\" style=\"display: inline-block;height:40px;width:40px;background-image:url(/head/"+res[i].uid+");background-size:cover;background-position:center;border-radius:20px;vertical-align: middle;float:left;cursor:pointer;margin-left:5px;\" ></div>\
+                            <div style=\"font-size:14px;padding:10px;float:left;max-width:80%;margin-left:0px;border-radius:5px;\">"+res[i].content+"<a href=\"javascript:void(0)\" onclick=\"huifu(this,"+res[i].id+",{{$list->id}})\">回复</a></div>\
+                            <div style=\"clear:both;margin-left:55px;color:#999;\" >\
+                                "+res[i].ltime+"\
+                            </div>\
+                        </div>";
                         $(".liuyanbox").append(item);
+                        if( res[i].sub.length ) {
+                            for( var j=0;j<res[i].sub.length;j++ ) {
+                                var item = "<div style=\"margin:20px 0;vertical-align: middle;margin-left:40px;\">\
+                            <div onclick=\"location.href='/user/"+res[i].sub[j].uid+"'\" style=\"display: inline-block;height:40px;width:40px;background-image:url(/head/"+res[i].sub[j].uid+");background-size:cover;background-position:center;border-radius:20px;vertical-align: middle;float:left;cursor:pointer;margin-left:5px;\" ></div>\
+                            <div style=\"font-size:14px;padding:10px;float:left;max-width:80%;margin-left:0px;border-radius:5px;\">"+res[i].sub[j].content+"</div>\
+                            <div style=\"clear:both;margin-left:55px;color:#999;\" >\
+                                "+res[i].sub[j].ltime+"\
+                            </div>\
+                        </div>";
+                                $(".liuyanbox").append(item);
+                            }
+                        }
                     }
                 }
             })
+        }
+        function huifu(that,pid,yid) {
+            if( content = prompt("输入回复内容","") ) {
+                $.post("/youjisubcomment",{"pid":pid,"content":content,"yid":yid},function(d){
+                    if( ajaxdata(d) ) {
+                        location.reload();
+                    }
+                })
+            }
         }
     </script>
 

@@ -388,36 +388,29 @@
                     if( res.length == 0 && window.liuyanpage!=1 ) {
                         toast("没有更多了"); return ;
                     }
+
                     for( var i=0;i<res.length;i++ ) {
-                        var item = `<div style="margin:20px 0;vertical-align: middle;">
-                            <div onclick="location.href='/user/${res[i].uid}'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;">${res[i].content}<a href="javascript:void(0)" onclick="huifu(this,${res[i].id})">回复</a></div>
-                            <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
-                                ${res[i].ctime}
-                            </div>
-                        </div>`;
+                        var item = "<div style=\"margin:20px 0;vertical-align: middle;\">" + "<div onclick=\"location.href='/user/"+res[i].uid+"'\" style=\"display: inline-block;height:60px;width:60px;background-image:url(/head/"+res[i].uid+");background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;\"></div>" + "<div style=\"font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;\">"+res[i].content+"<a href=\"javascript:void(0)\" onclick=\"huifu(this,"+res[i].id+",{{$detail->id}})\">回复</a></div>" + "<div style=\"clear:both;margin-left:90px;color:#999;text-align: left;\">" + res[i].ctime + "</div>" + "</div>";
                         $(".liuyanbox").append(item);
+                        if( res[i].sub.length ) {
+                            for( var j=0;j<res[i].sub.length;j++ ) {
+                                var item = "<div style=\"margin:20px 0;vertical-align: middle;margin-left:60px;\">" + "<div onclick=\"location.href='/user/"+res[i].sub[j].uid+"'\" style=\"display: inline-block;height:60px;width:60px;background-image:url(/head/"+res[i].sub[j].uid+");background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;\"></div>" + "<div style=\"font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;\">"+res[i].sub[j].content+"</div>" + "<div style=\"clear:both;margin-left:90px;color:#999;text-align: left;\">" + res[i].sub[j].ctime + "</div>" + "</div>";
+                                $(".liuyanbox").append(item);
+                            }
+                        }
+
                     }
                 }
             })
         }
-        function huifu(that,pid) {
+        function huifu(that,pid,tid) {
             if( content = prompt("输入回复内容","") ) {
-                var item = `<div style="margin:20px 0;vertical-align: middle;margin-left:60px;">
-                            <div onclick="location.href='/user/1'" style="display: inline-block;height:60px;width:60px;background-image:url(/head/87);background-size:cover;background-position:center;border-radius:30px;vertical-align: middle;float:left;cursor:pointer;" ></div>
-                            <div style="font-size:16px;padding:10px;float:left;max-width:600px;margin-left:20px;border-radius:5px;text-align:left;">${content}</div>
-                            <div style="clear:both;margin-left:90px;color:#999;text-align: left;" >
-                                ${(new Date()).toLocaleDateString()}
-                            </div>
-                        </div>`;
-                $(that).parent().parent().append(item);
-//                $.post("/subcomment",{"pid":pid,"content":content},function(d){
-//                    if( ajaxdata(d) ) {
-//                        location.reload();
-//                    }
-//                })
+                $.post("/tubusubcomment",{"pid":pid,"content":content,"tid":tid},function(d){
+                    if( ajaxdata(d) ) {
+                        location.reload();
+                    }
+                })
             }
-
         }
         function openorderbox() {
             @if( Session::get('uid') )

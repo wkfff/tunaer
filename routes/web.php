@@ -197,6 +197,8 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/inituserinfo","PostController@inituserinfo");
     Route::post("/youjicm","PostController@youjicm");
     Route::post("/tubucm","PostController@tubucm");
+    Route::post("/tubusubcomment","PostController@tubusubcomment");
+    Route::post("/youjisubcomment","PostController@youjisubcomment");
 
 
 });

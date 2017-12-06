@@ -54,12 +54,12 @@
     <div class="content" style="position:relative">
         <div class="wrap" style="position: absolute;top:-270px;width:100%;color:#fff;">
             <h2 style="color: #f4a219;">{{ isset($userinfo->uname)?$userinfo->uname : "资料待完善" }}
-                @if( $userinfo->sex == '女' )
-                    <script> window.sex = "女"; </script>
-                    <img src="/web/images/female.png" style="height:30px;">
-                @else
+                @if( $userinfo->sex == '男' )
                     <script> window.sex = "男"; </script>
                     <img src="/web/images/male.png" style="height:30px;">
+                @else
+                    <script> window.sex = "女"; </script>
+                    <img src="/web/images/female.png" style="height:30px;">
                 @endif
                 <div onclick="openchatbox({{$userinfo->userid}})" class="searchb"  >发消息</div>
                 <div onclick="zhaohu({{$userinfo->userid}})" style="margin-left:10px;background:dodgerblue" class="searchb"  >打招呼</div>
