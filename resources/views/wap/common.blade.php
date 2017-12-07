@@ -75,7 +75,9 @@
 
                 <div style="text-align:left" >
                     <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
-                    <span id="qqLoginBtn"></span>
+                    <a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=716027609&pt_3rd_aid=101428001&daid=383&pt_skey_valid=0&style=35&s_url=http%3A%2F%2Fconnect.qq.com&refer_cgi=authorize&which=&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin" style="float:left;" >QQ登录</a>
+                    <a href="javascript:void(0)" style="float:left;margin-left:10px;" >微信登录</a>
+                    {{--<span id="qqLoginBtn" style="display:none"></span>--}}
                 </div>
                 <script type="text/javascript">
                     QC.Login({

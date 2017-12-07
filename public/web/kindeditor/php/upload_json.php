@@ -7,6 +7,7 @@
  *
  */
 
+require_once dirname(__FILE__)."/../../../../app/Libs/fun.php";
 require_once 'JSON.php';
 
 $php_path = dirname(__FILE__) . '/';
@@ -121,7 +122,9 @@ if (empty($_FILES) === false) {
 	$file_path = $save_path . $new_file_name;
 	if (move_uploaded_file($tmp_name, $file_path) === false) {
 		alert("上传文件失败。");
-	}
+	}else{
+        img850($file_path);
+    }
 	@chmod($file_path, 0644);
 	$file_url = $save_url . $new_file_name;
 

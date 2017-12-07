@@ -59,11 +59,7 @@ function ql_register() {
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){
                 if( ajaxdata(d) ) {
-                    if( localStorage.getItem("enterurl") ) {
-                        location.href = localStorage.getItem("enterurl");
-                    }else{
-                        location.href = "/";
-                    }
+                    location.href = "/";
                 }
             })
         }
@@ -101,11 +97,7 @@ function otherlogin(openid,type) {
         var res = ajaxdata(d);
         if( res ) {
             localStorage.setItem("login_token",res);
-            if( localStorage.getItem("enterurl") ) {
-                location.href = localStorage.getItem("enterurl");
-            }else{
-                location.href = "/";
-            }
+            location.href = "/";
         }else{
             var data = QC.api("get_user_info", {
                 "access_token":localStorage.getItem("qq_access_token"),

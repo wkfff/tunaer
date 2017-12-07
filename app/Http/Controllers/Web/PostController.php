@@ -94,6 +94,7 @@ class PostController extends Controller{
             $imgname = $uid."_".time() .".". $file->getClientOriginalExtension();
             $destinationPath = base_path() . "/public/web/data/images/";
             if( $file->move($destinationPath,$imgname) ) {
+                @img850($destinationPath.$imgname,400);
                 $sql = " select * from userattr where uid=? ";
                 $res = DB::select($sql,[$uid]);
                 if( count($res) == 0 ) {
@@ -147,8 +148,8 @@ class PostController extends Controller{
         if ($file->isValid()) {
             $imgname = time() .".". $file->getClientOriginalExtension();
             $destinationPath = base_path() . "/public/web/data/images/";
-
             if( $file->move($destinationPath,$imgname) ) {
+                img850($destinationPath.$imgname);
                 // 返回图片名
                 echo $imgname;
             }else{
@@ -564,7 +565,7 @@ class PostController extends Controller{
                     if( $res ) {
                         $request->session()->flush();
                         // 直接登录
-                        login($phone,$passwd,true);
+                        login($phone,$passwd);
                     }else{
                         echo "400-注册失败";
                     }

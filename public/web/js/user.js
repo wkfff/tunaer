@@ -52,7 +52,7 @@ function uploadImg(t) {
     oXHR.onreadystatechange = function() {
         if (oXHR.readyState == 4 && oXHR.status == 200) {
             var d = oXHR.responseText; // 返回值
-            var img =`<div class="imgdiv" ondblclick="$(this).remove()"  style="background-image:url(/web/data/images/${d})" ></div>`;
+            var img ="<div class=\"imgdiv\" ondblclick=\"$(this).remove()\"  style=\"background-image:url(/web/data/images/"+d+")\" ></div>";
             $(".dongtaipics").append(img);
         }
     }

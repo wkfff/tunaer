@@ -181,6 +181,38 @@ function codeAbnormal($code,$log) {
     @DB::insert($sql,[$code,$log]);
 }
 
+/**
+ * @param $image 原图
+ * @param int $ww 目标宽
+ * @param int $hh 目标高
+ */
+function img850($image,$ww=850,$hh=0,$quality=100) {
+    @chmod($image,0777);
+    $filesize = filesize($image);
+    if( $filesize > 102400 ) {
+        $quality = (int)(($filesize/102400)*10);
+    }
+    $imgstream = file_get_contents($image);
+    $im = imagecreatefromstring($imgstream);
+    $x = imagesx($im); //原图片宽
+    $y = imagesy($im); //原图片高
+    if( $hh == 0 ) {
+        $hh = $y*$ww/$x;
+    }
+    if($x<=$ww) {
+//        如果图片宽度小于850 就不做处理了
+        file_put_contents($image,$imgstream);
+        return ;
+    }
+    if(function_exists("imagecreatetruecolor")) {
+        $dim = imagecreatetruecolor($ww, $hh); // 创建目标图gd2
+    } else {
+        $dim = imagecreate($ww, $hh); // 创建目标图gd1
+    }
+    imageCopyreSampled ($dim,$im,0,0,0,0,$ww,$hh,$x,$y);
+    header ("Content-type: image/jpeg");
+    imagejpeg ($dim, $image, $quality);
+}
 
 
 
