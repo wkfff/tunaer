@@ -449,7 +449,7 @@ class IndexController extends Controller
         $token = $arr->access_token; //这个地方获取到的是网页授权access_token,和普通的access_token 不一样
         $info = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$token."&openid=".$openid."&lang=zh_CN");
         $userinfo = json_decode($info);
-        return view("web.wxlogin",["userinfo"=>$userinfo]);
+        return view("web.wxlogin",["userinfo"=>json_encode($userinfo)]);
     }
     public function baominglist(Request $request,$tid) {
 
