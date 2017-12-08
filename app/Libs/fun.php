@@ -2,6 +2,8 @@
 
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 function checknull(...$args)
 {
@@ -214,18 +216,21 @@ function img850($image,$ww=850,$hh=0,$quality=100) {
     imagejpeg ($dim, $image, $quality);
 }
 
+/**
+ * @param bool $fresh 是否强制刷新
+ * @return mixed
+ */
+function getWxAccesstoken($fresh=false) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(Session::get('wx_token') && !$fresh) {
+//        echo "直接返回".Session::get('wx_token');
+        return Session::get('wxtoken');
+    }else{
+        $data = file_get_contents("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx10106332de6f9840&secret=4954bacf787c59654e7b8571831a5d38");
+        $arr = json_decode($data);
+        Session::put('wx_token',$arr->access_token);
+//        echo "重新获取：".Session::get('wx_token');
+        return $arr->access_token;
+    }
+}
 

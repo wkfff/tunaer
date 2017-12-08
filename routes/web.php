@@ -158,6 +158,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/searchtubu","IndexController@searchtubu");
     Route::get("/single/{id}","IndexController@singlepage");
     Route::get("/qqlogin","IndexController@qqlogin");
+    Route::get("/wxlogin","IndexController@wxlogin");
     Route::post("/otherlogin","PostController@otherlogin");
     Route::post("/tokenlogin","PostController@tokenlogin");
     Route::get("/baominglist/{tid}","IndexController@baominglist");
