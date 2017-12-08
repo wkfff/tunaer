@@ -93,7 +93,7 @@ function ql_register() {
         "passwd":passwd,
         "code":code,
         "qqid":localStorage.getItem("qq_openid"),
-        "wxid":localStorage.getItem("wx_openid"),
+        "wxid":localStorage.getItem("wx_openid")
     },function(data){
         var qqdata = JSON.parse(localStorage.getItem("qqdata"));
         var res = ajaxdata(data);

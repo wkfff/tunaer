@@ -575,13 +575,15 @@ class PostController extends Controller{
             }else{
 //                绑定qq或者微信 openid
                 if( $qqid != '' || $wxid != '' ) {
-                    if( $qqid != '' ) {
-                        $sql = " update user set qqid=?,passwd=? where id=? ";
-                        $r = DB::update($sql,[$qqid,md5($passwd),$res[0]->id]);
-                    }else{
-                        $sql = " update user set wxid=?,passwd=? where id=? ";
-                        $r = DB::update($sql,[$wxid,md5($passwd),$res[0]->id]);
-                    }
+                    $sql = " update user set wxid=?,passwd=?,qqid=? where id=? ";
+                    $r = DB::update($sql,[$wxid,md5($passwd),$qqid,$res[0]->id]);
+//                    if( $qqid != '' ) {
+//                        $sql = " update user set qqid=?,passwd=? where id=? ";
+//                        $r = DB::update($sql,[$qqid,md5($passwd),$res[0]->id]);
+//                    }else{
+//                        $sql = " update user set wxid=?,passwd=? where id=? ";
+//                        $r = DB::update($sql,[$wxid,md5($passwd),$res[0]->id]);
+//                    }
                     if( $r ) {
                         Session::put('uid', $res[0]->id);
                         Session::put('uname', $res[0]->uname);
@@ -767,7 +769,7 @@ class PostController extends Controller{
         if( checknull($openid,$type) ) {
             if( $type == "qq" ) {
                 $sql = " select user.id,userattr.uname from user left join userattr on user.id=userattr.uid where qqid=? ";
-            }else if( $type == "wx" ) {
+            }else if( $type == "weixin" ) {
                 $sql = " select user.id,userattr.uname from user left join userattr on user.id=userattr.uid where wxid=? ";
             }else{
                 echo "400-认证失败";return;
