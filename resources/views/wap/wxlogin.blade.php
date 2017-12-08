@@ -8,9 +8,8 @@
     <div class="content" style="margin-top:50px;">
 
         <p style="color:darkgrey;text-align: center;">正在检测用户身份．．．</p>
-        {{$userinfo}}
     </div>
-    <div class="modal fade" id="qqlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="wxlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:100%">
                 <div class="modal-header">
@@ -46,5 +45,16 @@
 @stop
 
 @section("htmlend")
-
+    <script>
+        $(document).ready(function(){
+            wxdata['nickname'] = "{{$userinfo->nickname}}";
+            wxdata['gender'] = "{{$userinfo->nickname=='1' ? "男":"女"}}";
+            wxdata['year'] = "1990";
+            wxdata['city'] = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
+            wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";
+            localStorage.setItem('qqdata',wxdata);
+            localStorage.setItem("qq_openid","{{$userinfo->openid}}");
+            otherlogin("{{$userinfo->openid}}","weixin");
+        });
+    </script>
 @stop
