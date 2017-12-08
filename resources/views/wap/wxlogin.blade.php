@@ -54,6 +54,7 @@
             wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";
             localStorage.setItem('qqdata',wxdata);
             localStorage.setItem("qq_openid","{{$userinfo->openid}}");
+            $("#wxlogin").modal("show");
             otherlogin("{{$userinfo->openid}}","weixin");
         });
     </script>

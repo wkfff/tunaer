@@ -111,7 +111,6 @@ function ql_register() {
 }
 // 第三方登录
 function otherlogin(openid,type) {
-
     $.post("/otherlogin",{"openid":openid,"type":type},function(d){
         var res = ajaxdata(d);
         if( res ) {
