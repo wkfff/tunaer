@@ -663,7 +663,7 @@ class PostController extends Controller{
 
         $page = $request->input("page",1);
         $num = $request->input("num",10);
-        $sql = " select * from tubuhuodong order by paixu desc,id desc limit ?,? ";
+        $sql = " select * from tubuhuodong where visible=1 order by paixu desc,id desc limit ?,? ";
         $tubus = DB::select($sql,[($page-1)*$num,$num]);
         echo json_encode($tubus);
     }
