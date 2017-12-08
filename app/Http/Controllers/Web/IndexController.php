@@ -446,7 +446,7 @@ class IndexController extends Controller
         $data = file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx10106332de6f9840&secret=4954bacf787c59654e7b8571831a5d38&code=".$code."&grant_type=authorization_code");
         $arr = json_decode($data);
         $openid = $arr->openid;
-        $token = $arr->token; //这个地方获取到的是网页授权access_token,和普通的access_token 不一样
+        $token = $arr->access_token; //这个地方获取到的是网页授权access_token,和普通的access_token 不一样
         $info = file_get_contents(" https://api.weixin.qq.com/sns/userinfo?access_token=".$token."&openid=".$openid."&lang=zh_CN");
         $userinfo = json_decode($info);
         return view("web.wxlogin",["userinfo"=>$userinfo]);
