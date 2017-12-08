@@ -52,7 +52,7 @@ class PostController extends Controller{
             if( $res ) {
 //                添加报名人数
 //                @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,$num);
-//                echo "200-success";
+                echo "200-success";
 //                添加常用游客
                 $youkearr = json_decode($youkes);
                 for( $i=0;$i<count($youkearr);$i++ ) {
