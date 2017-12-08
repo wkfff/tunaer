@@ -49,15 +49,18 @@
 @section("htmlend")
     <script>
         $(document).ready(function(){
+            alert("1");
             wxdata['nickname'] = "{{$userinfo->nickname}}";
             wxdata['gender'] = "{{$userinfo->sex=='1' ? "男":"女"}}";
             wxdata['year'] = "1990";
             wxdata['city'] = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
             wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";
             localStorage.setItem('qqdata',wxdata);
-            localStorage.setItem("qq_openid","{{$userinfo->openid}}");
+            localStorage.setItem("wx_openid","{{$userinfo->openid}}");
+            alert("3");
             $("#wxlogin").modal("show");
             otherlogin("{{$userinfo->openid}}","weixin");
+            alert("4");
         });
     </script>
 @stop
