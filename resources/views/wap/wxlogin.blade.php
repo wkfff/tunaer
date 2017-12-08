@@ -8,6 +8,8 @@
     <div class="content" style="margin-top:50px;">
 
         <p style="color:darkgrey;text-align: center;">正在检测用户身份．．．</p>
+        {{var_dump($userinfo)}}
+        {{$userinfo->openid}}
     </div>
     <div class="modal fade" id="wxlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
