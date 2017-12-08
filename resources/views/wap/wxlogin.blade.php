@@ -49,11 +49,11 @@
     <script>
         $(document).ready(function(){
 //            alert("1");
-            {{--wxdata['nickname'] = "{{$userinfo->nickname}}";--}}
-            {{--wxdata['gender'] = "{{$userinfo->sex=='1' ? '男':'女'}}";--}}
-            {{--wxdata['year'] = "1990";--}}
-            {{--wxdata['city'] = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";--}}
-            {{--wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";--}}
+            wxdata['nickname'] = "{{$userinfo->nickname}}";
+            wxdata['gender'] = "{{$userinfo->sex=='1' ? '男':'女'}}";
+            wxdata['year'] = "1990";
+            wxdata['city'] = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
+            wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";
 //            localStorage.setItem('qqdata',JSON.stringify(wxdata));
             localStorage.setItem("wx_openid","{{$userinfo->openid}}");
             alert("3");
