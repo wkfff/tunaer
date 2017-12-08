@@ -48,7 +48,7 @@
     <script>
         $(document).ready(function(){
             wxdata['nickname'] = "{{$userinfo->nickname}}";
-            wxdata['gender'] = "{{$userinfo->nickname=='1' ? "男":"女"}}";
+            wxdata['gender'] = "{{$userinfo->sex=='1' ? "男":"女"}}";
             wxdata['year'] = "1990";
             wxdata['city'] = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
             wxdata['figureurl_qq_2'] = "{{$userinfo->headimgurl}}";
