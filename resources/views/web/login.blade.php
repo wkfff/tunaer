@@ -21,9 +21,9 @@
     <div class="login_line" ></div>
     <div class="qrcode">
         <img src="/web/images/1506587848.png" alt="">
-        <div>扫描浏览手机版</div>
+        <div>微信扫描二维码</div>
+        <button onclick="alert('使用微信扫描二维码登录')"  style="background:#5DDF78;">微信登录</button>
         <button onclick="window.parent.location.href='https://graph.qq.com/oauth/show?which=Login&display=pc&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin'" style="background:#DC7164;cursor:pointer;">QQ登录</button>
-        <button onclick="alert('请用微信扫描上方二维码')"  style="background:#5DDF78;">微信登录</button>
     </div>
 
     <div class="register_close" onclick="window.parent.closelogin()"></div>
