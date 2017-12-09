@@ -96,9 +96,11 @@ function ql_register() {
         "wxid":localStorage.getItem("wx_openid")
     },function(data){
         var qqdata = JSON.parse(localStorage.getItem("qqdata"));
+        alert(qqdata.nickname);
         var res = ajaxdata(data);
         if( res ) {
             localStorage.setItem("login_token",res);
+            alert(res+":更新资料");
             $.post("/inituserinfo",{
                 "uname":qqdata.nickname,"sex":qqdata.gender,"age":parseInt((new Date().getFullYear() - qqdata.year)),"head":qqdata.figureurl_qq_2,"addr":qqdata.city
             },function(d){
