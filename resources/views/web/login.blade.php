@@ -23,7 +23,7 @@
         <img src="/web/images/1506587848.png" alt="">
         <div>扫描浏览手机版</div>
         <button onclick="window.parent.location.href='https://graph.qq.com/oauth/show?which=Login&display=pc&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin'" style="background:#DC7164;cursor:pointer;">QQ登录</button>
-        <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx10106332de6f9840&redirect_uri=http://www.cdtunaer.com/wxlogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"><button  style="background:#5DDF78;">微信登录</button></a>
+        <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wx10106332de6f9840&redirect_uri=http://www.cdtunaer.com/wxlogin&response_type=code&scope=snsapi_login#wechat_redirect"><button  style="background:#5DDF78;">微信登录</button></a>
     </div>
 
     <div class="register_close" onclick="window.parent.closelogin()"></div>
