@@ -76,7 +76,7 @@
                 <div style="text-align:left" >
                     <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
                     {{--<a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=716027609&pt_3rd_aid=101428001&daid=383&pt_skey_valid=0&style=35&s_url=http%3A%2F%2Fconnect.qq.com&refer_cgi=authorize&which=&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin" style="float:left;" >QQ登录</a>--}}
-                    <a href="javascript:vooid(0)" onclick="openQQ()" style="float:left;margin-left:10px;height:25px;width:80px;background:#007BBD;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >QQ登录</a>
+                    <a href="javascript:vooid(0)" onclick="openQQ()" style="float:left;height:25px;width:80px;background:#007BBD;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >QQ登录</a>
                     <span id="qqLoginBtn" style="float:left;"></span>
                     <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx10106332de6f9840&redirect_uri=http://www.cdtunaer.com/wxlogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect" style="float:left;margin-left:10px;height:25px;width:80px;background:#42A638;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >微信登录</a>
 
