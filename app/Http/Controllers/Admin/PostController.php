@@ -365,7 +365,7 @@ class PostController extends Controller{
     }
 
     public function copytubu($tid) {
-        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,baoming,phone,leader,pictures,tese,paixu,ptime,visible) select title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,baoming,phone,leader,pictures,tese,paixu,ptime,0 from tubuhuodong where id=?  ";
+        $sql = " insert into tubuhuodong (title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,baoming,phone,leader,pictures,tese,paixu,ptime,visible) select title,tuwen,types,howlong,startday,endday,price,mudidi,jingdian,neirong,jihetime,jihedidian,qiangdu,juli,jiaotong,need,jiezhi,0,phone,leader,pictures,tese,paixu,ptime,0 from tubuhuodong where id=?  ";
         $res = DB::insert($sql,[$tid]);
         if( $res ){
             echo "200-success";
