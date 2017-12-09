@@ -49,7 +49,7 @@ function ql_register() {
         "passwd":passwd,
         "code":code,
         "qqid":localStorage.getItem("qq_openid"),
-        "wxid":""
+        "wxid":localStorage.getItem("wx_openid")
     },function(data){
         var qqdata = JSON.parse(localStorage.getItem("qqdata"));
         var res = ajaxdata(data);
@@ -99,15 +99,19 @@ function otherlogin(openid,type) {
             localStorage.setItem("login_token",res);
             location.href = "/";
         }else{
-            var data = QC.api("get_user_info", {
-                "access_token":localStorage.getItem("qq_access_token"),
-                "openid":localStorage.getItem("qq_openid"),
-                "oauth_consumer_key":localStorage.getItem("101428001"),
-            }, "json", "GET").success(function(s){
-                localStorage.setItem("qqdata",JSON.stringify(s.data));
-                // $("#myModalLabel").append("<span>欢迎 <span style='color:red;font-weight:bold'>"+s.data.nickname+"</span>初次使用请绑定手机号码</span>")
-                $("#qqlogin").modal("show");
-            })
+            if( type == 'qq' ) {
+                var data = QC.api("get_user_info", {
+                    "access_token":localStorage.getItem("qq_access_token"),
+                    "openid":localStorage.getItem("qq_openid"),
+                    "oauth_consumer_key":localStorage.getItem("101428001"),
+                }, "json", "GET").success(function(s){
+                    localStorage.setItem("qqdata",JSON.stringify(s.data));
+                    $("#qqlogin").modal("show");
+                })
+            }else{
+                $("#wxlogin").modal("show");
+            }
+
         }
     })
 }

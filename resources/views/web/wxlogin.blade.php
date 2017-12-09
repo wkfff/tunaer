@@ -45,15 +45,17 @@
 @stop
 
 @section("htmlend")
-    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
-    <script type="text/javascript">
-        if( QC.Login.check() ) {
-            QC.Login.getMe(function(openId, accessToken){
-                localStorage.setItem("qq_access_token",accessToken);
-                localStorage.setItem("qq_openid",openId);
-                otherlogin(openId,"qq");
-            })
-        }
-
+    <script>
+        $(document).ready(function(){
+            var wxdata = {};
+            wxdata.nickname = "{{$userinfo->nickname}}";
+            wxdata.gender = "{{$userinfo->sex=='1' ? '男':'女'}}";
+            wxdata.year = "1990";
+            wxdata.city = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
+            wxdata.figureurl_qq_2 = "{{$userinfo->headimgurl}}";
+            localStorage.setItem('qqdata',JSON.stringify(wxdata));
+            localStorage.setItem("wx_openid","{{$userinfo->openid}}");
+            otherlogin("{{$userinfo->openid}}","weixin");
+        });
     </script>
 @stop
