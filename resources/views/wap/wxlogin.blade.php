@@ -56,7 +56,6 @@
             wxdata.city = "{{$userinfo->country.'-'.$userinfo->province.'-'.$userinfo->city}}";
             wxdata.figureurl_qq_2 = "{{$userinfo->headimgurl}}";
             localStorage.setItem('qqdata',JSON.stringify(wxdata));
-            alert(JSON.stringify(wxdata));
             localStorage.setItem("wx_openid","{{$userinfo->openid}}");
             $("#wxlogin").modal("show");
             otherlogin("{{$userinfo->openid}}","weixin");
