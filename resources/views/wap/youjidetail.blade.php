@@ -72,7 +72,7 @@
     <script>
         $(document).ready(function () {
             $(".tuwen").find("*").css("width","auto");
-            $(".tuwen").find("img").css("margin","5px 0");
+            $(".tuwen").find("img").css("margin","2.5px 0");
             $(".tuwen").find("div").css({
                 "padding":"0",
                 "margin":"0",
