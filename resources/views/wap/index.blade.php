@@ -121,13 +121,17 @@
                         toast("没有更多了"); return ;
                     }
                     for( var i=0;i<res.length;i++ ) {
-                        var item = `<a style="text-decoration: none" href="/tubu/tubudetail/${res[i].id}"><div class="newitem" >
-                            <div class="img" style="background-image:url(/admin/data/images/${res[i].pictures})"></div>
-                            <p class="title">${res[i].title}</p>
-                            <span style="display:block;font-size:12px;color:#666;margin-top:-5px;">出发时间：${res[i].startday}</span>
-                            <span style="display:block;font-size:12px;color:#666">活动地点：${res[i].mudidi}</span>
-                            <span class="price" >￥${res[i].price}</span>
-                        </div></a>`;
+                        var money = "<span class=\"price\" >￥"+res[i].price+"</span>";
+                        if( Date.parse(new Date()) - Date.parse(new Date(res[i].jiezhi)) > 0 ) {
+                            money = "<span style=\"width:70px;height:30px;outline:none;position:absolute;right:10px;bottom:5px;background:#ddd;text-align: center;line-height:30px;color:#777;\">活动结束</span>"
+                        }
+                        var item = "<a style=\"text-decoration: none\" href=\"/tubu/tubudetail/"+res[i].id+"\"><div class=\"newitem\" >\
+                            <div class=\"img\" style=\"background-image:url(/admin/data/images/"+res[i].pictures+")\"></div>\
+                            <p class=\"title\">"+res[i].title+"</p>\
+                            <span style=\"display:block;font-size:12px;color:#666;margin-top:-5px;\">出发时间："+res[i].startday+"</span>\
+                            <span style=\"display:block;font-size:12px;color:#666\">活动地点："+res[i].mudidi+"</span>\
+                            "+money+"\
+                        </div></a>";
                         $(".tublist").append(item);
                     }
                 }
