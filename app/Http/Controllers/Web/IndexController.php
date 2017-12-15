@@ -86,14 +86,14 @@ class IndexController extends Controller
 //            增加活动浏览量
             @DB::table("tubuhuodong")->where("id",$tid)->increment("readcnt",1);
 //            update tubuhuodong's baoming number
-            $sql = " select sum(num) as cnt from tubuorder where orderid<>'' and orderid<>0 and tid=? " ;
+            $sql = " select sum(num) as cnt from tubuorder where orderid<>'' and orderid<>'0' and tid=? " ;
             $rr = DB::select($sql,[$tid]);
-            if( $rr[0]->cnt != $res[0]->baoming ) {
+            //if( $rr[0]->cnt != $res[0]->baoming ) {
                 $sql = " update tubuhuodong set baoming=? where id=? ";
                 @DB::update($sql,[$rr[0]->cnt,$tid]);
                 $sql = " select tubuhuodong.*,tubutypes.name from tubuhuodong left join tubutypes on tubutypes.id=tubuhuodong.types where tubuhuodong.id=? ";
                 $res = DB::select($sql,[$tid]);
-            }
+           // }
 
 //            检查这个用户有没有报名
             $isjoined = false;

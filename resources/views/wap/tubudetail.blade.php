@@ -105,7 +105,7 @@
     <div style="color:orange;line-height:30px;position: relative;padding:10px;" >
         @if( strtotime($detail->startday) - time() > 0 )
             <p id="fukuanfangshi" style="color:#444;">
-                支付方式：<img style="cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/9.png" >微信支付<img style="margin-left:10px;cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/8.png" >支付宝
+                支付方式：<img style="cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/9.png" >微信支付<img style="margin-left:10px;cursor:pointer;vertical-align: middle;margin-right:5px;" src="/web/tubiao/8.png" ><span>支付宝<span>
             </p>
             @if( $isjoined )
 
@@ -250,6 +250,7 @@
         $(document).ready(function(){
             if(is_weixn()) {
                 $($("#fukuanfangshi").children("img")[1]).remove();
+		$("#fukuanfangshi").children("span").remove();
             }
         })
         function tiaozhuan(that) {
