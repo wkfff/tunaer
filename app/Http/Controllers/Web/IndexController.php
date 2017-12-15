@@ -519,5 +519,9 @@ class IndexController extends Controller
     public function forgetpassword() {
         return view("web.forgetpassword");
     }
+
+    public function tuiguang() {
+        return view('web.tuiguang');
+    }
     
 }

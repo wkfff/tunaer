@@ -62,10 +62,7 @@
         </div></a>
 	
     @endif
-
-
     <div class="content" >
-
         <div class="toppic">
             <div style="width:100px;height:100px;background-image: url(/head/{{$userinfo->userid}});border-radius:50px;
                     background-size:cover;background-position:center;position:absolute;left:50%;top:50%;margin-top:-70px;margin-left:-50px;overflow: hidden">
@@ -91,6 +88,9 @@
                 <span style="color:#fff;margin-left:5px;" >{{ isset($userinfo->addr)?$userinfo->addr : "保密" }}</span>
             </div>
         </div>
+        <a href="/tuiguang" style="text-decoration: none;"><div style="height:40px;background:#ff9046;color:white;text-align: center;line-height:40px;font-weight: bold">
+            进入我的推广
+        </div></a>
         <div class="usernav">
             <span onclick="changetab('dongtai')" >动态</span>
             <span onclick="changetab('youji')">游记</span>

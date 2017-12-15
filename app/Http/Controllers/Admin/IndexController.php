@@ -43,7 +43,7 @@ class IndexController extends Controller{
 //    用户列表
     public function userlist(Request $request){
         $page = $request->input("page",1);
-        $num = $request->input("num",13);
+        $num = $request->input("num",20);
         $ajax = $request->input("ajax","no");
         $sex = $request->input("sex","");
         $addr = $request->input("addr","");
@@ -51,7 +51,7 @@ class IndexController extends Controller{
         $mryst = $request->input("mryst","");
         $phone = $request->input("phone","");
         if( $phone != '' ) {
-            $sql = " select user.id as userid,user.phone,status,userattr.* from user inner join userattr on user.id=userattr.uid where user.phone='".$phone."' ";
+            $sql = " select user.id as userid,user.phone,status,proxy,userattr.* from user inner join userattr on user.id=userattr.uid where user.phone='".$phone."' ";
             $res = DB::select($sql);
             return view("admin.userlist",["list"=>$res,"fenye"=>""]);
         }
@@ -79,10 +79,10 @@ class IndexController extends Controller{
         }
         $count = DB::select("select count(*) as cnt from user inner join userattr on user.id=userattr.uid where user.status=1 ".$where);
 //        exit("select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 ".$where);
-        $sql = " select user.id as userid,user.phone,status,userattr.* from user inner join userattr on user.id=userattr.uid where 1=1 ".$where." order by user.id desc limit ?,? ";
+        $sql = " select user.id as userid,user.phone,status,proxy,userattr.* from user inner join userattr on user.id=userattr.uid where 1=1 ".$where." order by user.id desc limit ?,? ";
         $res = DB::select($sql,[($page-1)*$num,$num]);
         if( $ajax == 'no' ) {
-            return view("admin.userlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/userlist",$page,$num,$search)]);
+            return view("admin.userlist",["list"=>$res,"cnt"=>$count[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/admin/userlist",$page,$num,$search)]);
         }else{
             echo json_encode($res);
         }

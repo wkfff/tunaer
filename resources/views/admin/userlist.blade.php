@@ -46,7 +46,7 @@
             <th>地址</th>
             <th>婚况</th>
             <th>状态</th>
-            {{--<th>自我介绍</th>--}}
+            <th>代理</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -67,7 +67,13 @@
                     冻结
                 @endif
             </td>
-            {{--<td title="{{$list[$i]->intro}}" class="center">{{substr($list[$i]->intro,0,10)}}</td>--}}
+            <td class="center">
+                @if( $list[$i]->proxy == 1 )
+                    <span style="color:blue" >代理</span>
+                @else
+                    <span style="color:blue" >&nbsp;</span>
+                @endif
+            </td>
             <td class="center">
                 <li class="dropdown user" style="list-style: none">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -79,6 +85,7 @@
                         <li><a style="color:red" href="javascript:deletebyid({{$list[$i]->userid}})">删除会员</a></li>
                         <li><a href="javascript:dongjiebyid({{$list[$i]->userid}})">冻结会员</a></li>
                         <li><a href="javascript:changepasswd({{$list[$i]->userid}})">修改密码</a></li>
+                        <li><a style="color:blue" href="javascript:proxy({{$list[$i]->userid}},{{$list[$i]->proxy}})">代理/取消</a></li>
                     </ul>
                 </li>
             </td>
@@ -87,6 +94,7 @@
         </tbody>
     </table>
     {!! $fenye !!}
+    <span style="margin:5px;" >总计：{{$cnt}} 条数据</span>
 
     <div class="modal fade" id="myModal" style="display: none;" role="dialog" >
         <div class="modal-dialog" role="document">
@@ -133,6 +141,15 @@
                     }
                 })
             }
+        }
+        function proxy(uid,proxy) {
+            if( proxy == '1' )  proxy = 0;
+            else proxy = 1;
+            $.post("/admin/setproxy",{"uid":uid,"proxy":proxy},function(d){
+                if( ajaxdata(d) ) {
+                    location.reload();
+                }
+            })
         }
         function loadP() {
             for( var i=0;i<pro.length;i++ ) {

@@ -18,9 +18,9 @@ class logined
     {
         if( !Session::get('uid') ) {
             if( strtoupper($_SERVER['REQUEST_METHOD']) == 'GET' ) {
-                return redirect("/login");
+                return redirect('/login');
             }else{
-                exit("nologin");
+                exit("400-login need");
             }
         }
         return $next($request);

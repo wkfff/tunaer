@@ -110,7 +110,7 @@
 //            加载属性
         save();
 
-    },100)
+    },100);
     function fabu() {
         var t1 = $("#inputcls input");
         for( var i=0;i<t1.length;i++ ) {
@@ -146,8 +146,11 @@
         var imgs = [];
         for( var i=0 ; i<pics.length; i++ ) {
             var url = $(pics[i]).css("background-image");
-//                console.log(url.split('/').pop());
-            var img = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+            var tmp = url.split('/').pop();
+            if( !tmp ) {
+                continue;
+            }
+            var img = tmp.match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
             imgs.push(img);
         }
         window.shuxing.pictures = imgs.join("#");

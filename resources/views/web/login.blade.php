@@ -27,13 +27,13 @@
     </div>
 
     <div class="register_close" onclick="window.parent.closelogin()"></div>
-</div>
+
 </div>
 </body>
 </html>
 <script src="/web/js/jquery.min.js" ></script>
+<script src="/web/js/common.js" ></script>
 <script>
-
     $(".verify").click(function(e){
         $(".verify").attr("src","/verifycode?t="+(new Date().getTime()));
     })
@@ -47,20 +47,38 @@
             "passwd":passwd,
             "verifycode":code
         },function(data){
-            var res = window.parent.ajaxdata(data);
-            if( res ) {
-                localStorage.setItem("login_token",res);
-                if( localStorage.getItem("enterurl") ) {
-                    if( window.parent.location.href==localStorage.getItem("enterurl") ) {
-                        window.parent.location.reload();
+            if(window.parent.ajaxdata) {
+                var res = window.parent.ajaxdata(data);
+                if( res ) {
+                    localStorage.setItem("login_token",res);
+                    if( localStorage.getItem("enterurl") ) {
+                        if( window.parent.location.href==localStorage.getItem("enterurl") ) {
+                            window.parent.location.reload();
+                        }else{
+                            window.parent.location.href= localStorage.getItem("enterurl");
+                        }
                     }else{
-                        window.parent.location.href= localStorage.getItem("enterurl");
+                        window.parent.location.reload();
                     }
-                }else{
-                    window.parent.location.reload();
-                }
 
+                }
+            }else{
+                var res = ajaxdata(data);
+                if( res ) {
+                    localStorage.setItem("login_token",res);
+                    if( localStorage.getItem("enterurl") ) {
+                        if( location.href==localStorage.getItem("enterurl") ) {
+                            location.reload();
+                        }else{
+                            location.href= localStorage.getItem("enterurl");
+                        }
+                    }else{
+                        location.reload();
+                    }
+
+                }
             }
+
         })
     })
 </script>

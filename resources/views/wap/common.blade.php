@@ -45,11 +45,11 @@
 <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width:100%">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
-            </div>
+            {{--<div class="modal-header">--}}
+                {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+                    {{--<span aria-hidden="true">&times;</span></button>--}}
+                {{--<h4 class="modal-title" id="myModalLabel">用户登录</h4>--}}
+            {{--</div>--}}
             <div class="modal-body">
                 <div style="padding:20px;">
                     <div class="form-group">
@@ -69,14 +69,10 @@
                     <button type="button" onclick="lg_login()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
                     <p style="text-align:center;margin-top:10px" ><a href="/forgetpassword" target="_blank" style="color:#444;font-size:14px;">忘记密码？</a></p>
                 </div>
-            </div>
-            <div class="modal-footer">
                 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101428001" data-redirecturi="http://cdtunaer.com/qqlogin" charset="utf-8"></script>
-
                 <div style="text-align:left" >
-                    <a href="javascript:void(0)" style="float:right;" onclick="openreg()">注册新用户</a>
-                    {{--<a href="https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=716027609&pt_3rd_aid=101428001&daid=383&pt_skey_valid=0&style=35&s_url=http%3A%2F%2Fconnect.qq.com&refer_cgi=authorize&which=&client_id=101428001&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fcdtunaer.com%2Fqqlogin" style="float:left;" >QQ登录</a>--}}
-                    <a href="javascript:vooid(0)" onclick="openQQ()" style="float:left;height:25px;width:80px;background:#007BBD;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >QQ登录</a>
+                    <a href="javascript:void(0)" style="float:right;line-height:25px;" onclick="openreg()">注册新用户</a>
+                    <a href="javascript:void(0)" onclick="openQQ()" style="float:left;height:25px;width:80px;background:#007BBD;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >QQ登录</a>
                     <span id="qqLoginBtn" style="float:left;"></span>
                     <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx10106332de6f9840&redirect_uri=http://www.cdtunaer.com/wxlogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect" style="float:left;margin-left:10px;height:25px;width:80px;background:#5DDF78;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >微信登录</a>
 
@@ -88,10 +84,10 @@
                             redirectURI:"http://cdtunaer.com/qqlogin"
                         });
                     }
-//                    QC.Login({
-//                        btnId:"qqLoginBtn"    //插入按钮的节点id
-//                    });
                 </script>
+            </div>
+            <div class="modal-footer" style="opacity: 0;">
+
             </div>
         </div>
     </div>
@@ -99,11 +95,11 @@
 <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width:100%">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">注册新用户</h4>
-            </div>
+            {{--<div class="modal-header">--}}
+                {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+                    {{--<span aria-hidden="true">&times;</span></button>--}}
+                {{--<h4 class="modal-title" id="myModalLabel">注册新用户</h4>--}}
+            {{--</div>--}}
             <div class="modal-body">
                 <div style="padding:20px;">
                     <div class="form-group">
@@ -121,11 +117,16 @@
                         <input style="height:40px;" name="rg-passwd" type="password" class="form-control"  placeholder="登录密码">
                     </div>
 
-                    <button type="button" onclick="rg_register()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">登录</button>
+                    <button type="button" onclick="rg_register()" style="width:100%;height:40px;background-color:#337ab7" class="btn btn-primary ">立即注册</button>
                 </div>
             </div>
             <div class="modal-footer">
-                <div style="text-align:center" ><a href="javascript:void(0)" onclick="openlogion()">已有帐号登录</a></div>
+                <div style="text-align:center" >
+                    <a href="javascript:void(0)" style="float:right;line-height:25px;" onclick="openlogion()">已有帐号登录</a>
+                    <a href="javascript:void(0)" onclick="openQQ()" style="float:left;height:25px;width:80px;background:#007BBD;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >QQ登录</a>
+                    <span id="qqLoginBtn" style="float:left;"></span>
+                    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx10106332de6f9840&redirect_uri=http://www.cdtunaer.com/wxlogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect" style="float:left;margin-left:10px;height:25px;width:80px;background:#5DDF78;color:white;display: inline-block;text-align:center;line-height:25px;border-radius:5px;" >微信登录</a>
+</div>
             </div>
         </div>
     </div>

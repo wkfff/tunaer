@@ -373,4 +373,15 @@ class PostController extends Controller{
             echo "400-操作失败";
         }
     }
+    public function setproxy(Request $request) {
+        $uid = $request->input('uid');
+        $proxy = $request->input('proxy');
+        $sql = " update user set proxy=? where id=? ";
+        $res = DB::update($sql,[$proxy,$uid]);
+        if($res) {
+            echo "200-操作成功";
+        }else{
+            echo "400-error";
+        }
+    }
 }
