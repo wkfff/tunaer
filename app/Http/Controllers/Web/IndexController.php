@@ -40,7 +40,7 @@ class IndexController extends Controller
     }
 
     public function user($userid) {
-        $sql = " select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
+        $sql = " select user.id as userid,proxy,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 and user.id=? ";
         $res = DB::select($sql,[$userid]);
         //动态
 //        $sql = " select dongtai.* from dongtai inner join user on user.id=dongtai.uid where dongtai.uid=? order by dongtai.id desc limit 100 ";
@@ -520,8 +520,16 @@ class IndexController extends Controller
         return view("web.forgetpassword");
     }
 
-    public function tuiguang() {
-        return view('web.tuiguang');
+    public function tuiguang(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $sql = " select realname,mobile,money,ordertime,youkes,uid,tubuorder.orderid from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tubuorder.orderid<>'0' order by tubuorder.id desc limit ?,?  ";
+        $res = DB::select($sql,[0,($page-1)*$num,$num]);
+        $count = DB::select("select count(*) as cnt from tubuorder where proxy=? and orderid<>'0' ",[0]);
+        $sq = "select sum(money) as mon from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tubuorder.orderid<>'0' ";
+        $tixian = DB::select($sq,[0]);
+//        dd($res);
+        return view('web.tuiguang',["list"=>$res,'tixian'=>(int)($tixian[0]->mon*0.1),"fenye"=>fenye($count[0]->cnt,"/tuiguang",$page,$num)]);
     }
     
 }

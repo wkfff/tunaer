@@ -128,7 +128,7 @@
                         var item = "<a style=\"text-decoration: none\" href=\"/tubu/tubudetail/"+res[i].id+"\"><div class=\"newitem\" >\
                             <div class=\"img\" style=\"background-image:url(/admin/data/images/"+res[i].pictures+")\"></div>\
                             <p class=\"title\">"+res[i].title+"</p>\
-                            <span style=\"display:block;font-size:12px;color:#666;margin-top:-5px;\">出发时间："+res[i].startday+"</span>\
+                            <span style=\"display:block;font-size:12px;color:#666;margin-top:-5px;\">活动时间："+res[i].startday+"</span>\
                             <span style=\"display:block;font-size:12px;color:#666\">活动地点："+res[i].mudidi+"</span>\
                             "+money+"\
                         </div></a>";

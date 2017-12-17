@@ -88,9 +88,11 @@
                 <span style="color:#fff;margin-left:5px;" >{{ isset($userinfo->addr)?$userinfo->addr : "保密" }}</span>
             </div>
         </div>
-        <a href="/tuiguang" style="text-decoration: none;"><div style="height:40px;background:#ff9046;color:white;text-align: center;line-height:40px;font-weight: bold">
-            进入我的推广
-        </div></a>
+        @if($userinfo->proxy == 1)
+            <a href="/tuiguang" style="text-decoration: none;">
+                <div style="height:40px;background:#ff9046;color:white;text-align: center;line-height:40px;font-weight: bold">进入我的推广</div></a>
+        @endif
+
         <div class="usernav">
             <span onclick="changetab('dongtai')" >动态</span>
             <span onclick="changetab('youji')">游记</span>
@@ -171,7 +173,6 @@
             </div>
             <div class="tab shoporder">
                 <div class="shoporderbox">
-
                 </div>
                 <div style="clear:both;height:20px;" ></div>
                 <div onclick="getshoporder({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
@@ -183,12 +184,8 @@
                 <div style="clear:both;height:20px;" ></div>
                 <div onclick="gettubuorder({{$userinfo->userid}})" style="text-align:center;width:100%;color:dodgerblue;cursor:pointer;">加载更多</div>
             </div>
-
         </div>
-
     </div>
-
-
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:100%">
