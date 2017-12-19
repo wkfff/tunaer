@@ -63,6 +63,7 @@
             @endfor
             </tbody>
         </table>
+
     </div>
     {!! $fenye !!}
     <div style="height:55px;width:100%;"></div>
