@@ -1,5 +1,5 @@
 @extends("wap.common")
-@section("title","{$data->title}")
+@section("title",$data->title)
 @section("css")
     <style>
         .toppic{

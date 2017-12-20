@@ -164,10 +164,10 @@
 @yield("htmlend","")
 <script>
     $('.dropmenu').click(function(e){
-
         e.preventDefault();
-
         $(this).parent().find('ul').slideToggle();
-
     });
+    if( location.host == "cdtunaer.com" ) {
+        location.href = location.href.replace("cdtunaer.com","www.cdtunaer.com");
+    }
 </script>

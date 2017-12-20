@@ -1,5 +1,5 @@
 @extends("wap.common")
-@section("title","游记详情")
+@section("title",$list->title)
 @section("css")
 
     <style>

@@ -50,7 +50,7 @@
                         <td style="line-height:40px;">
                             {{str_replace('-','/',substr($list[$i]->ordertime,5,5))}}
                             @if( $j == 0 )
-                                @if( $list[$i]->orderid == '0'  )
+                                @if( $list[$i]->orderid == '0' || $list[$i]->money==''  )
                                     <span style="color:#666">未付款</span>
                                 @else
                                     <span style="color:#ff9046">&nbsp;￥{{$list[$i]->money}}</span>

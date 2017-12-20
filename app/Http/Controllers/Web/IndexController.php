@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
 
     public function index(Request $request) {
-        $sql = " select * from tubuhuodong order by paixu desc,id desc limit 10";
+        $sql = " select * from tubuhuodong where visible=1 order by paixu desc,id desc limit 10";
         $tubus = DB::select($sql);
         $sql = " select user.id as userid,userattr.* from user inner join userattr on user.id=userattr.uid where user.status=1 and userattr.head<>'' order by user.id desc limit 12";
         $users = DB::select($sql);

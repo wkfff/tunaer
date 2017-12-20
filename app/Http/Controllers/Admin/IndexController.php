@@ -50,6 +50,7 @@ class IndexController extends Controller{
         $age = $request->input("age","");
         $mryst = $request->input("mryst","");
         $phone = $request->input("phone","");
+
         if( $phone != '' ) {
             $sql = " select user.id as userid,user.phone,status,proxy,userattr.* from user inner join userattr on user.id=userattr.uid where user.phone='".$phone."' ";
             $res = DB::select($sql);

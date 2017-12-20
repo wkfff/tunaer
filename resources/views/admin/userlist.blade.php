@@ -94,7 +94,10 @@
         </tbody>
     </table>
     {!! $fenye !!}
-    <span style="margin:5px;" >总计：{{$cnt}} 条数据</span>
+    @if( isset($cnt) )
+        <span style="margin:5px;" >总计：{{$cnt}} 条数据</span>
+    @endif
+
 
     <div class="modal fade" id="myModal" style="display: none;" role="dialog" >
         <div class="modal-dialog" role="document">

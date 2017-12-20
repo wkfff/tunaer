@@ -1,5 +1,5 @@
 @extends("wap.common")
-@section("title","徒步游记")
+@section("title","徒哪儿会员-".$userinfo->uname)
 @section("css")
     <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
     <link rel="stylesheet" href="/wap/css/user.css">

@@ -1,5 +1,5 @@
 @extends("wap.common")
-@section("title","活动详情")
+@section("title",$detail->title)
 @section("css")
     <link rel="stylesheet" href="/web/css/swiper-3.4.2.min.css">
     <style>
