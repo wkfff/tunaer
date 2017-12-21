@@ -79,8 +79,8 @@
         <div id="sidebar-left" class="span2" style="overflow-y: auto;">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li><a href="/admin/index"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 主面板</span></a></li>
-                    <li><a href="/admin/userlist"><i class="icon-envelope"></i><span class="hidden-tablet"> 会员列表</span></a></li>
+                    <li><a href="/admin/index"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 主面板</span></a></li>
+                    <li><a href="/admin/userlist"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 会员列表</span></a></li>
                     <li>
                         <a class="dropmenu" style="cursor:pointer;color:#ff536a;font-weight:700"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 徒步活动</span><i class="icon-angle-down"></i></a>
                         <ul>
@@ -139,7 +139,8 @@
                             <li><a class="submenu" href="/admin/setting/mianban"><i class="icon-file-alt"></i><span class="hidden-tablet">快捷面板</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="/admin/payorder"><i class="icon-bar-chart"></i><span class="hidden-tablet"> 支付记录</span></a></li>
+                    <li><a href="/admin/payorder"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 支付记录</span></a></li>
+                    <li><a href="/admin/tixianlist"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 申请体现</span></a></li>
                 </ul>
             </div>
         </div>

@@ -903,4 +903,22 @@ class PostController extends Controller{
 //        curl_close($curl);
 //    }
 
+    public function tixian(Request $request){
+        $phone = $request->input('phone');
+        $sql = " select * from tixian where uid=? and done=0 ";
+        $r =  DB::select($sql,[Session::get('uid')]);
+        if( count($r) ) {
+            echo "400-请耐心等待处理..."; return;
+        }
+        $sq = "select sum(money) as mon from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tixian=0 and tubuorder.orderid<>'0' ";
+        $tixian = DB::select($sq,[Session::get('uid')]);
+        $sql = " insert into tixian (uid,mobile,money) values (?,?,?) ";
+        $res = DB::insert($sql,[Session::get('uid'),$phone,(int)($tixian[0]->mon*0.1)]);
+        if( $res ) {
+            echo "200-申请成功，请耐心等待";
+        }else{
+            echo "400-申请失败，请联系管理员";
+        }
+    }
+
 }

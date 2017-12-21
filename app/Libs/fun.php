@@ -44,6 +44,7 @@ function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
     }
     $pagecnt = ceil($count/$page);
     $html = "";
+
 //    小于５页直接输出
     if( $pagecnt <=5 ) {
         for( $i=0;$i<$pagecnt;$i++ ) {
@@ -77,6 +78,7 @@ function fenye($count,$url,$currentpage=1,$page=10,$search='?') {
         //        末页
         $html .= "<a href='".$url.$search."page=".$pagecnt."'>末页</a>";
     }
+
     return "<div class='fenye' >".$html."</div>";
 }
 

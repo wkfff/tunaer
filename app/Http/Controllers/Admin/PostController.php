@@ -384,4 +384,23 @@ class PostController extends Controller{
             echo "400-error";
         }
     }
+    public function dotixian(Request $request) {
+        $id = $request->input("id");
+        $sql = " select * from tixian where id=? ";
+        $res = DB::select($sql,[$id]);
+        if( count($res) ) {
+            DB::beginTransaction();
+            $r1 = DB::update("update tixian set done=1 where id=?",[$res[0]->id]);
+            $r2 = DB::update("update tubuorder set tixian=1 where proxy=? and tixian=0 and ordertime <= ? and orderid<>'0' ",[$res[0]->uid,$res[0]->stime]);
+            if( $r1 && $r2 ) {
+                DB::commit();
+            }else{
+                DB::rollback();
+            }
+            echo "200-success";
+        }else{
+            echo "400-error";
+        }
+
+    }
 }

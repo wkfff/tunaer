@@ -105,6 +105,9 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::post("/tubuvisible/{tid}","PostController@tubuvisible");
     Route::post("/copytubu/{tid}","PostController@copytubu");
     Route::post("/setproxy","PostController@setproxy");
+    Route::get("/tixianlist","IndexController@tixianlist");
+    Route::post("/dotixian","PostController@dotixian");
+    Route::get("/tuiguang/{uid}","IndexController@tuiguang");
 
 });
 //Access Key ID	Access Key Secret	状态	创建时间	操作
@@ -201,6 +204,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/tubucm","PostController@tubucm");
     Route::post("/tubusubcomment","PostController@tubusubcomment");
     Route::post("/youjisubcomment","PostController@youjisubcomment");
+    Route::post("/tixian","PostController@tixian");
 
 
 });

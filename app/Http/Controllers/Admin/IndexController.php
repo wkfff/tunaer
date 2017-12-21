@@ -452,5 +452,24 @@ class IndexController extends Controller{
         $res = DB::select($sql,[$tid]);
         return view("admin.addorder",["data"=>$res[0]]);
     }
+    public function tixianlist(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",100);
+        $sql = " select * from tixian limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        $count = DB::select("select count(*) as cnt from tixian order by id desc");
+        return view("admin.tixianlist",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/tixianlist",$page,$num)]);
+    }
+    public function tuiguang(Request $request,$uid){
+        $page = $request->input("page",1);
+        $num = $request->input("num",10);
+        $sql = " select realname,mobile,money,ordertime,youkes,uid,tubuorder.orderid,tixian from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tubuorder.orderid<>'0' order by tubuorder.id desc limit ?,?  ";
+        $res = DB::select($sql,[$uid,($page-1)*$num,$num]);
+
+        $count = DB::select("select count(*) as cnt from tubuorder where proxy=? and orderid<>'0' ",[$uid]);
+        $sq = "select sum(money) as mon from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tixian=0 and tubuorder.orderid<>'0' ";
+        $tixian = DB::select($sq,[$uid]);
+        return view('admin.tuiguang',["list"=>$res,'tixian'=>(int)($tixian[0]->mon*0.1),"fenye"=>fenye($count[0]->cnt,"/admin/tuiguang/".$uid,$page,$num)]);
+    }
 
 }
