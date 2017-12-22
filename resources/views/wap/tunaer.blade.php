@@ -32,9 +32,9 @@
             <ul class="am-slides" >
                 @for( $i=0;$i<count($list);$i++ )
                 <li>
-                    <a href="/tubu/tubudetail/{{$list[$i]->id}}"><div style="position:relative; background-image:url(/admin/data/images/{{$list[$i]->pictures}});height:270px;width:100%;background-size:cover;border-radius:2px;overflow: hidden"></a>
+                    <a href="/tubu/tubudetail/{{$list[$i]->id}}"><div style="position:relative; background-image:url(/admin/data/images/{{$list[$i]->pictures}});height:270px;width:100%;background-size:cover;border-radius:2px;overflow: hidden">
                         <div style="background-color:rgba(200,200,200,0.8);color:#333;position: absolute;bottom:0px;left:0px;padding:10px;">{{$list[$i]->title}}</div>
-                    </div>
+                    </div></a>
                 </li>
                 @endfor
             </ul>
