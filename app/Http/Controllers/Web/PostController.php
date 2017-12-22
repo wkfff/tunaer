@@ -27,6 +27,7 @@ class PostController extends Controller{
         $youkes = $request->input("youkes",'');
         $num = $request->input("num",'');
         $jihe = $request->input("jihe",'');
+        $proxy = $request->input("proxy",'0');
         $mark = $request->input("mark",'') == ''?"无":$request->input("mark",'');
         $uid = Session::get('uid');
 
@@ -47,8 +48,8 @@ class PostController extends Controller{
         if( trim($tid) == '' ) {
             echo "400-活动不存在";
         }else{
-            $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,youkes,realname) values (?,?,?,?,?,?,?,?) ";
-            $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname]);
+            $sql = " insert into tubuorder (uid,tid,jihe,mobile,num,mark,youkes,realname,proxy) values (?,?,?,?,?,?,?,?,?) ";
+            $res = DB::insert($sql,[$uid,$tid,$jihe,$mobile,$num,$mark,$youkes,$realname,$proxy]);
             if( $res ) {
 //                添加报名人数
 //                @DB::table('tubuhuodong')->where('id', $tid)->increment('baoming' ,$num);
@@ -71,7 +72,7 @@ class PostController extends Controller{
         $intro = $request->input('intro');
         $mryst = $request->input('mryst');
         $addr = $request->input('addr');
-        if( checknull($uname,$sex,$age,$intro,$mryst,$addr) ) {
+//        if( checknull($uname,$sex,$age,$intro,$mryst,$addr) ) {
             $sql = " select * from userattr where uid=? ";
             $res = DB::select($sql,[Session::get('uid')]);
             if( count($res) == 0 ) {
@@ -82,9 +83,9 @@ class PostController extends Controller{
                 $res = DB::update($sql,[$uname,$sex,$age,$intro,$mryst,$addr,Session::get('uid')]);
             }
             echo "200-修改成功";
-        }else{
-            echo "400-信息不完整";
-        }
+//        }else{
+//            echo "400-信息不完整";
+//        }
     }
 
     public function updatehead(Request $request){

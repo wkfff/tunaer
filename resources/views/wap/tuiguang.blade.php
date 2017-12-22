@@ -21,9 +21,10 @@
 @stop
 
 @section("body")
-    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-weight:bold;font-size:16px;letter-spacing: 3px;">
+    <div  style="width:100%;height:55px;background:rgba(255,255,255,1);color:#666;position:fixed;left:0px;top:0px;z-index:999;text-align:center;line-height:55px;border-bottom:1px solid #eee;font-size:16px;letter-spacing: 3px;">
         <span onclick="history.back()" style="float:left;position: absolute;left:10px;top:0px;line-height:55px;" class="glyphicon glyphicon-menu-left" ></span>
-        <span style="max-width:180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;line-height:55px;">推广情况</span>
+        <span style="max-width:180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;line-height:55px;font-weight:bold;">推广情况</span>
+        <a href="/tunaer/{{Session::get('uid')}}"><span  style="position: absolute;right:10px;top:0px;line-height:55px;font-size:14px;color:#44b5ff" >推广页面</span></a>
     </div>
     <div class="content" style="margin-top:15px;" >
         <table class="table" >

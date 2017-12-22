@@ -171,6 +171,7 @@ Route::group(['namespace' => 'Web'], function()
     Route::get("/head/{userid?}","PostController@userhead");
     Route::get("/forgetpassword","IndexController@forgetpassword");
     Route::post("/changepasswd","PostController@changepasswd");
+    Route::get("/tunaer/{uid}","IndexController@tunaer");
 
 });
 

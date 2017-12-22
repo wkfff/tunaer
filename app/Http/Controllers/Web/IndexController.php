@@ -531,6 +531,18 @@ class IndexController extends Controller
         $tixian = DB::select($sq,[Session::get('uid')]);
         return view('web.tuiguang',["list"=>$res,'tixian'=>(int)($tixian[0]->mon*0.1),"fenye"=>fenye($count[0]->cnt,"/tuiguang",$page,$num)]);
     }
+    public function tunaer($uid){
+        $sql = " select * from user where id=? and proxy=1 ";
+        $res = DB::select($sql,[$uid]);
+        if( count($res) ) {
+            $sql = " select * from tubuhuodong where jiezhi>? and startday>? order by paixu desc,id desc limit 20 ";
+            $res = DB::select($sql,[date("Y-m-d H:i:s"),date("Y-m-d H:i:s")]);
+            return view('web.tunaer',["list"=>$res,"spreadid"=>$uid]);
+        }else{
+            return view('web.error');
+        }
+
+    }
 
     
 }

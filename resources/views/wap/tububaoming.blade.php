@@ -177,7 +177,8 @@
                 youkes.push(pos);
             }
             youkes = JSON.stringify(youkes);
-            $.post("/tubu/baoming",{
+
+            var data = {
                 "tid":"{{$data->id}}",
                 "realname":c_name,
                 "mobile":c_mobile,
@@ -185,8 +186,21 @@
                 "num":tmp.length,
                 "jihe":jihe,
                 "youkes":youkes,
-                "mark":mark,
-            },function(d){
+                "mark":mark
+            }
+            if( localStorage.getItem('spreadid') ) {
+                var tmp = localStorage.getItem('spreadid');
+                var dtime = tmp.split("#")[1];
+                if( Date.parse(new Date())/1000 > dtime ) {
+                    console.log("推广过期");
+                    localStorage.removeItem('spreadid');
+                }else{
+                    console.log("可用推广");
+                    data.proxy = tmp.split("#")[0];
+                }
+            }
+
+            $.post("/tubu/baoming",data,function(d){
                 if( ajaxdata(d) ) {
                     $("#myModal").modal("hide");
                     toast("报名成功，请及时付款");
