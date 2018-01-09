@@ -71,6 +71,7 @@
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                <script> window.imgUrl = "{{explode("#",$detail->pictures)[0]}}" </script>
                 @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
                     <div class="swiper-slide" style="background-image:url(/admin/data/images/{{$imgs[$i]}});">
                     </div>
@@ -250,7 +251,7 @@
         $(document).ready(function(){
             if(is_weixn()) {
                 $($("#fukuanfangshi").children("img")[1]).remove();
-		$("#fukuanfangshi").children("span").remove();
+		        $("#fukuanfangshi").children("span").remove();
             }
         })
         function tiaozhuan(that) {
