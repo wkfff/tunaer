@@ -265,7 +265,7 @@ function getsignature() {
         'noncestr'=>'5d6f7g8h95467scasaas',   //不要填成了 公众号原始id
         'jsapi_ticket'=>getJsapiTicket(),
         'timestamp'=>$time,
-        'url'=>$_SERVER['REQUEST_URI']
+        'url'=>explode("#",$_SERVER['REQUEST_URI'])[0]
     );
     ksort($tmpArr);
     $buff = "";
