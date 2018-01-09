@@ -71,7 +71,7 @@
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <script> window.imgUrl = "{{explode("#",$detail->pictures)[0]}}";alert(window.imgUrl) </script>
+                <script> window.imgUrl = "/admin/data/images/{{explode("#",$detail->pictures)[0]}}";</script>
                 @for( $imgs = explode("#",$detail->pictures),$i=0;$i<count($imgs);$i++ )
                     <div class="swiper-slide" style="background-image:url(/admin/data/images/{{$imgs[$i]}});">
                     </div>
