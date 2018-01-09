@@ -52,3 +52,7 @@ use Illuminate\Http\Request;
 //账号：48111534
 //密码：17780708586
 
+
+//change master to master_host='122.112.198.197',master_port=3306,master_user='repl',master_password='123456',master_log_file='master-bin.000013',master_log_pos=44379499;
+
+//grant replication slave on *.* to 'repl'@'%' identified by '123456';

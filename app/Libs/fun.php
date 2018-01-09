@@ -235,6 +235,53 @@ function getWxAccesstoken($fresh=false) {
         return $arr->access_token;
     }
 }
-
+//获取微信token
+function getwxtoken() {
+    if (Cache::has('access_token')) {
+//        ...
+    }else{
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx10106332de6f9840&secret=4954bacf787c59654e7b8571831a5d38";
+        $res = file_get_contents($url);
+        $tmp = json_decode($res);
+        Cache::put('access_token', $tmp->access_token, 100);
+    }
+    return Cache::get('access_token');
+}
+function getJsapiTicket() {
+    if (Cache::has('jsapi_ticket')) {
+//        ...
+    }else{
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=".getwxtoken()."&type=jsapi";
+        $res = file_get_contents($url);
+        $tmp = json_decode($res);
+        Cache::put('jsapi_ticket', $tmp->ticket, 100);
+    }
+    return Cache::get('jsapi_ticket');
+}
+//获取微信签名
+function getsignature($url) {
+    $time = time();
+    $tmpArr = array(
+        'noncestr'=>'5d6f7g8h95467scasaas',   //不要填成了 公众号原始id
+        'jsapi_ticket'=>getJsapiTicket(),
+        'timestamp'=>$time,
+        'url'=>$url
+    );
+    ksort($tmpArr);
+    $buff = "";
+    foreach ($tmpArr as $k => $v) {
+        $buff .= $k . "=" . $v . "&";
+    }
+    $buff = trim($buff, "&");
+    $res = array(
+        'debug'=>'true',   //不要填成了 公众号原始id
+        'appId'=>'wx10106332de6f9840',
+        'timestamp'=>$time,
+        'nonceStr'=>'5d6f7g8h95467scasaas',
+        'signature'=>sha1($buff),
+        'jsApiList'=>"['onMenuShareTimeline','onMenuShareAppMessage']"
+    );
+    return json_encode($res);
+}
 
 

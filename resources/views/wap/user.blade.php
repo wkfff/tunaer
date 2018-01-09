@@ -90,7 +90,7 @@
         </div>
         @if($userinfo->proxy == 1)
             <a href="/tuiguang" style="text-decoration: none;">
-                <div style="height:40px;background:#ff9046;color:white;text-align: center;line-height:40px;font-weight: bold">进入我的推广</div></a>
+                <div style="height:40px;background:#ff9046;color:white;text-align: center;line-height:40px;font-weight: bold">进入我的分销</div></a>
         @endif
 
         <div class="usernav">
