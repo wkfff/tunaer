@@ -20,6 +20,9 @@
         // alert('13')
         wx.config({!! getsignature() !!});
         wx.ready(function(){
+            wx.hideMenuItems({
+                menuList: ['menuItem:share:timeline'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+            });
             wx.onMenuShareTimeline({
                 title: 'wechat-php-sdk博客',
                 desc: '微信公众平台php开发包,细化各项接口操作,支持链式调用。项目创建人：dodgepudding 项目地址：https://github.com/dodgepudding/wechat-php-sdk',
