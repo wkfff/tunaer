@@ -12,7 +12,7 @@
         }
         .tuwen{
             font-size:11px !important;width:100%;padding:5px;
-            overflow: hidden;margin-top:10px;display:none;
+            overflow: hidden;margin-top:20px;display:none;
         }
         .tuwen img{
             max-width:100% !important;height:auto !important;
@@ -72,7 +72,7 @@
     <script>
         $(document).ready(function () {
             $(".tuwen").find("*").css("width","auto");
-            $(".tuwen").find("img").css("margin","0.5px 0");
+            $(".tuwen").find("img").css("margin","5px 0");
             $(".tuwen").find("div").css({
                 "padding":"0",
                 "margin":"0",
