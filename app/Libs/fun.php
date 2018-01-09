@@ -279,7 +279,7 @@ function getsignature() {
         'timestamp'=>$time,
         'nonceStr'=>'5d6f7g8h95467scasaas',
         'signature'=>sha1($buff),
-        'jsApiList'=>"['onMenuShareTimeline','onMenuShareAppMessage']"
+        'jsApiList'=>['onMenuShareTimeline','onMenuShareAppMessage']
     );
     return json_encode($res);
 }
