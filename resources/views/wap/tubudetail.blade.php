@@ -290,6 +290,7 @@
             }
         }
         $(document).ready(function () {
+            window.desc = $.trim($("#hdxq").next().text()).substr(0,50);
             var mySwiper = new Swiper ('.swiper-container', {
                 autoplay:5000,
                 loop: true,
