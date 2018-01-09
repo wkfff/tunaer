@@ -19,8 +19,8 @@
     <script>
         // alert('13')
         wx.config({!! getsignature() !!});
-        wx.ready(function(res){
-            alert(res);
+        wx.ready(function(){
+            alert('123');
         });
         wx.error(function(res){
             alert(res);
