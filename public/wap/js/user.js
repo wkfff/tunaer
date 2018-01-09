@@ -120,7 +120,8 @@ function fadongtai(t) {
     var tmp = new Array();
     for( var i=0;i<pics.length;i++ ) {
         var url = $(pics[i]).css("background-image");
-        var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+        var pic = url.split('/').pop();
+        pic = pic.substr(0,pic.length-1);
         tmp.push(pic);
     }
     if( tmp.length == 0 ) {
