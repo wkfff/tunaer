@@ -22,11 +22,11 @@
             location.href = location.href.replace("cdtunaer.com","www.cdtunaer.com");
         }
     </script>
-    @if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false && $_SERVER['REMOTE_ADDR'] == '124.161.23.11' )
+    @if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false && $_SERVER['REMOTE_ADDR'] == 'q124.161.23.11' )
         {{--@if( 1==1 )--}}
         <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
         <script>
-            alert('13');
+            // alert('13')
             wx.config({!! getsignature() !!});
             wx.ready(function(){
             });
