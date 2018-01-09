@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
 
     public function index(Request $request) {
-//        echo getJsapiTicket();
+//        echo getsignature("http://localhost:8080/");
 //        return;
         $sql = " select * from tubuhuodong where visible=1 order by paixu desc,id desc limit 10";
         $tubus = DB::select($sql);

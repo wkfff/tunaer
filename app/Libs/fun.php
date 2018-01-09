@@ -259,13 +259,13 @@ function getJsapiTicket() {
     return Cache::get('jsapi_ticket');
 }
 //获取微信签名
-function getsignature($url) {
+function getsignature() {
     $time = time();
     $tmpArr = array(
         'noncestr'=>'5d6f7g8h95467scasaas',   //不要填成了 公众号原始id
         'jsapi_ticket'=>getJsapiTicket(),
         'timestamp'=>$time,
-        'url'=>$url
+        'url'=>$_SERVER['REQUEST_URI']
     );
     ksort($tmpArr);
     $buff = "";

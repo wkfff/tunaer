@@ -22,6 +22,34 @@
             location.href = location.href.replace("cdtunaer.com","www.cdtunaer.com");
         }
     </script>
+    @if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false && $_SERVER['REMOTE_ADDR'] == '183.222.50.199' )
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
+        <script>
+            alert('...');
+            wx.config("{{getsignature()}}");
+            wx.ready(function(){
+            });
+            wx.error(function(res){
+            });
+            wx.onMenuShareTimeline({
+                title: document.title,
+                link: location.href,
+                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                success: function () { },
+                cancel: function () { }
+            });
+            wx.onMenuShareAppMessage({
+                title: document.title,
+                link: location.href,
+                desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                type: '',
+                dataUrl: '',
+                success: function () { },
+                cancel: function () { }
+            });
+        </script>
+    @endif
 </head>
 <body >
 
