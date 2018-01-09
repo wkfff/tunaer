@@ -36,34 +36,34 @@
             ]
             wx.config(jdata);
             wx.ready(function(){
+                wx.onMenuShareTimeline({
+                    title: "徒哪儿-"+document.title,
+                    link: location.href,
+                    imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
+                });
+                wx.onMenuShareAppMessage({
+                    title: "徒哪儿-"+document.title,
+                    link: location.href,
+                    desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+                    imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                    type: '',
+                    dataUrl: ''
+                });
+                wx.onMenuShareQQ({
+                    title: "徒哪儿-"+document.title,
+                    link: location.href,
+                    desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+                    imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
+                });
+                wx.onMenuShareQZone({
+                    title: "徒哪儿-"+document.title,
+                    link: location.href,
+                    desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+                    imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
+                });
             });
             wx.error(function(res){
                 alert(res);
-            });
-            wx.onMenuShareTimeline({
-                title: "徒哪儿-"+document.title,
-                link: location.href,
-                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
-            });
-            wx.onMenuShareAppMessage({
-                title: "徒哪儿-"+document.title,
-                link: location.href,
-                desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
-                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
-                type: '',
-                dataUrl: ''
-            });
-            wx.onMenuShareQQ({
-                title: "徒哪儿-"+document.title,
-                link: location.href,
-                desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
-                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
-            });
-            wx.onMenuShareQZone({
-                title: "徒哪儿-"+document.title,
-                link: location.href,
-                desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
-                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png'
             });
 
 
