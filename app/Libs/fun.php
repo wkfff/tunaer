@@ -274,7 +274,7 @@ function getsignature() {
     }
     $buff = trim($buff, "&");
     $res = array(
-        'debug'=>true,   //不要填成了 公众号原始id
+        'debug'=>false, 
         'appId'=>'wx10106332de6f9840',
         'timestamp'=>$time,
         'nonceStr'=>'5d6f7g8h95467scasaas',
