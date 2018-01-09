@@ -19,9 +19,6 @@
     <script>
 
         wx.config({!! getsignature() !!});
-        setTimeout(function(){
-            alert(JSON.stringify(wx));
-        },5000)
         wx.ready(function(){
             alert(JSON.stringify(wx));
 
