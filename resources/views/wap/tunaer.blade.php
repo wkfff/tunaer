@@ -24,7 +24,7 @@
         wx.error(function(res){
         });
         wx.onMenuShareTimeline({
-            title: document.title,
+            title: "345678",
             link: location.href,
             imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
             success: function () { },
