@@ -13,7 +13,35 @@
     <link href="/wap/tuiguang/css.css?ty=3" rel="stylesheet" />
     </head>
 <body>
-
+@if( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false )
+    {{--@if( 1==1 )--}}
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
+    <script>
+        // alert('13')
+        wx.config({!! getsignature() !!});
+        wx.ready(function(){
+        });
+        wx.error(function(res){
+        });
+        wx.onMenuShareTimeline({
+            title: document.title,
+            link: location.href,
+            imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+            success: function () { },
+            cancel: function () { }
+        });
+        wx.onMenuShareAppMessage({
+            title: document.title,
+            link: location.href,
+            desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+            imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+            type: '',
+            dataUrl: '',
+            success: function () { },
+            cancel: function () { }
+        });
+    </script>
+@endif
 <div class="maindiv">
     <header>
         <div class="logo">
