@@ -20,6 +20,7 @@
         // alert('13')
         wx.config({!! getsignature() !!});
         wx.ready(function(){
+            alert(wx);
             wx.onMenuShareTimeline({
                 title: "345678",
                 link: location.href,
