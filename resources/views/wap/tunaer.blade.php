@@ -20,30 +20,30 @@
         // alert('13')
         wx.config({!! getsignature() !!});
         wx.ready(function(){
-            alert('123');
+            wx.onMenuShareTimeline({
+                title: "345678",
+                link: location.href,
+                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                success: function () { },
+                cancel: function () {
+                    alert('quxiao');
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: document.title,
+                link: location.href,
+                desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
+                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                type: '',
+                dataUrl: '',
+                success: function () { },
+                cancel: function () { }
+            });
         });
         wx.error(function(res){
             alert(res);
         });
-        wx.onMenuShareTimeline({
-            title: "345678",
-            link: location.href,
-            imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
-            success: function () { },
-            cancel: function () {
-                alert('quxiao');
-            }
-        });
-        wx.onMenuShareAppMessage({
-            title: document.title,
-            link: location.href,
-            desc: '徒哪儿户外俱乐部邀请大家参加徒步活动，健康徒步，有氧运动，让户外更加精彩。点击即可报名',
-            imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
-            type: '',
-            dataUrl: '',
-            success: function () { },
-            cancel: function () { }
-        });
+
 
     </script>
 @endif
