@@ -86,7 +86,13 @@
             </ul>
         </div>
     </div>
+    @if( Session::get('uid') )
+    <div class="btn"><a href="/tubulist" id="Areg_X">你已登陆，去参加徒步活动</a></div>
+    @else
     <div class="btn"><a href="/register" id="Areg_X">立即注册会员</a></div>
+    @endif
+
+
     <div class="btn divWX" onclick="img2big($('#wxpic')[0])"><a href="javascript:void(0)">关注徒哪儿微信公众号</a></div>
     <img src="/web/kindeditor/attached/image/20171101/20171101164558_62102.jpg" id="wxpic" style="display: none">
     <section id="about">
