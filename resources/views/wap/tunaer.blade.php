@@ -18,25 +18,25 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
     <script>
 
-        wx.config({!! getsignature() !!});
+        var jdata = {!! getsignature() !!};
+        jdata.jsApiList = [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo'
+        ]
+        wx.config(jdata);
         wx.ready(function(){
-            wx.checkJsApi({
-                jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-                success: function(res) {
-                    alert(JSON.stringify(res));
+            wx.onMenuShareTimeline({
+                title: "345678",
+                link: location.href,
+                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+                success: function () { },
+                cancel: function () {
+                    alert('quxiao');
                 }
             });
-
-
-            // wx.onMenuShareTimeline({
-            //     title: "345678",
-            //     link: location.href,
-            //     imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
-            //     success: function () { },
-            //     cancel: function () {
-            //         alert('quxiao');
-            //     }
-            // });
             // wx.onMenuShareAppMessage({
             //     title: document.title,
             //     link: location.href,
