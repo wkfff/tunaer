@@ -21,7 +21,7 @@
         wx.config({!! getsignature() !!});
         wx.ready(function(){
             wx.checkJsApi({
-                jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
                 success: function(res) {
                     alert(JSON.stringify(res));
                 }
