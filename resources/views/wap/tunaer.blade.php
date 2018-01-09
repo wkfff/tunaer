@@ -17,8 +17,11 @@
     {{--@if( 1==1 )--}}
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
     <script>
-        // alert('13')
+
         wx.config({!! getsignature() !!});
+        setTimeout(function(){
+            alert(JSON.stringify(wx));
+        },5000)
         wx.ready(function(){
             alert(JSON.stringify(wx));
 
