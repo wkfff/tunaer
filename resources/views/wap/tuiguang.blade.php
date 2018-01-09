@@ -26,7 +26,7 @@
         <span style="max-width:180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;display:inline-block;line-height:55px;font-weight:bold;">推广情况</span>
         <a href="/tunaer/{{Session::get('uid')}}"><span  style="position: absolute;right:10px;top:0px;line-height:55px;font-size:14px;color:#44b5ff" >推广页面</span></a>
     </div>
-    <div class="content" style="margin-top:15px;" >
+    <div class="content" style="margin-top:55px;" >
         <table class="table" >
             <thead>
             <tr style="background:#64B5ED;color:#fff;height:40px;line-height:40px;">
