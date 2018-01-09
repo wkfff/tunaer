@@ -20,7 +20,8 @@
     @if( $_SERVER['REMOTE_ADDR'] == '183.222.50.199' )
         <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
         <script>
-            alert('123');
+            // alert('123');
+            console.log("{{getsignature()}}");
             {{--wx.config("{{getsignature()}}");--}}
             wx.ready(function(){
             });
