@@ -23,27 +23,16 @@
             wx.hideMenuItems({
                 menuList: ['menuItem:share:timeline'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
             });
-            wx.onMenuShareTimeline({
-                title: 'wechat-php-sdk博客',
-                desc: '微信公众平台php开发包,细化各项接口操作,支持链式调用。项目创建人：dodgepudding 项目地址：https://github.com/dodgepudding/wechat-php-sdk',
-                link: 'http://binsee.github.io/wechat-php-sdk/',
-                imgUrl: 'http://binsee.github.io/wechat-php-sdk/img/author.jpg',
-                trigger: function (res) {
-                    alert("点击分享：" +JSON.stringify(res));
-                    // 用户确认分享后执行的回调函数
-                },
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
-                    alert("分享成功：" +JSON.stringify(res));
-                    // 用户确认分享后执行的回调函数
-                },
-                cancel: function (res) {
-                    alert("取消分享：" +JSON.stringify(res));
-                    // 用户取消分享后执行的回调函数
-                },
-                fail:function (res) {
-                    alert("分享失败：" +JSON.stringify(res));
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 }
             });
+
+
             // wx.onMenuShareTimeline({
             //     title: "345678",
             //     link: location.href,
