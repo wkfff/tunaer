@@ -73,7 +73,7 @@
         </div>
     </header>
     <!-----------轮播banner----------->
-    <div id="index_banner" style="margin:0 10px;">
+    <div id="index_banner" style="margin:0px;">
         <div class="am-slider am-slider-default" >
             <ul class="am-slides" >
                 @for( $i=0;$i<count($list);$i++ )
