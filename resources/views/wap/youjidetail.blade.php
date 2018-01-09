@@ -69,8 +69,10 @@
 
 @stop
 @section("htmlend")
+
     <script>
         $(document).ready(function () {
+            window.imgUrl = $(".tuwen").find("img")[0].src;
             $(".tuwen").find("*").css("width","auto");
             $(".tuwen").find("img").css("margin","5px 0");
             $(".tuwen").find("div").css({

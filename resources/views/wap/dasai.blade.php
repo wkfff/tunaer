@@ -53,7 +53,7 @@
     </style>
 @stop
 @section("body")
-
+    <script> window.imgUrl = "http://www.cdtunaer.com/admin/data/images/{{$data->pic}}"</script>
     <div class="toppic" style="background-image: url(/admin/data/images/{{ $data->pic }});" ></div>
     <div onclick="history.back()" style="width:40px;height:30px;background:rgba(0,0,0,0.3);color:#fff;position:fixed;left:10px;top:10px;z-index:999;text-align:center;line-height:30px;">
         <span class="glyphicon glyphicon-menu-left" ></span>
