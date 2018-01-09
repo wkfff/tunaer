@@ -21,7 +21,7 @@
         <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" ></script>
         <script>
             // alert('123');
-            console.log("{{getsignature()}}");
+            {{--console.log("{{getsignature()}}");--}}
             {{--wx.config("{{getsignature()}}");--}}
             wx.ready(function(){
             });
