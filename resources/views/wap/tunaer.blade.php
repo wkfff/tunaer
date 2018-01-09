@@ -20,16 +20,36 @@
         // alert('13')
         wx.config({!! getsignature() !!});
         wx.ready(function(){
-            alert(wx);
             wx.onMenuShareTimeline({
-                title: "345678",
-                link: location.href,
-                imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
-                success: function () { },
-                cancel: function () {
-                    alert('quxiao');
+                title: 'wechat-php-sdk博客',
+                desc: '微信公众平台php开发包,细化各项接口操作,支持链式调用。项目创建人：dodgepudding 项目地址：https://github.com/dodgepudding/wechat-php-sdk',
+                link: 'http://binsee.github.io/wechat-php-sdk/',
+                imgUrl: 'http://binsee.github.io/wechat-php-sdk/img/author.jpg',
+                trigger: function (res) {
+                    alert("点击分享：" +JSON.stringify(res));
+                    // 用户确认分享后执行的回调函数
+                },
+                success: function (res) {
+                    alert("分享成功：" +JSON.stringify(res));
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function (res) {
+                    alert("取消分享：" +JSON.stringify(res));
+                    // 用户取消分享后执行的回调函数
+                },
+                fail:function (res) {
+                    alert("分享失败：" +JSON.stringify(res));
                 }
             });
+            // wx.onMenuShareTimeline({
+            //     title: "345678",
+            //     link: location.href,
+            //     imgUrl: 'http://www.cdtunaer.com/web/images/admin.png',
+            //     success: function () { },
+            //     cancel: function () {
+            //         alert('quxiao');
+            //     }
+            // });
             wx.onMenuShareAppMessage({
                 title: document.title,
                 link: location.href,
