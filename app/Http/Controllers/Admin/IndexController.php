@@ -471,5 +471,60 @@ class IndexController extends Controller{
         $tixian = DB::select($sq,[$uid]);
         return view('admin.tuiguang',["list"=>$res,'tixian'=>(int)($tixian[0]->mon*0.1),"fenye"=>fenye($count[0]->cnt,"/admin/tuiguang/".$uid,$page,$num)]);
     }
+    public function fenxiaoOrders(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $count = DB::select(" select count(*) as cnt from tubuorder where proxy>0 ");
+        $sql = " select tubuorder.*,tubuhuodong.title from tubuorder left join userattr on tubuorder.uid=userattr.uid left join tubuhuodong on tubuorder.tid=tubuhuodong.id where proxy>0  order by tubuorder.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        return view("admin.fenxiaoOrders",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/fenxiao/orders",$page,$num)]);
+    }
+    public function fenxiaoUsers(Request $request) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",20);
+        $ajax = $request->input("ajax","no");
+        $sex = $request->input("sex","");
+        $addr = $request->input("addr","");
+        $age = $request->input("age","");
+        $mryst = $request->input("mryst","");
+        $phone = $request->input("phone","");
+
+        if( $phone != '' ) {
+            $sql = " select user.id as userid,user.phone,status,proxy,userattr.* from user inner join userattr on user.id=userattr.uid where user.phone='".$phone."' ";
+            $res = DB::select($sql);
+            return view("admin.fenxiaoUsers",["list"=>$res,"fenye"=>""]);
+        }
+        $where = "";
+        $search='?';
+        if( $sex != '' ) {
+            $where .= " and sex='".$sex."' ";
+            $search .= "&sex=".$sex;
+        }
+        if( $addr != '' && $addr != '-' ) {
+            $where .= " and addr like '%".$addr."%' ";
+            $search .= "&addr=".$addr;
+        }
+        if( $age != '' ) {
+            $age1 = explode("-",$age);
+            $where .= " and age>".$age1[0]." and age < ".$age1[1];
+            $search .= "&age=".$age;
+        }
+        if( $mryst != '' ) {
+            $where .= " and mryst='".$mryst."' ";
+            $search .= "&mryst=".$mryst;
+        }
+        if( $search != '?' ) {
+            $search .= "&";
+        }
+        $count = DB::select("select count(*) as cnt from user inner join userattr on user.id=userattr.uid where user.proxy=1 ".$where);
+//        exit("select user.id as userid,userattr.* from user left join userattr on user.id=userattr.uid where user.status=1 ".$where);
+        $sql = " select user.id as userid,user.phone,status,proxy,userattr.* from user inner join userattr on user.id=userattr.uid where proxy=1 ".$where." order by user.id desc limit ?,? ";
+        $res = DB::select($sql,[($page-1)*$num,$num]);
+        if( $ajax == 'no' ) {
+            return view("admin.fenxiaoUsers",["list"=>$res,"cnt"=>$count[0]->cnt,"fenye"=>fenye($count[0]->cnt,"/admin/fenxiao/users",$page,$num,$search)]);
+        }else{
+            echo json_encode($res);
+        }
+    }
 
 }

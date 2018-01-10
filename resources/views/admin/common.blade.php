@@ -140,7 +140,14 @@
                         </ul>
                     </li>
                     <li><a href="/admin/payorder"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 支付记录</span></a></li>
-                    <li><a href="/admin/tixianlist"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> 申请体现</span></a></li>
+                    <li>
+                        <a class="dropmenu" style="cursor:pointer;"><i class="icon-folder-close-alt"></i><span class="hidden-tablet">分销管理</span><i class="icon-angle-down"></i></a>
+                        <ul>
+                            <li><a class="submenu" href="/admin/tixianlist"><i class="icon-file-alt"></i><span class="hidden-tablet">申请体现</span></a></li>
+                            <li><a class="submenu" href="/admin/fenxiao/orders"><i class="icon-file-alt"></i><span class="hidden-tablet">分销订单</span></a></li>
+                            <li><a class="submenu" href="/admin/fenxiao/users"><i class="icon-file-alt"></i><span class="hidden-tablet">分销人员</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

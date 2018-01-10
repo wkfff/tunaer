@@ -31,8 +31,8 @@
             <thead>
             <tr style="background:#64B5ED;color:#fff;height:40px;line-height:40px;">
                 <th>用户</th>
+                <th>&nbsp;</th>
                 <th>状态</th>
-                <th>时间</th>
             </tr>
             </thead>
             <tbody>

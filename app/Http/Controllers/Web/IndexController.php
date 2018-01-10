@@ -531,7 +531,7 @@ class IndexController extends Controller
         $count = DB::select("select count(*) as cnt from tubuorder where proxy=? and orderid<>'0' ",[Session::get('uid')]);
         $sq = "select sum(money) as mon from tubuorder left join payment on tubuorder.orderid=payment.orderid where proxy=? and tixian=0 and tubuorder.orderid<>'0' ";
         $tixian = DB::select($sq,[Session::get('uid')]);
-        return view('web.tuiguang',["list"=>$res,'tixian'=>$tixian[0]->mon*0.1,"fenye"=>fenye($count[0]->cnt,"/tuiguang",$page,$num)]);
+        return view('web.tuiguang',["list"=>$res,'tixian'=>sprintf("%.1f",(float)$tixian[0]->mon*0.1),"fenye"=>fenye($count[0]->cnt,"/tuiguang",$page,$num)]);
     }
     public function tunaer($uid){
         $sql = " select * from user where id=? and proxy=1 ";

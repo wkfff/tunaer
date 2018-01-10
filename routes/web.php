@@ -108,6 +108,8 @@ Route::group(['middleware' => 'v6auth','prefix' => 'admin','namespace'=>'Admin']
     Route::get("/tixianlist","IndexController@tixianlist");
     Route::post("/dotixian","PostController@dotixian");
     Route::get("/tuiguang/{uid}","IndexController@tuiguang");
+    Route::get("/fenxiao/orders","IndexController@fenxiaoOrders");
+    Route::get("/fenxiao/users","IndexController@fenxiaoUsers");
 
 });
 //Access Key ID	Access Key Secret	状态	创建时间	操作
