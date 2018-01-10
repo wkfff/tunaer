@@ -106,7 +106,7 @@ class IndexController extends Controller
                 $r = DB::select($sql,[Session::get("uid"),$tid]);
 
                 if( count($r) >= 1 ) {
-                    if( $r[0]->orderid == 0 ) {
+                    if( $r[0]->orderid == '0' ) {
                         if(time() - strtotime("+2 hours",strtotime($r[0]->ordertime)) >=0 ) {
                             $sql3 = " update tubuorder set del=1 where id=? ";
                             DB::update($sql3,[$r[0]->id]);

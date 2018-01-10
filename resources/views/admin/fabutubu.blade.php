@@ -10,9 +10,9 @@
     提示:徒步内容编辑中请使用 shift+回车代替回车
 </p>
     </div>
-    <link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">
+    {{--<link rel="stylesheet" href="/admin/umediter/css/umeditor.min.css">--}}
 
-    <textarea id="editor_id" name="content" style="width:800px;min-height:600px; ">
+    <textarea id="editor_id" name="content" style="width:800px;height:600px; ">
 
         <div id="jhxx"  style="margin:0px;padding:0px;border-width:1px 1px 3px;border-style:solid;border-color:#DCDCDC #DCDCDC #FF8800;border-image:initial;vertical-align:baseline;-webkit-tap-highlight-color:transparent;font-family:微软雅黑;height:40px;line-height:40px;background:#F6F5F5;position:relative;color:#666666;letter-spacing:0.5px;white-space:normal;">
             <h2 class="detailh2" style="margin:0px 0px 0px 20px;font-size:14px;border:0px;vertical-align:baseline;-webkit-tap-highlight-color:transparent;float:left;display:inline;color:#4F4F4F;">
@@ -72,7 +72,7 @@
     </textarea>
     {{--<script type="text/plain" id="myEditor" style="width:900px;"></script>--}}
     <button type="button" onclick="fabu()" class="btn btn-primary red" style="margin-top:10px;">确认发布</button>
-
+    <div></div>
 @stop
 
 <!-- Modal -->
@@ -131,6 +131,12 @@
         width:280px;height:180px;margin:5px;background-repeat:no-repeat;
         float: left;background-position: center;
         background-size:cover;
+    }
+    .ke-icon-mp3 {
+        background-image: url(/web/images/mdp3.png);
+        background-position: 0px -672px;
+        width: 16px;
+        height: 16px;
     }
 </style>
 <div class="tubupics" onclick="$(this).slideUp()" style="width:100%;height: 100%;position:fixed;z-index:9999;left:0px;top:0px;display:none" >

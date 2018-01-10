@@ -165,6 +165,7 @@
             $.post("/canjiadasai",{"pic":pic,"intro":intro,"did":"{{$data->id}}"},function(d){
                 if( ajaxdata(d) ) {
                     toast("参赛成功");
+                    location.reload();
                     $("#myModal2").modal("hide");
                 }
             })
@@ -184,7 +185,7 @@
                     $(".zuopincurrent").children().remove();
                     var d = oXHR.responseText; // 返回值
                     if( ajaxdata(d) ) {
-                        var img =`<div onclick="img2big(this)" class="imgdiv"  style="background-image:url(/web/data/images/${d})" ></div>`;
+                        var img ="<div onclick=\"img2big(this)\" class=\"imgdiv\"  style=\"background-image:url(/web/data/images/"+d+")\" ></div>";
                         $(".zuopincurrent").append(img);
                     }
 

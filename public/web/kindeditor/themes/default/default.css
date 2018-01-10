@@ -9,6 +9,11 @@
 .ke-clearfix {
 	zoom: 1;
 }
+.ke-icon-mp3 {
+	background-position: 0px -1250px;
+	width: 16px;
+	height: 16px;
+}
 .ke-clearfix:after {
 	content: ".";
 	display: block;

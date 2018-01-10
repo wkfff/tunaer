@@ -73,7 +73,7 @@
     </div>
 </div>
 
-<div class="container-fluid-full" >
+<div class="container-fluid-full" style="height: auto !important;" >
     <div class="row-fluid">
         <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2" style="overflow-y: auto;">

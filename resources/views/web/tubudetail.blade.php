@@ -115,9 +115,8 @@
                                     {{--徒步通知说明：活动前一天发布具体分车,时间及车辆信息--}}
                                     {{$detail->shuoming}}
                                 </p>
-                                <p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>
-
                             @endif
+                            <p style="margin-top:10px;"><button onclick="openorderbox()" type="button" class="btn btn-primary" style="width:150px;height:45px;font-size: 18px;outline:none">马上报名</button></p>
                         @endif
 
                     </div>
