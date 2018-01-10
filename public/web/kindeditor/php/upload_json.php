@@ -120,6 +120,7 @@ if (empty($_FILES) === false) {
 	$new_file_name = date("YmdHis") . '_' . rand(10000, 99999) . '.' . $file_ext;
 	//移动文件
 	$file_path = $save_path . $new_file_name;
+	echo $tmp_name."000".$file_path;die;
 	if (move_uploaded_file($tmp_name, $file_path) === false) {
 		alert("上传文件失败。");
 	}else{
