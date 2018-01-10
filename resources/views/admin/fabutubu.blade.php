@@ -132,12 +132,6 @@
         float: left;background-position: center;
         background-size:cover;
     }
-    .ke-icon-mp3 {
-        background-image: url(/web/images/mdp3.png);
-        background-position: 0px -672px;
-        width: 16px;
-        height: 16px;
-    }
 </style>
 <div class="tubupics" onclick="$(this).slideUp()" style="width:100%;height: 100%;position:fixed;z-index:9999;left:0px;top:0px;display:none" >
 
