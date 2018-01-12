@@ -259,7 +259,7 @@ class PostController extends Controller{
                 echo "400-活动已经结束啦"; return ;
             }
             if( time() - strtotime($res[0]->startday) - $res[0]->uploadend*86400 < 0 ) {
-                echo "400-".date("Y-m-d H:i:s",strtotime($res[0]->startday)+$res[0]->uploadend*86400-time())."后开放投票";
+                echo "400-前".$res[0]->uploadend."天只能上传作品，不许投票";
                 return ;
             }
         }else{
