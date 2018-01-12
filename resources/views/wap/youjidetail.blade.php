@@ -73,7 +73,7 @@
     <script>
         $(document).ready(function () {
             window.imgUrl = $(".tuwen").find("img")[0].src;
-            window.desc = $.trim($(".tuwen").text()).substr(0,60).replace(/[\r\n]/g,"");
+            window.desc = $.trim($(".tuwen").text()).substr(0,60).replace(/[\r\n\s]/g,"");
             $(".tuwen").find("*").css("width","auto");
             $(".tuwen").find("img").css("margin","5px 0");
             $(".tuwen").find("div").css({
