@@ -114,7 +114,7 @@
                     <button type="button" onclick="$('.createyoujipanel').toggle()" class="btn btn-default" style="width:120px;height:40px;margin-bottom:10px;">添加游记 +</button>
                     <div class="createyoujipanel" style="display: none;margin-top:10px;">
                         <input type="text" class="form-control" placeholder="游记标题" style="width:100%;margin-bottom:10px" >
-                        <script type="text/plain" id="myEditor" style="width:300px;height:200px;"></script>
+                        <script type="text/plain" id="myEditor" style="width:300px;height:200px;" /> 
                         <button onclick="$('.uploadinput2').trigger('click')" style="outline:none;margin-top:10px;margin-bottom:10px;" type="button" class="btn btn-default">添加封面</button>
                         <button type="button" onclick="fabuyouji()" class="btn btn-success" style="margin-top:10px;margin-bottom:10px;">确认发布</button>
                         <div class="youjipics"></div>
