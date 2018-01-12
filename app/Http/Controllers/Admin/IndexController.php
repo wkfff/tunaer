@@ -526,5 +526,13 @@ class IndexController extends Controller{
             echo json_encode($res);
         }
     }
+    public function zuopins(Request $request,$did) {
+        $page = $request->input("page",1);
+        $num = $request->input("num",17);
+        $count = DB::select(" select count(*) as cnt from works where did=? ",[$did]);
+        $sql = " select works.*,dasai.title from works inner join dasai on works.did=dasai.id where did=? order by id desc limit ?,? ";
+        $res = DB::select($sql,[$did,($page-1)*$num,$num]);
+        return view("admin.zuopins",["list"=>$res,"fenye"=>fenye($count[0]->cnt,"/admin/zuopins/".$did,$page,$num)]);
+    }
 
 }
