@@ -352,7 +352,7 @@
     <script src="/admin/umediter/umeditor.config.js" ></script>
     <script src="/admin/umediter/umeditor.min.js" ></script>
     <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
-    <script src="/wap/js/user.js" ></script>
+    <script src="/wap/js/user.js?t=12" ></script>
     <script src="/web/js/addr.js" ></script>
     <script>
         $(document).ready(function(){
