@@ -160,7 +160,7 @@
                         <textarea class="form-control"  rows="5" placeholder="发点动态..."></textarea>
                         <div class="dongtaipics" ></div>
                         <div style="clear:both;height:20px;" ></div>
-                        <button style="outline:none" onclick="$('.uploadinput').trigger('click')" class="btn btn-default">添加图片</button>
+                        <button style="outline:none" onclick="$('.uploadinput').trigger('click')" class="btn btn-default">添加图片.</button>
                         <button style="outline:none" class="btn btn-success " onclick="fadongtai(this)" style="margin-left:30px;">立即发布</button>
                     </div>
                 @endif
