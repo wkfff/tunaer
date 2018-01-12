@@ -172,7 +172,9 @@
                 toast("请填写作品介绍"); return;
             }
             var url = $($(".zuopincurrent div")[0]).css("background-image");
-            var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+            var pic = url.split('/').pop();
+            pic = pic.substr(0,pic.length-1);
+            // var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
             $.post("/canjiadasai",{"pic":pic,"intro":intro,"did":"{{$data->id}}"},function(d){
                 if( ajaxdata(d) ) {
                     toast("参赛成功");
