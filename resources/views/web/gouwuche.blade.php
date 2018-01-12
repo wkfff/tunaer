@@ -29,7 +29,7 @@
             <input type="text" value=""  class="form-control addr" placeholder="收货地址"  >
         </div>
         <div class="form-group">
-            <label for="">买家留言</label>
+            <label for="">买家留言（<span style="color:red">请至少备注你的姓名</span>）</label>
             <input type="text" class="form-control liuyan" placeholder="买家留言">
         </div>
         <button onclick="goumai()" class="searchb" style="background:#FF0036;color:#fff;float:right;margin-right:0px;margin-top:10px;"  ><span class="glyphicon glyphicon-yen" style="margin-right:5px;" ></span>去结算</button>

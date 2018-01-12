@@ -54,7 +54,7 @@
             <input type="text"  class="form-control addr" value="" placeholder="收货地址"  >
         </div>
         <div class="form-group" style="margin:10px;">
-            <label for="">买家留言</label>
+            <label for="">买家留言（<span style="color:red">请至少备注你的姓名</span>）</label>
             <input type="text" class="form-control liuyan" placeholder="买家留言">
         </div>
         <div class="form-group" style="margin:10px;">
