@@ -37,7 +37,7 @@
                 <td class="center">{{$tubulist[$i]->endday}}</td>
                 <td style="color:mediumvioletred" class="center">{{$tubulist[$i]->price}}元</td>
                 <td class="center">{{$tubulist[$i]->need}}人</td>
-                <td style="color:green" class="center">{{$tubulist[$i]->baoming}}人</td>
+                <td style="color:green" class="class">{{$tubulist[$i]->baoming}}人</td>
                 <td class="center">{{$tubulist[$i]->juli}}</td>
                 <td class="center">{{$tubulist[$i]->leader}}</td>
                 <td class="center">{{$tubulist[$i]->visible == "1"?"显示":"隐藏"}}</td>

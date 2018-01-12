@@ -31,7 +31,7 @@ class PostController extends Controller{
         $mark = $request->input("mark",'') == ''?"无":$request->input("mark",'');
         $uid = Session::get('uid');
 
-        $sql1 = " select count(*) as baomingnum,need,jiezhi from tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where tid=? and orderid<>'0' ";
+        $sql1 = " select sum(num) as baomingnum,need,jiezhi from tubuorder inner join tubuhuodong on tubuhuodong.id=tubuorder.tid where tid=? and orderid<>'0' ";
         $res1 = DB::select($sql1,[$tid]);
         if( date("Y-m-d H:i:s") > $res1[0]->jiezhi ) {
             echo "400-报名已截止"; return ;
