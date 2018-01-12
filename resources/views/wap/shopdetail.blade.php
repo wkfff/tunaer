@@ -137,7 +137,7 @@
     <script src="/web/js/swiper-3.4.2.jquery.min.js" ></script>
     <script>
         $(document).ready(function () {
-            window.desc = $.trim($(".tuwen").text()).substr(0,60).replace(/[\r\n\s]/g,"");
+            window.desc = $.trim($(".tuwen").text()).substr(0,100).replace(/[\r\n\s]/g,"");
             var mySwiper = new Swiper ('.swiper-container', {
                 autoplay:5000,
                 loop: true,
