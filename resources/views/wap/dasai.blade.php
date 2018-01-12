@@ -16,7 +16,7 @@
         .workitem{
             width:100%;height:250px;background:deeppink;margin:0 auto;
             background-size:cover;background-repeat:no-repeat;
-            position: relative;margin-bottom:100px;
+            position: relative;margin-bottom:50px;
             background-position: center;
         }
         .fengexian{
@@ -104,8 +104,7 @@
                             </div>
                         @endif
                     </div>
-                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px
-                    ;overflow: hidden;" >
+                    <div title="{{$works[$i]->intro}}" onclick="zuzhi(event)" class="intro" style="position: absolute;bottom:-50px;width:100%;height:50px;color:#444;padding:10px ;overflow: hidden;" >
                         {{$works[$i]->intro}}
                     </div>
                 </div>
