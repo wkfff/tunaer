@@ -151,7 +151,7 @@
 @section("htmlend")
     <script>
         $(document).ready(function () {
-            window.desc = $.trim($(".jieshao").text()).substr(0,30).replace(/[\r\n]/g,"");
+            window.desc = $.trim($(".jieshao").text()).substr(0,60).replace(/[\r\n]/g,"");
             $(".tuwen").find("*").css("width","auto");
             $(".tuwen").find("img").css("margin","5px 0");
             $(".tuwen").find("div").css({
