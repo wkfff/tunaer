@@ -70,7 +70,7 @@
             }
             var url = $($(".youjipics div")[0]).css("background-image");
             var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
-            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime,"id":"{{$data->id}}"},function(d){
+            $.post("/admin/fabudasai",{"title":title,"tuwen":tuwen,"pic":pic,"startday":starttime,"endday":endtime,"id":"{{$data->id}}","uploadend":uploadend},function(d){
                 if( ajaxdata(d) ) {
                     toast("创建成功");
                     location.href="/admin/dasailist";
