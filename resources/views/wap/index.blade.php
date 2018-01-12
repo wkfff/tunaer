@@ -1,5 +1,5 @@
 @extends("wap.common")
-{{--@section("title","徒友动态")--}}
+@section("title","诚邀您参加徒步活动")
 @section("css")
     <style>
         .type{
