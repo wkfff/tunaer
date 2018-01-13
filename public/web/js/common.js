@@ -317,3 +317,30 @@ function createpay(way) {
             break;
     }
 }
+
+function img3big(t) {
+    var src = '';
+    // 不管是 div背景  还是 图片都能获取到图片 url
+    if( t.nodeName == 'IMG' || t.nodeName == 'img' ) {
+        src = $(t).attr('src').replace("\"",'');
+    }else{
+        var k = $(t).css("background-image").replace(/\"/g, "").split('(').pop();
+        src = ""+k.substr(0,k.length-1);
+    }
+    var arr = src.split("/");
+    var imgs = arr.pop();
+    var imgarr = imgs.split("#");
+    var imgpath = arr.join("/");
+    var lis = "";
+    // console.log(t); return;
+    for( var i=0;i<imgarr.length;i++ ){
+        var Item = "<li class=\"col-xs-6 col-sm-4 col-md-3\" data-src="+imgpath+"/"+imgarr[i]+" data-sub-html=\"<p>"+($(t).attr('title')==undefined?"":$(t).attr('title'))+"</p>\"></li>";
+        lis+=Item;
+    }
+
+    var node = "<ul id=\"lightgallery\" class=\"list-unstyled row\">"+lis+"</ul>";
+    $("#lightgallery").remove();
+    $("body").append(node);
+    $('#lightgallery').lightGallery();
+    $($("#lightgallery li")[0]).trigger('click');
+}

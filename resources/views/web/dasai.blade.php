@@ -1,6 +1,6 @@
 @extends("web.common")
 @section("title","{$data->title} - 摄影大赛")
-
+<link href="/web/css/lightgallery.min.css" rel="stylesheet">
 @section("css")
     <style>
          .toppic{
@@ -28,7 +28,7 @@
              opacity:0.7;color:#fff
          }
          .imgdiv{
-             height:300px;width:450px;background-size:cover;margin-right:30px;
+             height:90px;width:130px;background-size:cover;margin-right:10px;float:left;
              background-position:center;background-repeat: no-repeat;margin-top:10px;
          }
         .toupiaobtn {
@@ -87,7 +87,7 @@
         </div>
         <div class="workbox" >
             @for( $i=0;$i<count($works);$i++ )
-                <div class="workitem" onclick="img2big(this)"
+                <div class="workitem" title="{{$works[$i]->intro}}" onclick="img3big(this)"
                      style="background-image:url(/web/data/images/{{$works[$i]->pics}});">
                     <div onclick="zuzhi(event)" style="height:50px;position: absolute;width:100%;bottom:0px;background:rgba(0,0,0,0.5);color:#fff;" >
                         <a href="/user/{{$works[$i]->uid}}"><div style="width:35px;height:35px;background-image:url(/head/{{$works[$i]->uid}});background-size:cover;background-position:center;border-radius:17.5px;margin:7.5px;float:left;vertical-align: middle;" ></div></a>
@@ -112,8 +112,6 @@
         <div style="clear: both" ></div>
         {!! $fenye !!}
     </div>
-
-
     @include("web.footer")
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -130,6 +128,7 @@
 
                     <textarea class="form-control" name="intro" style="margin-top:10px;width:450px;" rows="3" placeholder="作品介绍（不超过50字．）"></textarea>
                     <div class="zuopincurrent" ></div>
+                    <div style="clear:both" ></div>
                 </div>
                 <div class="modal-footer">
                     <span  style="float:left" >单击图片预览</span>
@@ -145,6 +144,8 @@
 
 
 @section("htmlend")
+    <script src="/web/js/lightgallery.min.js"></script>
+
     <script>
         $(document).ready(function () {
 //            window.tuijianleft = $(".tuijian")[0].getBoundingClientRect().left;
@@ -153,16 +154,27 @@
             $("#myModal2").modal("show");
         }
         function save() {
-            if( $(".zuopincurrent div").length == 0 ){
-                toast("没有添加作品");return ;
+            if( $(".zuopincurrent div").length != 3 ){
+                toast("请上传三张作品");return ;
             }
             var intro = $.trim( $("textarea[name=intro]").val() );
             if( intro == '' ) {
                 toast("请填写作品介绍"); return;
             }
-            var url = $($(".zuopincurrent div")[0]).css("background-image");
-            var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
-            $.post("/canjiadasai",{"pic":pic,"intro":intro,"did":"{{$data->id}}"},function(d){
+            var pics = "";
+            for( var i=0;i<3;i++ ){
+                var url = $($(".zuopincurrent div")[i]).css("background-image");
+                var pic = url.split('/').pop();
+                pic = pic.substr(0,pic.length-1).replace(/[\"]/g,'');
+                if( pics == "" ) {
+                    pics = pic;
+                }else{
+                    pics= pics+'#'+pic;
+                }
+            }
+            // var url = $($(".zuopincurrent div")[0]).css("background-image");
+            // var pic = url.split('/').pop().match(/(\d+\.[a-zA-Z]+)\"\)/)[1];
+            $.post("/canjiadasai",{"pic":pics,"intro":intro,"did":"{{$data->id}}"},function(d){
                 if( ajaxdata(d) ) {
                     toast("参赛成功");
                     location.reload();
@@ -181,10 +193,11 @@
             oXHR.open('POST', "/uploadimg");
             oXHR.onreadystatechange = function() {
                 if (oXHR.readyState == 4 && oXHR.status == 200) {
-
-                    $(".zuopincurrent").children().remove();
                     var d = oXHR.responseText; // 返回值
                     if( ajaxdata(d) ) {
+                        if( $(".zuopincurrent div").length >=3 ) {
+                            $(".zuopincurrent div")[0].remove();
+                        }
                         var img ="<div onclick=\"img2big(this)\" class=\"imgdiv\"  style=\"background-image:url(/web/data/images/"+d+")\" ></div>";
                         $(".zuopincurrent").append(img);
                     }
