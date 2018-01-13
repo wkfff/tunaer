@@ -209,7 +209,7 @@ Route::group(['namespace'=>'Web',"middleware"=>'logined'],function(){
     Route::post("/tubusubcomment","PostController@tubusubcomment");
     Route::post("/youjisubcomment","PostController@youjisubcomment");
     Route::post("/tixian","PostController@tixian");
-
+    Route::post('/deldongtai', 'PostController@deldongtai');
 
 });
 

@@ -48,6 +48,19 @@
         .searchb:hover{
             box-shadow: 1px 1px 10px rgba(255,255,255,0.9);
         }
+        @if( !empty(Session::get('uid')) && Session::get('uid') == $userinfo->userid )
+            .deldongtai{
+            height:20px;width:40px;background:greenyellow;display:inline-block;
+            color:red;text-align:center;line-height:20px;font-size:0.8em;
+            cursor:pointer;opacity:0.8;
+        }
+        @else
+            .deldongtai{
+            height:20px;width:40px;background:greenyellow;display:none;
+            color:red;text-align:center;line-height:20px;font-size:0.8em;
+            cursor:pointer;opacity:0.8;
+        }
+        @endif
     </style>
     <div class="bgpic" style="width:100%;height:372px;
          background-image: url(/web/images/s_ban.jpg);background-size:cover;background-position:center;"></div>

@@ -46,6 +46,21 @@
             height:100px;width:100px;background-size:cover;float:left;margin-right:10px;
             background-position:center;background-repeat: no-repeat;margin-top:10px;
         }
+
+        @if( !empty(Session::get('uid')) && Session::get('uid') == $userinfo->userid )
+            .deldongtai{
+            height:20px;width:40px;background:greenyellow;display:inline-block;
+            color:red;text-align:center;line-height:20px;font-size:0.8em;
+            cursor:pointer;opacity:0.8;
+        }
+        @else
+            .deldongtai{
+            height:20px;width:40px;background:greenyellow;display:none;
+            color:red;text-align:center;line-height:20px;font-size:0.8em;
+            cursor:pointer;opacity:0.8;
+        }
+        @endif
+
     </style>
 @stop
 

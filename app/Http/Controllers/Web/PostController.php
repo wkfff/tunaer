@@ -921,5 +921,12 @@ class PostController extends Controller{
             echo "400-申请失败，请联系管理员";
         }
     }
+    public function deldongtai(Request $request) {
+
+        $id = $request->input("id","0");
+        $sql = " delete from dongtai where id=? and uid=? ";
+        $res = DB::delete($sql,[$id,Session::get('uid')]);
+        echo "200-success";
+    }
 
 }

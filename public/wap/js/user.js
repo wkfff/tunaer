@@ -122,7 +122,7 @@ function fadongtai(t) {
         var url = $(pics[i]).css("background-image");
         var pic = url.split('/').pop();
         pic = pic.substr(0,pic.length-1);
-        tmp.push(pic);
+        tmp.push(pic.replace(/[\"\']/g,''));
     }
     if( tmp.length == 0 ) {
         toast("至少添加一张图片"); return ;
@@ -353,35 +353,40 @@ function getdongtais(userid) {
             }
             for( var i=0;i<res.length;i++ ) {
                 var pics = res[i].imgs.split("#");
-                var item = `<div>
-                        <a href="/user/{{$dongtai[$i]->uid}}"><div style="display: inline-block;height:30px;width:30px;background-image:url(/head/${res[i].uid});background-size:cover;background-position:center;border-radius:15px;vertical-align: middle" ></div></a>
-                            <span>发布于 ${res[i].ftime}</span>
-                            <div style="clear:both;height:10px;" ></div>
-                        <div>${res[i].content}</div>
-                        ${imgs2div(pics)}
-                        <div style="clear:both;height:20px;" ></div>
-                        <div style="margin-bottom:20px">
-                            
-                            <button onclick="dongtaicmtmp(${res[i].id},'dianzan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/xihuan.png" style="height:18px;"><span style="margin-left:10px;" >点赞${res[i].zancnt}</span>
-                            </button>
-                            <button onclick="dongtaicmtmp(${res[i].id},'liuyan')" style="outline:none;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/liuyan.png" style="height:15px;"><span style="margin-left:10px;" >评论${res[i].cmcnt}</span>
-                            </button>
-                            <button onclick="zhankai(${res[i].id},this)" style="outline:none;" type="button" class="btn btn-default btn-sm">
-                                <img src="/web/images/zhankai.png" style="width:10px;"><span style="margin-left:10px;" >展开评论</span>
-                            </button>
-                            <div style="height:100px;width:100%;border:1px solid #eee;margin-top:10px;display: none;" >
-
-                            </div>
-                        </div>
-                    </div>`;
+                var item = "<div>\
+                        <a href=\"/user/"+res[i].uid+"\"><div style=\"display: inline-block;height:30px;width:30px;background-image:url(/head/"+res[i].uid+");background-size:cover;background-position:center;border-radius:15px;vertical-align: middle\" ></div></a>\
+                            <span>发布于 "+res[i].ftime+"<span onclick='deldongtai("+res[i].id+")' class='deldongtai' >删除</span></span>\
+                            <div style=\"clear:both;height:10px;\" ></div>\
+                        <div>"+res[i].content+"</div>\
+                        "+imgs2div(pics)+"\
+                        <div style=\"clear:both;height:20px;\" ></div>\
+                        <div style=\"margin-bottom:20px\">\
+                            <button onclick=\"dongtaicmtmp("+res[i].id+",'dianzan')\" style=\"outline:none;\" type=\"button\" class=\"btn btn-default btn-sm\">\
+                                <img src=\"/web/images/xihuan.png\" style=\"height:18px;\"><span style=\"margin-left:10px;\" >点赞"+res[i].zancnt+"</span>\
+                            </button>\
+                            <button onclick=\"dongtaicmtmp("+res[i].id+",'liuyan')\" style=\"outline:none;\" type=\"button\" class=\"btn btn-default btn-sm\">\
+                                <img src=\"/web/images/liuyan.png\" style=\"height:15px;\"><span style=\"margin-left:10px;\" >评论"+res[i].cmcnt+"</span>\
+                            </button>\
+                            <button onclick=\"zhankai("+res[i].id+",this)\" style=\"outline:none;\" type=\"button\" class=\"btn btn-default btn-sm\">\
+                                <img src=\"/web/images/zhankai.png\" style=\"width:10px;\"><span style=\"margin-left:10px;\" >展开评论</span>\
+                            </button>\
+                            <div style=\"height:100px;width:100%;border:1px solid #eee;margin-top:10px;display: none;\" >\
+                            </div>\
+                        </div>\
+                    </div>";
                 $(".dongtaibox").append(item);
             }
         }
     })
 }
-
+function deldongtai(id) {
+    zuzhi(event);
+    $.post("/deldongtai",{"id":id},function(d){
+        if( ajaxdata(d) ) {
+            location.reload();
+        }
+    })
+}
 function imgs2div(pics) {
     var tmp = "";
     for( var i=0;i<pics.length;i++ ) {
