@@ -381,11 +381,13 @@ function getdongtais(userid) {
 }
 function deldongtai(id) {
     zuzhi(event);
-    $.post("/deldongtai",{"id":id},function(d){
-        if( ajaxdata(d) ) {
-            location.reload();
-        }
-    })
+    if( confirm("删除此条动态？") ) {
+        $.post("/deldongtai",{"id":id},function(d){
+            if( ajaxdata(d) ) {
+                location.reload();
+            }
+        })
+    }
 }
 function imgs2div(pics) {
     var tmp = "";
