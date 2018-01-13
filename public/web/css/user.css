@@ -27,13 +27,7 @@
     height:128px;width:293px;float:left;cursor: pointer;margin-right:6px;margin-top:10px;border:1px solid #eee;
     position: relative;
 }
-.closeitem{
-    position: absolute;right:0px;top:0px;font-size:30px;color:red;width:40px;height:40px;
-    text-align: center;liet-height:40px;background-color:rgba(0,0,0,0.1);
-}
-.closeitem:hover{
-    background-color:rgba(0,0,0,0.3);
-}
+
 .userhead{
     background-size:cover;background-repeat:no-repeat;background-position:center;height:90px;width:90px;margin-top:19px;border-radius:45px;float:left;border:2px solid rgba(255,255,255,0.7);margin-left:5px;
 }

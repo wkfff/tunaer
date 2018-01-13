@@ -306,15 +306,15 @@ function getchatlist(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div class="useritem">
-                                <a href="/user/${res[i].uid}"><div class="userhead" style="background-image:url(/head/${res[i].uid});"></div></a>
-                                <div class="userinfo">
-                                    <div>${res[i].uname}</div>
-                                    <div>${res[i].age}岁 ${res[i].mryst}</div>
-                                    <div>${res[i].addr}</div>
-                                </div>
-                                <span onclick="delchat(${res[i].uid})" class="closeitem">&times;</span>
-                            </div>`;
+                var item = "<div class=\"useritem\">\
+                                <a href=\"/user/"+res[i].uid+"\"><div class=\"userhead\" style=\"background-image:url(/head/"+res[i].uid+");\"></div></a>\
+                                <div class=\"userinfo\">\
+                                    <div>"+res[i].uname+"</div>\
+                                    <div>"+res[i].age+"岁 "+res[i].mryst+"</div>\
+                                    <div>"+res[i].addr+"</div>\
+                                </div>\
+                                <span onclick=\"delchat("+res[i].uid+")\" class=\"closeitem\">&times;</span>\
+                            </div>";
                 $(".friendbox").append(item);
             }
         }
@@ -333,7 +333,7 @@ function getphotos(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div class="imgdiv2" onclick="img2big(this)" style="background-image:url(/web/data/images/${res[i].pic})" ></div>`;
+                var item = "<div class=\"imgdiv2\" onclick=\"img2big(this)\" style=\"background-image:url(/web/data/images/"+res[i].pic+")\" ><span onclick='deldata(\"xiangce\","+res[i].id+")' class='deldata' >删除</span></div>";
                 $(".photosbox").append(item);
             }
         }
@@ -354,7 +354,7 @@ function getdongtais(userid) {
             for( var i=0;i<res.length;i++ ) {
                 var pics = res[i].imgs.split("#");
                 var item = "<div>\
-                        <div>"+res[i].content+"<span onclick='deldongtai("+res[i].id+")' class='deldongtai' >删除</span></div>\
+                        <div>"+res[i].content+"<span onclick='deldata(\"dongtai\","+res[i].id+")' class='deldata' >删除</span></div>\
                         "+imgs2div(pics)+"\
                         <div style=\"clear:both;height:20px;\" ></div>\
                         <div style=\"margin-bottom:20px\">\
@@ -377,10 +377,10 @@ function getdongtais(userid) {
         }
     })
 }
-function deldongtai(id) {
+function deldata(table,id) {
     zuzhi(event);
-    if( confirm("删除此条动态？") ) {
-        $.post("/deldongtai",{"id":id},function(d){
+    if( confirm("确认删除？") ) {
+        $.post("/deldata",{"id":id,"table":table},function(d){
             if( ajaxdata(d) ) {
                 location.reload();
             }
@@ -433,16 +433,16 @@ function getyoujis(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<a href="/youji/detail/${res[i].id}"><div class="youjiitem">
-                        <div class="youjipic" style="background-image:url(/web/data/images/${res[i].pic})" ></div>
-                            <div class="youjiuserhead" style="background-image:url(/head/${res[i].uid})" ></div>
-                        <div class="youjititle">
-                            ${res[i].title}
-                        </div>
-                        <div class="youjitime">
-                            ${res[i].ytime}
-                        </div>
-                    </div></a>`;
+                var item = "<a href=\"/youji/detail/"+res[i].id+"\"><div class=\"youjiitem\">\
+                        <div class=\"youjipic\" style=\"background-image:url(/web/data/images/"+res[i].pic+")\" ><span onclick='deldata(\"youji\","+res[i].id+")' class='deldata' >删除</span></div>\
+                            <div class=\"youjiuserhead\" style=\"background-image:url(/head/"+res[i].uid+")\" ></div>\
+                        <div class=\"youjititle\">\
+                            "+res[i].title+"\
+                        </div>\
+                        <div class=\"youjitime\">\
+                            "+res[i].ytime+"\
+                        </div>\
+                    </div></a>";
                 $(".youjibox").append(item);
             }
         }

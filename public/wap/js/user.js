@@ -333,7 +333,7 @@ function getphotos(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<div class="imgdiv2" onclick="img2big(this)" style="background-image:url(/web/data/images/${res[i].pic})" ></div>`;
+                var item = "<div class=\"imgdiv2\" onclick=\"img2big(this)\" style=\"background-image:url(/web/data/images/"+res[i].pic+")\" ><span onclick='deldata(\"xiangce\","+res[i].id+")' class='deldata' >删除</span></div>";
                 $(".photosbox").append(item);
             }
         }
@@ -355,7 +355,7 @@ function getdongtais(userid) {
                 var pics = res[i].imgs.split("#");
                 var item = "<div>\
                         <a href=\"/user/"+res[i].uid+"\"><div style=\"display: inline-block;height:30px;width:30px;background-image:url(/head/"+res[i].uid+");background-size:cover;background-position:center;border-radius:15px;vertical-align: middle\" ></div></a>\
-                            <span>发布于 "+res[i].ftime+"<span onclick='deldongtai("+res[i].id+")' class='deldongtai' >删除</span></span>\
+                            <span>发布于 "+res[i].ftime+"<span onclick='deldata(\"dongtai\","+res[i].id+")' class='deldata' >删除</span></span>\
                             <div style=\"clear:both;height:10px;\" ></div>\
                         <div>"+res[i].content+"</div>\
                         "+imgs2div(pics)+"\
@@ -379,10 +379,10 @@ function getdongtais(userid) {
         }
     })
 }
-function deldongtai(id) {
+function deldata(table,id) {
     zuzhi(event);
-    if( confirm("删除此条动态？") ) {
-        $.post("/deldongtai",{"id":id},function(d){
+    if( confirm("确认删除？") ) {
+        $.post("/deldata",{"id":id,"table":table},function(d){
             if( ajaxdata(d) ) {
                 location.reload();
             }
@@ -435,16 +435,16 @@ function getyoujis(userid) {
                 toast("没有更多了"); return ;
             }
             for( var i=0;i<res.length;i++ ) {
-                var item = `<a href="/youji/detail/${res[i].id}"><div class="youjiitem">
-                        <div class="youjipic" style="background-image:url(/web/data/images/${res[i].pic})" ></div>
-                            <div class="youjiuserhead" style="background-image:url(/head/${res[i].uid})" ></div>
-                        <div class="youjititle">
-                            ${res[i].title}
-                        </div>
-                        <div class="youjitime">
-                            ${res[i].ytime}
-                        </div>
-                    </div></a>`;
+                var item = "<a href=\"/youji/detail/"+res[i].id+"\"><div class=\"youjiitem\">\
+                        <div class=\"youjipic\" style=\"background-image:url(/web/data/images/"+res[i].pic+")\" ><span onclick='deldata(\"youji\","+res[i].id+")' class='deldata' >删除</span></div>\
+                            <div class=\"youjiuserhead\" style=\"background-image:url(/head/${res[i].uid})\" ></div>\
+                        <div class=\"youjititle\">\
+                            "+res[i].title+"\
+                        </div>\
+                        <div class=\"youjitime\">\
+                            "+res[i].ytime+"\
+                        </div>\
+                    </div></a>";
                 $(".youjibox").append(item);
             }
         }

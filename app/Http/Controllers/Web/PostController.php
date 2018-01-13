@@ -921,12 +921,17 @@ class PostController extends Controller{
             echo "400-申请失败，请联系管理员";
         }
     }
-    public function deldongtai(Request $request) {
+    public function deldata(Request $request) {
 
+        $table = $request->input("table","none");
         $id = $request->input("id","0");
-        $sql = " delete from dongtai where id=? and uid=? ";
-        $res = DB::delete($sql,[$id,Session::get('uid')]);
-        echo "200-success";
+        if( $table == 'none' || $id == "0") {
+            echo "400-操作失败";
+        }else{
+            $sql = " delete from `$table` where id=? and uid=? ";
+            $res = DB::delete($sql,[$id,Session::get('uid')]);
+            echo "200-success";
+        }
     }
 
 }

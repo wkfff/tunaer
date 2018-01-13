@@ -49,17 +49,25 @@
             box-shadow: 1px 1px 10px rgba(255,255,255,0.9);
         }
         @if( !empty(Session::get('uid')) && Session::get('uid') == $userinfo->userid )
-            .deldongtai{
-            height:20px;width:40px;background:greenyellow;display:inline-block;
-            color:red;text-align:center;line-height:20px;font-size:0.8em;
-            cursor:pointer;opacity:0.8;
-        }
+            .deldata{
+                height:20px;width:40px;background:greenyellow;display:inline-block;
+                color:red;text-align:center;line-height:20px;font-size:0.8em;
+                cursor:pointer;opacity:0.8;margin:3px;
+            }
+            .closeitem{
+                position: absolute;right:0px;top:0px;font-size:30px;color:red;width:40px;height:40px;
+                text-align: center;liet-height:40px;background-color:rgba(0,0,0,0.1);
+            }
+            .closeitem:hover{
+                background-color:rgba(0,0,0,0.3);
+            }
         @else
-            .deldongtai{
-            height:20px;width:40px;background:greenyellow;display:none;
-            color:red;text-align:center;line-height:20px;font-size:0.8em;
-            cursor:pointer;opacity:0.8;
-        }
+            .deldata{
+                display:none;
+            }
+            .closeitem{
+                display:none;
+            }
         @endif
     </style>
     <div class="bgpic" style="width:100%;height:372px;
