@@ -1,5 +1,5 @@
 @extends('admin.common')
-<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
+
 @section("title","修改活动")
 
 @section("content")
@@ -93,9 +93,6 @@
 </div>
 
 @section("htmlend")
-
-    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
-    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
     <script>
         KindEditor.ready(function(K) {
             window.editor = K.create('textarea[name="content"]', {

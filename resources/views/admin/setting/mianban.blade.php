@@ -1,6 +1,6 @@
 
 @extends('admin.common')
-<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
+
 @section("content")
 
     <button onclick="tijiao()" type="button" class="btn btn-primary red" style="margin-bottom:10px;" >提交保存</button>
@@ -9,8 +9,6 @@
 @stop
 
 @section("htmlend")
-    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
-    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
 
     <script>
         KindEditor.ready(function(K) {

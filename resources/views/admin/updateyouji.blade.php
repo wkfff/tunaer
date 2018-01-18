@@ -1,5 +1,5 @@
 @extends('admin.common')
-<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
+
 @section("title","编辑游记")
 
 @section("content")
@@ -23,9 +23,6 @@
 
 
 @section("htmlend")
-
-    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
-    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
 
     <script>
         KindEditor.ready(function(K) {

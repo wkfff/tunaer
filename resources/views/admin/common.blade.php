@@ -12,6 +12,7 @@
     <link href="/admin/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link id="base-style" href="/admin/css/style.css" rel="stylesheet">
     <link id="base-style-responsive" href="/admin/css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="/web/kindeditor/themes/default/default.css?t=34523678">
     <style>
         .fenye{
             margin:10px 0px;
@@ -167,6 +168,8 @@
 <script src="/admin/js/jquery-1.10.min.js"></script>
 <script src="/admin/js/bootstrap.min.js"></script>
 <script src="/admin/js/common.js"></script>
+<script src="/web/kindeditor/kindeditor-all-min.js?t=14dd3" ></script>
+<script src="/web/kindeditor/lang/zh-CN.js?t=234567" ></script>
 </body>
 </html>
 @yield("htmlend","")

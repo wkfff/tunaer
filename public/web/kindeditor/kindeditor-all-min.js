@@ -268,7 +268,7 @@ K.options = {
 		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
 		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
 		'flash','media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-		'anchor', 'link', 'unlink', '|','mp3'
+		'anchor', 'link', 'unlink', '|','mp3','mp4'
 	],
 	noDisableItems : ['source', 'fullscreen'],
 	colorTable : [

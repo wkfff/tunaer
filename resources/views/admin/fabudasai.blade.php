@@ -1,5 +1,5 @@
 @extends('admin.common')
-<link rel="stylesheet" href="/web/kindeditor/themes/default/default.css">
+
 @section("title","创建摄影大赛")
 
 @section("content")
@@ -30,9 +30,6 @@
 
     <script src="/admin/js/bootstrap-datetimepicker.min.js" ></script>
     <script src="/admin/js/bootstrap-datetimepicker.zh-CN.js" ></script>
-
-    <script src="/web/kindeditor/kindeditor-all-min.js" ></script>
-    <script src="/web/kindeditor/lang/zh-CN.js" ></script>
 
     <script>
         KindEditor.ready(function(K) {

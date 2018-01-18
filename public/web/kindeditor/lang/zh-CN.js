@@ -43,6 +43,7 @@ KindEditor.lang({
 	flash : 'Flash',
     media : '视音频',
     mp3 : '音乐',
+    mp4 : '视频',
 	table : '表格',
 	tablecell : '单元格',
 	hr : '插入横线',
