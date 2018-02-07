@@ -225,7 +225,7 @@
     </div>
     <div style="height:70px;" ></div>
     <div style="height:60px;width:100%;background:#fff;position:fixed;bottom:0px;left:0px;color:#333;z-index:999" >
-        <a href="tel:18000548612"><div style="float:left;width:23%;height:60px;text-align:center;line-height:60px;position: relative;" >
+        <a href="tel:13540139792"><div style="float:left;width:23%;height:60px;text-align:center;line-height:60px;position: relative;" >
             <img src="/web/tubiao/12.png" style="height:25px;margin-top:-20px;">
             <span style="color:#333;position: absolute;top:15px;left:0px;height:20px;width:100%;">报名咨询</span>
         </div></a>
